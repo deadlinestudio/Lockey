@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/tab_timer"
+        android:title="@string/tab_home" />
+
+    <item
+        android:id="@+id/navigation_applist"
+        android:icon="@drawable/tab_admin"
+        android:title="@string/tab_applist" />
+
+    <item
+        android:id="@+id/navigation_graph"
+        android:icon="@drawable/tab_analy"
+        android:title="@string/tab_graph" />
+
+    <item
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/tab_admin"
+        android:title="@string/tab_setting"/>
+
+</menu>
