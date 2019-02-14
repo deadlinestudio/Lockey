@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "894086141625",
+    "firebase_url": "https://lockey-c7925.firebaseio.com",
+    "project_id": "lockey-c7925",
+    "storage_bucket": "lockey-c7925.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894086141625:android:cc103ef9bda476be",
+        "android_client_info": {
+          "package_name": "com.deadlinestudio.lockey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894086141625-n3kjhs4iotv34nqkmocsr6atvibmr2fd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deadlinestudio.lockey",
+            "certificate_hash": "a6b84f584b7e0f55c22f4ebfb2242351e772365e"
+          }
+        },
+        {
+          "client_id": "894086141625-gpgvfhggkuahvtupkjqnqe7gjjv6iq2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxtAz-y2CgXOJhEwBQOo7KaEkVGfF_gmw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894086141625-gpgvfhggkuahvtupkjqnqe7gjjv6iq2e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

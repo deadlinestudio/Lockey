@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<LinearLayout
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="129dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="63dp"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toTopOf="@+id/appListBtn"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+        android:id="@+id/TargetTimeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimary"
+        android:textSize="58sp" />
+
+    <TextView
+        android:id="@+id/TotalTimeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="24sp" />
+
+</LinearLayout>
+
+<Button
+    android:id="@+id/appListBtn"
+    android:layout_width="32dp"
+    android:layout_height="32dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/app_list_btn_color"
+    app:layout_constraintBottom_toTopOf="@+id/seekArc"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+<Button
+    android:id="@+id/minusMinBtn"
+    android:layout_width="50dp"
+    android:layout_height="25dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/btn_stroke"
+    android:elevation="0dp"
+    android:text="-30"
+    android:textColor="@color/colorPrimary"
+    app:layout_constraintEnd_toStartOf="@+id/seekArc"
+    app:layout_constraintStart_toStartOf="@+id/seekArc"
+    app:layout_constraintTop_toTopOf="@+id/seekArc" />
+
+<Button
+    android:id="@+id/plusMinBtn"
+    android:layout_width="50dp"
+    android:layout_height="25dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/btn_stroke"
+    android:elevation="0dp"
+    android:text="+30"
+    android:textColor="@color/colorPrimary"
+    app:layout_constraintEnd_toEndOf="@+id/seekArc"
+    app:layout_constraintStart_toEndOf="@+id/seekArc"
+    app:layout_constraintTop_toTopOf="@+id/seekArc" />
+<Button
+    android:id="@+id/StartBtn"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/lock_icon_grey"
+    android:elevation="1dp"
+    android:padding="8dp"
+    app:layout_constraintBottom_toBottomOf="@+id/seekArc"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/seekArc" />
+
+<com.triggertrap.seekarc.SeekArc
+    android:id="@+id/seekArc"
+    android:layout_width="210dp"
+    android:layout_height="210dp"
+    android:layout_gravity="center"
+    android:layout_marginBottom="56dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginStart="8dp"
+    android:padding="30dp"
+    app:elevation="0dp"
+    app:arcColor="#dadada"
+    app:arcWidth="25dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/appListBtn"
+    app:progressColor="#85CC9F"
+    app:progressWidth="25dp"
+    app:startAngle="0"
+    app:sweepAngle="360"
+    app:thumb="@drawable/btn_thumb"
+    app:touchInside="true" />
+
+
+</android.support.constraint.ConstraintLayout>

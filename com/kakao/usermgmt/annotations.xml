@@ -1,0 +1,6 @@
+<root>
+    <item
+        name='com.kakao.usermgmt.UserManagement void requestLogout(com.kakao.usermgmt.callback.LogoutResponseCallback)'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+</root>
