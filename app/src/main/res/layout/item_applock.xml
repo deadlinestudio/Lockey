@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp">
+    <ImageView
+        android:id = "@+id/appLockIcon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentLeft="true"/>
+
+    <TextView
+        android:id="@+id/appLockText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/appLockIcon"
+        android:layout_toLeftOf="@+id/appLockSwitch"
+        android:text="hello"
+        android:textColor="#000"
+        android:textSize="25sp" />
+    <Switch
+        android:id="@+id/appLockSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:switchMinWidth="36dp"
+        android:theme="@style/SwitchTheme"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>

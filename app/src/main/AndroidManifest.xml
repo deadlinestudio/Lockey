@@ -1,21 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.deadlinestudio.lockey">
 
     <application
+        android:name=".presenter.Adapter.GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
+        <activity android:name=".presenter.Activity.LoadActivity">
+        </activity>
+        <activity android:name=".presenter.Activity.MainTempActivity">
+        </activity>
+        <activity android:name=".presenter.Activity.MainActivity">
+        </activity>
+        <activity android:name=".presenter.Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
+        <activity android:name=".presenter.Activity.OpenSourceActivity">
+        </activity>
+        <activity android:name=".presenter.Activity.LockActivity">
+        </activity>
+        <activity android:name=".presenter.Activity.AppLockActivity">
+        </activity>
+        <activity android:name=".presenter.Activity.GoogleLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
+        </activity>
+        <activity android:name=".presenter.Activity.FacebookLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
+        </activity>
+        <activity android:name=".presenter.Activity.KakaoLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
+        </activity>
+        <activity android:name=".presenter.Activity.SignupActivity">
+        </activity>
+        <service android:name=".presenter.Service.TimerService">
+            <intent-filter>
+                <action android:name="timerservice"/>
+            </intent-filter>
+        </service>
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
 
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+
+        <activity
+            android:name="com.kakao.auth.authorization.authcode.KakaoWebViewActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <service android:name=".presenter.Service.AppLockService" />
+
+        <receiver
+            android:name=".presenter.Service.RestartService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+    </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
 </manifest>
