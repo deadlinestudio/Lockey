@@ -9,14 +9,13 @@
 1. android studio -> tools -> firebase -> Assistant -> Analytics -> Log an Analytics event 클릭
 1. firebase 연결 클릭 
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
 
 ### 안드로이드 디버그 해시키
 #### [keytool 사용법]
 1. keytool의 위치는 C:\Program Files\Java\jdk-11.0.1\bin에 있다.
 1. cmd에서 keytool의 위치로 간후
-1.      keytool -exportcert -alias androiddebugkey -keystore "C:\Users\s_negaro\.android\debug.keystore" -storepass android -keypass android | openssl sha1 -binary | openssl base64
- 입력
+1.      keytool -exportcert -alias androiddebugkey -keystore "C:\Users\s_negaro\.android\debug.keystore" -storepass android -keypass android | openssl sha1 -binary | openssl base64 
 1. 초기 비밀번호는 android
 <br>ex) zSdJoEbFoz6suAQRNzDRPkT97vM=
 <br>* 'openssl'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는 배치 파일이 아닙니다.
@@ -24,7 +23,7 @@
 
 #### [안드로이드 키스토어 사용법]
 1. C:\Users\s_negaro\.android\debug.keystore로 이동
-1.      keytool -list -v -keystore debug.keystore 입력
+1.      keytool -list -v -keystore debug.keystore 
 1. 초기 비밀번호는 android
 <br>ex) 3F:23:00:98:D3:13:DD:34:D7:13:38:47:96:C2:B2:7E:F8:7F:48:78
 
@@ -53,7 +52,7 @@
 #### * 안드로이드 릴리스  해시키 (출시용)
       keytool -exportcert -alias <release_key_alias> -keystore <release_keystore_path> | openssl sha1 -binary | openssl base64
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
 
 ### 페이스북 연동 시 "invalid key hash..." 같은 에러가 뜰 경우
 1. 에러메세지에 나온 해시키를 복사
