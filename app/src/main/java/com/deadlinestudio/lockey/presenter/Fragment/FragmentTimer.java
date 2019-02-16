@@ -53,8 +53,7 @@ public class FragmentTimer extends Fragment{
     private NumberPicker hourPicker, minPicker;
     private LinearLayout pickerContatiner, timerOnContainer;
     private TextView targetView, totalView;
-    private Button appListBtn;
-    private Button startBtn, plusMinBtn, minusMinBtn;
+    private Button startBtn;
     private long targetTime = 0;
     private double achievement;
     public static BasicTimer bt;
@@ -62,8 +61,6 @@ public class FragmentTimer extends Fragment{
     private Data tempData;
     private SeekArc seekBar;
     private boolean receiverRegied;
-    private ArrayList<ItemApplock> applocks;
-    private Intent lockIntent;
 
     //private TimerService timerService;
     //private Intent tService;
@@ -79,9 +76,6 @@ public class FragmentTimer extends Fragment{
     public FragmentTimer(){}
 
     @SuppressLint("ValidFragment")
-    public FragmentTimer(ArrayList<ItemApplock> applocks){
-        this.applocks = applocks;
-    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

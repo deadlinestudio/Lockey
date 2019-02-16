@@ -50,6 +50,7 @@ public class LogfileController extends BaseActivity {
             String line="";
             while((line=reader.readLine())!=null){
                 strBuffer.append(line);
+                Log.e("Log file : ",line);
             }
             reader.close();
             fis.close();
