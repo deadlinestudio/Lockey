@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.deadlinestudio.lockey.presenter.Activity.FacebookLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.GoogleLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.KakaoLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.LoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
+import com.deadlinestudio.lockey.presenter.Activity.NaverLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.OpenSourceActivity;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import com.deadlinestudio.lockey.presenter.Item.ItemSetting;
@@ -75,7 +75,7 @@ public class AdapterSetting extends BaseAdapter{
                             intent.putExtra("InOut", 2);
                             mainActivity.startActivity(intent);
                         }else if(mainActivity.getSns().equals("2")){
-                            Intent intent = new Intent(mainActivity, FacebookLoginActivity.class);
+                            Intent intent = new Intent(mainActivity, NaverLoginActivity.class);
                             intent.putExtra("InOut", 2);
                             mainActivity.startActivity(intent);
                         }else if(mainActivity.getSns().equals("3")){

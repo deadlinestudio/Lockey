@@ -56,7 +56,7 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/facebookBtn"
+            android:id="@+id/naverBtn"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginBottom="0dp"
@@ -74,7 +74,7 @@
                 android:gravity="center"
                 android:elevation="1dp"
                 android:textColor="#FFF"
-                android:text="페이스북으로 로그인"/>
+                android:text="네이버로 로그인"/>
         </FrameLayout>
         <FrameLayout
             android:id="@+id/kakaoBtn"

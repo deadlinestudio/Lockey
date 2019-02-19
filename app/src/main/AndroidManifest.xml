@@ -33,9 +33,9 @@
         </activity>
         <activity android:name=".presenter.Activity.GoogleLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
         </activity>
-        <activity android:name=".presenter.Activity.FacebookLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
-        </activity>
         <activity android:name=".presenter.Activity.KakaoLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
+        </activity>
+        <activity android:name=".presenter.Activity.NaverLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
         </activity>
         <activity android:name=".presenter.Activity.SignupActivity">
         </activity>
