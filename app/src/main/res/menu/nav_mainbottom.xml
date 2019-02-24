@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/tab_timer"
-        android:title="@string/tab_home" />
+        android:title="@string/tab_home"/>
 
     <item
         android:id="@+id/navigation_applist"
@@ -14,7 +16,7 @@
     <item
         android:id="@+id/navigation_graph"
         android:icon="@drawable/tab_analy"
-        android:title="@string/tab_graph" />
+        android:title="@string/tab_analysis" />
 
     <item
         android:id="@+id/navigation_setting"

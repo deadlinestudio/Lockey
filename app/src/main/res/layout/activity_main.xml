@@ -10,14 +10,13 @@
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottomMainNav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-
+        android:background="@color/colorWhite"
         app:layout_constraintTop_toBottomOf="@id/pager"
         android:layout_alignParentBottom="true"
-        app:labelVisibilityMode="labeled"
+        app:labelVisibilityMode="unlabeled"
         app:menu="@menu/nav_mainbottom" />
 
     <com.deadlinestudio.lockey.presenter.Fragment.NoSwipePager

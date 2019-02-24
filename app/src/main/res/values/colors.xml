@@ -5,6 +5,8 @@
     <color name="darkGrey">#aaaaaa</color>
     <color name="lightGrey">#dadada</color>
     <color name="colorPrimaryDark">#FFF</color>
+    <color name="colorWhite">#FFF</color>
+    <color name="colorBlack">#000</color>
     <color name="colorAccent">#85CC9F</color>
     <color name="transparent">#00000000</color>
 </resources>
