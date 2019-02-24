@@ -90,7 +90,6 @@ public class FragmentApplock extends Fragment {
             }
         }
         mToolbar  = rootView.findViewById(R.id.appListToolbar);
-        mToolbar.setTitle("앱 목록");
         //setSupportActionBar(mToolbar);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

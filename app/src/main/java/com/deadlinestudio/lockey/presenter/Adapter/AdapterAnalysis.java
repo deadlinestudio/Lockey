@@ -11,6 +11,9 @@ import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import com.deadlinestudio.lockey.presenter.Item.ItemAnalysis;
+import com.deadlinestudio.lockey.presenter.Itemview.ItemViewAlysBarChart;
+import com.deadlinestudio.lockey.presenter.Itemview.ItemViewAlysLineChart;
+import com.deadlinestudio.lockey.presenter.Itemview.ItemViewAlysPieChart;
 import com.deadlinestudio.lockey.presenter.Itemview.ItemViewAnalysis;
 
 import java.util.ArrayList;
@@ -72,13 +75,33 @@ public class AdapterAnalysis extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ItemViewAnalysis v = new ItemViewAnalysis(context);
         ItemAnalysis item = items.get(i);
-        v.setTitleText(item.getTitle());
-        v.setSubText(item.getSubTitle());
-        if(this.sns.equals("4") == false)
-            v.setCombinedChart(i, analysisData[i], xaxis[i]);
-        return v;
+        if(i ==0){
+            ItemViewAlysPieChart pie = new ItemViewAlysPieChart(context);
+            pie.setTitleText(item.getTitle());
+            pie.setPieChart();
+            return pie;
+        }else if(i==1){
+            ItemViewAlysBarChart bar = new ItemViewAlysBarChart(context);
+            bar.setTitleText(item.getTitle());
+            bar.setChartAvgVals("10"); // 평균 시간
+            bar.setChartAvgTimes("20190101","20190201");
+            bar.setBarChart();
+            return bar;
+        } else if(i==2){
+            ItemViewAlysLineChart line = new ItemViewAlysLineChart(context);
+            line.setTitleText(item.getTitle());
+            line.setLineChart();
+            return line;
+        }else{
+            if(this.sns.equals("4") == false){
+                ItemViewAnalysis v = new ItemViewAnalysis(context);
+                v.setTitleText(item.getTitle());
+                v.setCombinedChart(i, analysisData[i], xaxis[i]);
+                return v;
+            }
+        }
+        return null;
     }
 
     private String setFormattedData(int index) {

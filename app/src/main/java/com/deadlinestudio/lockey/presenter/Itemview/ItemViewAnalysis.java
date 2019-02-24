@@ -49,16 +49,19 @@ public class ItemViewAnalysis extends LinearLayout {
         inflater.inflate(R.layout.item_analysis, this, true);
 
         titleText = findViewById(R.id.analyTitleText);
-        subText = findViewById(R.id.analySubText);
     }
 
     public void setTitleText(String s) {
         titleText.setText(s);
     }
-
     public void setSubText(String s) {
         subText.setText(s);
     }
+
+    /*
+     * @brief combine chart (line + bar graph)
+     * set the line and bar data by generate functions
+     * */
     public void setCombinedChart(int index, HashMap<String, Long> _analysisData, ArrayList<String> _xaxis){
         this.xaxis = _xaxis;
         this.analysisData = _analysisData;
@@ -107,6 +110,7 @@ public class ItemViewAnalysis extends LinearLayout {
         combinedChart.setData(combinedData);
         combinedChart.invalidate();
     }
+
     public LineData generateLineData(){
         List<Entry> entries = new ArrayList<Entry>();
         int sum = 0;
@@ -128,6 +132,7 @@ public class ItemViewAnalysis extends LinearLayout {
         lineData.setDrawValues(false);
         return lineData;
     }
+
     public BarData generateBarData(){
         List<BarEntry> entries = new ArrayList<BarEntry>();
 
@@ -144,46 +149,5 @@ public class ItemViewAnalysis extends LinearLayout {
         return barData;
     }
 
-    /*
-     * @brief set the Line Graph
-     * */
-    /*
-    public void setLineChart(){
-        LineChart lineChart = (LineChart) findViewById(R.id.chart);
-        List<Entry> entries = new ArrayList<Entry>();
-        for(int i =0; i<5; i++){
-            entries.add(new Entry(i,i));
-        }
-        LineDataSet dataSet = new LineDataSet(entries,"label");
-        dataSet.setColor(Color.rgb(70,144,150));
-        //dataSet.setColor(000);
-        //dataSet.setValueTextColor(000);
-
-        LineData lineData = new LineData(dataSet);
-        lineChart.setData(lineData);
-        lineChart.invalidate();
-    }*/
-    /*
-     * @brief set the bar graph
-     *
-    public void setBarChart(){
-        BarChart barChart = findViewById(R.id.barChart);
-        List<BarEntry> entries = new ArrayList<BarEntry>();
-        for(int i =0; i<5; i++){
-            entries.add(new BarEntry(i,i*10));
-        }
-        BarDataSet dataSet = new BarDataSet(entries,"label");
-        dataSet.setColor(Color.rgb(133,204,159));
-
-        BarData barData = new BarData(dataSet);
-       // barChart.setScaleX(10);
-        barChart.setDoubleTapToZoomEnabled(false);
-        barChart.getXAxis().setGranularity(1f);
-        barChart.getDescription().setText("");
-        barChart.setPinchZoom(false);
-        barChart.setData(barData);
-        barChart.invalidate();
-    }
-    */
 }
 

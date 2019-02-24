@@ -33,20 +33,20 @@
                 android:id="@+id/nicknameshowText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="닉네임" />
+                android:text="@string/nickname" />
 
             <EditText
                 android:id="@+id/nicknameeditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="8"
-                android:hint="닉네임을 입력해주세요" />
+                android:hint="@string/nickname_example" />
 
             <TextView
                 android:id="@+id/ageshowText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text= "나이"/>
+                android:text= "@string/age"/>
 
             <EditText
                 android:id="@+id/ageeditText"
@@ -60,14 +60,14 @@
                 android:id="@+id/jobshowText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="직업" />
+                android:text="@string/age" />
 
             <EditText
                 android:id="@+id/jobeditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="8"
-                android:hint="ex) 학생, 개발자, 디자이너" />
+                android:hint="@string/job_example" />
         </LinearLayout>
     </ScrollView>
 
@@ -75,12 +75,9 @@
         android:id="@+id/signupBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
         android:background="@color/colorPrimary"
         android:textColor="#FFF"
-        android:text="가입하기"
+        android:text="@string/signup_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
