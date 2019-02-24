@@ -1,18 +1,41 @@
 <resources>
-    <string name="facebook_app_id">321035648755011</string>
-    <string name="fb_login_protocol_scheme">fb321035648755011</string>
     <string name="kakao_app_key">e2be04788cd082723365b6868a040b04</string>
     <string name="google_status_fmt">google_status_fmt</string>
     <string name="firebase_status_fmt">firebase_status_fmt</string>
     <string name="app_name">Lockey</string>
     <string name="loading">loading</string>
     <string name="signed_out">signed_out</string>
-    <string name="tab_home">home</string>
-    <string name="tab_setting">setting</string>
-    <string name="tab_graph">graph</string>
-    <string name="tab_applist">app list</string>
+
+    <!--tabs-->
+    <string name="tab_home">홈</string>
+    <string name="tab_setting">설정</string>
+    <string name="tab_analysis">분석</string>
+    <string name="tab_applist">앱 목록</string>
+
+    <!--Common Strings-->
+    <string name="id">아이디</string>
+    <string name="nickname">닉네임</string>
+    <string name="age">나이</string>
+    <string name="job">직업</string>
+    <string name="time">시간</string>
 
     <!--Timer Fragment-->
     <string name="btwHourMin">:</string>
     <string name="disableNotiSound">알람없음</string>
+
+    <!--Analysis Fragment-->
+    <string name="totalFocusTime">총 집중시간</string>
+    <string name="dailyTab">일</string>
+    <string name="weeklyTab">주</string>
+    <string name="monthlyTab">월</string>
+    <string name="totalTab">전체</string>
+    <string name="total">총</string>
+    <string name="average">평균</string>
+
+    <!--SignUp Activity-->
+    <string name="nickname_example">닉네임을 입력해주세요</string>
+    <string name="job_example">직업을 입력해주세요(예. 학생, 개발자)</string>
+    <string name="signup_btn">가입하기</string>
+
+
 </resources>

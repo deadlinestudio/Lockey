@@ -7,9 +7,8 @@ public class ItemAnalysis {
     String subTitle;
     Data data;
 
-    public ItemAnalysis(String title, String subTitle) {
+    public ItemAnalysis(String title) {
         this.title = title;
-        this.subTitle = subTitle;
     }
 
     public String getTitle() {
@@ -20,19 +19,10 @@ public class ItemAnalysis {
         this.title = title;
     }
 
-    public String getSubTitle() {
-        return subTitle;
-    }
-
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
-    }
-
     @Override
     public String toString() {
         return "ItemAnalysis{" +
                 "title='" + title + '\'' +
-                ", subTitle='" + subTitle + '\'' +
                 '}';
     }
 }

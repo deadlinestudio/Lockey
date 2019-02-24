@@ -17,7 +17,7 @@ import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 
 public class LoginActivity extends BaseActivity{
-    private FrameLayout kakaoBtn, facebookBtn, googleBtn;
+    private FrameLayout kakaoBtn, NaverBtn, googleBtn;
     private Button noMemberBtn;
 
     private LogfileController lfc;
@@ -70,7 +70,7 @@ public class LoginActivity extends BaseActivity{
         }
         googleBtn = findViewById(R.id.googleBtn);
         kakaoBtn = findViewById(R.id.kakaoBtn);
-        facebookBtn = findViewById(R.id.facebookBtn);
+        NaverBtn = findViewById(R.id.naverBtn);
         noMemberBtn = findViewById(R.id.noMemberBtn);
 
         /**
@@ -94,10 +94,10 @@ public class LoginActivity extends BaseActivity{
             }
         });
 
-        facebookBtn.setOnClickListener(new Button.OnClickListener() {
+        NaverBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(cont,FacebookLoginActivity.class);
+                Intent intent = new Intent(cont,NaverLoginActivity.class);
                 intent.putExtra("InOut",1);
                 startActivity(intent);
             }

@@ -29,9 +29,7 @@ import com.deadlinestudio.lockey.presenter.Service.AppLockService;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
-
-public class FragmentApplock extends Fragment {
+public class FragmentApplock extends Fragment{
     AppLockController alc;
     LogfileController lfc;
     Context cont;
@@ -72,7 +70,7 @@ public class FragmentApplock extends Fragment {
 
         alc = new AppLockController();
         lfc = new LogfileController();
-        cont = getApplicationContext();
+        cont = this.getContext();
 
         // load applist from main activity
         applocks = alc.LoadAppList(this.getActivity());
@@ -90,7 +88,6 @@ public class FragmentApplock extends Fragment {
             }
         }
         mToolbar  = rootView.findViewById(R.id.appListToolbar);
-        mToolbar.setTitle("앱 목록");
         //setSupportActionBar(mToolbar);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -113,9 +110,9 @@ public class FragmentApplock extends Fragment {
                     }
                 }
 
-                Intent sintent = new Intent(getApplicationContext(), AppLockService.class); // 이동할 컴포넌트
+                Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
                 getActivity().startService(sintent); // 서비스 시작
-                Intent mintent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent mintent = new Intent(cont,MainActivity.class);
                 mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(mintent);
             }
@@ -142,7 +139,7 @@ public class FragmentApplock extends Fragment {
                     }
                 }
 
-                Intent sintent = new Intent(getApplicationContext(),AppLockService.class); // 이동할 컴포넌트
+                Intent sintent = new Intent(cont,AppLockService.class); // 이동할 컴포넌트
                 getActivity().startService(sintent); // 서비스 시작
 
                 return true;

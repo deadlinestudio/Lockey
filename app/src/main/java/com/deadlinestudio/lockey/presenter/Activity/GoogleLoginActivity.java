@@ -115,9 +115,9 @@ public class GoogleLoginActivity extends AppCompatActivity{
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithCredential:success");
-
+                                FirebaseUser user = mAuth.getCurrentUser();
                                 // 다음화면으로 이름과 이메일을 넘기고 화면을 띄운다
-                                String EMAIL = acct.getEmail();
+                                String EMAIL = user.getEmail();
                                 Log.e("Google Email : ",EMAIL);
                                 String content =
                                         "1," + EMAIL;
