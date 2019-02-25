@@ -32,7 +32,8 @@ public class AppLockController extends BaseActivity {
         AppInfos = pkgm.queryIntentActivities(intent, 0);
         for (ResolveInfo info : AppInfos) {
             ActivityInfo ai = info.activityInfo;
-            itemApplocks.add(new ItemApplock(ai.loadLabel(pkgm).toString(),ai.loadIcon(pkgm), ai.packageName));
+            if(!ai.packageName.equals("com.deadlinestudio.lockey"))
+                itemApplocks.add(new ItemApplock(ai.loadLabel(pkgm).toString(),ai.loadIcon(pkgm), ai.packageName));
         }
         return itemApplocks;
     }

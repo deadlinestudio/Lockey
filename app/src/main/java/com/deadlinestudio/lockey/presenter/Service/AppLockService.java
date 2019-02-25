@@ -113,7 +113,7 @@ public class AppLockService extends Service {
                     .setContentText("AppLockService")  // the contents of the entry
                     .build();
         }
-        startForeground(1,notification);
+        startForeground(0,notification);
 
         return super.onStartCommand(intent, flags, startId);
     }
