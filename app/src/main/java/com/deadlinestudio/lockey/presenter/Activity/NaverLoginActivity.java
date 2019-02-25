@@ -200,6 +200,7 @@ public class NaverLoginActivity extends AppCompatActivity {
                         finish();
                     } else {
                         Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                        intent.putExtra("SNS", 2);
                         startActivity(intent);
                         finish();
                     }

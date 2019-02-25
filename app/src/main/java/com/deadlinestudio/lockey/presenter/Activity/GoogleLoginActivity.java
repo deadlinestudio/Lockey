@@ -140,6 +140,7 @@ public class GoogleLoginActivity extends AppCompatActivity{
                                     finish();
                                 } else {
                                     Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                                    intent.putExtra("SNS", 1);
                                     startActivity(intent);
                                     finish();
                                 }
