@@ -136,6 +136,7 @@ public class KakaoLoginActivity extends AppCompatActivity {
                             finish();
                         } else {
                             Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                            intent.putExtra("SNS", 3);
                             startActivity(intent);
                             finish();
                         }

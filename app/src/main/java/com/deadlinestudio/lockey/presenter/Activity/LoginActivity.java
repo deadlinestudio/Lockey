@@ -36,7 +36,7 @@ public class LoginActivity extends BaseActivity{
         //check login log
         String line = lfc.ReadLogFile(cont,filename);
         try {
-            if (line.equals("nofile") == false) {
+            if (!line.equals("nofile")) {
                 String sns = "";
                 StringTokenizer tokens = new StringTokenizer(line, ",");
                 User temp_user = new User();
@@ -112,6 +112,7 @@ public class LoginActivity extends BaseActivity{
                 String content = "4,";
                 lfc.WriteLogFile(getApplicationContext(), filename, content, 2);
                 Intent intent = new Intent(cont, LoadActivity.class);
+                intent.putExtra("SNS",4);
                 startActivity(intent);
                 finish();
             }
