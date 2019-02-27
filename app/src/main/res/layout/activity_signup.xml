@@ -11,17 +11,19 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/signupToolbar"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="30dp"
         app:layout_constraintTop_toTopOf="parent">
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
+        android:id="@+id/signupScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/signupToolbar">
+        app:layout_constraintTop_toBottomOf="@+id/signupImage">
 
         <LinearLayout
+            android:id="@+id/signupLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -60,10 +62,23 @@
                 android:id="@+id/jobshowText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/age" />
+                android:layout_marginBottom="5dp"
+                android:text="@string/job" />
+
+            <Spinner
+                android:id="@+id/jobSpinner"
+                android:entries="@array/job_list"
+                android:verticalScrollbarPosition="right"
+                android:spinnerMode="dropdown"
+                android:overlapAnchor="false"
+                android:scrollbarThumbVertical="@drawable/scrollbar_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:ems="8" />
 
             <EditText
-                android:id="@+id/jobeditText"
+                android:id="@+id/jobText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="8"

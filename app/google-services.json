@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "894086141625-3u7dbj55bqeegfh48qhg7qaf38kenm4u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deadlinestudio.lockey",
+            "certificate_hash": "3df2c7595df8fd99111a5f021b259b7f599ad2e7"
+          }
+        },
+        {
           "client_id": "894086141625-gpgvfhggkuahvtupkjqnqe7gjjv6iq2e.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -123,10 +123,12 @@ public class GoogleLoginActivity extends AppCompatActivity{
                                         "1," + EMAIL;
                                 lfc.WriteLogFile(getApplicationContext(), filename, content, 2);
 
+                                Log.e("google debuging", "test1");
                                 User temp_user = new User();
                                 temp_user.setId(EMAIL);
                                 NetworkTask networkTask = new NetworkTask("/check-user", temp_user, null);
                                 networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
+                                Log.e("google debuging", "test2");
                                 if(networkTask.getUser().getisUser()) {
                                     String contents =
                                             "1," + EMAIL +
@@ -139,6 +141,7 @@ public class GoogleLoginActivity extends AppCompatActivity{
                                     startActivity(intent);
                                     finish();
                                 } else {
+                                    Log.e("google debuging", "test3");
                                     Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -148,7 +151,7 @@ public class GoogleLoginActivity extends AppCompatActivity{
                                 Log.w(TAG, "signInWithCredential:failure", task.getException());
                             }
                         } catch(Exception e) {
-                            Log.e("google login", e.getMessage());
+                            Log.e("google login", "google login error");
                         }
                     }
                 });

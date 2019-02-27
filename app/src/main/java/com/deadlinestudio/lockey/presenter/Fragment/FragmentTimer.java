@@ -59,7 +59,6 @@ public class FragmentTimer extends Fragment{
     public static BasicTimer bt;
     private boolean timerOn;
     private Data tempData;
-    private SeekArc seekBar;
     private boolean receiverRegied;
 
     //private TimerService timerService;
@@ -99,12 +98,8 @@ public class FragmentTimer extends Fragment{
         targetView = (TextView)rootView.findViewById(R.id.TargetTimeText);
         totalView = (TextView)rootView.findViewById(R.id.TotalTimeText);
         timerOnContainer.setVisibility(View.INVISIBLE);
-
-
         // timer set up
-
         timerOn = false;
-
 
         tempData = new Data();
         mainActivity = (MainActivity) this.getActivity();
@@ -117,7 +112,6 @@ public class FragmentTimer extends Fragment{
 
         final Intent sendIntent = new Intent("TIMER_BROAD_CAST_REQ");
         getActivity().sendBroadcast(sendIntent);
-
 
         //Using the Gyroscope & Accelometer
         mSensorManager = (SensorManager) mainActivity.getSystemService(Context.SENSOR_SERVICE);
@@ -324,13 +318,11 @@ public class FragmentTimer extends Fragment{
                         isFirst = true;
                         startBtn.setBackgroundResource(R.drawable.lock_icon_color);
                         //bt.timerStart();
-                        seekBar.setEnabled(false);
 
                         // timer service start
                         Intent timerService = new Intent(mainActivity,TimerService.class);
                         timerService.putExtra("timer",bt);
                         mainActivity.startService(timerService);
-                        seekBar.setEnabled(false);
                     }
                 } else {
                     if (isFirst && !timerOn) {
@@ -368,10 +360,8 @@ public class FragmentTimer extends Fragment{
                         SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss");
                         tempData.setDate(time.format(currentTime));
                         fragmentTimer.setTargetTime(0);
-                        seekBar.setProgress(0);
                         fragmentTimer.updateTextview();
 
-                        seekBar.setEnabled(true);
                     }
                 }
             }
