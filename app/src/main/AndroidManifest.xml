@@ -36,7 +36,7 @@
         </activity>
         <activity android:name=".presenter.Activity.NaverLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
         </activity>
-        <activity android:name=".presenter.Activity.SignupActivity" android:windowSoftInputMode="adjustResize">
+        <activity android:name=".presenter.Activity.SignupActivity" android:windowSoftInputMode="adjustPan">
         </activity>
         <service android:name=".presenter.Service.TimerService">
             <intent-filter>
