@@ -15,6 +15,7 @@
         android:id="@+id/appLockList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/lockStartBtn"
         android:layout_below="@+id/appListToolbar" />
     <Button
         android:id="@+id/lockStartBtn"
@@ -22,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
+        android:layout_below="@+id/appLockList"
         android:textColor="#FFF"
         android:textSize="18sp"
-        android:text="잠금"/>
+        android:text="@string/lock"/>
 </RelativeLayout>

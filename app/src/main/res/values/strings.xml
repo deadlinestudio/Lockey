@@ -20,10 +20,16 @@
     <string name="age">나이</string>
     <string name="job">직업</string>
     <string name="time">시간</string>
+    <string name="lock">잠금</string>
+    <string name="lock_en">LOCK</string>
+    <string name="key_en">KEY</string>
 
     <!--Timer Fragment-->
     <string name="btwHourMin">:</string>
     <string name="disableNotiSound">알람없음</string>
+    <string name="remainTime">남은시간</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
 
     <!--Analysis Fragment-->
     <string name="totalFocusTime">총 집중시간</string>
