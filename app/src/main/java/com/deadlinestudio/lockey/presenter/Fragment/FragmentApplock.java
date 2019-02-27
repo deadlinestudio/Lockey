@@ -29,9 +29,7 @@ import com.deadlinestudio.lockey.presenter.Service.AppLockService;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
-
-public class FragmentApplock extends Fragment {
+public class FragmentApplock extends Fragment{
     AppLockController alc;
     LogfileController lfc;
     Context cont;
@@ -46,6 +44,7 @@ public class FragmentApplock extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // View Set up
         final ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_applock, container,false);
+
 
         mainActivity = (MainActivity) this.getActivity();
         // GET_USAGE_STATS 권한 확인
@@ -72,7 +71,7 @@ public class FragmentApplock extends Fragment {
 
         alc = new AppLockController();
         lfc = new LogfileController();
-        cont = getApplicationContext();
+        cont = this.getContext();
 
         // load applist from main activity
         applocks = alc.LoadAppList(this.getActivity());
@@ -111,10 +110,16 @@ public class FragmentApplock extends Fragment {
                         lfc.WriteLogFile(cont, sfilename, applocks.get(i).getAppPackage() + ",", 1);
                     }
                 }
-
-                Intent sintent = new Intent(getApplicationContext(), AppLockService.class); // 이동할 컴포넌트
-                getActivity().startService(sintent); // 서비스 시작
-                Intent mintent = new Intent(getApplicationContext(),MainActivity.class);
+                String line = lfc.ReadLogFile(cont, sfilename);
+                if(line.equals("")) {
+                    Log.e("잠글 앱 없으야~", "서비스 종료하자!");
+                    Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
+                    getActivity().stopService(sintent); // 서비스 종료
+                }else {
+                    Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
+                    getActivity().startService(sintent); // 서비스 시작
+                }
+                Intent mintent = new Intent(cont, MainActivity.class);
                 mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(mintent);
             }
@@ -141,7 +146,7 @@ public class FragmentApplock extends Fragment {
                     }
                 }
 
-                Intent sintent = new Intent(getApplicationContext(),AppLockService.class); // 이동할 컴포넌트
+                Intent sintent = new Intent(cont,AppLockService.class); // 이동할 컴포넌트
                 getActivity().startService(sintent); // 서비스 시작
 
                 return true;
