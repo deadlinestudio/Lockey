@@ -65,6 +65,8 @@ public class ItemViewAlysLineChart extends LinearLayout {
         //dataSet.setValueTextColor(000);
         Legend l = lineChart.getLegend();
         l.setEnabled(false);
+
+
         LineData lineData = new LineData(dataSet);
         lineChart.setData(lineData);
         lineChart.invalidate();

@@ -20,7 +20,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ItemViewAlysPieChart extends LinearLayout {
+    private int[] pieColors ={
+            this.getContext().getColor(R.color.catOne),
+            this.getContext().getColor(R.color.catTwo),
+            this.getContext().getColor(R.color.catThree),
+            this.getContext().getColor(R.color.catFour),
+            this.getContext().getColor(R.color.catFive),
 
+    };
     private TextView titleText, subText;
     private PieChart chart;
     private HashMap<String, Long> analysisData;
@@ -72,10 +79,17 @@ public class ItemViewAlysPieChart extends LinearLayout {
 
         PieDataSet dataSet = new PieDataSet(yVals,"Study Times");
         dataSet.setSliceSpace(4f);
+        ArrayList<Integer> colors = new ArrayList<>();
+        for (int color : pieColors) {
+            colors.add(color);
+        }
+        dataSet.setColors(colors);
 
         PieData data = new PieData(dataSet);
-
+        data.setValueTextSize(13f);
         pieChart.setData(data);
+
+        pieChart.invalidate();
     }
 
 }

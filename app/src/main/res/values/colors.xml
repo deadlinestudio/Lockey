@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#85CC9F</color>
+    <color name="colorPrimary_ultra_light">#e2f0e7</color>
+    <color name="colorPrimary_lighter">#d7e7dd</color>
     <color name="colorPrimary_light">#8bb79b</color>
     <color name="darkGrey">#aaaaaa</color>
     <color name="lightGrey">#dadada</color>
     <color name="colorPrimaryDark">#FFF</color>
     <color name="colorWhite">#FFF</color>
     <color name="colorBlack">#000</color>
+    <color name="colorBlack_light">#5e5e5e</color>
     <color name="colorAccent">#85CC9F</color>
     <color name="transparent">#00000000</color>
+
+
+    <color name="catOne">#57bb8a</color>
+    <color name="catTwo">#9ace6a</color>
+    <color name="catThree">#ffcf02</color>
+    <color name="catFour">#ff9f02</color>
+    <color name="catFive">#ff6f31</color>
 </resources>

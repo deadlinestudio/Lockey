@@ -84,7 +84,6 @@ public class AdapterSetting extends BaseAdapter{
                             mainActivity.startActivity(intent);
                         } else {
                             Intent intent = new Intent(mainActivity, LoginActivity.class);
-                            intent.putExtra("InOut", 2);
                             mainActivity.startActivity(intent);
                         }
                         break;

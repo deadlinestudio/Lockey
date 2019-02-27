@@ -32,10 +32,14 @@ public class SignupActivity extends AppCompatActivity {
     private LogfileController lfc;
     private Context cont;
     private final String filename = "userlog.txt";
+    private int sns;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        Intent intent = getIntent();
+        sns = intent.getIntExtra("SNS", 0);
 
         lfc = new LogfileController();
         nicknameText = findViewById(R.id.nicknameeditText);
@@ -110,6 +114,32 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        lfc = new LogfileController();
+        lfc.WriteLogFile(this, filename,"nofile",2);
+        if(sns==1) {
+            Intent intent = new Intent(getBaseContext(), GoogleLoginActivity.class);
+            intent.putExtra("InOut", 2);
+            startActivity(intent);
+        }else if(sns==2){
+            Intent intent = new Intent(getBaseContext(), NaverLoginActivity.class);
+            intent.putExtra("InOut", 2);
+            startActivity(intent);
+        }else if(sns==3){
+            Intent intent = new Intent(getBaseContext(), KakaoLoginActivity.class);
+            intent.putExtra("InOut", 2);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+            intent.putExtra("InOut", 2);
+            startActivity(intent);
+        }
+        finish();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
