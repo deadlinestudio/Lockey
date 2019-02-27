@@ -13,6 +13,8 @@ import com.deadlinestudio.lockey.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -71,10 +73,26 @@ public class ItemViewAlysBarChart extends LinearLayout {
 
         // barChart.setScaleX(10);
         barChart.setDoubleTapToZoomEnabled(false);
-        barChart.getXAxis().setGranularity(1f);
+        //barChart.getXAxis().setGranularity(1f);
+        barChart.setDrawBorders(true);
+        barChart.setGridBackgroundColor(this.getResources().getColor(R.color.lightGrey));
+        barChart.setBorderColor(this.getResources().getColor(R.color.lightGrey));
         barChart.getDescription().setText("");
         barChart.setPinchZoom(false);
         barChart.invalidate();
+
+        YAxis leftAxis = barChart.getAxisLeft();
+        YAxis rightAxis = barChart.getAxisRight();
+
+        leftAxis.setAxisMinimum(0f);
+        rightAxis.setAxisMinimum(0f);
+        leftAxis.setDrawLabels(false);
+        rightAxis.setTextColor(this.getResources().getColor(R.color.darkGrey));
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setGridColor(this.getResources().getColor(R.color.lightGrey));
+        xAxis.setTextColor(this.getResources().getColor(R.color.darkGrey));
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
         Legend l = barChart.getLegend();
         l.setEnabled(false);
@@ -87,6 +105,7 @@ public class ItemViewAlysBarChart extends LinearLayout {
         dataSet.setColor(Color.rgb(133,204,159));
 
         BarData barData = new BarData(dataSet);
+        barData.setHighlightEnabled(false);
         barChart.setData(barData);
     }
 
