@@ -1,0 +1,71 @@
+{
+  "project_info": {
+    "project_number": "894086141625",
+    "firebase_url": "https://lockey-c7925.firebaseio.com",
+    "project_id": "lockey-c7925",
+    "storage_bucket": "lockey-c7925.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894086141625:android:cc103ef9bda476be",
+        "android_client_info": {
+          "package_name": "com.deadlinestudio.lockey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894086141625-n3kjhs4iotv34nqkmocsr6atvibmr2fd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deadlinestudio.lockey",
+            "certificate_hash": "a6b84f584b7e0f55c22f4ebfb2242351e772365e"
+          }
+        },
+        {
+          "client_id": "894086141625-3u7dbj55bqeegfh48qhg7qaf38kenm4u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deadlinestudio.lockey",
+            "certificate_hash": "3df2c7595df8fd99111a5f021b259b7f599ad2e7"
+          }
+        },
+        {
+          "client_id": "894086141625-t1fjful9chjv8b3uajc2rlqaht2vaddg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deadlinestudio.lockey",
+            "certificate_hash": "e0375a972872d2429ece3b92d82b625259dd80d5"
+          }
+        },
+        {
+          "client_id": "894086141625-gpgvfhggkuahvtupkjqnqe7gjjv6iq2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxtAz-y2CgXOJhEwBQOo7KaEkVGfF_gmw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894086141625-gpgvfhggkuahvtupkjqnqe7gjjv6iq2e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

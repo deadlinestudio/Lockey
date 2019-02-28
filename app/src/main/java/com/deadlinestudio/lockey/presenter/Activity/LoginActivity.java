@@ -129,4 +129,9 @@ public class LoginActivity extends BaseActivity{
     }
     // [END on_start_check_user]
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 }
