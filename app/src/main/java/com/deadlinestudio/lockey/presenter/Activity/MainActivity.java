@@ -1,6 +1,7 @@
 package com.deadlinestudio.lockey.presenter.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -116,8 +117,12 @@ public class MainActivity extends AppCompatActivity {
     }*/
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finishAffinity();
+        Log.e("main back", "start!");
+        //moveTaskToBack(true);
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 

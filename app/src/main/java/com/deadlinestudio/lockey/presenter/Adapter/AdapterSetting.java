@@ -69,23 +69,22 @@ public class AdapterSetting extends BaseAdapter{
                         Log.e("deb/logout", "in");
                         lfc.WriteLogFile(context,filename,"",2);
                         lfc.WriteLogFile(context,filename,"nofile",2);
+                        Intent intent;
 
                         if(mainActivity.getSns().equals("1")) {
-                            Intent intent = new Intent(mainActivity, GoogleLoginActivity.class);
+                            intent = new Intent(mainActivity, GoogleLoginActivity.class);
                             intent.putExtra("InOut", 2);
-                            mainActivity.startActivity(intent);
                         }else if(mainActivity.getSns().equals("2")){
-                            Intent intent = new Intent(mainActivity, NaverLoginActivity.class);
+                            intent = new Intent(mainActivity, NaverLoginActivity.class);
                             intent.putExtra("InOut", 2);
-                            mainActivity.startActivity(intent);
                         }else if(mainActivity.getSns().equals("3")){
-                            Intent intent = new Intent(mainActivity, KakaoLoginActivity.class);
+                            intent = new Intent(mainActivity, KakaoLoginActivity.class);
                             intent.putExtra("InOut", 2);
-                            mainActivity.startActivity(intent);
                         } else {
-                            Intent intent = new Intent(mainActivity, LoginActivity.class);
-                            mainActivity.startActivity(intent);
+                            intent = new Intent(mainActivity, LoginActivity.class);
                         }
+                        mainActivity.startActivity(intent);
+                        mainActivity.finish();
                         break;
                 }
             }

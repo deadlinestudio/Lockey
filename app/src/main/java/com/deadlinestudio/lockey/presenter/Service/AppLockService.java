@@ -51,7 +51,7 @@ public class AppLockService extends Service {
             while(granted && stopSign) {
                 if(alc.CheckRunningApp(context,AppLock)) {
                     Intent intent = new Intent(context,LockActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);       // LockActivity가 중복되지 않도록 Flag설정
                     startActivity(intent);
                     //finish();
                 }
