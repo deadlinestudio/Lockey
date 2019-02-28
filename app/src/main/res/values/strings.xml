@@ -40,8 +40,18 @@
 
     <!--SignUp Activity-->
     <string name="nickname_example">닉네임을 입력해주세요</string>
-    <string name="job_example">직업을 입력해주세요(예. 학생, 개발자)</string>
+    <string name="job_example">직업을 입력해주세요</string>
     <string name="signup_btn">가입하기</string>
+    <string-array name="job_list">
+        <item>중/고등학생</item>
+        <item>대학생</item>
+        <item>취준생</item>
+        <item>개발자</item>
+        <item>디자이너</item>
+        <item>교사/강사</item>
+        <item>회사원</item>
+        <item>기타</item>
+    </string-array>
 
 
 </resources>
