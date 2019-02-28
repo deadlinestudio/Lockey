@@ -45,11 +45,11 @@
     <string-array name="job_list">
         <item>중/고등학생</item>
         <item>대학생</item>
-        <item>수험생</item>
         <item>취준생</item>
+        <item>개발자</item>
+        <item>디자이너</item>
+        <item>교사/강사</item>
         <item>회사원</item>
-        <item>교사</item>
-        <item>예술가</item>
         <item>기타</item>
     </string-array>
 
