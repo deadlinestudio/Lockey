@@ -4,10 +4,11 @@
     <color name="colorPrimary_ultra_light">#e2f0e7</color>
     <color name="colorPrimary_lighter">#d7e7dd</color>
     <color name="colorPrimary_light">#8bb79b</color>
+    <color name="colorPrimary_soft">#C8E8C7</color>
     <color name="darkGrey">#aaaaaa</color>
     <color name="lightGrey">#dadada</color>
     <color name="colorPrimaryDark">#FFF</color>
-    <color name="colorWhite">#FFF</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000</color>
     <color name="colorBlack_light">#5e5e5e</color>
     <color name="colorAccent">#85CC9F</color>

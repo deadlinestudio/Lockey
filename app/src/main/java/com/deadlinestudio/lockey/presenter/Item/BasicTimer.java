@@ -97,6 +97,11 @@ public class BasicTimer implements Parcelable{
         this.onoff = onoff;
     }
 
+    public void resetTimer(){
+        this.targetTime = 0;
+        this.totalTime = 0;
+        this.tempTarget = 0;
+    }
     /*
     * @brief timer starts when start button onClicked
     * */
