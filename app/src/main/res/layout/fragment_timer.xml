@@ -53,15 +53,28 @@
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/timer_seekbar_bg" />
 
-            <TextView
-                android:id="@+id/TargetTimeText"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:text="90:90"
-                android:textColor="@color/colorBlack_light"
-                android:textSize="48sp" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/TargetTimeText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack_light"
+                    android:textSize="48sp" />
+
+                <TextView
+                    android:id="@+id/TotalTimeText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <com.triggertrap.seekarc.SeekArc
                 android:id="@+id/seekArc"
@@ -91,41 +104,37 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/hardMinusBtn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/btn_oval"
-                android:textColor="@color/colorWhite"
-                android:text="@string/minus" />
+                android:id="@+id/quickQuaterBtn"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/quick_timer_quater"
+                android:textColor="@color/colorWhite" />
 
             <Button
-                android:id="@+id/softMinusBtn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/btn_oval"
-                android:textColor="@color/colorWhite"
-                android:text="@string/minus" />
+                android:id="@+id/quickHalfBtn"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/quick_timer_half"
+                android:textColor="@color/colorWhite" />
 
             <Button
-                android:id="@+id/softPlusBtn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/btn_oval"
+                android:id="@+id/quickTripleBtn"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/quick_timer_triple"
 
-                android:textColor="@color/colorWhite"
-                android:text="@string/plus" />
+                android:textColor="@color/colorWhite" />
 
             <Button
-                android:id="@+id/hardPlusBtn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/btn_oval"
+                android:id="@+id/quickFullBtn"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/quick_timer_full"
 
-                android:textColor="@color/colorWhite"
-                android:text="@string/plus" />
+                android:textColor="@color/colorWhite" />
         </LinearLayout>
 
         <FrameLayout
