@@ -73,6 +73,7 @@ public class KakaoLoginActivity extends AppCompatActivity {
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
             Log.e("SessionCallback :: ", "onSessionOpenFailed : " + exception.getMessage());
+            finish(); // LoginActivity로 돌아가기
         }
 
         // 사용자 정보 요청
