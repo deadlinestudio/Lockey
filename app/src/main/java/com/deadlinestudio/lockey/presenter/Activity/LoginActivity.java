@@ -17,8 +17,9 @@ import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 
-public class LoginActivity extends AppCompatActivity {
-    private FrameLayout kakaoBtn, facebookBtn, googleBtn;
+
+public class LoginActivity extends BaseActivity{
+    private FrameLayout kakaoBtn, NaverBtn, googleBtn;
     private Button noMemberBtn;
 
     private LogfileController lfc;
@@ -37,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         //check login log
         String line = lfc.ReadLogFile(cont,filename);
         try {
-            if (line.equals("nofile") == false) {
+            if (!line.equals("nofile")) {
                 String sns = "";
                 StringTokenizer tokens = new StringTokenizer(line, ",");
                 User temp_user = new User();
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         googleBtn = findViewById(R.id.googleBtn);
         kakaoBtn = findViewById(R.id.kakaoBtn);
-        facebookBtn = findViewById(R.id.facebookBtn);
+        NaverBtn = findViewById(R.id.naverBtn);
         noMemberBtn = findViewById(R.id.noMemberBtn);
 
         /**
@@ -95,10 +96,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        facebookBtn.setOnClickListener(new Button.OnClickListener() {
+        NaverBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(cont,FacebookLoginActivity.class);
+                Intent intent = new Intent(cont,NaverLoginActivity.class);
                 intent.putExtra("InOut",1);
                 startActivity(intent);
             }
@@ -113,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                 String content = "4,";
                 lfc.WriteLogFile(getApplicationContext(), filename, content, 2);
                 Intent intent = new Intent(cont, LoadActivity.class);
+                intent.putExtra("SNS",4);
                 startActivity(intent);
                 finish();
             }

@@ -29,6 +29,7 @@ public class AppLockService extends Service {
     private Context context = null;
     final static String sfilename= "applock.txt";
     boolean grantFlag;
+    boolean stopSign;
 
     private ArrayList<String> AppLock;
 
@@ -47,7 +48,7 @@ public class AppLockService extends Service {
                 granted = (mode == AppOpsManager.MODE_ALLOWED);
             }
 
-            while(granted && !isInterrupted()) {
+            while(granted && stopSign) {
                 if(alc.CheckRunningApp(context,AppLock)) {
                     Intent intent = new Intent(context,LockActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -79,6 +80,7 @@ public class AppLockService extends Service {
         alc = new AppLockController();
         lfc = new LogfileController();
         grantFlag = false;
+        stopSign = true;
         context = getApplicationContext();
         AppLock = new ArrayList<String>();
         th = new checkThread();
@@ -113,7 +115,7 @@ public class AppLockService extends Service {
                     .setContentText("AppLockService")  // the contents of the entry
                     .build();
         }
-        startForeground(1,notification);
+        startForeground(0,notification);
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -122,6 +124,7 @@ public class AppLockService extends Service {
     public void onDestroy() {
         super.onDestroy();
         // 서비스가 종료될 때 실행
+        stopSign = false;
     }
 
 }
