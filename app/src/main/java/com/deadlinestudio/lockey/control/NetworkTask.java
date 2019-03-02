@@ -17,6 +17,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private Data data;
     private AnalysisData analysisData;
     private RequestHttpConnection requestHttpConnection;
+    private String column;
+    private String new_data;
     private final String[] weekdays = {"월", "화", "수", "목", "금", "토", "일"};
 
     public NetworkTask(String url, User user, Data data) {
@@ -38,12 +40,19 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
             case "/check-user":
                this.user = requestHttpConnection.getUser(url, user.getId());
                 if(this.user.getisUser()) {
-                    //Log.e("check-user", "success");
-                    //Log.e("check-user", this.user.getNickname());
-                    //Log.e("check-user", user.getJob());
                     result = "isUser";
                 } else {
                     Log.e("check-user", "fail");
+                    result = "noUser";
+                }
+                break;
+            case "/update-user":
+                // TODO : fix it
+               result = requestHttpConnection.updateUser(url, user.getId(), column, new_data);
+                if(result.equals("complete")) {
+                    result = "complete";
+                } else {
+                    Log.e("update-user", "fail");
                     result = "noUser";
                 }
                 break;
@@ -74,5 +83,10 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 
     public User getUser() {
         return this.user;
+    }
+
+    public void prepareUpdate(String column, String new_data) {
+        this.column = column;
+        this.new_data = new_data;
     }
 }

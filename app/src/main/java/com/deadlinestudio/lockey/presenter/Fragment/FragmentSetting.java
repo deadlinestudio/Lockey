@@ -30,12 +30,16 @@ public class FragmentSetting extends Fragment{
         ListView listView = (ListView) rootView.findViewById(R.id.settingList);
         AdapterSetting adapter = new AdapterSetting(mainActivity,getActivity().getApplicationContext());
 
-        adapter.addItem(new ItemSetting("계정 관리"));
+        adapter.addItem(new ItemSetting("닉네임 변경"));
         adapter.addItem(new ItemSetting("결제 내역 보기"));
         adapter.addItem(new ItemSetting("오픈소스 라이센스"));
         adapter.addItem(new ItemSetting("로그아웃"));
         listView.setAdapter(adapter);
 
         return rootView;
+    }
+
+    public void setProfileName(String nickname) {
+        profileName.setText(nickname);
     }
 }
