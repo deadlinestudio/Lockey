@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
@@ -112,12 +113,15 @@ public class FragmentApplock extends Fragment{
                 }
                 String line = lfc.ReadLogFile(cont, sfilename);
                 if(line.equals("")) {
-                    Log.e("잠글 앱 없으야~", "서비스 종료하자!");
                     Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
                     getActivity().stopService(sintent); // 서비스 종료
+                    String toastMsg = "앱 잠금 서비스를 종료합니다.";
+                    Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT).show();
                 }else {
                     Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
                     getActivity().startService(sintent); // 서비스 시작
+                    String toastMsg = "앱 잠금 목록을 업데이트 했습니다.";
+                    Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT).show();
                 }
                 Intent mintent = new Intent(cont, MainActivity.class);
                 mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -145,7 +149,6 @@ public class FragmentApplock extends Fragment{
                         lfc.WriteLogFile(cont, sfilename, applocks.get(i).getAppPackage() + ",", 1);
                     }
                 }
-
                 Intent sintent = new Intent(cont,AppLockService.class); // 이동할 컴포넌트
                 getActivity().startService(sintent); // 서비스 시작
 

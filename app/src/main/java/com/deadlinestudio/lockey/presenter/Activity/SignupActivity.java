@@ -108,6 +108,7 @@ public class SignupActivity extends AppCompatActivity {
                         networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                         Intent intent = new Intent(getBaseContext(), LoadActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 } catch(Exception e ) {
                     e.printStackTrace();
@@ -125,18 +126,21 @@ public class SignupActivity extends AppCompatActivity {
             Intent intent = new Intent(getBaseContext(), GoogleLoginActivity.class);
             intent.putExtra("InOut", 2);
             startActivity(intent);
+            finish();
         }else if(sns==2){
             Intent intent = new Intent(getBaseContext(), NaverLoginActivity.class);
             intent.putExtra("InOut", 2);
             startActivity(intent);
+            finish();
         }else if(sns==3){
             Intent intent = new Intent(getBaseContext(), KakaoLoginActivity.class);
             intent.putExtra("InOut", 2);
             startActivity(intent);
+            finish();
         } else {
             Intent intent = new Intent(getBaseContext(), LoginActivity.class);
-            intent.putExtra("InOut", 2);
             startActivity(intent);
+            finish();
         }
         finish();
     }

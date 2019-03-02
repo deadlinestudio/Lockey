@@ -95,6 +95,7 @@ public class GoogleLoginActivity extends AppCompatActivity{
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
+                finish();       // LoginActivity로 돌아가기
                 // [START_EXCLUDE]
                 // [END_EXCLUDE]
             }

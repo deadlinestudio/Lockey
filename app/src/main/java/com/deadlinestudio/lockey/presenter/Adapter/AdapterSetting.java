@@ -87,19 +87,17 @@ public class AdapterSetting extends BaseAdapter{
                         if(mainActivity.getSns().equals("1")) {
                             intent = new Intent(mainActivity, GoogleLoginActivity.class);
                             intent.putExtra("InOut", 2);
-                            mainActivity.startActivity(intent);
                         }else if(mainActivity.getSns().equals("2")){
                             intent = new Intent(mainActivity, NaverLoginActivity.class);
                             intent.putExtra("InOut", 2);
-                            mainActivity.startActivity(intent);
                         }else if(mainActivity.getSns().equals("3")){
                             intent = new Intent(mainActivity, KakaoLoginActivity.class);
                             intent.putExtra("InOut", 2);
-                            mainActivity.startActivity(intent);
                         } else {
                             intent = new Intent(mainActivity, LoginActivity.class);
-                            mainActivity.startActivity(intent);
                         }
+                        mainActivity.startActivity(intent);
+                        mainActivity.finish();
                         break;
                 }
             }

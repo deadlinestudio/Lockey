@@ -69,6 +69,7 @@ public class NaverLoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        finish(); //LoginActivity로 이동
         super.onResume();
 
     }
