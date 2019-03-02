@@ -64,6 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:text="000000"
                     android:textColor="@color/colorBlack_light"
                     android:textSize="48sp" />
 
@@ -87,8 +88,9 @@
                 app:elevation="0dp"
                 app:progressColor="@color/colorPrimary"
                 app:progressWidth="12dp"
+                app:max="48"
                 app:startAngle="0"
-                app:sweepAngle="360"
+                app:sweepAngle="500"
                 app:thumb="@drawable/btn_thumb"
                 app:touchInside="true" />
         </FrameLayout>

@@ -45,10 +45,10 @@ public class FragmentAnalysis extends Fragment{
         // Tab pager Adapter
         AdapterGraph pagerAdapter = new AdapterGraph(mainActivity.getSupportFragmentManager());
 
-        FragmentGraph dailyTab = new FragmentGraph();
-        FragmentGraph weeklyTab = new FragmentGraph();
-        FragmentGraph monthlyTab = new FragmentGraph();
-        FragmentGraph totalTab = new FragmentGraph();
+        FragmentGraphDay dailyTab = new FragmentGraphDay();
+        FragmentGraphWeek weeklyTab = new FragmentGraphWeek();
+        FragmentGraphMonth monthlyTab = new FragmentGraphMonth();
+        FragmentGraphTotal totalTab = new FragmentGraphTotal();
 
         pagerAdapter.addItem(dailyTab);
         pagerAdapter.addItem(weeklyTab);
