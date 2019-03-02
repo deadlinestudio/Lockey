@@ -7,10 +7,16 @@
         <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorWhite</item>
+        <!--
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="android:editTextStyle">@style/EditTextStyle</item>
+        <item name="android:radioButtonStyle">@style/RadioButtonStyle</item>
+        <item name="android:checkboxStyle">@style/CheckboxStyle</item>
+        -->
         <!-- No Title Bar-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
     </style>
     <style name="SwitchTheme" parent="Theme.AppCompat.Light">
         <item name="android:colorControlActivated">@color/colorPrimary</item>
@@ -22,6 +28,28 @@
         <item name="android:textColorHighlight">@color/lightGrey</item>
         <item name="android:descendantFocusability">blocksDescendants</item>
     </style>
+
+    <!-- Custom font style 일괄적용
+    <style name="TextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/notosansfont</item>
+    </style>
+
+    <style name="ButtonStyle" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
+        <item name="android:fontFamily">@font/notosansfont</item>
+    </style>
+
+    <style name="EditTextStyle" parent="@android:style/Widget.DeviceDefault.EditText">
+        <item name="android:fontFamily">@font/notosansfont</item>
+    </style>
+
+    <style name="RadioButtonStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.RadioButton">
+        <item name="android:fontFamily">@font/notosansfont</item>
+    </style>
+
+    <style name="CheckboxStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.CheckBox">
+        <item name="android:fontFamily">@font/notosansfont</item>
+    </style>
+-->
 
     <style name="TranslucentActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@android:color/transparent</item>

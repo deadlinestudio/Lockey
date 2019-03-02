@@ -29,6 +29,7 @@ public class AdapterAnalysis extends BaseAdapter{
     private ArrayList<ItemAnalysis> items = new ArrayList<ItemAnalysis>();
     private Context context;
     private HashMap<String, Long>[] analysisData = new HashMap[GRAPH_COUNT];
+
     private String[] weekdays = {"월", "화", "수", "목", "금", "토", "일"};
     private ArrayList<String>[] xaxis = new ArrayList[GRAPH_COUNT];
     private String sns;
@@ -86,7 +87,7 @@ public class AdapterAnalysis extends BaseAdapter{
             bar.setTitleText(item.getTitle());
             bar.setChartAvgVals("10"); // 평균 시간
             bar.setChartAvgTimes("20190101","20190201");
-            bar.setBarChart();
+            bar.setBarChart(item.getXlabels());
             return bar;
         } else if(i==2){
             ItemViewAlysLineChart line = new ItemViewAlysLineChart(context);
