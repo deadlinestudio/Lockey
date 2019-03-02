@@ -395,7 +395,7 @@ public class FragmentTimer extends Fragment{
                  * 여기까지의 pitch, roll의 단위는 '라디안'이다.
                  * SO 아래 로그 출력부분에서 멤버변수 'RAD2DGR'를 곱해주어 degree로 변환해줌.  */
                 pitch = pitch + gyroY*dt;
-                if (Math.abs(pitch * RAD2DGR) > 150.0) {
+                if (Math.abs(pitch * RAD2DGR) > 130.0) {
                     //textX.setText("           [Pitch]: 뒤집힘");
                     if (!TimerOn && !timerOn) {
                         vibrator.vibrate(millisecond);
