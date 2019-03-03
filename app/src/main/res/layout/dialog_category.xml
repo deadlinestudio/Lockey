@@ -47,6 +47,7 @@
         android:textColor="@color/colorBlack_light"
         android:gravity="center"
         android:backgroundTint="@color/colorPrimary"
+        android:inputType="text"
         android:text="기본 공부"/>
 
     <LinearLayout

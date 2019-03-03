@@ -56,6 +56,18 @@ public class ItemViewAlysLineChart extends LinearLayout {
     public void setLineChart(){
         LineChart lineChart = (LineChart) findViewById(R.id.lineChart);
         List<Entry> entries = new ArrayList<Entry>();
+
+
+        // barChart.setScaleX(10);
+        lineChart.setDoubleTapToZoomEnabled(false);
+        //barChart.getXAxis().setGranularity(1f);
+        lineChart.setDrawBorders(true);
+        lineChart.setGridBackgroundColor(this.getResources().getColor(R.color.lightGrey));
+        lineChart.setBorderColor(this.getResources().getColor(R.color.lightGrey));
+        lineChart.getDescription().setText("");
+        lineChart.setPinchZoom(false);
+        lineChart.invalidate();
+
         for(int i =0; i<5; i++){
             entries.add(new Entry(i,i));
         }

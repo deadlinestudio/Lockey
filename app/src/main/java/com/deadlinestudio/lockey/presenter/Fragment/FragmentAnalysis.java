@@ -11,6 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.Button;
+import android.widget.ListView;
+
 
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
@@ -22,7 +26,6 @@ public class FragmentAnalysis extends Fragment{
     private ViewPager viewPager;
     private TabLayout graphTabLayout;
     private MainActivity mainActivity;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,10 +43,10 @@ public class FragmentAnalysis extends Fragment{
         // Tab pager Adapter
         AdapterGraph pagerAdapter = new AdapterGraph(mainActivity.getSupportFragmentManager());
 
-        FragmentGraph dailyTab = new FragmentGraph();
-        FragmentGraph weeklyTab = new FragmentGraph();
-        FragmentGraph monthlyTab = new FragmentGraph();
-        FragmentGraph totalTab = new FragmentGraph();
+        FragmentGraphDay dailyTab = new FragmentGraphDay();
+        FragmentGraphWeek weeklyTab = new FragmentGraphWeek();
+        FragmentGraphMonth monthlyTab = new FragmentGraphMonth();
+        FragmentGraphTotal totalTab = new FragmentGraphTotal();
 
         pagerAdapter.addItem(dailyTab);
         pagerAdapter.addItem(weeklyTab);

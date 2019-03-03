@@ -12,12 +12,15 @@ import android.widget.TextView;
 import com.deadlinestudio.lockey.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,7 +70,7 @@ public class ItemViewAlysBarChart extends LinearLayout {
     /*
      * @brief bar chart
      * */
-    public void setBarChart(){
+    public void setBarChart(final String[] xLabels){
         BarChart barChart = findViewById(R.id.barChart);
         List<BarEntry> entries = new ArrayList<BarEntry>();
 
@@ -97,15 +100,25 @@ public class ItemViewAlysBarChart extends LinearLayout {
         Legend l = barChart.getLegend();
         l.setEnabled(false);
         // data insertion part
-        for(int i =0; i<5; i++){
+        for(int i =0; i<7; i++){
             entries.add(new BarEntry(i,i*10));
         }
+
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                //Print.e(value);
+                return xLabels[(int)value];
+            }
+
+        });
 
         BarDataSet dataSet = new BarDataSet(entries,"label");
         dataSet.setColor(Color.rgb(133,204,159));
 
         BarData barData = new BarData(dataSet);
         barData.setHighlightEnabled(false);
+        barData.setBarWidth(0.5f);
         barChart.setData(barData);
     }
 
