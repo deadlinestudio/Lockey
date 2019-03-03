@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,11 +15,10 @@ import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
-import com.deadlinestudio.lockey.presenter.Adapter.AdapterAnalysis;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterGraph;
-import com.deadlinestudio.lockey.presenter.Item.ItemAnalysis;
 
 public class FragmentAnalysis extends Fragment{
 
