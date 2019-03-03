@@ -1,12 +1,22 @@
 package com.deadlinestudio.lockey.presenter.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.deadlinestudio.lockey.R;
+import com.deadlinestudio.lockey.control.NetworkTask;
+import com.deadlinestudio.lockey.model.Data;
+import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Activity.GoogleLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.KakaoLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.LoginActivity;
@@ -18,6 +28,7 @@ import com.deadlinestudio.lockey.presenter.Item.ItemSetting;
 import com.deadlinestudio.lockey.presenter.Itemview.ItemViewSetting;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class AdapterSetting extends BaseAdapter{
     ArrayList<ItemSetting> items = new ArrayList<ItemSetting>();
@@ -59,17 +70,19 @@ public class AdapterSetting extends BaseAdapter{
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = null;
                 switch (mode){
+                    case 0:
+                        break;
                     case 2:
-                        Intent intents = new Intent(mainActivity, OpenSourceActivity.class);
-                        intents.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        mainActivity.startActivity(intents);
+                        intent = new Intent(mainActivity, OpenSourceActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                        mainActivity.startActivity(intent);
                         break;
                     case 3:
                         Log.e("deb/logout", "in");
                         lfc.WriteLogFile(context,filename,"",2);
                         lfc.WriteLogFile(context,filename,"nofile",2);
-                        Intent intent;
 
                         if(mainActivity.getSns().equals("1")) {
                             intent = new Intent(mainActivity, GoogleLoginActivity.class);
@@ -90,5 +103,50 @@ public class AdapterSetting extends BaseAdapter{
             }
         });
         return v;
+    }
+
+    /**
+     * @brief dialog message with edit text for save category
+     * @param time_data uses for save category value
+     * @TODO add achievement value if need
+     **/
+    public void showNoticeDialog(final Data time_data) {
+        // Create an instance of the dialog fragment and show it
+        final AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
+        // Get the layout inflater
+        LayoutInflater inflater = this.mainActivity.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.dialog_category, null));
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        Button saveBtn = dialog.findViewById(R.id.saveChangeBtn);
+        final EditText ed = dialog.findViewById(R.id.newNicknameText);
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    time_data.setCategory(String.valueOf(ed.getText()));
+                    dialog.dismiss();
+                    if(mainActivity.getSns().equals("4") == false) {
+                        String user_id = mainActivity.getId();
+                        User user = new User(user_id, null, 0, null);
+                        String new_nick = ed.getText().toString();
+                        NetworkTask networkTask = new NetworkTask("/update-user", user, null);
+                        networkTask.prepareUpdate("nickname", new_nick);
+                        networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
+                        String toastMsg = "닉네임이 변경됐습니다";
+                        TextView profileName = mainActivity.findViewById(R.id.profileName);
+                        profileName.setText(new_nick);
+                        Toast.makeText(context, toastMsg, Toast.LENGTH_LONG).show();
+                    } else {
+                        String toastMsg = "비회원은 저장되지 않습니다";
+                        Toast.makeText(context, toastMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

@@ -17,7 +17,7 @@ import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterAnalysis;
 import com.deadlinestudio.lockey.presenter.Item.ItemAnalysis;
 
-public class FragmentGraph extends Fragment {
+public class FragmentGraphTotal extends Fragment {
     private ListView listView;
     private MainActivity mainActivity;
 
@@ -47,11 +47,11 @@ public class FragmentGraph extends Fragment {
         Log.v("created","a");
         return rootView;
     }
-        public void setAdapter(){
+    public void setAdapter(){
         AdapterAnalysis adapter = new AdapterAnalysis(mainActivity.getApplicationContext());
-        adapter.addItem(new ItemAnalysis("집중 분포",1));
+        adapter.addItem(new ItemAnalysis("집중 분포"));
         adapter.addItem(new ItemAnalysis("기록",2));
-        adapter.addItem(new ItemAnalysis("시간 분포",3));
+        adapter.addItem(new ItemAnalysis("토탈"));
         listView.setAdapter(adapter);
     }
 

@@ -52,6 +52,7 @@ public class FragmentTimer extends Fragment{
     private Data tempData;
     private SeekArc seekBar;
     private boolean receiverRegied;
+    private boolean seekbarLimit = false;
     private boolean dialogClosed = true;
 
     //private TimerService timerService;
@@ -192,18 +193,19 @@ public class FragmentTimer extends Fragment{
                 }
             }
         });
-
         seekBar.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener() {
             @Override
             public void onProgressChanged(SeekArc seekArc, int i, boolean b) {
                 if(targetTime == 0){
                     targetTime = 1;
                 }else{
-                    //Log.v("angle", String.valueOf(seekBar.getProgress()));
-                    int progress = seekBar.getProgress();
-
+                    //Log.v("aaa", String.valueOf(b));
+                    //Log.v("angle", String.valueOf(seekBar.getSweepAngle()));
+                    int progress = i;
+                    if(i == 48 && !seekbarLimit){
+                        seekbarLimit = true;
+                    }
                     // timer max time is 4hours
-                    progress = (int)(progress *0.48);
                     targetTime = progress*300000;
                     bt.setTargetTime(targetTime);
                     updateTextview();
@@ -223,6 +225,7 @@ public class FragmentTimer extends Fragment{
             @Override
             public void onClick(View view) {
                 targetTime = 3600000; // one hour
+                seekBar.setProgress(12);
                 bt.setTargetTime(targetTime);
                 updateTextview();
             }
@@ -230,7 +233,8 @@ public class FragmentTimer extends Fragment{
         halfBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                targetTime = 7200000; // one hour
+                targetTime = 7200000; // two hour
+                seekBar.setProgress(24);
                 bt.setTargetTime(targetTime);
                 updateTextview();
             }
@@ -238,7 +242,8 @@ public class FragmentTimer extends Fragment{
         tripleBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                targetTime = 10800000; // one hour
+                targetTime = 10800000; // three hour
+                seekBar.setProgress(36);
                 bt.setTargetTime(targetTime);
                 updateTextview();
             }
@@ -247,6 +252,7 @@ public class FragmentTimer extends Fragment{
             @Override
             public void onClick(View view) {
                 targetTime = 14400000; // one hour
+                seekBar.setProgress(48);
                 bt.setTargetTime(targetTime);
                 updateTextview();
             }
@@ -389,7 +395,7 @@ public class FragmentTimer extends Fragment{
                  * 여기까지의 pitch, roll의 단위는 '라디안'이다.
                  * SO 아래 로그 출력부분에서 멤버변수 'RAD2DGR'를 곱해주어 degree로 변환해줌.  */
                 pitch = pitch + gyroY*dt;
-                if (Math.abs(pitch * RAD2DGR) > 150.0) {
+                if (Math.abs(pitch * RAD2DGR) > 130.0) {
                     //textX.setText("           [Pitch]: 뒤집힘");
                     if (!TimerOn && !timerOn) {
                         vibrator.vibrate(millisecond);

@@ -10,7 +10,7 @@
     <string name="tab_home">홈</string>
     <string name="tab_setting">설정</string>
     <string name="tab_analysis">분석</string>
-    <string name="tab_applist">앱 목록</string>
+    <string name="tab_applist">앱 잠금하기</string>
 
     <!--Common Strings-->
     <string name="id">아이디</string>
@@ -31,6 +31,11 @@
     <string name="plus">+</string>
     <string name="minus">-</string>
 
+    <!--Applock Fragment-->
+    <string name="recentWeek">최근 1주일 동안</string>
+    <string name="mostApp">가장 많이 사용한 앱</string>
+    <string name="selectAll">전체 선택</string>
+    <string name="selectNone">전체 해제</string>
     <!--Analysis Fragment-->
     <string name="totalFocusTime">총 집중시간</string>
     <string name="dailyTab">일</string>

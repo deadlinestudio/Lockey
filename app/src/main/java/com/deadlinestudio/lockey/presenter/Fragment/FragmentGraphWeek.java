@@ -17,7 +17,7 @@ import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterAnalysis;
 import com.deadlinestudio.lockey.presenter.Item.ItemAnalysis;
 
-public class FragmentGraph extends Fragment {
+public class FragmentGraphWeek extends Fragment {
     private ListView listView;
     private MainActivity mainActivity;
 
@@ -25,6 +25,7 @@ public class FragmentGraph extends Fragment {
 
     private int mode;
 
+    private String[] xlabels = {"월", "화", "수", "목", "금", "토", "일"};
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,11 +48,11 @@ public class FragmentGraph extends Fragment {
         Log.v("created","a");
         return rootView;
     }
-        public void setAdapter(){
+    public void setAdapter(){
         AdapterAnalysis adapter = new AdapterAnalysis(mainActivity.getApplicationContext());
-        adapter.addItem(new ItemAnalysis("집중 분포",1));
+        adapter.addItem(new ItemAnalysis("집중 분포"));
         adapter.addItem(new ItemAnalysis("기록",2));
-        adapter.addItem(new ItemAnalysis("시간 분포",3));
+        adapter.addItem(new ItemAnalysis("위크",3));
         listView.setAdapter(adapter);
     }
 

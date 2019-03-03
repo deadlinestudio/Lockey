@@ -168,6 +168,63 @@ public class RequestHttpConnection {
     }
 
     /**
+     * @brief method to update the user data to server
+     * @param url
+     * @param user
+     * @param column
+     * @param new_data
+     * @return 'complete' if successful, 'fail' if not
+     */
+    public String updateUser(String url, String id, String column, String new_data){
+        InputStream is = null;
+        String result = "";
+        try {
+            HttpURLConnection httpCon = connectHTTP(url);
+
+            String json = "";
+
+            // build jsonObject
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate("id", id);
+            jsonObject.accumulate("column", column);
+            jsonObject.accumulate("new_data", new_data);
+
+            // convert JSONObject to JSON to String
+            json = jsonObject.toString();
+            Log.e("post_data", json);
+
+            OutputStream os = httpCon.getOutputStream();
+            os.write(json.getBytes("UTF-8"));
+            os.flush();
+            os.close();
+
+            is = httpCon.getInputStream();
+            try {
+                // convert inputstream to string
+                if(is != null)
+                    result = convertInputStreamToString(is);
+                else
+                    result = "fail";
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                is.close();
+                httpCon.disconnect();
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (Exception e) {
+            Log.e("InputStream", e.getLocalizedMessage());
+        }
+        return result;
+    }
+
+    /**
      * @brief method to get user data from server with specific id
      * @param url
      * @param id
