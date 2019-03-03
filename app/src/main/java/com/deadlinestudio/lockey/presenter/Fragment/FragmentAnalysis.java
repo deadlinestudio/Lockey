@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.deadlinestudio.lockey.R;
@@ -27,7 +28,6 @@ public class FragmentAnalysis extends Fragment{
     private ViewPager viewPager;
     private TabLayout graphTabLayout;
     private MainActivity mainActivity;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

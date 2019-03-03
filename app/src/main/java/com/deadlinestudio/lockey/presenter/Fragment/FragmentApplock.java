@@ -36,7 +36,7 @@ public class FragmentApplock extends Fragment{
     Context cont;
     final static String sfilename = "applock.txt";
 
-    private Button startBtn;
+    private Button startBtn, selectAllBtn, selectNoneBtn;
     private Toolbar mToolbar;
     private ListView listView;
     private ArrayList<ItemApplock> applocks;
@@ -48,6 +48,12 @@ public class FragmentApplock extends Fragment{
 
 
         mainActivity = (MainActivity) this.getActivity();
+        mToolbar  = rootView.findViewById(R.id.appListToolbar);
+        listView = rootView.findViewById(R.id.appLockList);
+        startBtn = rootView.findViewById(R.id.lockStartBtn);
+        selectAllBtn = rootView.findViewById(R.id.appSelectAllBtn);
+        selectNoneBtn = rootView.findViewById(R.id.appSelectNoneBtn);
+
         // GET_USAGE_STATS 권한 확인
         boolean granted = false;
         AppOpsManager appOps = (AppOpsManager) mainActivity.getSystemService(Context.APP_OPS_SERVICE);
@@ -89,11 +95,9 @@ public class FragmentApplock extends Fragment{
                 }
             }
         }
-        mToolbar  = rootView.findViewById(R.id.appListToolbar);
         //setSupportActionBar(mToolbar);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        listView = rootView.findViewById(R.id.appLockList);
 
 
         final AdapterApplock adapterApplock = new AdapterApplock(this.getActivity().getApplicationContext(),applocks);
@@ -101,7 +105,6 @@ public class FragmentApplock extends Fragment{
         listView.setAdapter(adapterApplock);
 
         // start service by button
-        startBtn = rootView.findViewById(R.id.lockStartBtn);
         startBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,6 +129,27 @@ public class FragmentApplock extends Fragment{
                 Intent mintent = new Intent(cont, MainActivity.class);
                 mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(mintent);
+            }
+        });
+
+        // select all apps
+        selectAllBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (int i = 0; i < applocks.size(); i++) {
+                    applocks.get(i).setLockFlag(true);
+                    listView.setAdapter(adapterApplock);
+                }
+            }
+        });
+        // select all apps
+        selectNoneBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (int i = 0; i < applocks.size(); i++) {
+                    applocks.get(i).setLockFlag(false);
+                    listView.setAdapter(adapterApplock);
+                }
             }
         });
         return rootView;
