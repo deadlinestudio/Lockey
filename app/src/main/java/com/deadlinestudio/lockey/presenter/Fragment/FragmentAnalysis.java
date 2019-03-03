@@ -22,7 +22,6 @@ public class FragmentAnalysis extends Fragment{
     private ViewPager viewPager;
     private TabLayout graphTabLayout;
     private MainActivity mainActivity;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

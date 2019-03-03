@@ -1,8 +1,6 @@
 package com.deadlinestudio.lockey.presenter.Fragment;
 
 import android.app.AppOpsManager;
-import android.app.usage.UsageStats;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
@@ -33,7 +30,6 @@ import com.deadlinestudio.lockey.presenter.Service.AppLockService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 public class FragmentApplock extends Fragment{
@@ -104,11 +100,12 @@ public class FragmentApplock extends Fragment{
             }
         }
 
+        // get App Usage Time
+        AppUsageController auc = new AppUsageController(applocks);
+        auc.getAppUsageTime(mainActivity);
+        appRank = auc.getAppRank();
+
         mToolbar  = rootView.findViewById(R.id.appListToolbar);
-        //setSupportActionBar(mToolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
 
         final AdapterApplock adapterApplock = new AdapterApplock(this.getActivity().getApplicationContext(),applocks);
 
@@ -137,10 +134,6 @@ public class FragmentApplock extends Fragment{
                     Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT).show();
                 }
 
-                // get App Usage Time
-                AppUsageController auc = new AppUsageController(applocks);
-                auc.getAppUsageTime(mainActivity);
-                appRank = auc.getAppRank();
                 for(Pair<ItemApplock, Long> e : appRank){
                     long totalTime = e.second;
                     int hours   = (int) ((totalTime / (1000*60*60)) % 24);
@@ -174,15 +167,7 @@ public class FragmentApplock extends Fragment{
         });
         return rootView;
     }
-/*
-    @Override
-    public void onBackPressed() {
-        super.getActivity().onBackPressed();
-        Intent mintent = new Intent(getApplicationContext(),MainActivity.class);
-        mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(mintent);
-    }
-*/
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
