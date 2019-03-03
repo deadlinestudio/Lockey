@@ -1,6 +1,8 @@
 package com.deadlinestudio.lockey.presenter.Fragment;
 
 import android.app.AppOpsManager;
+import android.app.usage.UsageStats;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,11 +26,14 @@ import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterApplock;
 import com.deadlinestudio.lockey.presenter.Controller.AppLockController;
+import com.deadlinestudio.lockey.presenter.Controller.AppUsageController;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import com.deadlinestudio.lockey.presenter.Item.ItemApplock;
 import com.deadlinestudio.lockey.presenter.Service.AppLockService;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class FragmentApplock extends Fragment{
@@ -40,12 +46,13 @@ public class FragmentApplock extends Fragment{
     private Toolbar mToolbar;
     private ListView listView;
     private ArrayList<ItemApplock> applocks;
+    private List<Pair<ItemApplock, Long>> appRank;
     public MainActivity mainActivity;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // View Set up
         final ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_applock, container,false);
-
 
         mainActivity = (MainActivity) this.getActivity();
         // GET_USAGE_STATS 권한 확인
@@ -76,9 +83,9 @@ public class FragmentApplock extends Fragment{
 
         // load applist from main activity
         applocks = alc.LoadAppList(this.getActivity());
-        String line = lfc.ReadLogFile(cont, sfilename);
 
-        if((line = lfc.ReadLogFile(cont, sfilename)) != "nofile") {
+        String line;
+        if((line = lfc.ReadLogFile(cont, sfilename)) != "nofile") {         // 앱 잠금 리스트 확인 후 flag 업데이트
             StringTokenizer tokens = new StringTokenizer(line);
             while(tokens.hasMoreTokens()) {
                 String temp = tokens.nextToken(",");
@@ -89,6 +96,7 @@ public class FragmentApplock extends Fragment{
                 }
             }
         }
+
         mToolbar  = rootView.findViewById(R.id.appListToolbar);
         //setSupportActionBar(mToolbar);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -123,9 +131,19 @@ public class FragmentApplock extends Fragment{
                     String toastMsg = "앱 잠금 목록을 업데이트 했습니다.";
                     Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT).show();
                 }
-                Intent mintent = new Intent(cont, MainActivity.class);
-                mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(mintent);
+
+                // get App Usage Time
+                AppUsageController auc = new AppUsageController(applocks);
+                auc.getAppUsageTime(mainActivity);
+                appRank = auc.getAppRank();
+                for(Pair<ItemApplock, Long> e : appRank){
+                    long totalTime = e.second;
+                    int hours   = (int) ((totalTime / (1000*60*60)) % 24);
+                    int minutes = (int) ((totalTime / (1000*60)) % 60);
+                    int seconds = (int) (totalTime / 1000) % 60 ;
+                    Log.e("", e.first.getAppName() + " -----> " + hours + "시간 "+minutes+"분 "+seconds+"초");
+                }
+
             }
         });
         return rootView;
