@@ -49,8 +49,8 @@ public class FragmentGraphWeek extends Fragment {
     }
     public void setAdapter(){
         AdapterAnalysis adapter = new AdapterAnalysis(mainActivity.getApplicationContext());
-        adapter.addItem(new ItemAnalysis("집중 분포", ItemAnalysis.WEEK, ItemAnalysis.PIE_GRAPH));
-        adapter.addItem(new ItemAnalysis("기록", xlabels, ItemAnalysis.WEEK, ItemAnalysis.BAR_GRAPH));
+        adapter.addItem(new ItemAnalysis(mainActivity.getBaseContext(),"집중 분포", ItemAnalysis.WEEK, ItemAnalysis.PIE_GRAPH));
+        adapter.addItem(new ItemAnalysis(mainActivity.getBaseContext(),"기록", xlabels, ItemAnalysis.WEEK, ItemAnalysis.BAR_GRAPH));
 // adapter.addItem(new ItemAnalysis("위크",3));
         listView.setAdapter(adapter);
     }

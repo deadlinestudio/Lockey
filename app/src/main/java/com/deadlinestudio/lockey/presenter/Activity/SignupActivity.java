@@ -104,7 +104,7 @@ public class SignupActivity extends AppCompatActivity {
                         tokens.nextToken();
                         String id = tokens.nextToken();
                         User user = new User(id, nick, age, job);
-                        NetworkTask networkTask = new NetworkTask("/register-user", user, null);
+                        NetworkTask networkTask = new NetworkTask(getBaseContext(), "/register-user", user, null);
                         networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                         Intent intent = new Intent(getBaseContext(), LoadActivity.class);
                         startActivity(intent);

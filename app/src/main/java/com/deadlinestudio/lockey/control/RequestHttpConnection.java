@@ -33,7 +33,7 @@ public class RequestHttpConnection {
      * @param url the url you want to communicate with
      * @return Connected HttpURLConnection Object
      */
-    private HttpURLConnection connectHTTP(String url) {
+    private HttpURLConnection connectHTTP(String url) throws Exception {
         HttpURLConnection httpCon;
         try {
             URL urlCon = new URL(SERVER_ADDR + SERVER_PORT + url);
@@ -47,13 +47,12 @@ public class RequestHttpConnection {
             httpCon.setDoInput(true);
             return httpCon;
         } catch (ProtocolException e) {
-            e.printStackTrace();
+            throw e;
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            throw e;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw e;
         }
-        return null;
     }
 
     /**
@@ -62,7 +61,7 @@ public class RequestHttpConnection {
      * @param id
      * @return User Object received from server
      */
-    public User getUser(String url, String id){
+    public User getUser(String url, String id) throws Exception {
         InputStream is = null;
         String result = "";
         User user = new User();
@@ -95,7 +94,7 @@ public class RequestHttpConnection {
                 }
             }
             catch (Exception e) {
-                e.printStackTrace();
+                throw e;
             }
             finally {
                 is.close();
@@ -103,10 +102,10 @@ public class RequestHttpConnection {
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
+            throw e;
         }
         catch (Exception e) {
-            Log.e("InputStream", e.getLocalizedMessage());
+            throw e;
         }
         return user;
     }
@@ -117,7 +116,7 @@ public class RequestHttpConnection {
      * @param user
      * @return 'complete' if successful, 'fail' if not
      */
-    public String registerUser(String url, User user){
+    public String registerUser(String url, User user) throws Exception {
         InputStream is = null;
         String result = "";
         try {
@@ -151,7 +150,7 @@ public class RequestHttpConnection {
 
             }
             catch (Exception e) {
-                e.printStackTrace();
+                throw e;
             }
             finally {
                 is.close();
@@ -159,10 +158,10 @@ public class RequestHttpConnection {
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
+            throw e;
         }
         catch (Exception e) {
-            Log.e("InputStream", e.getLocalizedMessage());
+            throw e;
         }
         return result;
     }
@@ -175,7 +174,7 @@ public class RequestHttpConnection {
      * @param new_data
      * @return 'complete' if successful, 'fail' if not
      */
-    public String updateUser(String url, String id, String column, String new_data){
+    public String updateUser(String url, String id, String column, String new_data) throws Exception {
         InputStream is = null;
         String result = "";
         try {
@@ -208,7 +207,7 @@ public class RequestHttpConnection {
 
             }
             catch (Exception e) {
-                e.printStackTrace();
+                throw e;
             }
             finally {
                 is.close();
@@ -216,10 +215,10 @@ public class RequestHttpConnection {
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
+            throw e;
         }
         catch (Exception e) {
-            Log.e("InputStream", e.getLocalizedMessage());
+            throw e;
         }
         return result;
     }
@@ -230,7 +229,7 @@ public class RequestHttpConnection {
      * @param id
      * @return Time Object received from server
      */
-    public HashMap<String, Long> getClassfiedTime(String url, String id, String period){
+    public HashMap<String, Long> getClassfiedTime(String url, String id, String period) throws Exception {
         InputStream is = null;
         HashMap<String, Long> recv_data = null;
         try {
@@ -265,7 +264,7 @@ public class RequestHttpConnection {
                     recv_data = null;
             }
             catch (Exception e) {
-                e.printStackTrace();
+                throw e;
             }
             finally {
                 is.close();
@@ -273,10 +272,10 @@ public class RequestHttpConnection {
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
+            throw e;
         }
         catch (Exception e) {
-            Log.e("InputStream", e.getLocalizedMessage());
+            throw e;
         }
         return recv_data;
     }
@@ -288,7 +287,7 @@ public class RequestHttpConnection {
      * @param time
      * @return 'complete' if successful, 'fail' if not
      */
-    public String registerTime(String url, String id, Data time){
+    public String registerTime(String url, String id, Data time) throws Exception {
         String result = "";
         try {
             HttpURLConnection httpCon = connectHTTP(url);
@@ -317,7 +316,7 @@ public class RequestHttpConnection {
                     result = "fail";
             }
             catch (Exception e) {
-                e.printStackTrace();
+                throw e;
             }
             finally {
                 is.close();
@@ -325,10 +324,10 @@ public class RequestHttpConnection {
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
+            throw e;
         }
         catch (Exception e) {
-            Log.e("InputStream", e.getLocalizedMessage());
+            throw e;
         }
         return result;
     }

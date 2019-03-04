@@ -48,8 +48,8 @@ public class FragmentGraphMonth extends Fragment {
     }
     public void setAdapter(){
         AdapterAnalysis adapter = new AdapterAnalysis(mainActivity.getApplicationContext());
-        adapter.addItem(new ItemAnalysis("집중 분포", ItemAnalysis.MONTH, ItemAnalysis.PIE_GRAPH));
-        ItemAnalysis item = new ItemAnalysis("기록", ItemAnalysis.MONTH, ItemAnalysis.BAR_GRAPH);
+        adapter.addItem(new ItemAnalysis(mainActivity.getBaseContext(),"집중 분포", ItemAnalysis.MONTH, ItemAnalysis.PIE_GRAPH));
+        ItemAnalysis item = new ItemAnalysis(mainActivity.getBaseContext(),"기록", ItemAnalysis.MONTH, ItemAnalysis.BAR_GRAPH);
         item.setxLabels();
         adapter.addItem(item);
         // adapter.addItem(new ItemAnalysis("먼뜨",3));

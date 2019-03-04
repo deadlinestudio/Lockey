@@ -1,5 +1,6 @@
 package com.deadlinestudio.lockey.presenter.Item;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.deadlinestudio.lockey.control.NetworkTask;
@@ -20,6 +21,7 @@ public class ItemAnalysis {
     public static final int PIE_GRAPH = 1;
     public static final int BAR_GRAPH = 2;
     private static final int periods[] = {1, 7, 30, 365};
+    private Context cont;
     private String title;
     private String subTitle;
     private String[] xLabels;
@@ -27,13 +29,15 @@ public class ItemAnalysis {
 
     private HashMap<String, Long> analysisData;
 
-    public ItemAnalysis(String title, int mode, int type) {
+    public ItemAnalysis(Context cont, String title, int mode, int type) {
+        this.cont = cont;
         this.title = title;
         this.period = periods[mode];
         setAnalysisData(mode,type);
     }
 
-    public ItemAnalysis(String title, String[] xlabels, int mode, int type) {
+    public ItemAnalysis(Context cont, String title, String[] xlabels, int mode, int type) {
+        this.cont = cont;
         this.title = title;
         this.xLabels = xlabels;
         this.period = periods[mode];
@@ -44,24 +48,24 @@ public class ItemAnalysis {
         NetworkTask asyncNetwork = null;
         try {
             if (type == PIE_GRAPH) {
-                asyncNetwork = new NetworkTask("/classify-category",
+                asyncNetwork = new NetworkTask(cont,"/classify-category",
                         new User(MainActivity.getId(), null, 0, null), null);
             } else if (type == BAR_GRAPH) {
                 switch (mode) {
                     case DAY:
-                        asyncNetwork = new NetworkTask("/classify-day",
+                        asyncNetwork = new NetworkTask(cont, "/classify-day",
                                 new User(MainActivity.getId(), null, 0, null), null);
                         break;
                     case WEEK:
-                        asyncNetwork = new NetworkTask("/classify-week",
+                        asyncNetwork = new NetworkTask(cont, "/classify-week",
                                 new User(MainActivity.getId(), null, 0, null), null);
                         break;
                     case MONTH:
-                        asyncNetwork = new NetworkTask("/classify-month",
+                        asyncNetwork = new NetworkTask(cont, "/classify-month",
                                 new User(MainActivity.getId(), null, 0, null), null);
                         break;
                     case YEAR:
-                        asyncNetwork = new NetworkTask("/classify-year",
+                        asyncNetwork = new NetworkTask(cont, "/classify-year",
                                 new User(MainActivity.getId(), null, 0, null), null);
                         break;
                     default:
@@ -85,6 +89,8 @@ public class ItemAnalysis {
     }
 
     public void setxLabels() {
+        if(analysisData == null)
+            return;
         Object[] keys = analysisData.keySet().toArray();
         Arrays.sort(keys);
         xLabels = new String[keys.length];

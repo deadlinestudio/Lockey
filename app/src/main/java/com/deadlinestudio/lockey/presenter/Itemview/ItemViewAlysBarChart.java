@@ -29,6 +29,7 @@ import java.util.List;
 public class ItemViewAlysBarChart extends LinearLayout {
     private TextView titleText, subText, chartAvgVals, charAvgTimes;
     private PieChart chart;
+    private String[] xLabels;
 
     public ItemViewAlysBarChart(Context context) {
         super(context);
@@ -68,7 +69,7 @@ public class ItemViewAlysBarChart extends LinearLayout {
     /*
      * @brief bar chart
      * */
-    public void setBarChart(HashMap<String, Long> analysisData, final String[] xLabels, int period){
+    public void setBarChart(HashMap<String, Long> analysisData, String[] _xLabels, int period){
         BarChart barChart = findViewById(R.id.barChart);
         List<BarEntry> entries = new ArrayList<BarEntry>();
 
@@ -99,12 +100,24 @@ public class ItemViewAlysBarChart extends LinearLayout {
         l.setEnabled(false);
 
         // data insertion part
+        this.xLabels = _xLabels;
         double avg = 0;
-        for(int i =0; i<xLabels.length; i++){
-            Log.e("xLabel", xLabels[i]);
-            int value = analysisData.get(xLabels[i]).intValue() / 60;
-            entries.add(new BarEntry(i, value));
-            avg += value / period;
+        if(analysisData == null) {
+            if(xLabels == null) {
+                xLabels = new String[] {"~01.07","~01.14","~01.21","~01.28","~02.04"};
+            }
+            for(int i = 0; i < xLabels.length; i++) {
+                int randValue = (int) (Math.random() * 1800) + 60;
+                entries.add(new BarEntry(i, randValue));
+                avg += randValue / period;
+            }
+        } else {
+            for (int i = 0; i < xLabels.length; i++) {
+                Log.e("xLabel", xLabels[i]);
+                int value = analysisData.get(xLabels[i]).intValue() / 60;
+                entries.add(new BarEntry(i, value));
+                avg += value / period;
+            }
         }
         setChartAvgVals(avg / 60);
 
