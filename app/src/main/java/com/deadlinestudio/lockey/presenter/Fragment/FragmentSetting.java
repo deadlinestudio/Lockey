@@ -1,5 +1,6 @@
 package com.deadlinestudio.lockey.presenter.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,17 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
+import com.deadlinestudio.lockey.presenter.Activity.OpenSourceActivity;
+import com.deadlinestudio.lockey.presenter.Activity.ProfileEditActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterSetting;
 import com.deadlinestudio.lockey.presenter.Item.ItemSetting;
 
 public class FragmentSetting extends Fragment{
 
     private TextView profileName;
-    private LinearLayout profileLayout;
+    private RelativeLayout profileLayout;
     private MainActivity mainActivity;
 
 
@@ -36,8 +40,11 @@ public class FragmentSetting extends Fragment{
         profileLayout.setOnClickListener(new View.OnClickListener(){
 
             @Override
-            public void onClick(View v){
+            public void onClick(View view) {
                 // go to profile edit
+                Intent intent = new Intent(mainActivity, ProfileEditActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                mainActivity.startActivity(intent);
             }
         });
 
@@ -56,7 +63,7 @@ public class FragmentSetting extends Fragment{
         return rootView;
     }
 
-    public static void setProfileName(String nickname) {
-        profileName.setText(nickname);
+    public void setProfileName(String nickname) {
+        this.profileName.setText(nickname);
     }
 }
