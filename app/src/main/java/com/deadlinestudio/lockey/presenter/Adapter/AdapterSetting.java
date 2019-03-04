@@ -73,15 +73,21 @@ public class AdapterSetting extends BaseAdapter{
             public void onClick(View view) {
                 Intent intent = null;
                 switch (mode){
-                    case 0:
-                        showNoticeDialog();
+                    case 0: // 공지 사항
                         break;
-                    case 2:
+                    case 1: // 도움말
+                        break;
+                    case 2: // 데이터 초기화
+
+                        break;
+                    case 3: // 버전 확인
+                        break;
+                    case 4: //오픈소스 라이센스
                         intent = new Intent(mainActivity, OpenSourceActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         mainActivity.startActivity(intent);
                         break;
-                    case 3:
+                    case 5: //로그 아웃
                         Log.e("deb/logout", "in");
                         lfc.WriteLogFile(context,filename,"",2);
                         lfc.WriteLogFile(context,filename,"nofile",2);
