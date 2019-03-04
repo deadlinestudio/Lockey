@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,23 +18,37 @@ import com.deadlinestudio.lockey.presenter.Item.ItemSetting;
 
 public class FragmentSetting extends Fragment{
     private TextView profileName;
-    public MainActivity mainActivity;
+    private LinearLayout profileLayout;
+    private MainActivity mainActivity;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_setting, container,false);
         mainActivity = (MainActivity) this.getActivity();
+        profileLayout = rootView.findViewById(R.id.profile);
         profileName = rootView.findViewById(R.id.profileName);
         String nick = mainActivity.getNickname();
         profileName.setText(!(nick.equals("")) ? nick : "비회원");
+
+        profileLayout.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                // go to profile edit
+            }
+        });
+
         ListView listView = (ListView) rootView.findViewById(R.id.settingList);
         AdapterSetting adapter = new AdapterSetting(mainActivity,getActivity().getApplicationContext());
 
-        adapter.addItem(new ItemSetting("닉네임 변경"));
-        adapter.addItem(new ItemSetting("결제 내역 보기"));
+        adapter.addItem(new ItemSetting("공지 사항"));
+        adapter.addItem(new ItemSetting("도움말"));
+        adapter.addItem(new ItemSetting("데이터 초기화"));
+        adapter.addItem(new ItemSetting("버전 확인"));
         adapter.addItem(new ItemSetting("오픈소스 라이센스"));
         adapter.addItem(new ItemSetting("로그아웃"));
+
         listView.setAdapter(adapter);
 
         return rootView;

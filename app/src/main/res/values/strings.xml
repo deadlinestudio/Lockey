@@ -45,6 +45,9 @@
     <string name="total">총</string>
     <string name="average">평균</string>
 
+    <!-- Setting Fragment-->
+    <string name="profileCheck">프로필 확인 및 수정</string>
+
     <!--SignUp Activity-->
     <string name="nickname_example">닉네임을 입력해주세요</string>
     <string name="job_example">직업을 입력해주세요</string>
