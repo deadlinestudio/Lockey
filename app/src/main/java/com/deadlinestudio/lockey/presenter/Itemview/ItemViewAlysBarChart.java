@@ -23,7 +23,6 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,9 +55,9 @@ public class ItemViewAlysBarChart extends LinearLayout {
     public void setSubText(String s) {
         subText.setText(s);
     }
-    public void setChartAvgVals(String s){
+    private void setChartAvgVals(double avg){
         String tmp = this.getResources().getString(R.string.average)
-                +" "+s
+                +" "+  String.format("%.1f", avg)
                 +this.getResources().getString(R.string.time);
         chartAvgVals.setText(tmp);
     }
@@ -69,7 +68,7 @@ public class ItemViewAlysBarChart extends LinearLayout {
     /*
      * @brief bar chart
      * */
-    public void setBarChart(HashMap<String, Long> analysisData, final String[] xLabels){
+    public void setBarChart(HashMap<String, Long> analysisData, final String[] xLabels, int period){
         BarChart barChart = findViewById(R.id.barChart);
         List<BarEntry> entries = new ArrayList<BarEntry>();
 
@@ -98,11 +97,16 @@ public class ItemViewAlysBarChart extends LinearLayout {
 
         Legend l = barChart.getLegend();
         l.setEnabled(false);
+
         // data insertion part
+        double avg = 0;
         for(int i =0; i<xLabels.length; i++){
             Log.e("xLabel", xLabels[i]);
-            entries.add(new BarEntry(i, analysisData.get(xLabels[i]).intValue() / 60));
+            int value = analysisData.get(xLabels[i]).intValue() / 60;
+            entries.add(new BarEntry(i, value));
+            avg += value / period;
         }
+        setChartAvgVals(avg / 60);
 
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override

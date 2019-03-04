@@ -17,8 +17,13 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static java.util.stream.Collectors.toMap;
 
 public class ItemViewAlysPieChart extends LinearLayout {
     private int[] pieColors ={
@@ -31,8 +36,6 @@ public class ItemViewAlysPieChart extends LinearLayout {
     };
     private TextView titleText, subText;
     private PieChart chart;
-    private HashMap<String, Long> analysisData;
-    private ArrayList<String> xaxis;
 
     public ItemViewAlysPieChart(Context context) {
         super(context);
@@ -70,12 +73,28 @@ public class ItemViewAlysPieChart extends LinearLayout {
         Legend l = pieChart.getLegend();
         l.setEnabled(false);
 
+        Map<String, Long> sorted = analysisData
+                .entrySet()
+                .stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .collect(
+                        toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
+                                LinkedHashMap::new));
+
         ArrayList<PieEntry> yVals = new ArrayList<>();
-        Iterator<String> keys = analysisData.keySet().iterator();
+        Iterator<String> keys = sorted.keySet().iterator();
+        int cnt = 4;
+        long sum = 0;
         while(keys.hasNext()) {
             String key = keys.next();
-            yVals.add(new PieEntry((float) analysisData.get(key), key));
+            if(cnt-- > 0)
+                yVals.add(new PieEntry((float) analysisData.get(key), key));
+            else
+                sum += analysisData.get(key);
         }
+
+        if(sum != 0)
+            yVals.add(new PieEntry((float) sum, "기타"));
 
         PieDataSet dataSet = new PieDataSet(yVals,"Study Times");
         dataSet.setSliceSpace(4f);
