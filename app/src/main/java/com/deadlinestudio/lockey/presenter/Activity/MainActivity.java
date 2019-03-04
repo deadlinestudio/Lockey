@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         Log.e("main back", "start!");
         //moveTaskToBack(true);
-        Intent intent = new Intent(Intent.ACTION_MAIN);
+        Intent intent = new Intent(Intent.ACTION_MAIN);     // Home으로 이동
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

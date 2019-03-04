@@ -8,26 +8,32 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterApplock;
+import com.deadlinestudio.lockey.presenter.Adapter.AdapterMostApps;
 import com.deadlinestudio.lockey.presenter.Controller.AppLockController;
+import com.deadlinestudio.lockey.presenter.Controller.AppUsageController;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import com.deadlinestudio.lockey.presenter.Item.ItemApplock;
+import com.deadlinestudio.lockey.presenter.Item.ItemMostApps;
 import com.deadlinestudio.lockey.presenter.Service.AppLockService;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class FragmentApplock extends Fragment{
@@ -36,11 +42,15 @@ public class FragmentApplock extends Fragment{
     Context cont;
     final static String sfilename = "applock.txt";
 
-    private Button startBtn;
+    private Button startBtn, selectAllBtn, selectNoneBtn;
     private Toolbar mToolbar;
+    private RecyclerView mostAppListView;
     private ListView listView;
     private ArrayList<ItemApplock> applocks;
+    private ArrayList<ItemMostApps> mostApps;
+    private List<Pair<ItemApplock, Long>> appRank;
     public MainActivity mainActivity;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // View Set up
@@ -48,6 +58,14 @@ public class FragmentApplock extends Fragment{
 
 
         mainActivity = (MainActivity) this.getActivity();
+        mToolbar  = rootView.findViewById(R.id.appListToolbar);
+        mostAppListView = rootView.findViewById(R.id.mostAppList);
+        listView = rootView.findViewById(R.id.appLockList);
+        startBtn = rootView.findViewById(R.id.lockStartBtn);
+        selectAllBtn = rootView.findViewById(R.id.appSelectAllBtn);
+        selectNoneBtn = rootView.findViewById(R.id.appSelectNoneBtn);
+
+
         // GET_USAGE_STATS 권한 확인
         boolean granted = false;
         AppOpsManager appOps = (AppOpsManager) mainActivity.getSystemService(Context.APP_OPS_SERVICE);
@@ -76,9 +94,9 @@ public class FragmentApplock extends Fragment{
 
         // load applist from main activity
         applocks = alc.LoadAppList(this.getActivity());
-        String line = lfc.ReadLogFile(cont, sfilename);
-
-        if((line = lfc.ReadLogFile(cont, sfilename)) != "nofile") {
+        mostApps = new ArrayList<ItemMostApps>();
+        String line;
+        if((line = lfc.ReadLogFile(cont, sfilename)) != "nofile") {         // 앱 잠금 리스트 확인 후 flag 업데이트
             StringTokenizer tokens = new StringTokenizer(line);
             while(tokens.hasMoreTokens()) {
                 String temp = tokens.nextToken(",");
@@ -89,19 +107,31 @@ public class FragmentApplock extends Fragment{
                 }
             }
         }
-        mToolbar  = rootView.findViewById(R.id.appListToolbar);
-        //setSupportActionBar(mToolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        listView = rootView.findViewById(R.id.appLockList);
+        // get App Usage Time
+        AppUsageController auc = new AppUsageController(applocks);
+        auc.getAppUsageTime(mainActivity);
+        appRank = auc.getAppRank();
+        int appranks = 0;
+        for(Pair<ItemApplock, Long> e : appRank){
+            long totalTime = e.second;
+            int hours   = (int) ((totalTime / (1000*60*60)) % 24);
+            int minutes = (int) ((totalTime / (1000*60)) % 60);
+            int seconds = (int) (totalTime / 1000) % 60 ;
+            String tempTime = String.valueOf(hours)+"시간 "+String.valueOf(minutes)+"분";
 
+            ItemMostApps tempApp = new ItemMostApps(e.first.getAppName(), tempTime, e.first.getAppIcon());
+            mostApps.add(tempApp);
+
+            Log.v("", e.first.getAppName() + " -----> " + hours + "시간 "+minutes+"분 "+seconds+"초");
+        }
 
         final AdapterApplock adapterApplock = new AdapterApplock(this.getActivity().getApplicationContext(),applocks);
-
+        final AdapterMostApps adapterMostApps = new AdapterMostApps(this.getActivity().getApplicationContext(),mostApps);
         listView.setAdapter(adapterApplock);
+        mostAppListView.setAdapter(adapterMostApps);
 
         // start service by button
-        startBtn = rootView.findViewById(R.id.lockStartBtn);
         startBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,22 +153,32 @@ public class FragmentApplock extends Fragment{
                     String toastMsg = "앱 잠금 목록을 업데이트 했습니다.";
                     Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT).show();
                 }
-                Intent mintent = new Intent(cont, MainActivity.class);
-                mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(mintent);
+            }
+        });
+
+        // select all apps
+        selectAllBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (ItemApplock ia : applocks) {
+                    ia.setLockFlag(true);
+                }
+                listView.setAdapter(adapterApplock);
+            }
+        });
+        // select all apps
+        selectNoneBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (ItemApplock ia : applocks) {
+                    ia.setLockFlag(false);
+                }
+                listView.setAdapter(adapterApplock);
             }
         });
         return rootView;
     }
-/*
-    @Override
-    public void onBackPressed() {
-        super.getActivity().onBackPressed();
-        Intent mintent = new Intent(getApplicationContext(),MainActivity.class);
-        mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(mintent);
-    }
-*/
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){

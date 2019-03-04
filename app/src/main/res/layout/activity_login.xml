@@ -61,12 +61,12 @@
             android:layout_height="45dp"
             android:layout_marginBottom="0dp"
             android:padding="12dp"
-            android:background="#3B5998"
+            android:background="#1EC800"
             android:elevation="1dp">
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/googleg_standard_color_18"
+                android:background="@drawable/naver_login_icon"
                 android:elevation="0dp"/>
             <TextView
                 android:layout_width="match_parent"

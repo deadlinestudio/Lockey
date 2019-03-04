@@ -10,8 +10,8 @@
     android:layout_marginRight="24dp">
     <ImageView
         android:id = "@+id/appLockIcon"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_alignParentLeft="true"/>
@@ -25,7 +25,7 @@
         android:layout_toLeftOf="@+id/appLockSwitch"
         android:text="hello"
         android:textColor="#000"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
     <Switch
         android:id="@+id/appLockSwitch"
         android:layout_width="wrap_content"
