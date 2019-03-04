@@ -17,13 +17,14 @@ import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterAnalysis;
 import com.deadlinestudio.lockey.presenter.Item.ItemAnalysis;
 
-public class FragmentGraphTotal extends Fragment {
+import java.util.HashMap;
+
+public class FragmentGraphYear extends Fragment {
     private ListView listView;
     private MainActivity mainActivity;
 
-
-
-    private int mode;
+    private String[] xlabels = {"1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월",
+            "10월", "11월", "12월"};
 
     @Nullable
     @Override
@@ -49,9 +50,9 @@ public class FragmentGraphTotal extends Fragment {
     }
     public void setAdapter(){
         AdapterAnalysis adapter = new AdapterAnalysis(mainActivity.getApplicationContext());
-        adapter.addItem(new ItemAnalysis("집중 분포"));
-        adapter.addItem(new ItemAnalysis("기록",2));
-        adapter.addItem(new ItemAnalysis("토탈"));
+        adapter.addItem(new ItemAnalysis(mainActivity.getBaseContext(),"집중 분포", ItemAnalysis.YEAR, ItemAnalysis.PIE_GRAPH));
+        adapter.addItem(new ItemAnalysis(mainActivity.getBaseContext(),"기록", xlabels, ItemAnalysis.YEAR, ItemAnalysis.BAR_GRAPH));
+// adapter.addItem(new ItemAnalysis("토탈"));
         listView.setAdapter(adapter);
     }
 

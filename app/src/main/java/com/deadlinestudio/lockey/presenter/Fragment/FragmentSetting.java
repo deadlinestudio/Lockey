@@ -17,9 +17,11 @@ import com.deadlinestudio.lockey.presenter.Adapter.AdapterSetting;
 import com.deadlinestudio.lockey.presenter.Item.ItemSetting;
 
 public class FragmentSetting extends Fragment{
+
     private TextView profileName;
     private LinearLayout profileLayout;
     private MainActivity mainActivity;
+
 
     @Nullable
     @Override
@@ -54,7 +56,7 @@ public class FragmentSetting extends Fragment{
         return rootView;
     }
 
-    public void setProfileName(String nickname) {
+    public static void setProfileName(String nickname) {
         profileName.setText(nickname);
     }
 }

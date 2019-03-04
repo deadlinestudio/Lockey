@@ -45,16 +45,6 @@ public class AdapterAnalysis extends BaseAdapter{
         StringTokenizer tokens = new StringTokenizer(line, ",");
 
         this.sns = tokens.nextToken();
-        if(sns.equals("4") == false) {
-            String id = tokens.nextToken();
-            String nick = tokens.nextToken();
-            int age = Integer.parseInt(tokens.nextToken());
-            String job = tokens.nextToken();
-            user = new User(id, nick, age, job);
-            for (int i = 0; i < GRAPH_COUNT; i++) {
-                setFormattedData(i);
-            }
-        }
     }
     public void addItem(ItemAnalysis item){
         items.add(item);
@@ -77,93 +67,25 @@ public class AdapterAnalysis extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ItemAnalysis item = items.get(i);
+
         if(i ==0){
             ItemViewAlysPieChart pie = new ItemViewAlysPieChart(context);
             pie.setTitleText(item.getTitle());
-            pie.setPieChart();
+            pie.setPieChart(item.getAnalysisData());
             return pie;
         }else if(i==1){
             ItemViewAlysBarChart bar = new ItemViewAlysBarChart(context);
             bar.setTitleText(item.getTitle());
-            bar.setChartAvgVals("10"); // 평균 시간
             bar.setChartAvgTimes("20190101","20190201");
-            bar.setBarChart(item.getXlabels());
+            bar.setBarChart(item.getAnalysisData(), item.getXLabels(), item.getPeriod());
             return bar;
-        } else if(i==2){
-            ItemViewAlysLineChart line = new ItemViewAlysLineChart(context);
-            line.setTitleText(item.getTitle());
-            line.setLineChart();
-            return line;
-        }else{
-            if(this.sns.equals("4") == false){
-                ItemViewAnalysis v = new ItemViewAnalysis(context);
-                v.setTitleText(item.getTitle());
-                v.setCombinedChart(i, analysisData[i], xaxis[i]);
-                return v;
-            }
         }
+//        else if(i==2){
+//            ItemViewAlysLineChart line = new ItemViewAlysLineChart(context);
+//            line.setTitleText(item.getTitle());
+//            line.setLineChart();
+//            return line;
+//        }
         return null;
     }
-
-    private String setFormattedData(int index) {
-        xaxis[index] = new ArrayList<String>();
-
-        NetworkTask asyncNetwork;
-        Iterator<String> keys;
-        HashMap<String, Long> temp = new HashMap<>();
-        String key, temp_x;
-        try {
-            switch (index) {
-                case 0:
-                    asyncNetwork = new NetworkTask("/classify-category", user, null);
-                    asyncNetwork.execute().get(1000, TimeUnit.MILLISECONDS);
-                    analysisData[index] = asyncNetwork.getAnalysisData().getAnalysis_category();
-                    Log.e("category size", Integer.toString(analysisData[index].size()));
-                    keys = analysisData[index].keySet().iterator();
-                    while(keys.hasNext()) {
-                        xaxis[index].add(keys.next());
-                    }
-                    break;
-                case 1:
-                    asyncNetwork = new NetworkTask("/classify-weekday", user, null);
-                    asyncNetwork.execute().get(1000, TimeUnit.MILLISECONDS);
-                    analysisData[index] = asyncNetwork.getAnalysisData().getAnalysis_weekday();
-                    Log.e("weekday size", Integer.toString(analysisData[index].size()));
-                    keys = analysisData[index].keySet().iterator();
-                    while(keys.hasNext()) {
-                        key = keys.next();
-                        Log.e("keys test", key);
-                        xaxis[index].add(weekdays[Integer.parseInt(key)]);
-                        temp.put(weekdays[Integer.parseInt(key)], analysisData[index].get(key));
-                        Log.e("add weekday", weekdays[Integer.parseInt(key)]);
-                    }
-                    analysisData[index] = temp;
-                    break;
-                case 2:
-                    asyncNetwork = new NetworkTask("/classify-week", user, null);
-                    asyncNetwork.execute().get(1000, TimeUnit.MILLISECONDS);
-                    analysisData[index] = asyncNetwork.getAnalysisData().getAnalysis_week();
-                    Log.e("week size", Integer.toString(analysisData[index].size()));
-                    List sortedKeys = new ArrayList(analysisData[index].keySet());
-                    Collections.sort(sortedKeys);
-                    for(int i = 0; i < sortedKeys.size(); i++) {
-                        temp_x = "~"+sortedKeys.get(i);
-                        Log.e("keys test", temp_x);
-                        xaxis[index].add(temp_x);
-                        temp.put(temp_x, analysisData[index].get(sortedKeys.get(i)));
-                    }
-                    analysisData[index] = temp;
-                    break;
-                default:
-                    return "switch fail";
-            }
-            xaxis[index].add(0, "");
-            xaxis[index].add("");
-
-        } catch(Exception e) {
-            return e.toString();
-        }
-        return "Success";
-    }
-
 }

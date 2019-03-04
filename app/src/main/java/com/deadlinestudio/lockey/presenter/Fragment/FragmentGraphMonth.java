@@ -1,5 +1,6 @@
 package com.deadlinestudio.lockey.presenter.Fragment;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,13 +18,11 @@ import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterAnalysis;
 import com.deadlinestudio.lockey.presenter.Item.ItemAnalysis;
 
+import java.util.HashMap;
+
 public class FragmentGraphMonth extends Fragment {
     private ListView listView;
     private MainActivity mainActivity;
-
-
-
-    private int mode;
 
     @Nullable
     @Override
@@ -49,9 +48,11 @@ public class FragmentGraphMonth extends Fragment {
     }
     public void setAdapter(){
         AdapterAnalysis adapter = new AdapterAnalysis(mainActivity.getApplicationContext());
-        adapter.addItem(new ItemAnalysis("집중 분포"));
-        adapter.addItem(new ItemAnalysis("기록",2));
-        adapter.addItem(new ItemAnalysis("먼뜨",3));
+        adapter.addItem(new ItemAnalysis(mainActivity.getBaseContext(),"집중 분포", ItemAnalysis.MONTH, ItemAnalysis.PIE_GRAPH));
+        ItemAnalysis item = new ItemAnalysis(mainActivity.getBaseContext(),"기록", ItemAnalysis.MONTH, ItemAnalysis.BAR_GRAPH);
+        item.setxLabels();
+        adapter.addItem(item);
+        // adapter.addItem(new ItemAnalysis("먼뜨",3));
         listView.setAdapter(adapter);
     }
 

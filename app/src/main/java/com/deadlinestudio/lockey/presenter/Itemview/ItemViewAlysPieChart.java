@@ -17,7 +17,13 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static java.util.stream.Collectors.toMap;
 
 public class ItemViewAlysPieChart extends LinearLayout {
     private int[] pieColors ={
@@ -30,8 +36,6 @@ public class ItemViewAlysPieChart extends LinearLayout {
     };
     private TextView titleText, subText;
     private PieChart chart;
-    private HashMap<String, Long> analysisData;
-    private ArrayList<String> xaxis;
 
     public ItemViewAlysPieChart(Context context) {
         super(context);
@@ -60,7 +64,7 @@ public class ItemViewAlysPieChart extends LinearLayout {
     /*
      * @brief pie chart
      * */
-    public void setPieChart(){
+    public void setPieChart(HashMap<String, Long> analysisData){
         PieChart pieChart = (PieChart) findViewById(R.id.pieChart);
         pieChart.setUsePercentValues(true);
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
@@ -70,12 +74,34 @@ public class ItemViewAlysPieChart extends LinearLayout {
         l.setEnabled(false);
 
         ArrayList<PieEntry> yVals = new ArrayList<>();
-        yVals.add(new PieEntry(8f, "라키"));
-        yVals.add(new PieEntry(15f, "짱짱맨"));
-        yVals.add(new PieEntry(12f, "회사"));
-        yVals.add(new PieEntry(25f, "가기"));
-        yVals.add(new PieEntry(23f, "싫다"));
-        yVals.add(new PieEntry(17f, "리얼"));
+        if(analysisData == null) {
+            yVals.add(new PieEntry((float) 50f, "수학"));
+            yVals.add(new PieEntry((float) 12f, "국어"));
+            yVals.add(new PieEntry((float) 22f, "영어"));
+            yVals.add(new PieEntry((float) 33f, "과학"));
+        } else {
+            Map<String, Long> sorted = analysisData
+                    .entrySet()
+                    .stream()
+                    .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                    .collect(
+                            toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
+                                    LinkedHashMap::new));
+
+            Iterator<String> keys = sorted.keySet().iterator();
+            int cnt = 4;
+            long sum = 0;
+            while (keys.hasNext()) {
+                String key = keys.next();
+                if (cnt-- > 0)
+                    yVals.add(new PieEntry((float) analysisData.get(key), key));
+                else
+                    sum += analysisData.get(key);
+            }
+
+            if (sum != 0)
+                yVals.add(new PieEntry((float) sum, "기타"));
+        }
 
         PieDataSet dataSet = new PieDataSet(yVals,"Study Times");
         dataSet.setSliceSpace(4f);

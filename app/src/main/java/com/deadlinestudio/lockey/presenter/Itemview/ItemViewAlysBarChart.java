@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,11 +27,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ItemViewAlysBarChart extends LinearLayout {
-
     private TextView titleText, subText, chartAvgVals, charAvgTimes;
     private PieChart chart;
-    private HashMap<String, Long> analysisData;
-    private ArrayList<String> xaxis;
+    private String[] xLabels;
 
     public ItemViewAlysBarChart(Context context) {
         super(context);
@@ -57,9 +56,9 @@ public class ItemViewAlysBarChart extends LinearLayout {
     public void setSubText(String s) {
         subText.setText(s);
     }
-    public void setChartAvgVals(String s){
+    private void setChartAvgVals(double avg){
         String tmp = this.getResources().getString(R.string.average)
-                +" "+s
+                +" "+  String.format("%.1f", avg)
                 +this.getResources().getString(R.string.time);
         chartAvgVals.setText(tmp);
     }
@@ -70,7 +69,7 @@ public class ItemViewAlysBarChart extends LinearLayout {
     /*
      * @brief bar chart
      * */
-    public void setBarChart(final String[] xLabels){
+    public void setBarChart(HashMap<String, Long> analysisData, String[] _xLabels, int period){
         BarChart barChart = findViewById(R.id.barChart);
         List<BarEntry> entries = new ArrayList<BarEntry>();
 
@@ -99,10 +98,28 @@ public class ItemViewAlysBarChart extends LinearLayout {
 
         Legend l = barChart.getLegend();
         l.setEnabled(false);
+
         // data insertion part
-        for(int i =0; i<7; i++){
-            entries.add(new BarEntry(i,i*10));
+        this.xLabels = _xLabels;
+        double avg = 0;
+        if(analysisData == null) {
+            if(xLabels == null) {
+                xLabels = new String[] {"~01.07","~01.14","~01.21","~01.28","~02.04"};
+            }
+            for(int i = 0; i < xLabels.length; i++) {
+                int randValue = (int) (Math.random() * 1800) + 60;
+                entries.add(new BarEntry(i, randValue));
+                avg += randValue / period;
+            }
+        } else {
+            for (int i = 0; i < xLabels.length; i++) {
+                Log.e("xLabel", xLabels[i]);
+                int value = analysisData.get(xLabels[i]).intValue() / 60;
+                entries.add(new BarEntry(i, value));
+                avg += value / period;
+            }
         }
+        setChartAvgVals(avg / 60);
 
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
@@ -110,7 +127,6 @@ public class ItemViewAlysBarChart extends LinearLayout {
                 //Print.e(value);
                 return xLabels[(int)value];
             }
-
         });
 
         BarDataSet dataSet = new BarDataSet(entries,"label");

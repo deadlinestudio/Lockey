@@ -45,7 +45,7 @@ public class LoginActivity extends BaseActivity{
                 if(tokens.hasMoreTokens()) {
                     sns = tokens.nextToken();
                     temp_user.setId(tokens.nextToken());
-                    NetworkTask networkTask = new NetworkTask("/check-user", temp_user, null);
+                    NetworkTask networkTask = new NetworkTask(getBaseContext(),"/check-user", temp_user, null);
                     networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                     if (networkTask.getUser().getisUser()) {
                         String contents =
@@ -58,10 +58,6 @@ public class LoginActivity extends BaseActivity{
                         lfc.WriteLogFile(getApplicationContext(), filename, contents, 2);
 
                         Intent intent = new Intent(getApplicationContext(), LoadActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
                         startActivity(intent);
                         finish();
                     }

@@ -122,7 +122,7 @@ public class KakaoLoginActivity extends AppCompatActivity {
 
                         User temp_user = new User();
                         temp_user.setId(EMAIL);
-                        NetworkTask networkTask = new NetworkTask("/check-user", temp_user, null);
+                        NetworkTask networkTask = new NetworkTask(getBaseContext(), "/check-user", temp_user, null);
                         networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                         if (networkTask.getUser().getisUser()) {
                             String contents =

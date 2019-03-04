@@ -24,6 +24,7 @@ import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Activity.NaverLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.OpenSourceActivity;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
+import com.deadlinestudio.lockey.presenter.Fragment.FragmentSetting;
 import com.deadlinestudio.lockey.presenter.Item.ItemSetting;
 import com.deadlinestudio.lockey.presenter.Itemview.ItemViewSetting;
 
@@ -72,7 +73,6 @@ public class AdapterSetting extends BaseAdapter{
             public void onClick(View view) {
                 Intent intent = null;
                 switch (mode){
-
                     case 0: // 공지 사항
                         break;
                     case 1: // 도움말
@@ -81,7 +81,6 @@ public class AdapterSetting extends BaseAdapter{
 
                         break;
                     case 3: // 버전 확인
-
                         break;
                     case 4: //오픈소스 라이센스
                         intent = new Intent(mainActivity, OpenSourceActivity.class);
@@ -115,16 +114,14 @@ public class AdapterSetting extends BaseAdapter{
     }
 
     /**
-     * @brief dialog message with edit text for save category
-     * @param time_data uses for save category value
-     * @TODO add achievement value if need
+     * @brief dialog message with edit text for changing the nickname
      **/
-    public void showNoticeDialog(final Data time_data) {
+    public void showNoticeDialog() {
         // Create an instance of the dialog fragment and show it
         final AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
         // Get the layout inflater
         LayoutInflater inflater = this.mainActivity.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.dialog_category, null));
+        builder.setView(inflater.inflate(R.layout.dialog_nickname, null));
 
         final AlertDialog dialog = builder.create();
         dialog.show();
@@ -135,17 +132,17 @@ public class AdapterSetting extends BaseAdapter{
             @Override
             public void onClick(View view) {
                 try {
-                    time_data.setCategory(String.valueOf(ed.getText()));
                     dialog.dismiss();
                     if(mainActivity.getSns().equals("4") == false) {
                         String user_id = mainActivity.getId();
                         User user = new User(user_id, null, 0, null);
                         String new_nick = ed.getText().toString();
-                        NetworkTask networkTask = new NetworkTask("/update-user", user, null);
+                        NetworkTask networkTask = new NetworkTask(mainActivity.getBaseContext(), "/update-user", user, null);
                         networkTask.prepareUpdate("nickname", new_nick);
                         networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                         String toastMsg = "닉네임이 변경됐습니다";
                         TextView profileName = mainActivity.findViewById(R.id.profileName);
+                        FragmentSetting.setProfileName(new_nick);
                         profileName.setText(new_nick);
                         Toast.makeText(context, toastMsg, Toast.LENGTH_LONG).show();
                     } else {

@@ -26,6 +26,7 @@
         android:backgroundTint="@color/colorPrimary"
         android:inputType="text"
         android:hint="새로운 닉네임을 입력하세요."/>
+
     <Button
         android:id="@+id/saveChangeBtn"
         android:layout_width="250dp"
