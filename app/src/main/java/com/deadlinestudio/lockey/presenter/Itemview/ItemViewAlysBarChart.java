@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,15 +23,13 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 public class ItemViewAlysBarChart extends LinearLayout {
-
     private TextView titleText, subText, chartAvgVals, charAvgTimes;
     private PieChart chart;
-    private HashMap<String, Long> analysisData;
-    private ArrayList<String> xaxis;
 
     public ItemViewAlysBarChart(Context context) {
         super(context);
@@ -70,7 +69,7 @@ public class ItemViewAlysBarChart extends LinearLayout {
     /*
      * @brief bar chart
      * */
-    public void setBarChart(final String[] xLabels){
+    public void setBarChart(HashMap<String, Long> analysisData, final String[] xLabels){
         BarChart barChart = findViewById(R.id.barChart);
         List<BarEntry> entries = new ArrayList<BarEntry>();
 
@@ -100,8 +99,9 @@ public class ItemViewAlysBarChart extends LinearLayout {
         Legend l = barChart.getLegend();
         l.setEnabled(false);
         // data insertion part
-        for(int i =0; i<7; i++){
-            entries.add(new BarEntry(i,i*10));
+        for(int i =0; i<xLabels.length; i++){
+            Log.e("xLabel", xLabels[i]);
+            entries.add(new BarEntry(i, analysisData.get(xLabels[i]).intValue() / 60));
         }
 
         xAxis.setValueFormatter(new IAxisValueFormatter() {
@@ -110,7 +110,6 @@ public class ItemViewAlysBarChart extends LinearLayout {
                 //Print.e(value);
                 return xLabels[(int)value];
             }
-
         });
 
         BarDataSet dataSet = new BarDataSet(entries,"label");

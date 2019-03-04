@@ -3,29 +3,28 @@ package com.deadlinestudio.lockey.control;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.deadlinestudio.lockey.control.RequestHttpConnection;
-import com.deadlinestudio.lockey.model.AnalysisData;
 import com.deadlinestudio.lockey.model.Data;
 import com.deadlinestudio.lockey.model.User;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class NetworkTask extends AsyncTask<Void, Void, String> {
+    private static final String period[] = {"day", "week", "month", "year"};
     private String url;
     private User user;
     private Data data;
-    private AnalysisData analysisData;
+    private HashMap<String, Long> analysisData;
     private RequestHttpConnection requestHttpConnection;
     private String column;
     private String new_data;
-    private final String[] weekdays = {"월", "화", "수", "목", "금", "토", "일"};
+    private int mode;
+    private int type;
 
     public NetworkTask(String url, User user, Data data) {
         this.url = url;
         this.user = user;
         this.data = data;
-        this.analysisData = new AnalysisData();
+        this.analysisData = new HashMap<>();
     }
 
     @Override
@@ -61,13 +60,16 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                 Log.d("register-time", result);
                 break;
             case "/classify-category":
-                analysisData.setAnalysis_category(requestHttpConnection.getClassfiedTime(url, user.getId()));
+                analysisData = requestHttpConnection.getClassfiedTime(url, user.getId(), period[mode]);
                 break;
             case "/classify-week":
-                analysisData.setAnalysis_week(requestHttpConnection.getClassfiedTime(url, user.getId()));
+                analysisData = requestHttpConnection.getClassfiedTime(url, user.getId(), period[mode]);
                 break;
-            case "/classify-weekday":
-                analysisData.setAnalysis_weekday(requestHttpConnection.getClassfiedTime(url, user.getId()));
+            case "/classify-month":
+                analysisData = requestHttpConnection.getClassfiedTime(url, user.getId(), period[mode]);
+                break;
+            case "/classify-year":
+                analysisData = requestHttpConnection.getClassfiedTime(url, user.getId(), period[mode]);
                 break;
             default:
                 Log.e("url error", "inappropriate url: " + url);
@@ -76,8 +78,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         return result;
     }
 
-    public AnalysisData getAnalysisData() {
-        Log.e("analysis test", Integer.toString(analysisData.getAnalysis_category().size()));
+    public HashMap<String, Long> getAnalysisData() {
         return this.analysisData;
     }
 
@@ -88,5 +89,10 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     public void prepareUpdate(String column, String new_data) {
         this.column = column;
         this.new_data = new_data;
+    }
+
+    public void setConfig(int mode, int type) {
+        this.mode = mode;
+        this.type = type;
     }
 }

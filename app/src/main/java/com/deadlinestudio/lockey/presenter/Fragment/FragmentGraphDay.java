@@ -17,18 +17,22 @@ import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterAnalysis;
 import com.deadlinestudio.lockey.presenter.Item.ItemAnalysis;
 
+import java.util.HashMap;
+
 public class FragmentGraphDay extends Fragment {
     private ListView listView;
     private MainActivity mainActivity;
 
     /**여기서 받아서**/
+    private HashMap<String, Long> analysis_category;
+    private HashMap<String, Long> analysis_day;
 
 
     private int mode;
 
-    private String[] xlabels = {"월", "화", "수", "목", "금", "토", "일"};
-//    private String[] xlabels = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
-//                                "12", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"};
+//    private String[] xlabels = {"월", "화", "수", "목", "금", "토", "일"};
+    private String[] xlabels = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
+                                "12", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"};
 //
     @Nullable
     @Override
@@ -54,9 +58,9 @@ public class FragmentGraphDay extends Fragment {
     }
     public void setAdapter(){
         AdapterAnalysis adapter = new AdapterAnalysis(mainActivity.getApplicationContext());
-        adapter.addItem(new ItemAnalysis("집중 분포"));
-        adapter.addItem(new ItemAnalysis("기록", xlabels));
-        adapter.addItem(new ItemAnalysis("데이",3));
+        adapter.addItem(new ItemAnalysis("집중 분포", ItemAnalysis.DAY, ItemAnalysis.PIE_GRAPH));
+        adapter.addItem(new ItemAnalysis("기록", xlabels, ItemAnalysis.DAY, ItemAnalysis.BAR_GRAPH));
+// adapter.addItem(new ItemAnalysis("데이",3));
         listView.setAdapter(adapter);
     }
 

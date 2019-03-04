@@ -18,6 +18,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class ItemViewAlysPieChart extends LinearLayout {
     private int[] pieColors ={
@@ -60,7 +61,7 @@ public class ItemViewAlysPieChart extends LinearLayout {
     /*
      * @brief pie chart
      * */
-    public void setPieChart(){
+    public void setPieChart(HashMap<String, Long> analysisData){
         PieChart pieChart = (PieChart) findViewById(R.id.pieChart);
         pieChart.setUsePercentValues(true);
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
@@ -70,12 +71,11 @@ public class ItemViewAlysPieChart extends LinearLayout {
         l.setEnabled(false);
 
         ArrayList<PieEntry> yVals = new ArrayList<>();
-        yVals.add(new PieEntry(8f, "라키"));
-        yVals.add(new PieEntry(15f, "짱짱맨"));
-        yVals.add(new PieEntry(12f, "회사"));
-        yVals.add(new PieEntry(25f, "가기"));
-        yVals.add(new PieEntry(23f, "싫다"));
-        yVals.add(new PieEntry(17f, "리얼"));
+        Iterator<String> keys = analysisData.keySet().iterator();
+        while(keys.hasNext()) {
+            String key = keys.next();
+            yVals.add(new PieEntry((float) analysisData.get(key), key));
+        }
 
         PieDataSet dataSet = new PieDataSet(yVals,"Study Times");
         dataSet.setSliceSpace(4f);

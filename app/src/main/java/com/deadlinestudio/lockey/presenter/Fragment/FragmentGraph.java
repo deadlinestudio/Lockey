@@ -21,8 +21,6 @@ public class FragmentGraph extends Fragment {
     private ListView listView;
     private MainActivity mainActivity;
 
-
-
     private int mode;
 
     @Nullable
@@ -49,9 +47,9 @@ public class FragmentGraph extends Fragment {
     }
         public void setAdapter(){
         AdapterAnalysis adapter = new AdapterAnalysis(mainActivity.getApplicationContext());
-        adapter.addItem(new ItemAnalysis("집중 분포",1));
-        adapter.addItem(new ItemAnalysis("기록",2));
-        adapter.addItem(new ItemAnalysis("시간 분포",3));
+//        adapter.addItem(new ItemAnalysis("집중 분포",1));
+//        adapter.addItem(new ItemAnalysis("기록",2));
+//        adapter.addItem(new ItemAnalysis("시간 분포",3));
         listView.setAdapter(adapter);
     }
 

@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="2dp"
-                        android:text="1000 시간"
+                        android:text="0 시간"
                         android:textColor="@color/colorPrimary_light"
                         android:textSize="20sp" />
 
@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingBottom="10dp"
-                        android:text="상위 1%"
+                        android:text="상위 0.0%"
                         android:textColor="#000"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -124,10 +124,12 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/shape_round_corner">
 
+                    <!--
                     <android.support.design.widget.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/dailyTab" />
+                    -->
 
                     <android.support.design.widget.TabItem
                         android:layout_width="wrap_content"
