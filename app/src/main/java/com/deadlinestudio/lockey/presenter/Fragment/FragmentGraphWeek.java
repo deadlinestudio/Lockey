@@ -17,15 +17,14 @@ import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterAnalysis;
 import com.deadlinestudio.lockey.presenter.Item.ItemAnalysis;
 
+import java.util.HashMap;
+
 public class FragmentGraphWeek extends Fragment {
     private ListView listView;
     private MainActivity mainActivity;
 
+    private static final String[] xlabels = {"월", "화", "수", "목", "금", "토", "일"};
 
-
-    private int mode;
-
-    private String[] xlabels = {"월", "화", "수", "목", "금", "토", "일"};
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,9 +49,9 @@ public class FragmentGraphWeek extends Fragment {
     }
     public void setAdapter(){
         AdapterAnalysis adapter = new AdapterAnalysis(mainActivity.getApplicationContext());
-        adapter.addItem(new ItemAnalysis("집중 분포"));
-        adapter.addItem(new ItemAnalysis("기록",2));
-        adapter.addItem(new ItemAnalysis("위크",3));
+        adapter.addItem(new ItemAnalysis("집중 분포", ItemAnalysis.WEEK, ItemAnalysis.PIE_GRAPH));
+        adapter.addItem(new ItemAnalysis("기록", xlabels, ItemAnalysis.WEEK, ItemAnalysis.BAR_GRAPH));
+// adapter.addItem(new ItemAnalysis("위크",3));
         listView.setAdapter(adapter);
     }
 

@@ -230,7 +230,7 @@ public class RequestHttpConnection {
      * @param id
      * @return Time Object received from server
      */
-    public HashMap<String, Long> getClassfiedTime(String url, String id){
+    public HashMap<String, Long> getClassfiedTime(String url, String id, String period){
         InputStream is = null;
         HashMap<String, Long> recv_data = null;
         try {
@@ -240,6 +240,7 @@ public class RequestHttpConnection {
             // build jsonObject
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("id", id);
+            jsonObject.accumulate("period", period);
 
             // convert JSONObject to JSON to String
             json = jsonObject.toString();

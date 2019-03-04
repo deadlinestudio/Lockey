@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     final String filename = "userlog.txt";
 
     private String sns = "";
-    private String id = "";
+    private static String id = "";
     private String nickname = "";
     private int age = 0;
     private String job = "";
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-    public String getId() {
+    public static String getId() {
         return id;
     }
     public void setId(String id) {
