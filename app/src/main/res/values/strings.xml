@@ -47,6 +47,8 @@
 
     <!-- Setting Fragment-->
     <string name="profileCheck">프로필 확인 및 수정</string>
+    <string name="profileEdit">프로필 수정</string>
+    <string name="serviceOut">서비스 탈퇴하기</string>
 
     <!--SignUp Activity-->
     <string name="nickname_example">닉네임을 입력해주세요</string>

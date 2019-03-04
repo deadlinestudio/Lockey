@@ -14,7 +14,7 @@
         tools:replace="android:icon">
         <activity android:name=".presenter.Activity.LoadActivity">
         </activity>
-        <activity android:name=".presenter.Activity.MainTempActivity">
+        <activity android:name=".presenter.Activity.ProfileEditActivity">
         </activity>
         <activity android:name=".presenter.Activity.MainActivity">
         </activity>
