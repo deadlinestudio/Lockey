@@ -73,28 +73,35 @@ public class ItemViewAlysPieChart extends LinearLayout {
         Legend l = pieChart.getLegend();
         l.setEnabled(false);
 
-        Map<String, Long> sorted = analysisData
-                .entrySet()
-                .stream()
-                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-                .collect(
-                        toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
-                                LinkedHashMap::new));
-
         ArrayList<PieEntry> yVals = new ArrayList<>();
-        Iterator<String> keys = sorted.keySet().iterator();
-        int cnt = 4;
-        long sum = 0;
-        while(keys.hasNext()) {
-            String key = keys.next();
-            if(cnt-- > 0)
-                yVals.add(new PieEntry((float) analysisData.get(key), key));
-            else
-                sum += analysisData.get(key);
-        }
+        if(analysisData == null) {
+            yVals.add(new PieEntry((float) 50f, "수학"));
+            yVals.add(new PieEntry((float) 12f, "국어"));
+            yVals.add(new PieEntry((float) 22f, "영어"));
+            yVals.add(new PieEntry((float) 33f, "과학"));
+        } else {
+            Map<String, Long> sorted = analysisData
+                    .entrySet()
+                    .stream()
+                    .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                    .collect(
+                            toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
+                                    LinkedHashMap::new));
 
-        if(sum != 0)
-            yVals.add(new PieEntry((float) sum, "기타"));
+            Iterator<String> keys = sorted.keySet().iterator();
+            int cnt = 4;
+            long sum = 0;
+            while (keys.hasNext()) {
+                String key = keys.next();
+                if (cnt-- > 0)
+                    yVals.add(new PieEntry((float) analysisData.get(key), key));
+                else
+                    sum += analysisData.get(key);
+            }
+
+            if (sum != 0)
+                yVals.add(new PieEntry((float) sum, "기타"));
+        }
 
         PieDataSet dataSet = new PieDataSet(yVals,"Study Times");
         dataSet.setSliceSpace(4f);

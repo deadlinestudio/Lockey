@@ -131,7 +131,7 @@ public class AdapterSetting extends BaseAdapter{
                         String user_id = mainActivity.getId();
                         User user = new User(user_id, null, 0, null);
                         String new_nick = ed.getText().toString();
-                        NetworkTask networkTask = new NetworkTask("/update-user", user, null);
+                        NetworkTask networkTask = new NetworkTask(mainActivity.getBaseContext(), "/update-user", user, null);
                         networkTask.prepareUpdate("nickname", new_nick);
                         networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                         String toastMsg = "닉네임이 변경됐습니다";

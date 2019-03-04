@@ -331,7 +331,7 @@ public class FragmentTimer extends Fragment{
                     if(mainActivity.getSns().equals("4") == false) {
                         String user_id = mainActivity.getId();
                         User user = new User(user_id, null, 0, null);
-                        NetworkTask networkTask = new NetworkTask("/register-time", user, time_data);
+                        NetworkTask networkTask = new NetworkTask(mainActivity.getBaseContext(), "/register-time", user, time_data);
                         networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                         String toastMsg = time_data.getCategory() + " " + time_data.getAmount() + " 저장됐습니다";
                         Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG).show();

@@ -30,7 +30,8 @@ public class FragmentAnalysis extends Fragment{
         ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_analysis, container,false);
         mainActivity = (MainActivity) this.getActivity();
         idText = rootView.findViewById(R.id.profileName);
-        idText.setText(mainActivity.getNickname());
+        String nick = mainActivity.getNickname();
+        idText.setText((nick.equals("")) ?"비회원":nick);
         // set up Toolbars
         mToolbar  = rootView.findViewById(R.id.analysisToolbar);
 

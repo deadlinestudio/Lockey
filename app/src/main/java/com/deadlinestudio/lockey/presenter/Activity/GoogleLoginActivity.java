@@ -127,7 +127,7 @@ public class GoogleLoginActivity extends AppCompatActivity{
                                 Log.e("google debuging", "test1");
                                 User temp_user = new User();
                                 temp_user.setId(EMAIL);
-                                NetworkTask networkTask = new NetworkTask("/check-user", temp_user, null);
+                                NetworkTask networkTask = new NetworkTask(getBaseContext(), "/check-user", temp_user, null);
                                 networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                                 Log.e("google debuging", "test2");
                                 if(networkTask.getUser().getisUser()) {
