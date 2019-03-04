@@ -56,7 +56,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                     }
                     break;
                 case "/update-user":
-                    // TODO : fix it
                     result = requestHttpConnection.updateUser(url, user.getId(), column, new_data);
                     if (result.equals("complete")) {
                         result = "complete";
@@ -69,7 +68,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                     result = requestHttpConnection.registerTime(url, user.getId(), data);
                     Log.d("register-time", result);
                     break;
-                case "/total-time":
+                case "/get-time":
                     analysisData = requestHttpConnection.getClassfiedTime(url, user.getId(), period[mode]);
                     break;
                 case "/classify-category":
@@ -104,6 +103,11 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                     builder.show();
                 }
             };
+            new Thread() {
+                public void run() {
+                    mHandler.sendMessage(null);
+                }
+            }.start();
             return "fail";
         }
         return "success";
