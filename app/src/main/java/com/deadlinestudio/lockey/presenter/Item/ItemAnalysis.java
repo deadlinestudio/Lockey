@@ -19,21 +19,24 @@ public class ItemAnalysis {
     public static final int YEAR = 3;
     public static final int PIE_GRAPH = 1;
     public static final int BAR_GRAPH = 2;
+    private static final int periods[] = {1, 7, 30, 365};
     private String title;
     private String subTitle;
     private String[] xLabels;
+    private int period;
 
-    /**여기다 넘길거야*****/
     private HashMap<String, Long> analysisData;
 
     public ItemAnalysis(String title, int mode, int type) {
         this.title = title;
+        this.period = periods[mode];
         setAnalysisData(mode,type);
     }
 
     public ItemAnalysis(String title, String[] xlabels, int mode, int type) {
         this.title = title;
         this.xLabels = xlabels;
+        this.period = periods[mode];
         setAnalysisData(mode,type);
     }
 
@@ -92,6 +95,10 @@ public class ItemAnalysis {
 
     public String[] getXLabels(){
         return this.xLabels;
+    }
+
+    public int getPeriod() {
+        return this.period;
     }
 
     public HashMap<String, Long> getAnalysisData() {
