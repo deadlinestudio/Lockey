@@ -23,8 +23,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private Data data;
     private HashMap<String, Long> analysisData;
     private RequestHttpConnection requestHttpConnection;
-    private String column;
-    private String new_data;
     private int mode;
     private int type;
 
@@ -48,25 +46,18 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                     break;
                 case "/check-user":
                     this.user = requestHttpConnection.getUser(url, user.getId());
-                    if (this.user.getisUser()) {
-                        result = "isUser";
-                    } else {
-                        Log.e("check-user", "fail");
-                        result = "noUser";
-                    }
                     break;
                 case "/update-user":
-                    result = requestHttpConnection.updateUser(url, user.getId(), column, new_data);
-                    if (result.equals("complete")) {
-                        result = "complete";
-                    } else {
-                        Log.e("update-user", "fail");
-                        result = "noUser";
-                    }
+                    requestHttpConnection.updateUser(url, user);
+                    break;
+                case "/leave-user":
+                    requestHttpConnection.updateUser(url, user);
                     break;
                 case "/register-time":
-                    result = requestHttpConnection.registerTime(url, user.getId(), data);
-                    Log.d("register-time", result);
+                    requestHttpConnection.registerTime(url, user.getId(), data);
+                    break;
+                case "/reset-time":
+                    requestHttpConnection.resetTime(url, user.getId());
                     break;
                 case "/get-time":
                     analysisData = requestHttpConnection.getClassfiedTime(url, user.getId(), period[mode]);
@@ -119,11 +110,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 
     public User getUser() {
         return this.user;
-    }
-
-    public void prepareUpdate(String column, String new_data) {
-        this.column = column;
-        this.new_data = new_data;
     }
 
     public void setConfig(int mode, int type) {
