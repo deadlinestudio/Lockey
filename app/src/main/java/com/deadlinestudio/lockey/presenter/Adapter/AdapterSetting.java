@@ -74,19 +74,16 @@ public class AdapterSetting extends BaseAdapter{
             public void onClick(View view) {
                 Intent intent = null;
                 switch (mode){
-                    case 0: // 공지 사항
+                    case 0: // 도움말
                         break;
-                    case 1: // 도움말
+                    case 1: // 데이터 초기화
                         break;
-                    case 2: // 데이터 초기화
-
-                        break;
-                    case 3: // 버전 확인
+                    case 2: // 버전 확인
                         intent = new Intent(mainActivity, VerCheckActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         mainActivity.startActivity(intent);
                         break;
-                    case 4: //로그 아웃
+                    case 3:  //로그 아웃
                         Log.e("deb/logout", "in");
                         lfc.WriteLogFile(context,filename,"",2);
                         lfc.WriteLogFile(context,filename,"nofile",2);

@@ -23,8 +23,8 @@
             android:layout_gravity="center"/>
         <ImageView
             android:id="@+id/checkVerBackBtn"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginStart="30dp"
             android:layout_gravity="start"
             app:srcCompat="?attr/actionModeCloseDrawable"/>

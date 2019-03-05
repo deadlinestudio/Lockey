@@ -38,17 +38,19 @@ public class ProfileEditActivity extends AppCompatActivity {
         saveBtn = findViewById(R.id.profileEditSaveBtn);
         serviceOut = findViewById(R.id.serviceOutLink);
         idText = findViewById(R.id.proEditIdText);
+      
         nickText = findViewById(R.id.proEditNickText);
-        jobSpinner = findViewById(R.id.editJobSpinner);
+        nickText.setSelection(nickText.getText().length());
+        jobText = findViewById(R.id.proEditJobText);
+        jobText.setSelection(jobText.getText().length());
 
-        jobText = findViewById(R.id.editJobText);
+        jobSpinner = findViewById(R.id.editJobSpinner);
         idText.setText(User.getInstance().getId());
         jobText.setVisibility(View.GONE);
 
         try {
             Field popup = Spinner.class.getDeclaredField("mPopup");
             popup.setAccessible(true);
-
             ListPopupWindow window = (ListPopupWindow) popup.get(jobSpinner);
             window.setHeight(400);
         } catch(Exception e) {
