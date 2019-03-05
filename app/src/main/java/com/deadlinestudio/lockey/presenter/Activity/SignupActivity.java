@@ -110,14 +110,15 @@ public class SignupActivity extends AppCompatActivity {
 
                         tokens.nextToken();
                         String id = tokens.nextToken();
-                        User user = new User(id, nick, age, job);
-                        NetworkTask networkTask = new NetworkTask(getBaseContext(), "/register-user", user, null);
+                        User user = User.getInstance();
+                        user.setData(id, nick, age, job);
+                        NetworkTask networkTask = new NetworkTask(getBaseContext(), "/register-user", null);
                         networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                         Intent intent = new Intent(getBaseContext(), LoadActivity.class);
                         startActivity(intent);
                         finish();
                     }
-                } catch(Exception e ) {
+                } catch(Exception e) {
                     e.printStackTrace();
                 }
             }

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.deadlinestudio.lockey.R;
+import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Adapter.MainPagerAdapter;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import com.deadlinestudio.lockey.presenter.Fragment.FragmentAnalysis;
@@ -26,14 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
     private LogfileController lfc;
     private Context cont;
-    final String filename = "userlog.txt";
+    private static final String filename = "userlog.txt";
 
-    private String sns = "";
-    private static String id = "";
-    private String nickname = "";
-    private int age = 0;
-    private String job = "";
-
+    private static String sns = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
         this.setSns(tokens.nextToken());
         Log.e("SNS in Login", this.getSns());
 
+        User user = User.getInstance();
         if(this.getSns().equals("4") == false) {
-            this.setId(tokens.nextToken());
-
-            this.setNickname(tokens.nextToken());
-            this.setAge(Integer.parseInt(tokens.nextToken()));
-            this.setJob(tokens.nextToken());
+            user.setId(tokens.nextToken());
+            user.setNickname(tokens.nextToken());
+            user.setAge(Integer.parseInt(tokens.nextToken()));
+            user.setJob(tokens.nextToken());
         }
-        Log.e("logfile in mainactivity", this.getNickname()+this.getJob());
+        Log.e("logfile in mainactivity", user.getNickname()+user.getJob());
 
         /* bottom navigation*/
         BottomNavigationView btmNav = (BottomNavigationView) findViewById(R.id.bottomMainNav);
@@ -129,28 +125,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * @brief getter and setters
      * **/
-    public String getNickname() {
-        return nickname;
-    }
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-    public static String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
 
-    public String getSns() { return sns; }
+    public static String getSns() { return sns; }
+    public static String getFilename() { return filename; }
 
     public void setSns(String sns) { this.sns = sns; }
 
-    public int getAge() { return age; }
-
-    public void setAge(int age) { this.age = age; }
-
-    public String getJob() { return job; }
-
-    public void setJob(String job) { this.job = job; }
 }

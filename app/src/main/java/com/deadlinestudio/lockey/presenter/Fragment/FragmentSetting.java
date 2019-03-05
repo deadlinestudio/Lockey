@@ -12,8 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.deadlinestudio.lockey.R;
+import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Activity.OpenSourceActivity;
 import com.deadlinestudio.lockey.presenter.Activity.ProfileEditActivity;
@@ -34,7 +36,7 @@ public class FragmentSetting extends Fragment{
         mainActivity = (MainActivity) this.getActivity();
         profileLayout = rootView.findViewById(R.id.profile);
         profileName = rootView.findViewById(R.id.profileName);
-        String nick = mainActivity.getNickname();
+        String nick = User.getInstance().getNickname();
         profileName.setText(!(nick.equals("")) ? nick : "비회원");
 
         profileLayout.setOnClickListener(new View.OnClickListener(){
@@ -42,9 +44,14 @@ public class FragmentSetting extends Fragment{
             @Override
             public void onClick(View view) {
                 // go to profile edit
-                Intent intent = new Intent(mainActivity, ProfileEditActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                mainActivity.startActivity(intent);
+                if(mainActivity.getSns().equals("4") == true) {
+                    String toastMsg = "비회원은 이용할 수 없습니다.";
+                    Toast.makeText(mainActivity.getBaseContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(mainActivity, ProfileEditActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    mainActivity.startActivity(intent);
+                }
             }
         });
 
