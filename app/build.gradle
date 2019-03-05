@@ -38,6 +38,7 @@ dependencies {
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
     implementation 'com.android.support:design:28.0.0'
     implementation files('libs/naveridlogin_android_sdk_4.2.0.aar')
+    implementation files('libs/CaulySDK-3.4.23.jar')
     implementation 'com.android.support:support-core-utils:28.0.0'
     implementation 'com.android.support:customtabs:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'

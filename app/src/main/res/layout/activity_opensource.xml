@@ -5,10 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <android.support.v7.widget.Toolbar
-        android:id="@+id/appListToolbar"
+        android:id="@+id/OpenSourceToolbar"
         android:layout_width="match_parent"
-        android:layout_height="65dp">
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent">
+
     </android.support.v7.widget.Toolbar>
 
     <TextView
@@ -21,5 +24,5 @@
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appListToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/OpenSourceToolbar" />
 </android.support.constraint.ConstraintLayout>

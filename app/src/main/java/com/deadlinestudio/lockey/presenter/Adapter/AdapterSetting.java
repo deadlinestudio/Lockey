@@ -115,7 +115,7 @@ public class AdapterSetting extends BaseAdapter{
 
     /**
      * @brief dialog message with edit text for changing the nickname
-     **/
+
     public void showNoticeDialog() {
         // Create an instance of the dialog fragment and show it
         final AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
@@ -154,5 +154,7 @@ public class AdapterSetting extends BaseAdapter{
                 }
             }
         });
+
     }
+     **/
 }
