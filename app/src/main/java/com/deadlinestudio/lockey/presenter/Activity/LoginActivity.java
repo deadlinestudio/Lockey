@@ -41,11 +41,11 @@ public class LoginActivity extends BaseActivity{
             if (!line.equals("nofile")) {
                 String sns = "";
                 StringTokenizer tokens = new StringTokenizer(line, ",");
-                User temp_user = new User();
+                User temp_user = User.getInstance();
                 if(tokens.hasMoreTokens()) {
                     sns = tokens.nextToken();
                     temp_user.setId(tokens.nextToken());
-                    NetworkTask networkTask = new NetworkTask(getBaseContext(),"/check-user", temp_user, null);
+                    NetworkTask networkTask = new NetworkTask(getBaseContext(),"/check-user", null);
                     networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                     if (networkTask.getUser().getisUser()) {
                         String contents =

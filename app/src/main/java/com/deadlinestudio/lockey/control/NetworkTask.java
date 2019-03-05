@@ -24,12 +24,11 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private HashMap<String, Long> analysisData;
     private RequestHttpConnection requestHttpConnection;
     private int mode;
-    private int type;
 
-    public NetworkTask(Context cont, String url, User user, Data data) {
+    public NetworkTask(Context cont, String url, Data data) {
         this.cont = cont;
         this.url = url;
-        this.user = user;
+        this.user = User.getInstance();
         this.data = data;
         this.analysisData = null;
     }
@@ -38,14 +37,12 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... params) {
         try {
             requestHttpConnection = new RequestHttpConnection();
-            String result = "";
             switch (url) {
                 case "/register-user":
-                    result = requestHttpConnection.registerUser(url, user);
-                    Log.d("register-user", result);
+                    requestHttpConnection.registerUser(url, user);
                     break;
                 case "/check-user":
-                    this.user = requestHttpConnection.getUser(url, user.getId());
+                    requestHttpConnection.getUser(url, user.getId());
                     break;
                 case "/update-user":
                     requestHttpConnection.updateUser(url, user);
@@ -112,8 +109,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         return this.user;
     }
 
-    public void setConfig(int mode, int type) {
+    public void setConfig(int mode) {
         this.mode = mode;
-        this.type = type;
     }
 }

@@ -4,13 +4,15 @@ package com.deadlinestudio.lockey.model;
  * @brief Model Class with user data
  */
 public class User {
-    String id;
-    String nickname;
-    int age;
-    String job;
-    boolean isUser;
+    private static User user = new User();
 
-    public User() {}
+    private String id;
+    private String nickname;
+    private int age;
+    private String job;
+    private boolean isUser;
+
+    private User() {}
 
     /**
      * @biref Constructor
@@ -19,7 +21,7 @@ public class User {
      * @param age
      * @param job
      */
-    public User(String id, String nickname, int age, String job) {
+    public void setData(String id, String nickname, int age, String job) {
         this.id = id;
         this.nickname = nickname;
         this.age = age;
@@ -44,7 +46,6 @@ public class User {
 
     public void setisUser(boolean user) { this.isUser = user; }
 
-
     public String getId() {
         return id;
     }
@@ -63,4 +64,5 @@ public class User {
 
     public boolean getisUser() { return isUser; }
 
+    public static User getInstance() { return user; }
 }

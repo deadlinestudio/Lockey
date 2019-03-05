@@ -36,7 +36,7 @@ public class FragmentAnalysis extends Fragment{
         ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_analysis, container,false);
         mainActivity = (MainActivity) this.getActivity();
         idText = rootView.findViewById(R.id.profileName);
-        String nick = mainActivity.getNickname();
+        String nick = User.getInstance().getNickname();
         idText.setText((nick.equals("")) ?"비회원":nick);
         // set up Toolbars
         mToolbar  = rootView.findViewById(R.id.analysisToolbar);
@@ -88,8 +88,7 @@ public class FragmentAnalysis extends Fragment{
 
     private void setTotalText() {
         try {
-            NetworkTask asyncNetwork = new NetworkTask(mainActivity.getBaseContext(), "/get-time",
-                    new User(MainActivity.getId(), null, 0, null), null);
+            NetworkTask asyncNetwork = new NetworkTask(mainActivity.getBaseContext(), "/get-time", null);
             asyncNetwork.execute().get(1000, TimeUnit.MILLISECONDS);
             HashMap<String, Long> analysisData = asyncNetwork.getAnalysisData();
             if(analysisData != null)

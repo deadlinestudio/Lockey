@@ -48,31 +48,26 @@ public class ItemAnalysis {
         NetworkTask asyncNetwork = null;
         try {
             if (type == PIE_GRAPH) {
-                asyncNetwork = new NetworkTask(cont,"/classify-category",
-                        new User(MainActivity.getId(), null, 0, null), null);
+                asyncNetwork = new NetworkTask(cont,"/classify-category", null);
             } else if (type == BAR_GRAPH) {
                 switch (mode) {
                     case DAY:
-                        asyncNetwork = new NetworkTask(cont, "/classify-day",
-                                new User(MainActivity.getId(), null, 0, null), null);
+                        asyncNetwork = new NetworkTask(cont, "/classify-day", null);
                         break;
                     case WEEK:
-                        asyncNetwork = new NetworkTask(cont, "/classify-week",
-                                new User(MainActivity.getId(), null, 0, null), null);
+                        asyncNetwork = new NetworkTask(cont, "/classify-week", null);
                         break;
                     case MONTH:
-                        asyncNetwork = new NetworkTask(cont, "/classify-month",
-                                new User(MainActivity.getId(), null, 0, null), null);
+                        asyncNetwork = new NetworkTask(cont, "/classify-month", null);
                         break;
                     case YEAR:
-                        asyncNetwork = new NetworkTask(cont, "/classify-year",
-                                new User(MainActivity.getId(), null, 0, null), null);
+                        asyncNetwork = new NetworkTask(cont, "/classify-year", null);
                         break;
                     default:
                         break;
                 }
             }
-            asyncNetwork.setConfig(mode, type);
+            asyncNetwork.setConfig(mode);
             asyncNetwork.execute().get(1000, TimeUnit.MILLISECONDS);
             analysisData = asyncNetwork.getAnalysisData();
         } catch(Exception e) {

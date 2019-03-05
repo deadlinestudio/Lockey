@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deadlinestudio.lockey.R;
+import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Activity.OpenSourceActivity;
 import com.deadlinestudio.lockey.presenter.Activity.ProfileEditActivity;
@@ -35,7 +36,7 @@ public class FragmentSetting extends Fragment{
         mainActivity = (MainActivity) this.getActivity();
         profileLayout = rootView.findViewById(R.id.profile);
         profileName = rootView.findViewById(R.id.profileName);
-        String nick = mainActivity.getNickname();
+        String nick = User.getInstance().getNickname();
         profileName.setText(!(nick.equals("")) ? nick : "비회원");
 
         profileLayout.setOnClickListener(new View.OnClickListener(){
@@ -48,7 +49,6 @@ public class FragmentSetting extends Fragment{
                     Toast.makeText(mainActivity.getBaseContext(), toastMsg, Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(mainActivity, ProfileEditActivity.class);
-                    intent.putExtra("id", MainActivity.getId());
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     mainActivity.startActivity(intent);
                 }

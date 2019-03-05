@@ -61,10 +61,7 @@ public class RequestHttpConnection {
      * @param id
      * @return User Object received from server
      */
-    public User getUser(String url, String id) throws Exception {
-        InputStream is = null;
-        String result = "";
-        User user = new User();
+    public void getUser(String url, String id) throws Exception {
         try {
             HttpURLConnection httpCon = connectHTTP(url);
             String json = "";
@@ -87,10 +84,8 @@ public class RequestHttpConnection {
             try {
                 // convert inputstream to string
                 if(is != null) {
-                    user = readJson.readJsonUser(is);
-                    Log.e("isUser in requestHTTP", user.getisUser() ? "yes" : "no");
-                } else {
-                    user = null;
+                    readJson.readJsonUser(is);
+                    Log.e("isUser in requestHTTP", User.getInstance().getisUser() ? "yes" : "no");
                 }
             }
             catch (Exception e) {
@@ -107,7 +102,6 @@ public class RequestHttpConnection {
         catch (Exception e) {
             throw e;
         }
-        return user;
     }
 
     /**

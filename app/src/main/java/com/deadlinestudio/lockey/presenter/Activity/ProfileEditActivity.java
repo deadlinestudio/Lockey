@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.control.NetworkTask;
 import com.deadlinestudio.lockey.model.User;
+import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 
 import java.lang.reflect.Field;
 import java.util.StringTokenizer;
@@ -33,9 +34,6 @@ public class ProfileEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
 
-        Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-
         backBtn = findViewById(R.id.profileEditCancel);
         saveBtn = findViewById(R.id.profileEditSaveBtn);
         serviceOut = findViewById(R.id.serviceOutLink);
@@ -44,7 +42,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         jobSpinner = findViewById(R.id.editJobSpinner);
 
         jobText = findViewById(R.id.editJobText);
-        idText.setText(id);
+        idText.setText(User.getInstance().getId());
         jobText.setVisibility(View.GONE);
 
         try {
@@ -92,11 +90,20 @@ public class ProfileEditActivity extends AppCompatActivity {
                             job.equals("")) {
                         Toast.makeText(getBaseContext(), "빈칸 없이 입력해주세요.", Toast.LENGTH_LONG).show();
                     } else {
-                        User user = new User(id, nick, MainActivity.getAge(), job);
-                        NetworkTask networkTask = new NetworkTask(getBaseContext(), "/update-user", user, null);
+                        User user = User.getInstance();
+                        user.setData(user.getId(), nick, user.getAge(), job);
+                        NetworkTask networkTask = new NetworkTask(getBaseContext(), "/update-user", null);
                         networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
+                        LogfileController lfc = new LogfileController();
+                        String contents =
+                                MainActivity.getSns() +
+                                        "," + user.getId() +
+                                        "," + nick +
+                                        "," + user.getAge() +
+                                        "," + job;
+                        lfc.WriteLogFile(getBaseContext(), MainActivity.getFilename(), contents, 2);
                         Toast.makeText(getBaseContext(), "프로필이 변경 되었습니다.", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getBaseContext(), LoadActivity.class);
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
                         startActivity(intent);
                         finish();
                     }

@@ -120,9 +120,9 @@ public class KakaoLoginActivity extends AppCompatActivity {
                                 "3," + EMAIL;
                         lfc.WriteLogFile(getApplicationContext(), filename, content, 2);
 
-                        User temp_user = new User();
+                        User temp_user = User.getInstance();
                         temp_user.setId(EMAIL);
-                        NetworkTask networkTask = new NetworkTask(getBaseContext(), "/check-user", temp_user, null);
+                        NetworkTask networkTask = new NetworkTask(getBaseContext(), "/check-user", null);
                         networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                         if (networkTask.getUser().getisUser()) {
                             String contents =
