@@ -18,19 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/timerNotiBtn"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="end"
-            android:background="@drawable/agumon" />
-        <TextView
-            android:id="@+id/timerNotiText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="8dp"
-            android:text="@string/disableNotiSound" />
     </android.support.v7.widget.Toolbar>
 
 
@@ -107,23 +94,23 @@
 
             <Button
                 android:id="@+id/quickQuaterBtn"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="@drawable/quick_timer_quater"
                 android:textColor="@color/colorWhite" />
 
             <Button
                 android:id="@+id/quickHalfBtn"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/quick_timer_half"
                 android:textColor="@color/colorWhite" />
 
             <Button
                 android:id="@+id/quickTripleBtn"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/quick_timer_triple"
 
@@ -131,8 +118,8 @@
 
             <Button
                 android:id="@+id/quickFullBtn"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/quick_timer_full"
 

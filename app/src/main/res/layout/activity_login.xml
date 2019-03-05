@@ -38,9 +38,9 @@
             android:id="@+id/googleBtn"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginBottom="1dp"
             android:padding="12dp"
-            android:background="#FFF"
+            android:layout_marginBottom="1dp"
+            android:background="@color/colorWhite_dark"
             android:elevation="1dp">
             <ImageView
                 android:layout_width="20dp"

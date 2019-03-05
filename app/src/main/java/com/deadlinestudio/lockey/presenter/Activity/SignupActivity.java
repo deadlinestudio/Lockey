@@ -44,10 +44,17 @@ public class SignupActivity extends AppCompatActivity {
 
         lfc = new LogfileController();
         nicknameText = findViewById(R.id.nicknameeditText);
+        nicknameText.setSelection(nicknameText.getText().length());
+
         ageText = findViewById(R.id.ageeditText);
+        ageText.setSelection(ageText.getText().length());
+
         jobSpinner = findViewById(R.id.jobSpinner);
         signupBtn = findViewById(R.id.signupBtn);
+
         jobText = findViewById(R.id.jobText);
+        jobText.setSelection(jobText.getText().length());
+
         jobText.setVisibility(View.GONE);
         cont = this.getApplicationContext();
 
