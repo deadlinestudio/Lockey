@@ -27,11 +27,11 @@ import static java.util.stream.Collectors.toMap;
 
 public class ItemViewAlysPieChart extends LinearLayout {
     private int[] pieColors ={
-            this.getContext().getColor(R.color.catOne),
             this.getContext().getColor(R.color.catTwo),
             this.getContext().getColor(R.color.catThree),
             this.getContext().getColor(R.color.catFour),
             this.getContext().getColor(R.color.catFive),
+            this.getContext().getColor(R.color.catOne),
 
     };
     private TextView titleText, subText;

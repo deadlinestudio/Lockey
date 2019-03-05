@@ -23,6 +23,7 @@ import com.deadlinestudio.lockey.presenter.Activity.LoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Activity.NaverLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.OpenSourceActivity;
+import com.deadlinestudio.lockey.presenter.Activity.VerCheckActivity;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import com.deadlinestudio.lockey.presenter.Fragment.FragmentSetting;
 import com.deadlinestudio.lockey.presenter.Item.ItemSetting;
@@ -81,11 +82,12 @@ public class AdapterSetting extends BaseAdapter{
 
                         break;
                     case 3: // 버전 확인
-                        break;
-                    case 4: //오픈소스 라이센스
-                        intent = new Intent(mainActivity, OpenSourceActivity.class);
+                        intent = new Intent(mainActivity, VerCheckActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         mainActivity.startActivity(intent);
+                        break;
+                    case 4: //오픈소스 라이센스
+
                         break;
                     case 5: //로그 아웃
                         Log.e("deb/logout", "in");

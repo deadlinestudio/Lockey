@@ -22,7 +22,7 @@ public class OpenSourceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_opensource);
 
 
-        mToolbar  = findViewById(R.id.appListToolbar);
+        mToolbar  = findViewById(R.id.OpenSourceToolbar);
         mToolbar.setTitle("오픈 소스 라이센스");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -170,9 +170,7 @@ public class OpenSourceActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
-                Intent mintent = new Intent(getApplicationContext(), MainActivity.class);
-                mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(mintent);
+                finish();
                 return true;
             }
         }
@@ -181,8 +179,6 @@ public class OpenSourceActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent mintent = new Intent(getApplicationContext(),MainActivity.class);
-        mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(mintent);
+        finish();
     }
 }

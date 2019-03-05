@@ -5,7 +5,9 @@
     <string name="app_name">Lockey</string>
     <string name="loading">loading</string>
     <string name="signed_out">signed_out</string>
-
+    <string name="app_ver">Version 0.5</string>
+    <string name="release_date">2019. 03. 08.</string>
+    <string name="copyright">Copyright 2019 Deadline Studio. All Rights Reserved.</string>
     <!--tabs-->
     <string name="tab_home">홈</string>
     <string name="tab_setting">설정</string>
@@ -23,6 +25,7 @@
     <string name="cancel">취소</string>
     <string name="lock_en">LOCK</string>
     <string name="key_en">KEY</string>
+    <string name="lockey">라키</string>
 
     <!--Timer Fragment-->
     <string name="btwHourMin">:</string>
@@ -36,6 +39,7 @@
     <string name="mostApp">가장 많이 사용한 앱</string>
     <string name="selectAll">전체 선택</string>
     <string name="selectNone">전체 해제</string>
+
     <!--Analysis Fragment-->
     <string name="totalFocusTime">총 집중시간</string>
     <string name="dailyTab">일</string>
@@ -48,7 +52,8 @@
     <!-- Setting Fragment-->
     <string name="profileCheck">프로필 확인 및 수정</string>
     <string name="profileEdit">프로필 수정</string>
-    <string name="serviceOut">서비스 탈퇴하기</string>
+    <string name="serviceOut">서비스 탈퇴하기 ></string>
+    <string name="opensource">오픈소스 라이센스 ></string>
 
     <!--SignUp Activity-->
     <string name="nickname_example">닉네임을 입력해주세요</string>
