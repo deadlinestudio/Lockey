@@ -19,7 +19,6 @@
         <activity
             android:name=".presenter.Activity.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation" >	<!-- orientation 변경 시 Activity 재시작 방지 -->
-            >
         </activity>
         <activity android:name=".presenter.Activity.LoginActivity">
             <intent-filter>
@@ -49,7 +48,9 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>        <!-- ca-app-pub-8600536608045213~4285578189 -->
         <activity
             android:name="com.kakao.auth.authorization.authcode.KakaoWebViewActivity"
             android:launchMode="singleTop"

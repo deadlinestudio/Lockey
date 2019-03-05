@@ -12,9 +12,11 @@ import android.widget.ImageView;
 import com.deadlinestudio.lockey.R;
 
 public class LockActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+
         setContentView(R.layout.activity_lock);
         ImageView lockBaseImg = findViewById(R.id.lockBaseImg);
         ImageView lockRingImg = findViewById(R.id.lockRingImg);
@@ -29,10 +31,7 @@ public class LockActivity extends AppCompatActivity {
                 intent.addCategory(Intent.CATEGORY_HOME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-
             }
         });
     }
-
-
 }
