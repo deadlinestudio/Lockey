@@ -41,7 +41,7 @@ public class ReadJSON {
      * @throws IOException
      */
     private User readUser(JsonReader reader) throws IOException {
-        User user = new User();
+        User user = User.getInstance();
 
         reader.beginObject();
         while (reader.hasNext()) {

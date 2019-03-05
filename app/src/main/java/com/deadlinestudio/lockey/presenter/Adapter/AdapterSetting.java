@@ -115,48 +115,4 @@ public class AdapterSetting extends BaseAdapter{
         return v;
     }
 
-    /**
-     * @brief dialog message with edit text for changing the nickname
-
-    public void showNoticeDialog() {
-        // Create an instance of the dialog fragment and show it
-        final AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
-        // Get the layout inflater
-        LayoutInflater inflater = this.mainActivity.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.dialog_nickname, null));
-
-        final AlertDialog dialog = builder.create();
-        dialog.show();
-        Button saveBtn = dialog.findViewById(R.id.saveChangeBtn);
-        final EditText ed = dialog.findViewById(R.id.newNicknameText);
-
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    dialog.dismiss();
-                    if(mainActivity.getSns().equals("4") == false) {
-                        String user_id = mainActivity.getId();
-                        User user = new User(user_id, null, 0, null);
-                        String new_nick = ed.getText().toString();
-                        NetworkTask networkTask = new NetworkTask(mainActivity.getBaseContext(), "/update-user", user, null);
-                        networkTask.prepareUpdate("nickname", new_nick);
-                        networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
-                        String toastMsg = "닉네임이 변경됐습니다";
-                        TextView profileName = mainActivity.findViewById(R.id.profileName);
-                        FragmentSetting.setProfileName(new_nick);
-                        profileName.setText(new_nick);
-                        Toast.makeText(context, toastMsg, Toast.LENGTH_LONG).show();
-                    } else {
-                        String toastMsg = "비회원은 저장되지 않습니다";
-                        Toast.makeText(context, toastMsg, Toast.LENGTH_LONG).show();
-                    }
-                } catch(Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-    }
-     **/
 }

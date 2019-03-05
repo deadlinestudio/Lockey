@@ -21,7 +21,6 @@
         <activity
             android:name=".presenter.Activity.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation" >	<!-- orientation 변경 시 Activity 재시작 방지 -->
-            >
         </activity>
         <activity android:name=".presenter.Activity.LoginActivity">
             <intent-filter>

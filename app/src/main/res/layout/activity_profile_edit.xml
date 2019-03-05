@@ -58,7 +58,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-
             android:background="@color/colorWhite"
             android:text="@string/id"
             android:textColor="@color/colorBlack_light"
@@ -77,7 +76,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-
             android:background="@color/colorWhite"
             android:text="@string/nickname"
             android:textColor="@color/colorBlack_light"
@@ -89,7 +87,7 @@
             android:layout_marginBottom="10dp"
             android:inputType="text"
             android:background="@color/colorWhite"
-            android:text="@string/id"
+            android:hint="@string/nickname_example"
             android:textColor="@color/colorBlack"
             android:textSize="18sp" />
         <TextView
@@ -97,21 +95,30 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-
             android:background="@color/colorWhite"
             android:text="@string/job"
             android:textColor="@color/colorBlack_light"
             android:textSize="15sp" />
-        <EditText
-            android:id="@+id/proEditJobText"
+
+        <Spinner
+            android:id="@+id/editJobSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_margin="5dp"
+            android:ems="8"
+            android:entries="@array/job_list"
+            android:overlapAnchor="false"
+            android:scrollbarThumbVertical="@drawable/scrollbar_style"
+            android:spinnerMode="dropdown"
+            android:verticalScrollbarPosition="right" />
+
+        <EditText
+            android:id="@+id/editJobText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="8"
             android:inputType="text"
-            android:background="@color/colorWhite"
-            android:text="@string/id"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp" />
+            android:hint="@string/job_example" />
 
         <TextView
             android:id="@+id/serviceOutLink"
