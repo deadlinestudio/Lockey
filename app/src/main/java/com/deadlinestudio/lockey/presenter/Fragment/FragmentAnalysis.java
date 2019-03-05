@@ -14,11 +14,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.deadlinestudio.lockey.R;
+import com.deadlinestudio.lockey.control.NetworkTask;
+import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterGraph;
+import com.deadlinestudio.lockey.presenter.Item.ItemAnalysis;
+
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class FragmentAnalysis extends Fragment{
-    private TextView idText;
+    private TextView idText, totalText;
     private Toolbar mToolbar;
     private ViewPager viewPager;
     private TabLayout graphTabLayout;
@@ -30,10 +36,13 @@ public class FragmentAnalysis extends Fragment{
         ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_analysis, container,false);
         mainActivity = (MainActivity) this.getActivity();
         idText = rootView.findViewById(R.id.profileName);
-        String nick = mainActivity.getNickname();
+        String nick = User.getInstance().getNickname();
         idText.setText((nick.equals("")) ?"비회원":nick);
         // set up Toolbars
         mToolbar  = rootView.findViewById(R.id.analysisToolbar);
+
+        totalText = rootView.findViewById(R.id.userTotalTimeText);
+        setTotalText();
 
         // graph tab fragments
         graphTabLayout = (TabLayout)rootView.findViewById(R.id.analysisTabLayout);
@@ -75,5 +84,17 @@ public class FragmentAnalysis extends Fragment{
         });
 
         return rootView;
+    }
+
+    private void setTotalText() {
+        try {
+            NetworkTask asyncNetwork = new NetworkTask(mainActivity.getBaseContext(), "/get-time", null);
+            asyncNetwork.execute().get(1000, TimeUnit.MILLISECONDS);
+            HashMap<String, Long> analysisData = asyncNetwork.getAnalysisData();
+            if(analysisData != null)
+                totalText.setText(Long.toString(analysisData.get("total") / 3600) + " 시간");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

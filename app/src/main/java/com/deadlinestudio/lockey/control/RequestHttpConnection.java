@@ -61,10 +61,7 @@ public class RequestHttpConnection {
      * @param id
      * @return User Object received from server
      */
-    public User getUser(String url, String id) throws Exception {
-        InputStream is = null;
-        String result = "";
-        User user = new User();
+    public void getUser(String url, String id) throws Exception {
         try {
             HttpURLConnection httpCon = connectHTTP(url);
             String json = "";
@@ -87,10 +84,8 @@ public class RequestHttpConnection {
             try {
                 // convert inputstream to string
                 if(is != null) {
-                    user = readJson.readJsonUser(is);
-                    Log.e("isUser in requestHTTP", user.getisUser() ? "yes" : "no");
-                } else {
-                    user = null;
+                    readJson.readJsonUser(is);
+                    Log.e("isUser in requestHTTP", User.getInstance().getisUser() ? "yes" : "no");
                 }
             }
             catch (Exception e) {
@@ -107,7 +102,6 @@ public class RequestHttpConnection {
         catch (Exception e) {
             throw e;
         }
-        return user;
     }
 
     /**
@@ -170,13 +164,9 @@ public class RequestHttpConnection {
      * @brief method to update the user data to server
      * @param url
      * @param user
-     * @param column
-     * @param new_data
      * @return 'complete' if successful, 'fail' if not
      */
-    public String updateUser(String url, String id, String column, String new_data) throws Exception {
-        InputStream is = null;
-        String result = "";
+    public void updateUser(String url, User user) throws Exception {
         try {
             HttpURLConnection httpCon = connectHTTP(url);
 
@@ -184,9 +174,9 @@ public class RequestHttpConnection {
 
             // build jsonObject
             JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("id", id);
-            jsonObject.accumulate("column", column);
-            jsonObject.accumulate("new_data", new_data);
+            jsonObject.accumulate("id", user.getId());
+            jsonObject.accumulate("nickname", user.getNickname());
+            jsonObject.accumulate("job", user.getJob());
 
             // convert JSONObject to JSON to String
             json = jsonObject.toString();
@@ -197,14 +187,44 @@ public class RequestHttpConnection {
             os.flush();
             os.close();
 
+            httpCon.disconnect();
+        }
+        catch (IOException e) {
+            throw e;
+        }
+        catch (Exception e) {
+            throw e;
+        }
+    }
+
+    /**
+     * @brief method to reset data
+     * @param url
+     * @param id
+     * @return 'complete' if successful, 'fail' if not
+     */
+    public void resetTime(String url, String id) throws Exception {
+        try {
+            HttpURLConnection httpCon = connectHTTP(url);
+
+            String json = "";
+
+            // build jsonObject
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate("id", id);
+
+            // convert JSONObject to JSON to String
+            json = jsonObject.toString();
+
+            OutputStream os = httpCon.getOutputStream();
+            os.write(json.getBytes("UTF-8"));
+            os.flush();
+            os.close();
+
             is = httpCon.getInputStream();
             try {
-                // convert inputstream to string
                 if(is != null)
-                    result = convertInputStreamToString(is);
-                else
-                    result = "fail";
-
+                    convertInputStreamToString(is);
             }
             catch (Exception e) {
                 throw e;
@@ -220,7 +240,6 @@ public class RequestHttpConnection {
         catch (Exception e) {
             throw e;
         }
-        return result;
     }
 
     /**

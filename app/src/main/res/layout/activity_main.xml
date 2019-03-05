@@ -16,7 +16,7 @@
         android:background="@color/colorWhite"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/nav_mainbottom" />
+        app:menu="@menu/nav_mainbottom"/>
 
     <com.deadlinestudio.lockey.presenter.Fragment.NoSwipePager
         android:id="@+id/pager"

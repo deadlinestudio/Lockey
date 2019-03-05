@@ -325,7 +325,7 @@ public class FragmentTimer extends Fragment{
         Button cancelSaveBtn = dialog.findViewById(R.id.cancelSaveBtn);
         Button saveBtn = dialog.findViewById(R.id.saveBtn);
         final EditText ed = dialog.findViewById(R.id.categoryText);
-
+        ed.setSelection(ed.getText().length());
         TextView ctText = dialog.findViewById(R.id.completeTimeText);
         ctText.setText(time_data.getAmount());
 
@@ -336,9 +336,7 @@ public class FragmentTimer extends Fragment{
                     time_data.setCategory(String.valueOf(ed.getText()));
                     dialog.dismiss();
                     if(mainActivity.getSns().equals("4") == false) {
-                        String user_id = mainActivity.getId();
-                        User user = new User(user_id, null, 0, null);
-                        NetworkTask networkTask = new NetworkTask(mainActivity.getBaseContext(), "/register-time", user, time_data);
+                        NetworkTask networkTask = new NetworkTask(mainActivity.getBaseContext(), "/register-time", time_data);
                         networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                         String toastMsg = time_data.getCategory() + " " + time_data.getAmount() + " 저장됐습니다";
                         Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG).show();

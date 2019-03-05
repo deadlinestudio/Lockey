@@ -44,10 +44,17 @@ public class SignupActivity extends AppCompatActivity {
 
         lfc = new LogfileController();
         nicknameText = findViewById(R.id.nicknameeditText);
+        nicknameText.setSelection(nicknameText.getText().length());
+
         ageText = findViewById(R.id.ageeditText);
+        ageText.setSelection(ageText.getText().length());
+
         jobSpinner = findViewById(R.id.jobSpinner);
         signupBtn = findViewById(R.id.signupBtn);
+
         jobText = findViewById(R.id.jobText);
+        jobText.setSelection(jobText.getText().length());
+
         jobText.setVisibility(View.GONE);
         cont = this.getApplicationContext();
 
@@ -103,14 +110,15 @@ public class SignupActivity extends AppCompatActivity {
 
                         tokens.nextToken();
                         String id = tokens.nextToken();
-                        User user = new User(id, nick, age, job);
-                        NetworkTask networkTask = new NetworkTask(getBaseContext(), "/register-user", user, null);
+                        User user = User.getInstance();
+                        user.setData(id, nick, age, job);
+                        NetworkTask networkTask = new NetworkTask(getBaseContext(), "/register-user", null);
                         networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
                         Intent intent = new Intent(getBaseContext(), LoadActivity.class);
                         startActivity(intent);
                         finish();
                     }
-                } catch(Exception e ) {
+                } catch(Exception e) {
                     e.printStackTrace();
                 }
             }

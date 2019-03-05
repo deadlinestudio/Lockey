@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -43,7 +45,8 @@ public class FragmentApplock extends Fragment  {
     Context cont;
     final static String sfilename = "applock.txt";
 
-    private Button startBtn, selectAllBtn, selectNoneBtn;
+    private Button startBtn;
+    private LinearLayout selectAllBtn, selectNoneBtn;
     private Toolbar mToolbar;
     private RecyclerView mostAppListView;
     private ListView listView;
@@ -162,7 +165,7 @@ public class FragmentApplock extends Fragment  {
         });
 
         // select all apps
-        selectAllBtn.setOnClickListener(new Button.OnClickListener() {
+        selectAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 for (ItemApplock ia : applocks) {
@@ -172,7 +175,7 @@ public class FragmentApplock extends Fragment  {
             }
         });
         // select all apps
-        selectNoneBtn.setOnClickListener(new Button.OnClickListener() {
+        selectNoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 for (ItemApplock ia : applocks) {

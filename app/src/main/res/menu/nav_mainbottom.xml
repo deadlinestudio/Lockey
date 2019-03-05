@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/navigation_applist"
-        android:icon="@drawable/tab_admin"
+        android:icon="@drawable/tab_applist"
         android:title="@string/tab_applist" />
 
     <item

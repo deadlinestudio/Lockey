@@ -6,33 +6,33 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
     android:layout_marginTop="10dp"
-    android:layout_marginLeft="24dp"
-    android:layout_marginRight="24dp">
+    >
     <ImageView
         android:id = "@+id/appLockIcon"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_alignParentLeft="true"/>
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:id="@+id/appLockText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@id/appLockIcon"
-        android:layout_toLeftOf="@+id/appLockSwitch"
+        android:layout_toEndOf="@id/appLockIcon"
+        android:layout_toStartOf="@+id/appLockSwitch"
+        android:layout_marginStart="18dp"
+        android:layout_centerVertical="true"
         android:text="hello"
         android:textColor="#000"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
     <Switch
         android:id="@+id/appLockSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:switchMinWidth="36dp"
         android:theme="@style/SwitchTheme"
-        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
         />
 
 </RelativeLayout>

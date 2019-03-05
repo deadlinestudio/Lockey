@@ -21,8 +21,7 @@ public class OpenSourceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opensource);
 
-
-        mToolbar  = findViewById(R.id.appListToolbar);
+        mToolbar  = findViewById(R.id.OpenSourceToolbar);
         mToolbar.setTitle("오픈 소스 라이센스");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

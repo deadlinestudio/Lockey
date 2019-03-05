@@ -23,6 +23,7 @@ import com.deadlinestudio.lockey.presenter.Activity.LoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Activity.NaverLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.OpenSourceActivity;
+import com.deadlinestudio.lockey.presenter.Activity.VerCheckActivity;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import com.deadlinestudio.lockey.presenter.Fragment.FragmentSetting;
 import com.deadlinestudio.lockey.presenter.Item.ItemSetting;
@@ -73,21 +74,16 @@ public class AdapterSetting extends BaseAdapter{
             public void onClick(View view) {
                 Intent intent = null;
                 switch (mode){
-                    case 0: // 공지 사항
+                    case 0: // 도움말
                         break;
-                    case 1: // 도움말
+                    case 1: // 데이터 초기화
                         break;
-                    case 2: // 데이터 초기화
-
-                        break;
-                    case 3: // 버전 확인
-                        break;
-                    case 4: //오픈소스 라이센스
-                        intent = new Intent(mainActivity, OpenSourceActivity.class);
+                    case 2: // 버전 확인
+                        intent = new Intent(mainActivity, VerCheckActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         mainActivity.startActivity(intent);
                         break;
-                    case 5: //로그 아웃
+                    case 3:  //로그 아웃
                         Log.e("deb/logout", "in");
                         lfc.WriteLogFile(context,filename,"",2);
                         lfc.WriteLogFile(context,filename,"nofile",2);
@@ -113,48 +109,4 @@ public class AdapterSetting extends BaseAdapter{
         return v;
     }
 
-    /**
-     * @brief dialog message with edit text for changing the nickname
-
-    public void showNoticeDialog() {
-        // Create an instance of the dialog fragment and show it
-        final AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
-        // Get the layout inflater
-        LayoutInflater inflater = this.mainActivity.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.dialog_nickname, null));
-
-        final AlertDialog dialog = builder.create();
-        dialog.show();
-        Button saveBtn = dialog.findViewById(R.id.saveChangeBtn);
-        final EditText ed = dialog.findViewById(R.id.newNicknameText);
-
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    dialog.dismiss();
-                    if(mainActivity.getSns().equals("4") == false) {
-                        String user_id = mainActivity.getId();
-                        User user = new User(user_id, null, 0, null);
-                        String new_nick = ed.getText().toString();
-                        NetworkTask networkTask = new NetworkTask(mainActivity.getBaseContext(), "/update-user", user, null);
-                        networkTask.prepareUpdate("nickname", new_nick);
-                        networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
-                        String toastMsg = "닉네임이 변경됐습니다";
-                        TextView profileName = mainActivity.findViewById(R.id.profileName);
-                        FragmentSetting.setProfileName(new_nick);
-                        profileName.setText(new_nick);
-                        Toast.makeText(context, toastMsg, Toast.LENGTH_LONG).show();
-                    } else {
-                        String toastMsg = "비회원은 저장되지 않습니다";
-                        Toast.makeText(context, toastMsg, Toast.LENGTH_LONG).show();
-                    }
-                } catch(Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-    }
-     **/
 }

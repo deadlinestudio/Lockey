@@ -58,11 +58,11 @@
                     android:text="@string/profileCheck" />
             </LinearLayout>
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                app:srcCompat="@drawable/agumon" />
+                app:srcCompat="@drawable/more_btn" />
         </RelativeLayout>
         <ListView
             android:id="@+id/settingList"
