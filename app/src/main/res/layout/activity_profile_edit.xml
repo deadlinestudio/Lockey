@@ -122,10 +122,23 @@
             android:text="@string/job"
             android:textColor="@color/colorBlack_light"
             android:textSize="15sp" />
+        <Spinner
+            android:id="@+id/editJobSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:ems="8"
+            android:entries="@array/job_list"
+            android:overlapAnchor="false"
+            android:scrollbarThumbVertical="@drawable/scrollbar_style"
+            android:spinnerMode="dropdown"
+            android:verticalScrollbarPosition="right" />
         <EditText
             android:id="@+id/proEditJobText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:inputType="text"
             android:background="@color/colorWhite"
