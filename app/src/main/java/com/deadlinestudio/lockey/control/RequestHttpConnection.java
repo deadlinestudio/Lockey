@@ -221,7 +221,18 @@ public class RequestHttpConnection {
             os.flush();
             os.close();
 
-            httpCon.disconnect();
+            is = httpCon.getInputStream();
+            try {
+                if(is != null)
+                    convertInputStreamToString(is);
+            }
+            catch (Exception e) {
+                throw e;
+            }
+            finally {
+                is.close();
+                httpCon.disconnect();
+            }
         }
         catch (IOException e) {
             throw e;
