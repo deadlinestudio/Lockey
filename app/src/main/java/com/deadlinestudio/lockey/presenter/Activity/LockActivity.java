@@ -3,6 +3,7 @@ package com.deadlinestudio.lockey.presenter.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -10,11 +11,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.deadlinestudio.lockey.R;
+import com.deadlinestudio.lockey.presenter.Controller.AdmobAdController;
 
 public class LockActivity extends AppCompatActivity {
+    AdmobAdController aac;
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        aac = new AdmobAdController(this);
+
         setContentView(R.layout.activity_lock);
         ImageView lockBaseImg = findViewById(R.id.lockBaseImg);
         ImageView lockRingImg = findViewById(R.id.lockRingImg);
@@ -31,5 +36,11 @@ public class LockActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        aac.runVideoAd();
     }
 }

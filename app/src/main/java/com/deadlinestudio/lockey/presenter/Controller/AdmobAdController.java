@@ -38,13 +38,14 @@ public class AdmobAdController implements RewardedVideoAdListener{
             mRewardedVideoAd.show();
         }else{
             Log.e("동영상 광고가","로드 안댐요");
+            loadRewardedVideoAd();
         }
     }
 
     @Override
     public void onRewardedVideoAdLoaded() {
         Log.e("보상형"," 광고 로드댐");
-        this.load = true;
+        runVideoAd();
     }
 
     @Override
@@ -59,7 +60,7 @@ public class AdmobAdController implements RewardedVideoAdListener{
 
     @Override
     public void onRewardedVideoAdClosed() {
-        loadRewardedVideoAd();
+        Log.e("보상형"," 광고 껐다");
     }
 
     @Override
