@@ -55,7 +55,7 @@ public class FragmentSetting extends Fragment{
         adapter.addItem(new ItemSetting("도움말"));
         adapter.addItem(new ItemSetting("데이터 초기화"));
         adapter.addItem(new ItemSetting("버전 확인"));
-        adapter.addItem(new ItemSetting("오픈소스 라이센스"));
+        //adapter.addItem(new ItemSetting("오픈소스 라이센스"));
         adapter.addItem(new ItemSetting("로그아웃"));
 
         listView.setAdapter(adapter);
