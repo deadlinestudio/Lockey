@@ -86,14 +86,14 @@ public class ProfileEditActivity extends AppCompatActivity {
                     if(job.equals("기타")) {
                         job = jobText.getText().toString();
                     }
-                    if (nick.equals("") ||
-                            job.equals("")) {
+                    if (nick.equals("")) {
                         Toast.makeText(getBaseContext(), "빈칸 없이 입력해주세요.", Toast.LENGTH_LONG).show();
                     } else {
                         User user = User.getInstance();
                         user.setData(user.getId(), nick, user.getAge(), job);
                         NetworkTask networkTask = new NetworkTask(getBaseContext(), "/update-user", null);
                         networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
+
                         LogfileController lfc = new LogfileController();
                         String contents =
                                 MainActivity.getSns() +

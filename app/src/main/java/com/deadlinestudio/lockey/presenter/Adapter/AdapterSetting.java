@@ -86,10 +86,7 @@ public class AdapterSetting extends BaseAdapter{
                         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         mainActivity.startActivity(intent);
                         break;
-                    case 4: //오픈소스 라이센스
-
-                        break;
-                    case 5: //로그 아웃
+                    case 4: //로그 아웃
                         Log.e("deb/logout", "in");
                         lfc.WriteLogFile(context,filename,"",2);
                         lfc.WriteLogFile(context,filename,"nofile",2);
