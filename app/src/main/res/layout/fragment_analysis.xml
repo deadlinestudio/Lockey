@@ -88,6 +88,7 @@
                         android:textColor="@color/colorPrimary_light"
                         android:textSize="20sp" />
 
+                    <!--
                     <TextView
                         android:id="@+id/timeRankText"
                         android:layout_width="match_parent"
@@ -97,6 +98,7 @@
                         android:text="상위 0.0%"
                         android:textColor="#000"
                         android:textSize="14sp" />
+                    -->
                 </LinearLayout>
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
