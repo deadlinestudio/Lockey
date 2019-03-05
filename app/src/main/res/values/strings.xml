@@ -52,6 +52,7 @@
 
     <!--SignUp Activity-->
     <string name="nickname_example">닉네임을 입력해주세요</string>
+    <string name="age_example">나이를 입력해주세요</string>
     <string name="job_example">직업을 입력해주세요</string>
     <string name="signup_btn">가입하기</string>
     <string-array name="job_list">

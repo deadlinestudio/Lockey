@@ -31,9 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private String sns = "";
     private static String id = "";
     private String nickname = "";
-    private int age = 0;
+    private static int age = 0;
     private String job = "";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setSns(String sns) { this.sns = sns; }
 
-    public int getAge() { return age; }
+    public static int getAge() { return age; }
 
     public void setAge(int age) { this.age = age; }
 
