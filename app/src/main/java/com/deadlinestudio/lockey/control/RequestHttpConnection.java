@@ -180,20 +180,30 @@ public class RequestHttpConnection {
 
             // convert JSONObject to JSON to String
             json = jsonObject.toString();
-            Log.e("post_data", json);
+            Log.e("update-user", json);
 
             OutputStream os = httpCon.getOutputStream();
             os.write(json.getBytes("UTF-8"));
             os.flush();
             os.close();
 
-            httpCon.disconnect();
+            is = httpCon.getInputStream();
+            try {
+                if(is != null)
+                    convertInputStreamToString(is);
+            }
+            catch (Exception e) {
+                throw e;
+            }
+            finally {
+                httpCon.disconnect();
+            }
         }
         catch (IOException e) {
-            throw e;
+            Log.e("update-user", "IOEcxeption");
         }
         catch (Exception e) {
-            throw e;
+            Log.e("update-user", e.getMessage());
         }
     }
 
