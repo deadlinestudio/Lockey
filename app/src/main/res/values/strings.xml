@@ -56,6 +56,7 @@
     <string name="opensource">오픈소스 라이센스 ></string>
 
     <!--SignUp Activity-->
+    <string name="signup">회원가입</string>
     <string name="nickname_example">닉네임을 입력해주세요</string>
     <string name="job_example">직업을 입력해주세요</string>
     <string name="signup_btn">가입하기</string>

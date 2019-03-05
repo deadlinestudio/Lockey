@@ -27,7 +27,9 @@ public class ProfileEditActivity extends AppCompatActivity {
         serviceOut = findViewById(R.id.serviceOutLink);
         idText = findViewById(R.id.proEditIdText);
         nickText = findViewById(R.id.proEditNickText);
+        nickText.setSelection(nickText.getText().length());
         jobText = findViewById(R.id.proEditJobText);
+        jobText.setSelection(jobText.getText().length());
 
 
         backBtn.setOnClickListener(new View.OnClickListener(){

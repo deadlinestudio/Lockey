@@ -51,7 +51,6 @@ public class FragmentSetting extends Fragment{
         ListView listView = (ListView) rootView.findViewById(R.id.settingList);
         AdapterSetting adapter = new AdapterSetting(mainActivity,getActivity().getApplicationContext());
 
-        adapter.addItem(new ItemSetting("공지 사항"));
         adapter.addItem(new ItemSetting("도움말"));
         adapter.addItem(new ItemSetting("데이터 초기화"));
         adapter.addItem(new ItemSetting("버전 확인"));

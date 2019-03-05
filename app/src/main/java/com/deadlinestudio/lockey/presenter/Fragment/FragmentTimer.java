@@ -318,7 +318,7 @@ public class FragmentTimer extends Fragment{
         Button cancelSaveBtn = dialog.findViewById(R.id.cancelSaveBtn);
         Button saveBtn = dialog.findViewById(R.id.saveBtn);
         final EditText ed = dialog.findViewById(R.id.categoryText);
-
+        ed.setSelection(ed.getText().length());
         TextView ctText = dialog.findViewById(R.id.completeTimeText);
         ctText.setText(time_data.getAmount());
 
