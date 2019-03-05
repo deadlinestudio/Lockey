@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class AppLockService extends Service {
-
     LogfileController lfc;
     AppLockController alc;
     checkThread th;

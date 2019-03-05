@@ -28,23 +28,20 @@ import com.deadlinestudio.lockey.presenter.Adapter.AdapterApplock;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterMostApps;
 import com.deadlinestudio.lockey.presenter.Controller.AppLockController;
 import com.deadlinestudio.lockey.presenter.Controller.AppUsageController;
+import com.deadlinestudio.lockey.presenter.Controller.CaulyAdController;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import com.deadlinestudio.lockey.presenter.Item.ItemApplock;
 import com.deadlinestudio.lockey.presenter.Item.ItemMostApps;
 import com.deadlinestudio.lockey.presenter.Service.AppLockService;
-import com.fsn.cauly.CaulyAdInfo;
-import com.fsn.cauly.CaulyAdInfoBuilder;
-import com.fsn.cauly.CaulyAdView;
-import com.fsn.cauly.CaulyInterstitialAd;
-import com.fsn.cauly.CaulyInterstitialAdListener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class FragmentApplock extends Fragment implements CaulyInterstitialAdListener {
+public class FragmentApplock extends Fragment  {
     AppLockController alc;
     LogfileController lfc;
+    CaulyAdController cac;
     Context cont;
     final static String sfilename = "applock.txt";
 
@@ -57,14 +54,6 @@ public class FragmentApplock extends Fragment implements CaulyInterstitialAdList
     private ArrayList<ItemMostApps> mostApps;
     private List<Pair<ItemApplock, Long>> appRank;
     public MainActivity mainActivity;
-
-
-    // 광고 요청을 위한 App Code
-    private static final String APP_CODE = "aiTN1a2v ";
-
-    private CaulyAdView javaAdView;
-    private CaulyInterstitialAd interstitialAd;
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -105,6 +94,8 @@ public class FragmentApplock extends Fragment implements CaulyInterstitialAdList
 
         alc = new AppLockController();
         lfc = new LogfileController();
+        cac = new CaulyAdController(mainActivity);
+        cac.makeInterstitialAd();
         cont = this.getContext();
 
         // load applist from main activity
@@ -146,15 +137,6 @@ public class FragmentApplock extends Fragment implements CaulyInterstitialAdList
         listView.setAdapter(adapterApplock);
         mostAppListView.setAdapter(adapterMostApps);
 
-        // CaulyAdInfo 생성
-        // 배너 광고와 동일하게 광고 요청을 설정할 수 있다.
-        CaulyAdInfo interstitialAdInfo = new CaulyAdInfoBuilder(APP_CODE).build();
-
-        // 전면 광고 생성
-        interstitialAd = new CaulyInterstitialAd();
-        interstitialAd.setAdInfo(interstitialAdInfo);
-        interstitialAd.setInterstialAdListener(this);
-
         // start service by button
         startBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -178,7 +160,7 @@ public class FragmentApplock extends Fragment implements CaulyInterstitialAdList
                     Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT).show();
                 }
 
-                interstitialAd.requestInterstitialAd(mainActivity);
+                cac.runInterstitialAd();
             }
         });
 
@@ -222,40 +204,5 @@ public class FragmentApplock extends Fragment implements CaulyInterstitialAdList
             }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    // CaulyInterstitialAdListener
-    //	전면 광고의 경우, 광고 수신 후 자동으로 노출되지 않으므로,
-    //	반드시 onReceiveInterstitialAd 메소드에서 노출 처리해 주어야 한다.
-    @Override
-    public void onReceiveInterstitialAd(CaulyInterstitialAd caulyInterstitialAd, boolean b) {
-        // 광고 수신 성공한 경우 호출됨.
-        // 수신된 광고가 무료 광고인 경우 isChargeableAd 값이 false 임.
-        if (b == false) {
-            Log.d("CaulyExample", "free interstitial AD received.");
-        }
-        else {
-            Log.d("CaulyExample", "normal interstitial AD received.");
-        }
-
-        // 광고 노출
-        caulyInterstitialAd.show();
-    }
-
-    @Override
-    public void onFailedToReceiveInterstitialAd(CaulyInterstitialAd caulyInterstitialAd, int i, String s) {
-        // 전면 광고 수신 실패할 경우 호출됨.
-        Log.d("CaulyExample", "failed to receive interstitial AD.");
-    }
-
-    @Override
-    public void onClosedInterstitialAd(CaulyInterstitialAd caulyInterstitialAd) {
-        // 전면 광고가 닫힌 경우 호출됨.
-        Log.d("CaulyExample", "interstitial AD closed.");
-    }
-
-    @Override
-    public void onLeaveInterstitialAd(CaulyInterstitialAd caulyInterstitialAd) {
-        interstitialAd.cancel();
     }
 }

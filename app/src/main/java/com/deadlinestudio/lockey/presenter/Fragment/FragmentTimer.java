@@ -31,6 +31,7 @@ import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.model.Data;
 import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
+import com.deadlinestudio.lockey.presenter.Controller.CaulyAdController;
 import com.deadlinestudio.lockey.presenter.Item.BasicTimer;
 import com.deadlinestudio.lockey.presenter.Item.ItemApplock;
 import com.deadlinestudio.lockey.presenter.Service.TimerService;
@@ -54,6 +55,7 @@ public class FragmentTimer extends Fragment{
     private boolean receiverRegied;
     private boolean seekbarLimit = false;
     private boolean dialogClosed = true;
+    CaulyAdController cac;
 
     //private TimerService timerService;
     //private Intent tService;
@@ -99,6 +101,11 @@ public class FragmentTimer extends Fragment{
         receiverRegied = true;
         final Intent sendIntent = new Intent("TIMER_BROAD_CAST_REQ");
         getActivity().sendBroadcast(sendIntent);
+
+
+        /* Cauly AD */
+        cac = new CaulyAdController(mainActivity);
+        cac.makeInterstitialAd();
 
         /*
         //send timer object to
@@ -337,6 +344,7 @@ public class FragmentTimer extends Fragment{
                         String toastMsg = "비회원은 저장되지 않습니다";
                         Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG).show();
                     }
+                    cac.runInterstitialAd();
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
