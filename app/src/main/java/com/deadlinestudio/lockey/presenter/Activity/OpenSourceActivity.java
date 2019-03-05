@@ -179,7 +179,7 @@ public class OpenSourceActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        super.onBackPressed();
         Intent mintent = new Intent(getApplicationContext(),MainActivity.class);
         mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(mintent);
