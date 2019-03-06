@@ -103,6 +103,8 @@ public class ItemViewAlysPieChart extends LinearLayout {
             while (keys.hasNext()) {
                 String key = keys.next();
                 long value = sorted.get(key);
+                if(value <= 0)
+                    continue;
                 if (cnt-- > 0 && (total/value) < 20)
                     yVals.add(new PieEntry((float) value, key));
                 else

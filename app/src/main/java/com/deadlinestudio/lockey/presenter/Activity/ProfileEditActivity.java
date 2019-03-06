@@ -46,6 +46,8 @@ public class ProfileEditActivity extends AppCompatActivity {
       
         nickText = findViewById(R.id.proEditNickText);
         nickText.setSelection(nickText.getText().length());
+        nickText.setText(User.getInstance().getNickname());
+
         jobText = findViewById(R.id.proEditJobText);
         jobText.setSelection(jobText.getText().length());
 
