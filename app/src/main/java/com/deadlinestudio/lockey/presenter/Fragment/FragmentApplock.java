@@ -48,8 +48,7 @@ public class FragmentApplock extends Fragment  {
     private Button startBtn;
     private LinearLayout selectAllBtn, selectNoneBtn;
     private Toolbar mToolbar;
-    private RecyclerView mostAppListView;
-    private ListView listView;
+    private RecyclerView mostAppListView,listView;
     private ArrayList<ItemApplock> applocks;
     private ArrayList<ItemMostApps> mostApps;
     private List<Pair<ItemApplock, Long>> appRank;

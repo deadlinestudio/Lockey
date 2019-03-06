@@ -1,20 +1,15 @@
 package com.deadlinestudio.lockey.presenter.Adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.presenter.Item.ItemMostApps;
-import com.deadlinestudio.lockey.presenter.Item.MostAppsViewHolder;
+import com.deadlinestudio.lockey.presenter.ViewHolder.MostAppsViewHolder;
 
 import java.util.ArrayList;
 
