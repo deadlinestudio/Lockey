@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,7 @@ import com.deadlinestudio.lockey.presenter.Adapter.AdapterMostApps;
 import com.deadlinestudio.lockey.presenter.Controller.AppLockController;
 import com.deadlinestudio.lockey.presenter.Controller.AppUsageController;
 import com.deadlinestudio.lockey.presenter.Controller.CaulyAdController;
+import com.deadlinestudio.lockey.presenter.Controller.GrantController;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import com.deadlinestudio.lockey.presenter.Item.ItemApplock;
 import com.deadlinestudio.lockey.presenter.Item.ItemMostApps;
@@ -42,6 +44,7 @@ public class FragmentApplock extends Fragment  {
     AppLockController alc;
     LogfileController lfc;
     CaulyAdController cac;
+    GrantController gc;
     Context cont;
     final static String sfilename = "applock.txt";
 
@@ -59,7 +62,6 @@ public class FragmentApplock extends Fragment  {
         // View Set up
         final ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_applock, container,false);
 
-
         mainActivity = (MainActivity) this.getActivity();
         mToolbar  = rootView.findViewById(R.id.appListToolbar);
         mostAppListView = rootView.findViewById(R.id.mostAppList);
@@ -68,34 +70,24 @@ public class FragmentApplock extends Fragment  {
         selectAllBtn = rootView.findViewById(R.id.appSelectAllBtn);
         selectNoneBtn = rootView.findViewById(R.id.appSelectNoneBtn);
 
-
-        // GET_USAGE_STATS 권한 확인
-        boolean granted = false;
-        AppOpsManager appOps = (AppOpsManager) mainActivity.getSystemService(Context.APP_OPS_SERVICE);
-        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,android.os.Process.myUid(), mainActivity.getPackageName());
-
-        if (mode == AppOpsManager.MODE_DEFAULT) {
-            granted = (mainActivity.checkCallingOrSelfPermission(android.Manifest.permission.PACKAGE_USAGE_STATS) == PackageManager.PERMISSION_GRANTED);
-        } else {
-            granted = (mode == AppOpsManager.MODE_ALLOWED);
-        }
-
-        Log.d("isRooting granted = " , String.valueOf(granted));
-
-        if (granted == false)
-        {
-            // 권한이 없을 경우 권한 요구 페이지 이동
-            Intent sintent = new Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS);
-            sintent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            mainActivity.startActivity(sintent);
-        }
-
-
         alc = new AppLockController();
+        gc = new GrantController(mainActivity);
         lfc = new LogfileController();
         cac = new CaulyAdController(mainActivity);
         cac.makeInterstitialAd();
         cont = this.getContext();
+
+        // 사용자 접근 허용 권한 확인 및 설정
+        if(!gc.checkGrant()) {
+            String toastMsg = "Lockey를 선택 후 사용 추적 허용을 활성화 해주세요.";
+            final Toast toast = Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG);
+            new CountDownTimer(6000, 1000)
+            {
+                public void onTick(long millisUntilFinished) {toast.show();}
+                public void onFinish() {toast.show();}
+            }.start();
+            gc.settingGrant();
+        }
 
         // load applist from main activity
         applocks = alc.LoadAppList(this.getActivity());
@@ -140,26 +132,36 @@ public class FragmentApplock extends Fragment  {
         startBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                lfc.WriteLogFile(cont, sfilename, "", 2);
-                for (int i = 0; i < applocks.size(); i++) {
-                    if (applocks.get(i).getLockFlag()) {
-                        lfc.WriteLogFile(cont, sfilename, applocks.get(i).getAppPackage() + ",", 1);
+                if(gc.checkGrant()) {
+                    lfc.WriteLogFile(cont, sfilename, "", 2);
+                    for (int i = 0; i < applocks.size(); i++) {
+                        if (applocks.get(i).getLockFlag()) {
+                            lfc.WriteLogFile(cont, sfilename, applocks.get(i).getAppPackage() + ",", 1);
+                        }
                     }
+                    String line = lfc.ReadLogFile(cont, sfilename);
+                    if (line.equals("")) {
+                        Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
+                        getActivity().stopService(sintent); // 서비스 종료
+                        String toastMsg = "앱 잠금 서비스를 종료합니다.";
+                        Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
+                        getActivity().startService(sintent); // 서비스 시작
+                        String toastMsg = "앱 잠금 목록을 업데이트 했습니다.";
+                        Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    cac.runInterstitialAd();
+                }else{
+                    String toastMsg = "Lockey를 선택 후 사용 추적 허용을 활성화 해주세요.";
+                    final Toast toast = Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG);
+                    new CountDownTimer(6000, 1000)
+                    {
+                        public void onTick(long millisUntilFinished) {toast.show();}
+                        public void onFinish() {toast.show();}
+                    }.start();
+                    gc.settingGrant();
                 }
-                String line = lfc.ReadLogFile(cont, sfilename);
-                if(line.equals("")) {
-                    Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
-                    getActivity().stopService(sintent); // 서비스 종료
-                    String toastMsg = "앱 잠금 서비스를 종료합니다.";
-                    Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT).show();
-                }else {
-                    Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
-                    getActivity().startService(sintent); // 서비스 시작
-                    String toastMsg = "앱 잠금 목록을 업데이트 했습니다.";
-                    Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT).show();
-                }
-
-                cac.runInterstitialAd();
             }
         });
 
