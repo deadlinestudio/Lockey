@@ -114,7 +114,7 @@ public class ItemViewAlysBarChart extends LinearLayout {
         } else {
             for (int i = 0; i < xLabels.length; i++) {
                 Log.e("xLabel", xLabels[i]);
-                int value = analysisData.get(xLabels[i]).intValue() / 60;
+                int value = analysisData.get(xLabels[i]).intValue();
                 entries.add(new BarEntry(i, value));
                 avg += value / period;
             }

@@ -92,7 +92,7 @@ public class FragmentAnalysis extends Fragment{
             asyncNetwork.execute().get(1000, TimeUnit.MILLISECONDS);
             HashMap<String, Long> analysisData = asyncNetwork.getAnalysisData();
             if(analysisData != null)
-                totalText.setText(Long.toString(analysisData.get("total") / 3600) + " 시간");
+                totalText.setText(Long.toString(analysisData.get("total") / 60) + " 시간");
         } catch(Exception e) {
             e.printStackTrace();
         }

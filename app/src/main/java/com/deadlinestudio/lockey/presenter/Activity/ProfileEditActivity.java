@@ -29,10 +29,15 @@ public class ProfileEditActivity extends AppCompatActivity {
     private TextView idText, serviceOut, saveBtn;
     private EditText nickText, jobText;
     private Spinner jobSpinner;
+    private String patternNum, patternText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
+
+        patternText = "^[a-zA-Z가-힣0-9]+$";
+        patternNum = "^[0-9]+$";
 
         backBtn = findViewById(R.id.profileEditCancel);
         saveBtn = findViewById(R.id.profileEditSaveBtn);
@@ -41,6 +46,8 @@ public class ProfileEditActivity extends AppCompatActivity {
       
         nickText = findViewById(R.id.proEditNickText);
         nickText.setSelection(nickText.getText().length());
+        nickText.setText(User.getInstance().getNickname());
+
         jobText = findViewById(R.id.proEditJobText);
         jobText.setSelection(jobText.getText().length());
 
@@ -88,8 +95,10 @@ public class ProfileEditActivity extends AppCompatActivity {
                     if(job.equals("기타")) {
                         job = jobText.getText().toString();
                     }
-                    if (nick.equals("")) {
+                    if (nick.equals("") || job.equals("")) {
                         Toast.makeText(getBaseContext(), "빈칸 없이 입력해주세요.", Toast.LENGTH_LONG).show();
+                    }  else if(!nick.matches(patternText) || !job.matches(patternText)) {
+                        Toast.makeText(getBaseContext(), "특수문자는 사용하실 수 없습니다.", Toast.LENGTH_LONG).show();
                     } else {
                         User user = User.getInstance();
                         user.setData(user.getId(), nick, user.getAge(), job);

@@ -3,6 +3,7 @@ package com.deadlinestudio.lockey.presenter.Itemview;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toMap;
 
@@ -88,15 +90,25 @@ public class ItemViewAlysPieChart extends LinearLayout {
                             toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
                                     LinkedHashMap::new));
 
+            Iterator<String> it = sorted.keySet().iterator();
+            long total = 0;
+            while (it.hasNext()) {
+                String key = it.next();
+                total += sorted.get(key);
+            }
+
             Iterator<String> keys = sorted.keySet().iterator();
             int cnt = 4;
             long sum = 0;
             while (keys.hasNext()) {
                 String key = keys.next();
-                if (cnt-- > 0)
-                    yVals.add(new PieEntry((float) analysisData.get(key), key));
+                long value = sorted.get(key);
+                if(value <= 0)
+                    continue;
+                if (cnt-- > 0 && (total/value) < 20)
+                    yVals.add(new PieEntry((float) value, key));
                 else
-                    sum += analysisData.get(key);
+                    sum += value;
             }
 
             if (sum != 0)

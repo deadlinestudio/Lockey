@@ -76,7 +76,6 @@ public class AdapterAnalysis extends BaseAdapter{
         }else if(i==1){
             ItemViewAlysBarChart bar = new ItemViewAlysBarChart(context);
             bar.setTitleText(item.getTitle());
-            bar.setChartAvgTimes("20190101","20190201");
             bar.setBarChart(item.getAnalysisData(), item.getXLabels(), item.getPeriod());
             return bar;
         }
