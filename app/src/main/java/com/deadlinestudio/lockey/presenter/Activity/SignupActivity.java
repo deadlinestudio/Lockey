@@ -25,6 +25,7 @@ import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import java.lang.reflect.Field;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 public class SignupActivity extends AppCompatActivity {
     private Button signupBtn;
@@ -34,6 +35,8 @@ public class SignupActivity extends AppCompatActivity {
     private Context cont;
     private final String filename = "userlog.txt";
     private int sns;
+    private String patternText, patternNum;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,9 @@ public class SignupActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         sns = intent.getIntExtra("SNS", 0);
+
+        patternText = "^[a-zA-Z가-힣0-9]+$";
+        patternNum = "^[0-9]+$";
 
         lfc = new LogfileController();
         nicknameText = findViewById(R.id.nicknameeditText);
@@ -99,6 +105,10 @@ public class SignupActivity extends AppCompatActivity {
                             ageText.getText().equals("") ||
                             job.equals("")) {
                         Toast.makeText(cont, "빈칸 없이 입력해주세요.", Toast.LENGTH_LONG).show();
+                    } else if(!ageText.getText().toString().matches(patternNum)) {
+                        Toast.makeText(cont, "나이는 숫자로 입력해주세요.", Toast.LENGTH_LONG).show();
+                    } else if(!nick.matches(patternText) || !job.matches(patternText)) {
+                        Toast.makeText(cont, "특수문자는 사용하실 수 없습니다.", Toast.LENGTH_LONG).show();
                     } else {
                         String contents =
                                 "," + nick +
