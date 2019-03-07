@@ -3,6 +3,7 @@ package com.deadlinestudio.lockey.presenter.Fragment;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,6 +45,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 public class FragmentTimer extends Fragment{
     private TextView targetView, totalView;
     private Button startBtn, quaterBtn, halfBtn, tripleBtn, fullBtn;
@@ -56,6 +60,7 @@ public class FragmentTimer extends Fragment{
     private boolean seekbarLimit = false;
     private boolean dialogClosed = true;
     CaulyAdController cac;
+    private NotificationManager mNotificationManager;
 
     //private TimerService timerService;
     //private Intent tService;
@@ -106,6 +111,13 @@ public class FragmentTimer extends Fragment{
         /* Cauly AD */
         cac = new CaulyAdController(mainActivity);
         cac.makeInterstitialAd();
+
+        /* do not disturb mode NotificationManager */
+        mNotificationManager = (NotificationManager) mainActivity.getSystemService(NOTIFICATION_SERVICE);
+        if (!mNotificationManager.isNotificationPolicyAccessGranted()) {
+            Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+            startActivity(intent);
+        }
 
         /*
         //send timer object to
@@ -160,6 +172,7 @@ public class FragmentTimer extends Fragment{
                     seekBar.setEnabled(true);
                 }else{
                     /// timer start!
+                    mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
                     mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
                     startBtn.setBackgroundResource(R.drawable.lock_icon_color);
                     timerOn = true;
@@ -330,6 +343,7 @@ public class FragmentTimer extends Fragment{
                         String toastMsg = "비회원은 저장되지 않습니다";
                         Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG).show();
                     }
+                    mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);        // turn off DO NOT DISTURB MODE
                     cac.runInterstitialAd();
                 } catch(Exception e) {
                     e.printStackTrace();
