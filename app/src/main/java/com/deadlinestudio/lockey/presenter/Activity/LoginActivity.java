@@ -109,7 +109,6 @@ public class LoginActivity extends BaseActivity{
             public void onClick(View view) {
                 String content = "4,";
                 lfc.WriteLogFile(getApplicationContext(), filename, content, 2);
-                User.getInstance().setNickname("비회원");
                 Intent intent = new Intent(cont, LoadActivity.class);
                 intent.putExtra("SNS",4);
                 startActivity(intent);

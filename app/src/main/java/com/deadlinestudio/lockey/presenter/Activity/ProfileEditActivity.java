@@ -36,7 +36,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
 
-        patternText = "^[a-zA-Z가-힣0-9]+$";
+        patternText = "^[a-zA-Zㄱ-ㅎ가-힣0-9]+$";
         patternNum = "^[0-9]+$";
 
         backBtn = findViewById(R.id.profileEditCancel);
