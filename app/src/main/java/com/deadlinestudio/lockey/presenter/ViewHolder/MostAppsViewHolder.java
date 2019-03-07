@@ -1,4 +1,4 @@
-package com.deadlinestudio.lockey.presenter.Item;
+package com.deadlinestudio.lockey.presenter.ViewHolder;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
