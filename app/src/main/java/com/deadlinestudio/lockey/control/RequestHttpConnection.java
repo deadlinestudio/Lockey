@@ -306,7 +306,7 @@ public class RequestHttpConnection {
         catch (Exception e) {
             throw e;
         }
-        return recv_data;
+        return (recv_data.size() > 0) ? recv_data : null;
     }
 
     /**
