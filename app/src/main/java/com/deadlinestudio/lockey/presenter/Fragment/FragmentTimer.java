@@ -163,18 +163,11 @@ public class FragmentTimer extends Fragment{
                     mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
                     startBtn.setBackgroundResource(R.drawable.lock_icon_color);
                     timerOn = true;
-                    bt.timerStart();
                     seekBar.setEnabled(false);
 
-                    try {
-                        for (int i = 1; i <= 5; i++) {
-                            Toast.makeText(getContext(), i + "초 뒤 타이머가 시작됩니다.\n휴대폰을 뒤집어주세요.",
-                                    Toast.LENGTH_SHORT).show();
-                            Thread.sleep(1000);
-                        }
-                    } catch(InterruptedException e) {
-                        Log.e("Thread error", "InterruptedException");
-                    }
+                    Toast.makeText(getContext(), "타이머가 시작됩니다\n휴대폰을 뒤집어주세요",
+                            Toast.LENGTH_SHORT).show();
+                    bt.timerStart();
 
                     //timer text change
                     final Handler timerViewHandler = new Handler();
@@ -413,18 +406,6 @@ public class FragmentTimer extends Fragment{
 
                         startBtn.setBackgroundResource(R.drawable.lock_icon_grey);
                         bt.timerStop();
-
-                        // need delay to get broadcast msg
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                //achievement = (bt.getTotalTime()/bt.getTargetTime())*100;
-                                tempData.setTarget_time(String.valueOf(bt.makeToTimeFormat(targetTime)));
-                                tempData.setAmount(String.valueOf(bt.makeToTimeFormat(bt.getTotalTime())));
-                                Log.v("saved",String.valueOf(bt.makeToTimeFormat(bt.getTotalTime())));
-                                showNoticeDialog(tempData);
-                            }
-                        },500);
 
                         // need delay to get broadcast msg
                         new Handler().postDelayed(new Runnable() {
