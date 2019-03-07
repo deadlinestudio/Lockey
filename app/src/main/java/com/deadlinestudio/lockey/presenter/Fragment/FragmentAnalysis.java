@@ -37,7 +37,7 @@ public class FragmentAnalysis extends Fragment{
         mainActivity = (MainActivity) this.getActivity();
         idText = rootView.findViewById(R.id.profileName);
         String nick = User.getInstance().getNickname();
-        idText.setText((nick.equals("")) ?"비회원":nick);
+        idText.setText((nick.equals("")) ? "비회원":nick);
         // set up Toolbars
         mToolbar  = rootView.findViewById(R.id.analysisToolbar);
 

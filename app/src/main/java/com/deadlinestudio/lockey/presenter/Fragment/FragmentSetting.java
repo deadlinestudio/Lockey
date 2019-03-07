@@ -37,7 +37,7 @@ public class FragmentSetting extends Fragment{
         profileLayout = rootView.findViewById(R.id.profile);
         profileName = rootView.findViewById(R.id.profileName);
         String nick = User.getInstance().getNickname();
-        profileName.setText(!(nick.equals("")) ? nick : "비회원");
+        profileName.setText((!nick.equals("")) ? nick : "비회원");
 
         profileLayout.setOnClickListener(new View.OnClickListener(){
 

@@ -155,7 +155,6 @@ public class FragmentTimer extends Fragment{
 
                     // reset the timer values
                     setTargetTime(0);
-                    //bt.resetTimer();
                     seekBar.setProgress(0);
                     updateTextview();
                     seekBar.setEnabled(true);
@@ -339,6 +338,8 @@ public class FragmentTimer extends Fragment{
                     }
                 } catch(Exception e) {
                     e.printStackTrace();
+                }finally {
+                    bt.resetTimer();
                 }
             }
         });
