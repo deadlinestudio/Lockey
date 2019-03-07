@@ -120,7 +120,6 @@ public class FragmentTimer extends Fragment{
         mGgyroSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         mGyroLis = new GyroscopeListener(this);
         vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
-        mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
 
         /**
          * @brief timer btn listener, make the timer stop/start & load pop dialog
@@ -132,16 +131,10 @@ public class FragmentTimer extends Fragment{
             public void onClick(View view){
                 if(timerOn){
                     // timer stop!!
-                    mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
+                    mSensorManager.unregisterListener(mGyroLis);
                     startBtn.setBackgroundResource(R.drawable.lock_icon_grey);
                     timerOn = false;
                     bt.timerStop();
-                    /*
-                    //send broadcast msg
-                    getActivity().sendBroadcast(sendIntent);
-                    Intent timerService = new Intent(mainActivity,TimerService.class);
-                    mainActivity.stopService(timerService);
-*/
 
                     // need delay to get broadcast msg
                     new Handler().postDelayed(new Runnable() {
@@ -167,20 +160,21 @@ public class FragmentTimer extends Fragment{
                     seekBar.setEnabled(true);
                 }else{
                     /// timer start!
-                    mSensorManager.unregisterListener(mGyroLis);
+                    mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
                     startBtn.setBackgroundResource(R.drawable.lock_icon_color);
                     timerOn = true;
                     bt.timerStart();
                     seekBar.setEnabled(false);
 
-                    /*
-                    Intent timerService = new Intent(mainActivity,TimerService.class);
-                    timerService.putExtra("timer",bt);
-                    mainActivity.startService(timerService);
-                    */
-
-                    //timerService.setTimer(bt);
-                    //mainActivity.startService(tService);
+                    try {
+                        for (int i = 1; i <= 5; i++) {
+                            Toast.makeText(getContext(), i + "초 뒤 타이머가 시작됩니다.\n휴대폰을 뒤집어주세요.",
+                                    Toast.LENGTH_SHORT).show();
+                            Thread.sleep(1000);
+                        }
+                    } catch(InterruptedException e) {
+                        Log.e("Thread error", "InterruptedException");
+                    }
 
                     //timer text change
                     final Handler timerViewHandler = new Handler();
@@ -376,12 +370,12 @@ public class FragmentTimer extends Fragment{
         // for radian -> dgree
         private double RAD2DGR = 180 / Math.PI;
         private static final float NS2S = 1.0f/1000000000.0f;
-        private boolean TimerOn;
         private long millisecond = 300;
-        private boolean isFirst;
+        private boolean isFirst, isReversed;
         private FragmentTimer fragmentTimer;
 
         public GyroscopeListener(FragmentTimer _fragmentTimer) {
+            this.isFirst = true;
             this.fragmentTimer = _fragmentTimer;
         }
         @Override
@@ -404,34 +398,21 @@ public class FragmentTimer extends Fragment{
                 pitch = pitch + gyroY*dt;
                 if (Math.abs(pitch * RAD2DGR) > 130.0) {
                     //textX.setText("           [Pitch]: 뒤집힘");
-                    if (!TimerOn && !timerOn) {
+                    if (isFirst && timerOn) {
                         vibrator.vibrate(millisecond);
-                        TimerOn = true;
-                        isFirst = true;
-                        startBtn.setBackgroundResource(R.drawable.lock_icon_color);
-                        //bt.timerStart();
-                        seekBar.setEnabled(false);
-
-                        // timer service start
-                        Intent timerService = new Intent(mainActivity,TimerService.class);
-                        timerService.putExtra("timer",bt);
-                        mainActivity.startService(timerService);
-                        seekBar.setEnabled(false);
+                        isFirst = false;
+                        isReversed = true;
                     }
                 } else {
-                    if (isFirst && !timerOn) {
-                        TimerOn = false;
-                        isFirst = false;
+                    if (isReversed && timerOn) {
+                        vibrator.vibrate(millisecond);
+                        mSensorManager.unregisterListener(mGyroLis);
+                        isFirst = true;
+                        isReversed = false;
+                        timerOn = false;
+
                         startBtn.setBackgroundResource(R.drawable.lock_icon_grey);
-                        //bt.timerStop();
-
-                        //send broadcast msg
-                        Intent sendIntent = new Intent("TIMER_BROAD_CAST_REQ");
-                        getActivity().sendBroadcast(sendIntent);
-
-                        Intent timerService = new Intent(mainActivity,TimerService.class);
-                        mainActivity.stopService(timerService);
-
+                        bt.timerStop();
 
                         // need delay to get broadcast msg
                         new Handler().postDelayed(new Runnable() {
@@ -444,18 +425,22 @@ public class FragmentTimer extends Fragment{
                                 showNoticeDialog(tempData);
                             }
                         },500);
-                        /*
-                        tempData.setTarget_time(String.valueOf(bt.makeToTimeFormat(targetTime)));
-                        tempData.setAmount(String.valueOf(bt.makeToTimeFormat(bt.getTotalTime())));
-                        fragmentTimer.showNoticeDialog(tempData);
-*/
-                        Date currentTime = new Date();
-                        SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss");
-                        tempData.setDate(time.format(currentTime));
+
+                        // need delay to get broadcast msg
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                //achievement = (bt.getTotalTime()/bt.getTargetTime())*100;
+                                tempData.setTarget_time(String.valueOf(bt.makeToTimeFormat(targetTime)));
+                                tempData.setAmount(String.valueOf(bt.makeToTimeFormat(bt.getTotalTime())));
+                                Log.v("saved",String.valueOf(bt.makeToTimeFormat(bt.getTotalTime())));
+                                showNoticeDialog(tempData);
+                            }
+                        },500);
+
                         fragmentTimer.setTargetTime(0);
                         seekBar.setProgress(0);
                         fragmentTimer.updateTextview();
-                        bt.resetTimer();
                         seekBar.setEnabled(true);
                     }
                 }
