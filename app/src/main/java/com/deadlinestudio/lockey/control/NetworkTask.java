@@ -76,26 +76,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                     break;
             }
         } catch(Exception e) {
-            Handler mHandler = new Handler(Looper.getMainLooper()) {
-                @Override
-                public void handleMessage(Message message) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(cont);
-                    builder.setTitle("네트워크 오류");
-                    builder.setMessage("네트워크 연결이 원할하지 않습니다.");
-                    builder.setPositiveButton("확인",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                }
-                            });
-                    builder.show();
-                }
-            };
-            new Thread() {
-                public void run() {
-                    mHandler.sendMessage(null);
-                }
-            }.start();
             return "fail";
         }
         return "success";

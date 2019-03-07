@@ -45,7 +45,7 @@ public class SignupActivity extends AppCompatActivity {
         Intent intent = getIntent();
         sns = intent.getIntExtra("SNS", 0);
 
-        patternText = "^[a-zA-Z가-힣0-9]+$";
+        patternText = "^[a-zA-Zㄱ-ㅎ가-힣0-9]+$";
         patternNum = "^[0-9]+$";
 
         lfc = new LogfileController();

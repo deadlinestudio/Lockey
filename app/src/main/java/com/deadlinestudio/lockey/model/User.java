@@ -12,7 +12,13 @@ public class User {
     private String job;
     private boolean isUser;
 
-    private User() {}
+    private User() {
+        this.id = "";
+        this.nickname = "";
+        this.age = 0;
+        this.job = "";
+        this.isUser = false;
+    }
 
     /**
      * @biref Constructor
