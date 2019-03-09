@@ -135,6 +135,8 @@ public class AdapterSetting extends BaseAdapter{
                                         } else {
                                             intent = new Intent(mainActivity, LoginActivity.class);
                                         }
+                                        User user = User.getInstance();
+                                        user.resetData();
                                         mainActivity.startActivity(intent);
                                         mainActivity.finish();
                                     }
