@@ -29,7 +29,8 @@
             android:gravity="center"
             android:text="000000"
             android:textColor="@color/colorThird"
-            android:textSize="62sp"
+            android:textSize="58sp"
+            android:textStyle="bold"
             app:fontFamily="@font/my_font_family"
             android:includeFontPadding="false" />
 
@@ -41,7 +42,7 @@
             android:text="000000"
             android:textColor="@color/colorBlack_light"
             android:textSize="28sp"
-            app:fontFamily="@font/my_font_family"
+            app:fontFamily="@font/nanumgothic"
             android:includeFontPadding="false" />
 
     </LinearLayout>

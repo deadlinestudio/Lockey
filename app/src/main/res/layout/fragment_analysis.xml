@@ -89,7 +89,8 @@
                         android:gravity="center"
                         android:padding="2dp"
                         android:text="0 시간"
-                        android:textColor="@color/colorPrimary_light"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="20sp"
                         app:fontFamily="@font/my_font_family"
                         android:includeFontPadding="false"/>
