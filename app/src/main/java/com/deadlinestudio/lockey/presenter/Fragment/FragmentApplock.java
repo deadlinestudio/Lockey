@@ -103,6 +103,8 @@ public class FragmentApplock extends Fragment  {
                     }
                 }
             }
+            Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
+            getActivity().startService(sintent); // 서비스 시작
         }
 
         // get App Usage Time
