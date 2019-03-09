@@ -1,5 +1,9 @@
 package com.deadlinestudio.lockey.presenter.Activity;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,8 +25,11 @@ import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import java.lang.reflect.Field;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class ProfileEditActivity extends AppCompatActivity {
+    private Context cont;
+    private Activity activity;
     private Toolbar mToolbar;
     private ImageView backBtn;
 
@@ -34,6 +41,9 @@ public class ProfileEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
+
+        this.cont = getBaseContext();
+        this.activity = this;
 
         backBtn = findViewById(R.id.profileEditCancel);
         saveBtn = findViewById(R.id.profileEditSaveBtn);
@@ -121,7 +131,52 @@ public class ProfileEditActivity extends AppCompatActivity {
         serviceOut.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                if(MainActivity.getSns().equals("4") == true) {
+                    String toastMsg = "비회원은 이용할 수 없습니다.";
+                    Toast.makeText(cont, toastMsg, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(cont);
+                builder.setTitle("알림");
+                builder.setMessage("회원탈퇴 하실 경우 다시 되돌릴 수 없습니다. 그래도 계속하시겠습니까?");
+                builder.setPositiveButton("예",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                try {
+                                    NetworkTask networkTask = new NetworkTask(getBaseContext(), "/leave-user", null);
+                                    networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
+
+                                    LogfileController lfc = new LogfileController();
+                                    lfc.WriteLogFile(cont, LoginActivity.filename,"nofile",2);
+
+                                    Intent intent = null;
+                                    if(MainActivity.getSns().equals("1")) {
+                                        intent = new Intent(activity, GoogleLoginActivity.class);
+                                        intent.putExtra("InOut", 2);
+                                    }else if(MainActivity.getSns().equals("2")){
+                                        intent = new Intent(activity, NaverLoginActivity.class);
+                                        intent.putExtra("InOut", 2);
+                                    }else if(MainActivity.getSns().equals("3")){
+                                        intent = new Intent(activity, KakaoLoginActivity.class);
+                                        intent.putExtra("InOut", 2);
+                                    } else {
+                                        intent = new Intent(cont, LoginActivity.class);
+                                    }
+                                    activity.startActivity(intent);
+                                    activity.finish();
+                                } catch(Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.show();
             }
         });
     }

@@ -51,6 +51,7 @@ public class FragmentSetting extends Fragment{
                     Intent intent = new Intent(mainActivity, ProfileEditActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     mainActivity.startActivity(intent);
+                    mainActivity.finish();
                 }
             }
         });

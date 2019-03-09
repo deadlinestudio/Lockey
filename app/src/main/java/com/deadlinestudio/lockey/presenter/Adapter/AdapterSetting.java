@@ -2,6 +2,7 @@ package com.deadlinestudio.lockey.presenter.Adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -77,6 +78,33 @@ public class AdapterSetting extends BaseAdapter{
                     case 0: // 도움말
                         break;
                     case 1: // 데이터 초기화
+                        if(mainActivity.getSns().equals("4") == true) {
+                            String toastMsg = "비회원은 이용할 수 없습니다.";
+                            Toast.makeText(mainActivity.getBaseContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
+                        builder.setTitle("알림");
+                        builder.setMessage("초기화 하실 경우 다시 되돌릴 수 없습니다. 그래도 계속하시겠습니까?");
+                        builder.setPositiveButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        try {
+                                            NetworkTask networkTask = new NetworkTask(context, "/reset-time", null);
+                                            networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
+                                        } catch(Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+                        builder.show();
                         break;
                     case 2: // 버전 확인
                         intent = new Intent(mainActivity, VerCheckActivity.class);
@@ -85,7 +113,6 @@ public class AdapterSetting extends BaseAdapter{
                         break;
                     case 3:  //로그 아웃
                         Log.e("deb/logout", "in");
-                        lfc.WriteLogFile(context,filename,"",2);
                         lfc.WriteLogFile(context,filename,"nofile",2);
 
                         if(mainActivity.getSns().equals("1")) {
