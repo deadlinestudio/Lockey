@@ -6,80 +6,81 @@
     android:background="@color/colorWhite"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="76dp"
-        android:layout_height="75dp"
-        app:srcCompat="@drawable/lockey_newicon"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="197dp" />
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="340dp"
-        android:text="당신의 시간은 항상 소중하니까"
-        android:textColor="@color/darkGrey"
-        android:textSize="20sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:text="효율적인 시간 관리 서비스"
-        android:textColor="@color/colorPrimary"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="305dp" />
+        <TextView
+            android:id="@+id/TargetTimeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="000000"
+            android:textColor="@color/colorBlack_light"
+            android:textSize="48sp" />
+
+        <TextView
+            android:id="@+id/TotalTimeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+
+            android:text="000000"
+            android:textColor="@color/darkGrey"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <FrameLayout
+                android:id="@+id/fra"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/lightGrey">
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/fra2"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="324dp"
-        android:layout_height="52dp"
+        android:id="@+id/timerStartBtn"
+        android:layout_width="135dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/btn_hard_round"
-        android:text="로그인"
-        android:textColor="@color/darkGrey"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="454dp" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="324dp"
-        android:layout_height="52dp"
-        android:background="@drawable/btn_hard_round_color"
-        android:text="회원가입"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="390dp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비회원으로 시작하기 >"
+        android:text="@string/start"
         android:textColor="@color/darkGrey"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="513dp" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lockey"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="177dp"
-        tools:layout_editor_absoluteY="263dp" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 </android.support.constraint.ConstraintLayout>

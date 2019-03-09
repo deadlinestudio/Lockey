@@ -1,148 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:id="@+id/timerContainer"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/timerTopbar"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_marginStart="24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:gravity="end"
-        android:orientation="horizontal"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </android.support.v7.widget.Toolbar>
+        <TextView
+            android:id="@+id/TargetTimeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="000000"
+            android:textColor="@color/colorBlack_light"
+            android:textSize="48sp" />
 
+        <TextView
+            android:id="@+id/TotalTimeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
 
-    <LinearLayout
+            android:text="000000"
+            android:textColor="@color/darkGrey"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/timerScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timerTopbar">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/timer_seekbar_bg" />
-
-            <LinearLayout
-                android:layout_width="190dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/TargetTimeText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="000000"
-                    android:textColor="@color/colorBlack_light"
-                    android:textSize="48sp" />
-
-                <TextView
-                    android:id="@+id/TotalTimeText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <com.triggertrap.seekarc.SeekArc
-                android:id="@+id/seekArc"
-                android:layout_width="235dp"
-                android:layout_height="235dp"
-                android:layout_gravity="center"
-                android:padding="20dp"
-                app:arcColor="@color/colorPrimary_lighter"
-                app:arcWidth="7dp"
-                app:elevation="0dp"
-                app:progressColor="@color/colorPrimary"
-                app:progressWidth="12dp"
-                app:max="48"
-                app:startAngle="0"
-                app:sweepAngle="500"
-                app:thumb="@drawable/btn_thumb"
-                app:touchInside="true" />
-        </FrameLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/btncollect"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/quickQuaterBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/quick_timer_quater"
-                android:textColor="@color/colorWhite" />
 
-            <Button
-                android:id="@+id/quickHalfBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/quick_timer_half"
-                android:textColor="@color/colorWhite" />
+            <FrameLayout
+                android:id="@+id/timerTopFrame"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/colorWhite">
 
-            <Button
-                android:id="@+id/quickTripleBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/quick_timer_triple"
+            </FrameLayout>
 
-                android:textColor="@color/colorWhite" />
+            <FrameLayout
+                android:id="@+id/timerBottomFrame"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/colorPrimary">
 
-            <Button
-                android:id="@+id/quickFullBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/quick_timer_full"
-
-                android:textColor="@color/colorWhite" />
+            </FrameLayout>
         </LinearLayout>
+    </ScrollView>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="105dp"
-            android:layout_marginTop="50dp">
-
-
-            <Button
-                android:id="@+id/timerStartBtn"
-                android:layout_width="135dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center"
-                android:background="@drawable/btn_hard_round"
-                android:textColor="@color/darkGrey"
-                android:text="@string/start"
-                android:textSize="16sp" />
-        </FrameLayout>
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/timerStartBtn"
+        android:layout_width="135dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/btn_hard_round"
+        android:text="@string/start"
+        android:textColor="@color/darkGrey"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 </android.support.constraint.ConstraintLayout>
