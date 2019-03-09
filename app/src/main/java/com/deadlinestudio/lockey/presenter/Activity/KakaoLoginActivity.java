@@ -74,7 +74,7 @@ public class KakaoLoginActivity extends AppCompatActivity {
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
             Log.e("SessionCallback :: ", "onSessionOpenFailed : " + exception.getMessage());
-            String toastMsg = "인터넷을 연결해주세요.";
+            String toastMsg = "로그인에 실패하였습니다.";
             Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
             finish(); // LoginActivity로 돌아가기
         }

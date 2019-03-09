@@ -34,6 +34,7 @@ import com.deadlinestudio.lockey.model.Data;
 import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Controller.CaulyAdController;
+import com.deadlinestudio.lockey.presenter.Controller.GrantController;
 import com.deadlinestudio.lockey.presenter.Item.BasicTimer;
 import com.deadlinestudio.lockey.presenter.Item.ItemApplock;
 import com.deadlinestudio.lockey.presenter.Service.TimerService;
@@ -60,6 +61,7 @@ public class FragmentTimer extends Fragment{
     private boolean seekbarLimit = false;
     private boolean dialogClosed = true;
     CaulyAdController cac;
+    GrantController gc;
     private NotificationManager mNotificationManager;
 
     //private TimerService timerService;
@@ -112,12 +114,14 @@ public class FragmentTimer extends Fragment{
         cac = new CaulyAdController(mainActivity);
         cac.makeInterstitialAd();
 
+        /* GrantController */
+        gc = new GrantController(mainActivity);
+
         /* do not disturb mode NotificationManager */
         mNotificationManager = (NotificationManager) mainActivity.getSystemService(NOTIFICATION_SERVICE);
-        if (!mNotificationManager.isNotificationPolicyAccessGranted()) {
-            Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-            startActivity(intent);
-        }
+        if(!gc.checkAlertGrant(mNotificationManager))
+            gc.settingAccessGrant();
+
 
         /*
         //send timer object to
@@ -172,30 +176,34 @@ public class FragmentTimer extends Fragment{
                     seekBar.setEnabled(true);
                 }else{
                     /// timer start!
-                    mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
-                    mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
-                    startBtn.setBackgroundResource(R.drawable.lock_icon_color);
-                    timerOn = true;
-                    seekBar.setEnabled(false);
+                    if(!gc.checkAlertGrant(mNotificationManager))
+                        gc.settingAlertGrant();
+                    else{
+                        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
+                        mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
+                        startBtn.setBackgroundResource(R.drawable.lock_icon_color);
+                        timerOn = true;
+                        seekBar.setEnabled(false);
 
-                    Toast.makeText(getContext(), "타이머가 시작됩니다\n휴대폰을 뒤집어주세요",
-                            Toast.LENGTH_SHORT).show();
-                    bt.timerStart();
+                        Toast.makeText(getContext(), "타이머가 시작됩니다\n휴대폰을 뒤집어주세요",
+                                Toast.LENGTH_SHORT).show();
+                        bt.timerStart();
 
-                    //timer text change
-                    final Handler timerViewHandler = new Handler();
-                    timerViewHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            targetView.setText(bt.makeToTimeFormat(bt.getTempTarget()));
-                            totalView.setText(bt.makeToTimeFormat(bt.getTotalTime()+1000));
-                            timerViewHandler.postDelayed(this,1000);
-                            if(!bt.getOnoff()){
-                                timerViewHandler.removeMessages(0);
-                                updateTextview();
+                        //timer text change
+                        final Handler timerViewHandler = new Handler();
+                        timerViewHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                targetView.setText(bt.makeToTimeFormat(bt.getTempTarget()));
+                                totalView.setText(bt.makeToTimeFormat(bt.getTotalTime()+1000));
+                                timerViewHandler.postDelayed(this,1000);
+                                if(!bt.getOnoff()){
+                                    timerViewHandler.removeMessages(0);
+                                    updateTextview();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             }
         });

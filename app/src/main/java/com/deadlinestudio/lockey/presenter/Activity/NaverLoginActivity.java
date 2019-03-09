@@ -139,6 +139,8 @@ public class NaverLoginActivity extends AppCompatActivity {
                 // 실패했어도 클라이언트 상에 token 정보가 없기 때문에 추가적으로 해줄 수 있는 것은 없음
                 Log.d(TAG, "errorCode:" + mOAuthLoginInstance.getLastErrorCode(mContext));
                 Log.d(TAG, "errorDesc:" + mOAuthLoginInstance.getLastErrorDesc(mContext));
+                String toastMsg = "로그인에 실패하였습니다.";
+                Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
             }
 
             return null;
@@ -209,7 +211,7 @@ public class NaverLoginActivity extends AppCompatActivity {
                 }
             } catch(Exception e) {
                 e.printStackTrace();
-                String toastMsg = "인터넷을 연결해주세요.";
+                String toastMsg = "로그인에 실패하였습니다.";
                 Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
                 finish();
             }
