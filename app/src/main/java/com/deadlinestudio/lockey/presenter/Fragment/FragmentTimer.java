@@ -218,8 +218,6 @@ public class FragmentTimer extends Fragment{
         mGyroLis = new GyroscopeListener(this);
         vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
 
-
-
         /**
          * @brief timer btn listener, make the timer stop/start & load pop dialog
          * timer started by button is just for a performance to make user think timer is working
@@ -271,6 +269,7 @@ public class FragmentTimer extends Fragment{
                         gc.settingAlertGrant();
                         return;
                     }
+
                     prevNotificationFilter = mNotificationManager.getCurrentInterruptionFilter();
                     mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
                     mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
@@ -293,17 +292,20 @@ public class FragmentTimer extends Fragment{
                             if (endAlert && bt.getTempTarget() <= 1000) {
                                 Log.e("시간 다됬음","진동울리자");
                                 mNotificationManager.setInterruptionFilter(prevNotificationFilter);        // turn off DO NOT DISTURB MODE
-
+                                new Handler().postDelayed(new Runnable(){
+                                    @Override
+                                    public void run(){vibrator.vibrate(500);}
+                                }, 500);
                                 endAlert = false;
-                                vibrator.vibrate(1000);
                             }
+
                             timerViewHandler.postDelayed(this, 1000);
                             if (!bt.getOnoff()) {
                                 Log.e("시간 다됬음","설정시간 : "+bt.getTargetTime()+" 남은시간 : "+bt.getTempTarget());
                                 timerViewHandler.removeMessages(0);
                                 updateTextview();
                             }
-                            Log.e("짠 시간 다됬음","설정시간 : "+bt.getTargetTime()+" 남은시간 : "+bt.getTempTarget());
+                            Log.e("타이머 : ","설정시간 : "+bt.getTargetTime()+" 남은시간 : "+bt.getTempTarget());
                         }
                     });
                 }
@@ -517,7 +519,15 @@ public class FragmentTimer extends Fragment{
                 if (Math.abs(pitch * RAD2DGR) > 130.0) {
                     //textX.setText("           [Pitch]: 뒤집힘");
                     if (isFirst && timerOn) {
-                        vibrator.vibrate(millisecond);
+                        Log.e("진동","처음 뒤집힘요");
+                        mNotificationManager.setInterruptionFilter(prevNotificationFilter);                             // turn off Do Not Disturb mode
+                        new Handler().postDelayed(new Runnable(){
+                            @Override
+                            public void run(){
+                                vibrator.vibrate(millisecond);
+                                mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on Do Not Disturb mode
+                            }
+                        }, 500);
                         isFirst = false;
                         isReversed = true;
                     }
@@ -525,7 +535,14 @@ public class FragmentTimer extends Fragment{
                     timerScroll.setEnableScrolling(false);
                 } else {
                     if (isReversed && timerOn) {
-                        vibrator.vibrate(millisecond);
+                        Log.e("진동","다시 뒤집힘요");
+                        mNotificationManager.setInterruptionFilter(prevNotificationFilter);                         // turn off Do Not Disturb mode
+                        new Handler().postDelayed(new Runnable(){
+                            @Override
+                            public void run(){
+                                vibrator.vibrate(millisecond);
+                            }
+                        }, 500);
                         mSensorManager.unregisterListener(mGyroLis);
                         isFirst = true;
                         isReversed = false;
