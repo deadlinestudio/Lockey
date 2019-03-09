@@ -26,7 +26,22 @@
     <string name="lock_en">LOCK</string>
     <string name="key_en">KEY</string>
     <string name="lockey">라키</string>
+    <string name="lockey_en">LOCKEY</string>
+    <string name="start">시작</string>
+    <string name="stop">정지</string>
 
+    <!--Login Activity-->
+    <string name="loginInfoTitle">효율적인 시간 관리 서비스</string>
+    <string name="loginInfosubTitle">당신의 시간은 항상 소중하니까</string>
+    <string name="login">로그인</string>
+    <string name="noMemLogin">비회원으로 시작하기 ></string>
+    <string name="googleLogin">구글로 로그인</string>
+    <string name="naverLogin">네이버로 로그인</string>
+    <string name="kakaoLogin">카카오로 로그인</string>
+
+    <string name="googleSignup">구글로 가입하기</string>
+    <string name="naverSignup">네이버로 가입하기</string>
+    <string name="kakaoSignup">카카오로 가입하기</string>
     <!--Timer Fragment-->
     <string name="btwHourMin">:</string>
     <string name="disableNotiSound">알람없음</string>

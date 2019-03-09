@@ -1,110 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginRight="28dp"
-        android:layout_marginTop="150dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/signin_title" />
-
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginRight="28dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toTopOf="parent">
 
-
-        <FrameLayout
-            android:id="@+id/googleBtn"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:padding="12dp"
-            android:layout_marginBottom="1dp"
-            android:background="@color/colorWhite_dark"
-            android:elevation="1dp">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/googleg_standard_color_18"
-                android:elevation="0dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:elevation="1dp"
-                android:text="구글로 로그인"/>
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/naverBtn"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginBottom="0dp"
-            android:padding="12dp"
-            android:background="#1EC800"
-            android:elevation="1dp">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/naver_login_icon"
-                android:elevation="0dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:elevation="1dp"
-                android:textColor="#FFF"
-                android:text="네이버로 로그인"/>
-        </FrameLayout>
-        <FrameLayout
-            android:id="@+id/kakaoBtn"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginBottom="8dp"
-            android:padding="12dp"
-            android:background="#ffeb00"
-            android:elevation="1dp"
-            android:textColor="#3c1e1e" >
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/kakao_account_logo"
-                android:elevation="0dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:elevation="1dp"
-                android:text="카카오로 로그인"/>
-        </FrameLayout>
-
-
-        <Button
-            android:id="@+id/noMemberBtn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_stroke"
-            android:text="비회원 로그인" />
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                app:srcCompat="@drawable/lockey_newicon" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/lockey_en"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/loginInfoTitle" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textColor="@color/darkGrey"
+                android:text="@string/loginInfosubTitle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/selectSignUpBtn"
+                android:layout_width="325dp"
+                android:layout_height="52dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/btn_hard_round_color"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:text="@string/signup" />
+
+            <Button
+                android:id="@+id/selectLoginBtn"
+                android:layout_width="325dp"
+                android:layout_height="52dp"
+                android:elevation="0dp"
+                android:background="@drawable/btn_hard_round"
+                android:stateListAnimator="@null"
+                android:textSize="18sp"
+                android:textColor="@color/darkGrey"
+                android:text="@string/login" />
+
+            <TextView
+                android:id="@+id/noMemberBtn"
+                android:layout_width="325dp"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/darkGrey"
+                android:text="@string/noMemLogin" />
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

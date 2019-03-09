@@ -1,16 +1,23 @@
 package com.deadlinestudio.lockey.presenter.Activity;
 
+import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.control.NetworkTask;
+import com.deadlinestudio.lockey.model.Data;
 import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 
@@ -20,7 +27,8 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginActivity extends BaseActivity{
     private FrameLayout kakaoBtn, NaverBtn, googleBtn;
-    private Button noMemberBtn;
+    private TextView noMemberBtn;
+    private Button signUpGoBtn, logInGoBtn;
 
     private LogfileController lfc;
     private Context cont;
@@ -66,21 +74,63 @@ public class LoginActivity extends BaseActivity{
         } catch(Exception e) {
             Log.e("error in loginActivity", e.toString());
         }
-        googleBtn = findViewById(R.id.googleBtn);
-        kakaoBtn = findViewById(R.id.kakaoBtn);
-        NaverBtn = findViewById(R.id.naverBtn);
         noMemberBtn = findViewById(R.id.noMemberBtn);
+        signUpGoBtn = findViewById(R.id.selectSignUpBtn);
+        logInGoBtn = findViewById(R.id.selectLoginBtn);
 
-        /**
-        * @brief click Listener for each sign in buttons
-        **/
-        googleBtn.setOnClickListener(new Button.OnClickListener() {
+        signUpGoBtn.setOnClickListener(new Button.OnClickListener(){
+
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(cont,GoogleLoginActivity.class);
-                intent.putExtra("InOut",1);
-                startActivity(intent);
+                showSignUpDialog();
             }
+        });
+        logInGoBtn.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                showLoginDialog();
+            }
+        });
+        /**
+        * @brief for Non-member user
+        **/
+        noMemberBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String content = "4,";
+                lfc.WriteLogFile(getApplicationContext(), filename, content, 2);
+                Intent intent = new Intent(cont, LoadActivity.class);
+                intent.putExtra("SNS",4);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+    }
+
+    public void showSignUpDialog() {
+        // Create an instance of the dialog fragment and show it
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // Get the layout inflater
+        LayoutInflater inflater = this.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.dialog_signup, null));
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        googleBtn = dialog.findViewById(R.id.googleBtn);
+        kakaoBtn = dialog.findViewById(R.id.kakaoBtn);
+        NaverBtn = dialog.findViewById(R.id.naverBtn);
+        Button cancelBtn = dialog.findViewById(R.id.cancel_signup);
+
+        /**
+         * @brief click Listener for each sign in buttons
+         **/
+        googleBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(cont,GoogleLoginActivity.class);
+            intent.putExtra("InOut",1);
+            startActivity(intent);
         });
 
         kakaoBtn.setOnClickListener(new Button.OnClickListener() {
@@ -100,24 +150,63 @@ public class LoginActivity extends BaseActivity{
                 startActivity(intent);
             }
         });
-
-        /**
-        * @brief for Non-member user
-        **/
-        noMemberBtn.setOnClickListener(new Button.OnClickListener() {
+        cancelBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String content = "4,";
-                lfc.WriteLogFile(getApplicationContext(), filename, content, 2);
-                Intent intent = new Intent(cont, LoadActivity.class);
-                intent.putExtra("SNS",4);
-                startActivity(intent);
-                finish();
+                dialog.dismiss();
             }
         });
 
     }
+    public void showLoginDialog() {
+        // Create an instance of the dialog fragment and show it
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // Get the layout inflater
+        LayoutInflater inflater = this.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.dialog_login, null));
 
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        googleBtn = dialog.findViewById(R.id.googleBtn);
+        kakaoBtn = dialog.findViewById(R.id.kakaoBtn);
+        NaverBtn = dialog.findViewById(R.id.naverBtn);
+        Button cancelBtn = dialog.findViewById(R.id.cancel_signup);
+
+        /**
+         * @brief click Listener for each sign in buttons
+         **/
+        googleBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(cont,GoogleLoginActivity.class);
+            intent.putExtra("InOut",1);
+            startActivity(intent);
+        });
+
+        kakaoBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(cont,KakaoLoginActivity.class);
+                intent.putExtra("InOut",1);
+                startActivity(intent);
+            }
+        });
+
+        NaverBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(cont,NaverLoginActivity.class);
+                intent.putExtra("InOut",1);
+                startActivity(intent);
+            }
+        });
+        cancelBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+    }
     // [START on_start_check_user]
     @Override
     public void onStart() {
