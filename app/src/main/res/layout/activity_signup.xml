@@ -20,7 +20,8 @@
             android:textSize="17sp"
             android:text="@string/signup"
             android:layout_gravity="center"
-            app:fontFamily="@font/my_font_family"/>
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"/>
     </android.support.v7.widget.Toolbar>
 
 
@@ -44,7 +45,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack_light"
                 android:text="@string/nickname"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
 
             <EditText
                 android:id="@+id/nicknameeditText"
@@ -55,7 +57,8 @@
                 android:ems="8"
                 android:inputType="text"
                 android:hint="@string/nickname_example"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
 
             <TextView
                 android:id="@+id/ageshowText"
@@ -63,7 +66,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack_light"
                 android:text="@string/age"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
 
             <EditText
                 android:id="@+id/ageeditText"
@@ -74,7 +78,8 @@
                 android:ems="8"
                 android:hint="ex) 23"
                 android:inputType="number"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
 
             <TextView
                 android:id="@+id/jobshowText"
@@ -83,7 +88,8 @@
                 android:layout_marginBottom="5dp"
                 android:textColor="@color/colorBlack_light"
                 android:text="@string/job"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
 
             <Spinner
                 android:id="@+id/jobSpinner"
@@ -95,7 +101,9 @@
                 android:overlapAnchor="false"
                 android:scrollbarThumbVertical="@drawable/scrollbar_style"
                 android:spinnerMode="dropdown"
-                android:verticalScrollbarPosition="right" />
+                android:verticalScrollbarPosition="right"
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
 
             <EditText
                 android:id="@+id/jobText"
@@ -105,7 +113,8 @@
                 android:textColor="@color/colorBlack"
                 android:inputType="text"
                 android:hint="@string/job_example"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
         </LinearLayout>
     </ScrollView>
 
@@ -119,6 +128,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:fontFamily="@font/my_font_family"/>
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
 
 </android.support.constraint.ConstraintLayout>

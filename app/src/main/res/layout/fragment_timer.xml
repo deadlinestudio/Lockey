@@ -29,7 +29,9 @@
             android:gravity="center"
             android:text="000000"
             android:textColor="@color/colorBlack_light"
-            android:textSize="48sp" />
+            android:textSize="48sp"
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false" />
 
         <TextView
             android:id="@+id/TotalTimeText"
@@ -39,7 +41,9 @@
 
             android:text="000000"
             android:textColor="@color/darkGrey"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false" />
     </LinearLayout>
 
     <ScrollView
@@ -87,6 +91,8 @@
         android:text="@string/start"
         android:textColor="@color/darkGrey"
         android:textSize="16sp"
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

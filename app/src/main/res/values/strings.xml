@@ -29,6 +29,7 @@
     <string name="lockey_en">LOCKEY</string>
     <string name="start">시작</string>
     <string name="stop">정지</string>
+    <string name="confirm">확인</string>
 
     <!--Login Activity-->
     <string name="loginInfoTitle">효율적인 시간 관리 서비스</string>
@@ -42,12 +43,16 @@
     <string name="googleSignup">구글로 가입하기</string>
     <string name="naverSignup">네이버로 가입하기</string>
     <string name="kakaoSignup">카카오로 가입하기</string>
+
     <!--Timer Fragment-->
     <string name="btwHourMin">:</string>
     <string name="disableNotiSound">알람없음</string>
     <string name="remainTime">남은시간</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
+    <string name="focusComp">집중완료</string>
+    <string name="whatdoyoudo">무엇에 집중하셨나요?</string>
+
 
     <!--Applock Fragment-->
     <string name="recentWeek">최근 1주일 동안</string>
@@ -69,6 +74,8 @@
     <string name="profileEdit">프로필 수정</string>
     <string name="serviceOut">서비스 탈퇴하기 ></string>
     <string name="opensource">오픈소스 라이센스 ></string>
+    <string name="nicknameChange">닉네임 변경</string>
+    <string name="insertNewNickname">새로운 닉네임을 입력해주세요</string>
 
     <!--SignUp Activity-->
     <string name="signup">회원가입</string>

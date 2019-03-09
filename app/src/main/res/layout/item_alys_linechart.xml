@@ -16,7 +16,8 @@
         android:paddingStart="30dp"
         android:textSize="20sp"
         android:textColor="#000"
-        app:fontFamily="@font/my_font_family"/>
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
     <com.github.mikephil.charting.charts.LineChart
         android:id = "@+id/lineChart"
         android:layout_width="match_parent"
@@ -24,7 +25,9 @@
         android:minHeight="250dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
     <TextView
         android:id="@+id/chartAvgVals"
         android:layout_width="match_parent"
@@ -33,6 +36,7 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimary_light"
         app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"
         />
 
     <TextView
@@ -42,5 +46,6 @@
         android:textColor="@color/colorPrimary_light"
         android:paddingStart="30dp"
         android:textSize="14sp"
-        app:fontFamily="@font/my_font_family"/>
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
 </LinearLayout>

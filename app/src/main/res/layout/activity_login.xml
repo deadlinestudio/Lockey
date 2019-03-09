@@ -39,7 +39,8 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:text="@string/lockey_en"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,7 +49,8 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:text="@string/loginInfoTitle"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -57,7 +59,8 @@
                 android:textSize="17sp"
                 android:textColor="@color/darkGrey"
                 android:text="@string/loginInfosubTitle"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
         </LinearLayout>
 
         <LinearLayout
@@ -76,7 +79,8 @@
                 android:textSize="18sp"
                 android:textColor="@color/colorWhite"
                 android:text="@string/signup"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
 
             <Button
                 android:id="@+id/selectLoginBtn"
@@ -88,7 +92,8 @@
                 android:textSize="18sp"
                 android:textColor="@color/darkGrey"
                 android:text="@string/login"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
 
             <TextView
                 android:id="@+id/noMemberBtn"
@@ -98,7 +103,8 @@
                 android:textSize="16sp"
                 android:textColor="@color/darkGrey"
                 android:text="@string/noMemLogin"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
         </LinearLayout>
     </LinearLayout>
 
