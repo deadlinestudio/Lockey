@@ -21,7 +21,8 @@
             android:textColor="@color/colorBlack"
             android:textSize="19sp"
             android:text="@string/tab_setting"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            app:fontFamily="@font/my_font_family"/>
     </android.support.v7.widget.Toolbar>
     <LinearLayout
 
@@ -49,13 +50,15 @@
                     android:layout_height="wrap_content"
                     android:textSize="28sp"
                     android:textColor="@color/colorBlack"
-                    android:text="아이디" />
+                    android:text="아이디"
+                    app:fontFamily="@font/my_font_family"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="@color/colorBlack_light"
-                    android:text="@string/profileCheck" />
+                    android:text="@string/profileCheck"
+                    app:fontFamily="@font/my_font_family"/>
             </LinearLayout>
             <ImageView
                 android:layout_width="30dp"

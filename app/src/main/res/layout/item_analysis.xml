@@ -16,7 +16,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:textColor="#000"
-        android:gravity="center"/>
+        android:gravity="center"
+        app:fontFamily="@font/my_font_family"/>
     <com.github.mikephil.charting.charts.CombinedChart
         android:id = "@+id/combinedChart"
         android:layout_width="match_parent"

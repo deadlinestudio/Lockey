@@ -53,7 +53,8 @@
                     android:gravity="center"
                     android:text="000000"
                     android:textColor="@color/colorBlack_light"
-                    android:textSize="48sp" />
+                    android:textSize="48sp"
+                    app:fontFamily="@font/my_font_family"/>
 
                 <TextView
                     android:id="@+id/TotalTimeText"
@@ -61,7 +62,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@color/darkGrey"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    app:fontFamily="@font/my_font_family"/>
             </LinearLayout>
 
             <com.triggertrap.seekarc.SeekArc
@@ -97,7 +99,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/quick_timer_quater"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorWhite"
+                app:fontFamily="@font/my_font_family"/>
 
             <Button
                 android:id="@+id/quickHalfBtn"
@@ -105,7 +108,8 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/quick_timer_half"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorWhite"
+                app:fontFamily="@font/my_font_family"/>
 
             <Button
                 android:id="@+id/quickTripleBtn"
@@ -114,7 +118,8 @@
                 android:layout_marginStart="20dp"
                 android:background="@drawable/quick_timer_triple"
 
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorWhite"
+                app:fontFamily="@font/my_font_family"/>
 
             <Button
                 android:id="@+id/quickFullBtn"
@@ -123,7 +128,8 @@
                 android:layout_marginStart="20dp"
                 android:background="@drawable/quick_timer_full"
 
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorWhite"
+                app:fontFamily="@font/my_font_family"/>
         </LinearLayout>
 
         <FrameLayout
@@ -140,7 +146,8 @@
                 android:background="@drawable/btn_hard_round"
                 android:textColor="@color/darkGrey"
                 android:text="@string/start"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                app:fontFamily="@font/my_font_family"/>
         </FrameLayout>
 
     </LinearLayout>

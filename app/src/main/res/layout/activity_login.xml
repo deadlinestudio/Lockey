@@ -38,7 +38,8 @@
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
-                android:text="@string/lockey_en"/>
+                android:text="@string/lockey_en"
+                app:fontFamily="@font/my_font_family"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,7 +47,8 @@
                 android:textSize="28sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
-                android:text="@string/loginInfoTitle" />
+                android:text="@string/loginInfoTitle"
+                app:fontFamily="@font/my_font_family"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -54,7 +56,8 @@
                 android:gravity="center"
                 android:textSize="17sp"
                 android:textColor="@color/darkGrey"
-                android:text="@string/loginInfosubTitle" />
+                android:text="@string/loginInfosubTitle"
+                app:fontFamily="@font/my_font_family"/>
         </LinearLayout>
 
         <LinearLayout
@@ -72,7 +75,8 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="@color/colorWhite"
-                android:text="@string/signup" />
+                android:text="@string/signup"
+                app:fontFamily="@font/my_font_family"/>
 
             <Button
                 android:id="@+id/selectLoginBtn"
@@ -83,7 +87,8 @@
                 android:stateListAnimator="@null"
                 android:textSize="18sp"
                 android:textColor="@color/darkGrey"
-                android:text="@string/login" />
+                android:text="@string/login"
+                app:fontFamily="@font/my_font_family"/>
 
             <TextView
                 android:id="@+id/noMemberBtn"
@@ -92,7 +97,8 @@
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textColor="@color/darkGrey"
-                android:text="@string/noMemLogin" />
+                android:text="@string/noMemLogin"
+                app:fontFamily="@font/my_font_family"/>
         </LinearLayout>
     </LinearLayout>
 
