@@ -116,7 +116,7 @@ public class AdapterSetting extends BaseAdapter{
                         Log.e("deb/logout", "in");
                         builder = new AlertDialog.Builder(mainActivity);
                         builder.setTitle("알림");
-                        builder.setMessage("초기화 하실 경우 다시 되돌릴 수 없습니다. 그래도 계속하시겠습니까?");
+                        builder.setMessage("로그아웃 하시겠습니까?");
                         builder.setPositiveButton("예",
                                 new DialogInterface.OnClickListener() {
                                     @Override

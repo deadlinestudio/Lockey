@@ -24,10 +24,9 @@ import com.deadlinestudio.lockey.presenter.Item.ItemSetting;
 
 public class FragmentSetting extends Fragment{
 
-    private TextView profileName;
+    private static TextView profileName;
     private RelativeLayout profileLayout;
     private MainActivity mainActivity;
-
 
     @Nullable
     @Override
@@ -51,7 +50,6 @@ public class FragmentSetting extends Fragment{
                     Intent intent = new Intent(mainActivity, ProfileEditActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     mainActivity.startActivity(intent);
-                    mainActivity.finish();
                 }
             }
         });
@@ -70,7 +68,7 @@ public class FragmentSetting extends Fragment{
         return rootView;
     }
 
-    public void setProfileName(String nickname) {
-        this.profileName.setText(nickname);
+    public static void setProfileName(String nickname) {
+        profileName.setText(nickname);
     }
 }
