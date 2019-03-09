@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.deadlinestudio.lockey.R;
+import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -120,7 +121,7 @@ public class ItemViewAlysBarChart extends LinearLayout {
 
         this.xLabels = _xLabels;
         double avg = 0;
-        if(analysisData == null) {
+        if(MainActivity.getSns().equals("4") || analysisData == null) {
             if(xLabels == null) {
                 xLabels = new String[] {"~01.07", "~01.14","~01.21","~01.28", "~02."};
             }
