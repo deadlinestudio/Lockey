@@ -44,6 +44,7 @@ import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Controller.CaulyAdController;
 import com.deadlinestudio.lockey.presenter.Item.BasicTimer;
+import com.deadlinestudio.lockey.presenter.Item.CustomScrollView;
 import com.deadlinestudio.lockey.presenter.Item.ItemApplock;
 import com.deadlinestudio.lockey.presenter.Service.TimerService;
 import com.deadlinestudio.lockey.control.NetworkTask;
@@ -79,7 +80,7 @@ public class FragmentTimer extends Fragment{
 
     private ConstraintLayout timerCon;
     private FrameLayout timerTopFrame, timerBottomFrame;
-    private ScrollView timerScroll;
+    private CustomScrollView timerScroll;
     //private TimerService timerService;
     //private Intent tService;
     //Using the Accelometer & Gyroscoper
@@ -244,6 +245,7 @@ public class FragmentTimer extends Fragment{
                     setTargetTime(0);
                     timerTopFrame.setBackgroundColor(whiColor);
                     timerScroll.setScrollY(actionBarHeight);
+                    timerScroll.setEnableScrolling(true);
                     //seekBar.setProgress(0);
                     updateTextview();
                     //seekBar.setEnabled(true);
@@ -252,6 +254,7 @@ public class FragmentTimer extends Fragment{
                     mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
                     mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
                     startBtn.setText("정지");
+                    timerScroll.setEnableScrolling(false);
                     timerOn = true;
                     //seekBar.setEnabled(false);
 
@@ -488,6 +491,8 @@ public class FragmentTimer extends Fragment{
                         isFirst = false;
                         isReversed = true;
                     }
+                    startBtn.setText("정지");
+                    timerScroll.setEnableScrolling(false);
                 } else {
                     if (isReversed && timerOn) {
                         vibrator.vibrate(millisecond);
@@ -495,8 +500,8 @@ public class FragmentTimer extends Fragment{
                         isFirst = true;
                         isReversed = false;
                         timerOn = false;
-
                         startBtn.setText("시작");
+
                         //startBtn.setBackgroundResource(R.drawable.lock_icon_grey);
                         bt.timerStop();
 
@@ -515,6 +520,7 @@ public class FragmentTimer extends Fragment{
                         fragmentTimer.setTargetTime(0);
                         timerTopFrame.setBackgroundColor(whiColor);
                         timerScroll.setScrollY(actionBarHeight);
+                        timerScroll.setEnableScrolling(true);
                        // seekBar.setProgress(0);
                         fragmentTimer.updateTextview();
                         //seekBar.setEnabled(true);
