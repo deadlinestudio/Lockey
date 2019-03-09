@@ -70,8 +70,8 @@ public class FragmentApplock extends Fragment  {
         selectAllBtn = rootView.findViewById(R.id.appSelectAllBtn);
         selectNoneBtn = rootView.findViewById(R.id.appSelectNoneBtn);
 
-        alc = new AppLockController();
-        gc = new GrantController(mainActivity);
+        alc = new AppLockController(mainActivity.getApplicationContext());
+        gc = new GrantController(mainActivity.getApplicationContext());
         lfc = new LogfileController();
         cac = new CaulyAdController(mainActivity);
         cac.makeInterstitialAd();
@@ -82,7 +82,7 @@ public class FragmentApplock extends Fragment  {
             gc.settingAccessGrant();
 
         // load applist from main activity
-        applocks = alc.LoadAppList(this.getActivity());
+        applocks = alc.LoadAppList();
         mostApps = new ArrayList<ItemMostApps>();
         String line;
         if((line = lfc.ReadLogFile(cont, sfilename)) != "nofile") {         // 앱 잠금 리스트 확인 후 flag 업데이트

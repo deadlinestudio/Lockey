@@ -40,13 +40,16 @@ public class AppLockService extends Service {
 
             // GET_USAGE_STATS 권한 확인
             boolean granted = gc.checkAccessGrant();
-
+            Log.e("AppLockService  ","grant : "+granted);
             while(granted && stopSign) {
                 if(alc.CheckRunningApp(context,AppLock)) {
                     Intent intent = new Intent(context,LockActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);       // LockActivity가 중복되지 않도록 Flag설정
                     startActivity(intent);
                     //finish();
+                }else{
+                    //if(!gc.checkAccessGrant())                // 권한설정 리퀘스트 추가 후 수정하기 - 지금은 무한으로 뜸
+                    //    gc.settingAccessGrant();
                 }
                 try {
                     sleep(1000);
@@ -70,7 +73,7 @@ public class AppLockService extends Service {
         super.onCreate();
         // 서비스에서 가장 먼저 호출됨(최초에 한번만)
 
-        alc = new AppLockController();
+        alc = new AppLockController(getApplicationContext());
         lfc = new LogfileController();
         gc = new GrantController(getApplicationContext());
         grantFlag = false;

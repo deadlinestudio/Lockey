@@ -21,6 +21,7 @@ import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.control.NetworkTask;
 import com.deadlinestudio.lockey.model.Data;
 import com.deadlinestudio.lockey.model.User;
+import com.deadlinestudio.lockey.presenter.Controller.GrantController;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 
 import java.util.StringTokenizer;
@@ -33,6 +34,7 @@ public class LoginActivity extends BaseActivity{
     private Button signUpGoBtn, logInGoBtn;
 
     private LogfileController lfc;
+    private GrantController gc;
     private Context cont;
     public static final String filename = "userlog.txt";
 
@@ -43,6 +45,11 @@ public class LoginActivity extends BaseActivity{
 
         lfc = new LogfileController();
         cont = getApplicationContext();
+        gc = new GrantController(cont);
+
+        /* 가장 많이 사용한 앱 리스트 로드하기 위해 권한 설정*/
+        if(!gc.checkAccessGrant())
+            gc.settingAccessGrant();
 
         //check login log
         String line = lfc.ReadLogFile(cont,filename);

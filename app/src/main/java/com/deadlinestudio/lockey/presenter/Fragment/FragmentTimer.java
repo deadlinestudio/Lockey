@@ -74,6 +74,7 @@ public class FragmentTimer extends Fragment{
     CaulyAdController cac;
     GrantController gc;
     private NotificationManager mNotificationManager;
+    private int prevNotificationFilter = NotificationManager.INTERRUPTION_FILTER_ALL;
 
     private int priColor;
     private int whiColor;
@@ -156,7 +157,7 @@ public class FragmentTimer extends Fragment{
                 }else if(scrollY<maxHeight){
                     int progress = ((scrollY-actionBarHeight)/step);
                     Log.v("proa",String.valueOf(actionBarHeight));
-                    targetTime = progress*300000;
+                    targetTime = progress*10000;
                     if(hitmax){
                         timerTopFrame.setBackgroundColor(whiColor);
                         hitmax = false;
@@ -270,6 +271,7 @@ public class FragmentTimer extends Fragment{
                         gc.settingAlertGrant();
                         return;
                     }
+                    prevNotificationFilter = mNotificationManager.getCurrentInterruptionFilter();
                     mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
                     mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
                     //startBtn.setBackgroundResource(R.drawable.lock_icon_color);
@@ -290,9 +292,10 @@ public class FragmentTimer extends Fragment{
                             totalView.setText(bt.makeToTimeFormat(bt.getTotalTime() + 1000));
                             if (endAlert && bt.getTempTarget() <= 1000) {
                                 Log.e("시간 다됬음","진동울리자");
+                                mNotificationManager.setInterruptionFilter(prevNotificationFilter);        // turn off DO NOT DISTURB MODE
+
                                 endAlert = false;
-                                mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);        // turn off DO NOT DISTURB MODE
-                                vibrator.vibrate(300);
+                                vibrator.vibrate(1000);
                             }
                             timerViewHandler.postDelayed(this, 1000);
                             if (!bt.getOnoff()) {
@@ -428,7 +431,7 @@ public class FragmentTimer extends Fragment{
 
         final AlertDialog dialog = builder.create();
         dialog.show();
-        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);        // turn off DO NOT DISTURB MODE
+        mNotificationManager.setInterruptionFilter(prevNotificationFilter);        // turn off DO NOT DISTURB MODE
 
         Button cancelSaveBtn = dialog.findViewById(R.id.cancelSaveBtn);
         Button saveBtn = dialog.findViewById(R.id.saveBtn);
