@@ -13,18 +13,18 @@ import android.widget.Toast;
 import com.deadlinestudio.lockey.presenter.Activity.BaseActivity;
 
 public class GrantController extends BaseActivity {
-    Activity act;
-    public GrantController(Activity activity){
-        this.act = activity;
+    Context cont;
+    public GrantController(Context cont){
+        this.cont = cont;
     }
     public boolean checkAccessGrant(){
         // GET_USAGE_STATS 권한 확인
         boolean granted = false;
-        AppOpsManager appOps = (AppOpsManager) act.getSystemService(Context.APP_OPS_SERVICE);
-        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,android.os.Process.myUid(), act.getPackageName());
+        AppOpsManager appOps = (AppOpsManager) cont.getSystemService(Context.APP_OPS_SERVICE);
+        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,android.os.Process.myUid(), cont.getPackageName());
 
         if (mode == AppOpsManager.MODE_DEFAULT) {
-            granted = (act.checkCallingOrSelfPermission(android.Manifest.permission.PACKAGE_USAGE_STATS) == PackageManager.PERMISSION_GRANTED);
+            granted = (cont.checkCallingOrSelfPermission(android.Manifest.permission.PACKAGE_USAGE_STATS) == PackageManager.PERMISSION_GRANTED);
         } else {
             granted = (mode == AppOpsManager.MODE_ALLOWED);
         }
@@ -37,7 +37,7 @@ public class GrantController extends BaseActivity {
     public void settingAccessGrant(){
         // 권한이 없을 경우 권한 요구 페이지 이동
         String toastMsg = "Lockey를 선택 후 사용 추적 허용해주세요.";
-        final Toast toast = Toast.makeText(act, toastMsg, Toast.LENGTH_LONG);
+        final Toast toast = Toast.makeText(cont, toastMsg, Toast.LENGTH_LONG);
         new CountDownTimer(6000, 1000)
         {
             public void onTick(long millisUntilFinished) {toast.show();}
@@ -45,7 +45,7 @@ public class GrantController extends BaseActivity {
         }.start();
         Intent sintent = new Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS);
         sintent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        act.startActivity(sintent);
+        cont.startActivity(sintent);
     }
 
     public boolean checkAlertGrant(NotificationManager mNotificationManager){
@@ -59,7 +59,7 @@ public class GrantController extends BaseActivity {
     public void settingAlertGrant(){
         // 권한이 없을 경우 권한 요구 페이지 이동
         String toastMsg = "Lockey를 선택 후 방해 금지 모드를 허용해주세요.";
-        final Toast toast = Toast.makeText(act, toastMsg, Toast.LENGTH_LONG);
+        final Toast toast = Toast.makeText(cont, toastMsg, Toast.LENGTH_LONG);
         new CountDownTimer(6000, 1000)
         {
             public void onTick(long millisUntilFinished) {toast.show();}
@@ -67,6 +67,6 @@ public class GrantController extends BaseActivity {
         }.start();
         Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        act.startActivity(intent);
+        cont.startActivity(intent);
     }
 }

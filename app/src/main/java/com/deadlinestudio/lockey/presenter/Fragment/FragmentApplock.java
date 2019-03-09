@@ -70,21 +70,19 @@ public class FragmentApplock extends Fragment  {
         selectAllBtn = rootView.findViewById(R.id.appSelectAllBtn);
         selectNoneBtn = rootView.findViewById(R.id.appSelectNoneBtn);
 
-        alc = new AppLockController();
-        gc = new GrantController(mainActivity);
+        alc = new AppLockController(mainActivity.getApplicationContext());
+        gc = new GrantController(mainActivity.getApplicationContext());
         lfc = new LogfileController();
         cac = new CaulyAdController(mainActivity);
         cac.makeInterstitialAd();
         cont = this.getContext();
 
-        // 사용자 접근 허용 권한 확인 및 설정
-        if(!gc.checkAccessGrant()) {
-
+        /* 가장 많이 사용한 앱 리스트 로드하기 위해 권한 설정*/
+        if(!gc.checkAccessGrant())
             gc.settingAccessGrant();
-        }
 
         // load applist from main activity
-        applocks = alc.LoadAppList(this.getActivity());
+        applocks = alc.LoadAppList();
         mostApps = new ArrayList<ItemMostApps>();
         String line;
         if((line = lfc.ReadLogFile(cont, sfilename)) != "nofile") {         // 앱 잠금 리스트 확인 후 flag 업데이트
@@ -149,13 +147,6 @@ public class FragmentApplock extends Fragment  {
                     }
                     cac.runInterstitialAd();
                 }else{
-                    String toastMsg = "Lockey를 선택 후 사용 추적 허용을 활성화 해주세요.";
-                    final Toast toast = Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG);
-                    new CountDownTimer(6000, 1000)
-                    {
-                        public void onTick(long millisUntilFinished) {toast.show();}
-                        public void onFinish() {toast.show();}
-                    }.start();
                     gc.settingAccessGrant();
                 }
             }

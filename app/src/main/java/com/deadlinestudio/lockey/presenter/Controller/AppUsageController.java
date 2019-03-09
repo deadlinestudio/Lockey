@@ -26,8 +26,8 @@ public class AppUsageController extends BaseActivity {
     List<Pair<ItemApplock, Long>> AppRank;
 
     public AppUsageController(Activity act){
-        AppLockController alc = new AppLockController();
-        this.Applist = alc.LoadAppList(act);
+        AppLockController alc = new AppLockController(act.getApplicationContext());
+        this.Applist = alc.LoadAppList();
         this.AppRank = new LinkedList<>();
     }
 

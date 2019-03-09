@@ -20,10 +20,14 @@ public class AdmobAdController implements RewardedVideoAdListener{
     private Activity act;
     private boolean load;
     private NotificationManager mNotificationManager;
+    private int prevNotificationFilter = NotificationManager.INTERRUPTION_FILTER_ALL;
+
+    private GrantController gc;
 
     public AdmobAdController(Activity activity){
         this.act = activity;
         this.load = false;
+        this.gc = new GrantController(act);
 
         MobileAds.initialize(act, APP_ID);
 
@@ -36,10 +40,8 @@ public class AdmobAdController implements RewardedVideoAdListener{
         if(!mRewardedVideoAd.isLoaded()) {
             /* do not disturb mode NotificationManager */
             mNotificationManager = (NotificationManager) act.getSystemService(NOTIFICATION_SERVICE);
-            if (!mNotificationManager.isNotificationPolicyAccessGranted()) {
-                Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-                act.startActivity(intent);
-            }
+            if(!gc.checkAlertGrant(mNotificationManager))
+                gc.settingAlertGrant();
             mRewardedVideoAd.loadAd(AD_UNIT_ID, new AdRequest.Builder().build());
         }
     }
@@ -50,7 +52,7 @@ public class AdmobAdController implements RewardedVideoAdListener{
             mRewardedVideoAd.show();
         }else{
             Log.e("동영상 광고가","로드 안댐요");
-            loadRewardedVideoAd();
+            //loadRewardedVideoAd();
         }
     }
 
@@ -63,6 +65,7 @@ public class AdmobAdController implements RewardedVideoAdListener{
     @Override
     public void onRewardedVideoAdOpened() {
         Log.e("보상형"," 광고 열렸다");
+        prevNotificationFilter = mNotificationManager.getCurrentInterruptionFilter();
         mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
     }
 
@@ -74,7 +77,7 @@ public class AdmobAdController implements RewardedVideoAdListener{
     @Override
     public void onRewardedVideoAdClosed() {
         Log.e("보상형"," 광고 껐다");
-        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);       // turn off DO NOT DISTURB MODE
+        mNotificationManager.setInterruptionFilter(prevNotificationFilter);       // turn off DO NOT DISTURB MODE
     }
 
     @Override
