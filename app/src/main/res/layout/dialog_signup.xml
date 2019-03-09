@@ -40,7 +40,8 @@
                 android:elevation="1dp"
                 android:gravity="center"
                 android:text="@string/googleSignup"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
         </FrameLayout>
 
         <FrameLayout
@@ -64,7 +65,8 @@
                 android:gravity="center"
                 android:text="@string/naverSignup"
                 android:textColor="#FFF"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
         </FrameLayout>
 
         <FrameLayout
@@ -88,7 +90,8 @@
                 android:elevation="1dp"
                 android:gravity="center"
                 android:text="@string/kakaoSignup"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
         </FrameLayout>
 
     </LinearLayout>

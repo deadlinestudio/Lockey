@@ -63,6 +63,7 @@
         android:textStyle="bold"
         android:elevation="0dp"
         app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

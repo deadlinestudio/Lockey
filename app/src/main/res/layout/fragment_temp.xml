@@ -28,7 +28,8 @@ android:layout_height="match_parent">
         android:gravity="center_horizontal"
         android:textColor="@color/colorPrimary"
         android:textSize="58sp"
-        app:fontFamily="@font/my_font_family"/>
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
 
     <TextView
         android:id="@+id/TotalTimeText"
@@ -37,7 +38,8 @@ android:layout_height="match_parent">
         android:gravity="center_horizontal"
         android:textColor="@android:color/darker_gray"
         android:textSize="24sp"
-        app:fontFamily="@font/my_font_family"/>
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
 
 </LinearLayout>
 
@@ -53,7 +55,8 @@ android:layout_height="match_parent">
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-    app:fontFamily="@font/my_font_family"/>
+    app:fontFamily="@font/my_font_family"
+    android:includeFontPadding="false"/>
 
 <Button
     android:id="@+id/minusMinBtn"
@@ -68,7 +71,8 @@ android:layout_height="match_parent">
     app:layout_constraintEnd_toStartOf="@+id/seekArc"
     app:layout_constraintStart_toStartOf="@+id/seekArc"
     app:layout_constraintTop_toTopOf="@+id/seekArc"
-    app:fontFamily="@font/my_font_family"/>
+    app:fontFamily="@font/my_font_family"
+    android:includeFontPadding="false"/>
 
 <Button
     android:id="@+id/plusMinBtn"

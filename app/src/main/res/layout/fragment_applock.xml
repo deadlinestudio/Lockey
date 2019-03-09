@@ -22,7 +22,8 @@
             android:textSize="19sp"
             android:text="@string/tab_applist"
             android:layout_gravity="center"
-            app:fontFamily="@font/my_font_family"/>
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"/>
     </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.CoordinatorLayout
@@ -60,12 +61,14 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:gravity="center_horizontal"
                         android:textSize="20sp"
+
                         android:textColor="@color/colorBlack_light"
                         android:layout_marginTop="6dp"
                         android:text="@string/recentWeek"
-                        app:fontFamily="@font/my_font_family"/>
+                        app:fontFamily="@font/my_font_family"
+                        android:includeFontPadding="false"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -74,7 +77,8 @@
                         android:textColor="@color/colorBlack_light"
                         android:layout_marginTop="2dp"
                         android:text="@string/mostApp"
-                        app:fontFamily="@font/my_font_family"/>
+                        app:fontFamily="@font/my_font_family"
+                        android:includeFontPadding="false"/>
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

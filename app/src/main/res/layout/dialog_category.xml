@@ -25,17 +25,18 @@
         android:textSize="40sp"
         android:textColor="@color/colorPrimary"
         android:gravity="center"
-        app:fontFamily="@font/my_font_family"/>
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="20sp"
         android:textColor="@color/colorBlack_light"
-        android:text="집중 완료"
-
+        android:text="@string/focusComp"
         android:gravity="center"
-        app:fontFamily="@font/my_font_family"/>
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
 
     <EditText
         android:id="@+id/categoryText"
@@ -50,8 +51,9 @@
         android:gravity="center"
         android:backgroundTint="@color/colorPrimary"
         android:inputType="text"
-        android:hint="무엇에 집중 하셨나요?"
-        app:fontFamily="@font/my_font_family"/>
+        android:hint="@string/whatdoyoudo"
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,7 +68,8 @@
             android:text="@string/cancel"
             android:textColor="#fff"
             android:textSize="18sp"
-            app:fontFamily="@font/my_font_family"/>
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"/>
 
         <Button
             android:id="@+id/saveBtn"
@@ -76,7 +79,8 @@
             android:text="@string/save"
             android:textColor="#fff"
             android:textSize="18sp"
-            app:fontFamily="@font/my_font_family"/>
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"/>
 
     </LinearLayout>
 </LinearLayout>

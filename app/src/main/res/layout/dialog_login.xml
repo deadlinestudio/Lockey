@@ -40,7 +40,8 @@
                 android:elevation="1dp"
                 android:gravity="center"
                 android:text="@string/googleLogin"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
         </FrameLayout>
 
         <FrameLayout
@@ -64,7 +65,8 @@
                 android:gravity="center"
                 android:text="@string/naverLogin"
                 android:textColor="#FFF"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
         </FrameLayout>
 
         <FrameLayout
@@ -88,7 +90,8 @@
                 android:elevation="1dp"
                 android:gravity="center"
                 android:text="@string/kakaoLogin"
-                app:fontFamily="@font/my_font_family"/>
+                app:fontFamily="@font/my_font_family"
+                android:includeFontPadding="false"/>
         </FrameLayout>
 
     </LinearLayout>
@@ -107,5 +110,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:fontFamily="@font/my_font_family"/>
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
 </android.support.constraint.ConstraintLayout>

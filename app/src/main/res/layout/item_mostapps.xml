@@ -23,7 +23,8 @@
         android:text="hello"
         android:textColor="@color/colorBlack_light"
         android:textSize="15sp"
-        app:fontFamily="@font/my_font_family"/>
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
     <TextView
         android:id="@+id/mostAppTimeText"
         android:layout_width="wrap_content"
@@ -31,6 +32,7 @@
         android:text="10시간 10분"
         android:textColor="@color/darkGrey"
         android:textSize="12sp"
-        app:fontFamily="@font/my_font_family"/>
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
 
 </LinearLayout>

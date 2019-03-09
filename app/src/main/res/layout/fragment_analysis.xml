@@ -18,7 +18,9 @@
             android:textColor="@color/colorBlack"
             android:textSize="19sp"
             android:text="@string/tab_analysis"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"/>
     </android.support.v7.widget.Toolbar>
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -67,7 +69,8 @@
                         android:text="@string/nickname"
                         android:textColor="#000"
                         android:textSize="24sp"
-                        app:fontFamily="@font/my_font_family"/>
+                        app:fontFamily="@font/my_font_family"
+                        android:includeFontPadding="false"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -76,7 +79,8 @@
                         android:text="@string/totalFocusTime"
                         android:textColor="#000"
                         android:textSize="14sp"
-                        app:fontFamily="@font/my_font_family"/>
+                        app:fontFamily="@font/my_font_family"
+                        android:includeFontPadding="false"/>
 
                     <TextView
                         android:id="@+id/userTotalTimeText"
@@ -87,7 +91,8 @@
                         android:text="0 시간"
                         android:textColor="@color/colorPrimary_light"
                         android:textSize="20sp"
-                        app:fontFamily="@font/my_font_family"/>
+                        app:fontFamily="@font/my_font_family"
+                        android:includeFontPadding="false"/>
 
                     <!--
                     <TextView
@@ -125,7 +130,9 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/shape_round_corner">
+                    android:background="@drawable/shape_round_corner"
+                    app:fontFamily="@font/my_font_family"
+                    android:includeFontPadding="false"  >
 
                     <!--
                     <android.support.design.widget.TabItem

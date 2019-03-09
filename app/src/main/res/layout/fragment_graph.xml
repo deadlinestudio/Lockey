@@ -13,6 +13,8 @@
             android:id="@+id/analysisList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="true"/>
+            android:nestedScrollingEnabled="true"
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 </android.support.constraint.ConstraintLayout>
