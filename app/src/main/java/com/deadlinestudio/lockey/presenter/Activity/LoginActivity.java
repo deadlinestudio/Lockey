@@ -130,17 +130,33 @@ public class LoginActivity extends BaseActivity{
          * @brief click Listener for each sign in buttons
          **/
         googleBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(cont,GoogleLoginActivity.class);
-            intent.putExtra("InOut",1);
-            startActivity(intent);
+            ConnectivityManager cm = (ConnectivityManager) cont.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            if(activeNetwork != null){
+                Log.e("인터넷","연결댐");
+                Intent intent = new Intent(cont,GoogleLoginActivity.class);
+                intent.putExtra("InOut",1);
+                startActivity(intent);
+            }else{
+                String toastMsg = "인터넷을 연결해주세요.";
+                Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
+            }
         });
 
         kakaoBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(cont,KakaoLoginActivity.class);
-                intent.putExtra("InOut",1);
-                startActivity(intent);
+                ConnectivityManager cm = (ConnectivityManager) cont.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                if(activeNetwork != null){
+                    Log.e("인터넷","연결댐");
+                    Intent intent = new Intent(cont,KakaoLoginActivity.class);
+                    intent.putExtra("InOut",1);
+                    startActivity(intent);
+                }else{
+                    String toastMsg = "인터넷을 연결해주세요.";
+                    Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -187,17 +203,33 @@ public class LoginActivity extends BaseActivity{
          * @brief click Listener for each sign in buttons
          **/
         googleBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(cont,GoogleLoginActivity.class);
-            intent.putExtra("InOut",1);
-            startActivity(intent);
+            ConnectivityManager cm = (ConnectivityManager) cont.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            if(activeNetwork != null){
+                Log.e("인터넷","연결댐");
+                Intent intent = new Intent(cont,GoogleLoginActivity.class);
+                intent.putExtra("InOut",1);
+                startActivity(intent);
+            }else{
+                String toastMsg = "인터넷을 연결해주세요.";
+                Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
+            }
         });
 
         kakaoBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(cont,KakaoLoginActivity.class);
-                intent.putExtra("InOut",1);
-                startActivity(intent);
+                ConnectivityManager cm = (ConnectivityManager) cont.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                if(activeNetwork != null){
+                    Log.e("인터넷","연결댐");
+                    Intent intent = new Intent(cont,KakaoLoginActivity.class);
+                    intent.putExtra("InOut",1);
+                    startActivity(intent);
+                }else{
+                    String toastMsg = "인터넷을 연결해주세요.";
+                    Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
