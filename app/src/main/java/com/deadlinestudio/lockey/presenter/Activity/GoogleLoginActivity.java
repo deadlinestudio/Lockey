@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.model.User;
@@ -95,6 +96,8 @@ public class GoogleLoginActivity extends AppCompatActivity{
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
+                String toastMsg = "로그인에 실패하였습니다.";
+                Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
                 finish();       // LoginActivity로 돌아가기
                 // [START_EXCLUDE]
                 // [END_EXCLUDE]
@@ -151,9 +154,15 @@ public class GoogleLoginActivity extends AppCompatActivity{
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithCredential:failure", task.getException());
+                                String toastMsg = "로그인에 실패하였습니다.";
+                                Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         } catch(Exception e) {
                             Log.e("google login", "google login error");
+                            String toastMsg = "로그인에 실패하였습니다.";
+                            Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }
                 });

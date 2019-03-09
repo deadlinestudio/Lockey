@@ -78,15 +78,9 @@ public class FragmentApplock extends Fragment  {
         cont = this.getContext();
 
         // 사용자 접근 허용 권한 확인 및 설정
-        if(!gc.checkGrant()) {
-            String toastMsg = "Lockey를 선택 후 사용 추적 허용을 활성화 해주세요.";
-            final Toast toast = Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG);
-            new CountDownTimer(6000, 1000)
-            {
-                public void onTick(long millisUntilFinished) {toast.show();}
-                public void onFinish() {toast.show();}
-            }.start();
-            gc.settingGrant();
+        if(!gc.checkAccessGrant()) {
+
+            gc.settingAccessGrant();
         }
 
         // load applist from main activity
@@ -134,7 +128,7 @@ public class FragmentApplock extends Fragment  {
         startBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(gc.checkGrant()) {
+                if(gc.checkAccessGrant()) {
                     lfc.WriteLogFile(cont, sfilename, "", 2);
                     for (int i = 0; i < applocks.size(); i++) {
                         if (applocks.get(i).getLockFlag()) {
@@ -162,7 +156,7 @@ public class FragmentApplock extends Fragment  {
                         public void onTick(long millisUntilFinished) {toast.show();}
                         public void onFinish() {toast.show();}
                     }.start();
-                    gc.settingGrant();
+                    gc.settingAccessGrant();
                 }
             }
         });

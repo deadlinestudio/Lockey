@@ -6,7 +6,7 @@
     android:font="@font/nanumgothic"
     android:fontStyle="normal"
     android:fontWeight="400"
-    app:font="@font/nanumgothic"
+    app:font="@font/noto"
     app:fontStyle="normal"
     app:fontWeight="400" />
 

@@ -30,10 +30,14 @@ public class LockActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_MAIN);
+                /*Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_HOME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                startActivity(intent);*/
+                Intent restart = getApplicationContext().getPackageManager().getLaunchIntentForPackage(getApplicationContext().getPackageName());
+                restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                restart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(restart);
             }
         });
     }
@@ -42,5 +46,16 @@ public class LockActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         aac.runVideoAd();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.e("lock back", "start!");
+        //moveTaskToBack(true);
+        Intent intent = new Intent(Intent.ACTION_MAIN);     // Home으로 이동
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }

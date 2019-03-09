@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.deadlinestudio.lockey.control.NetworkTask;
 import com.deadlinestudio.lockey.model.User;
@@ -73,6 +74,8 @@ public class KakaoLoginActivity extends AppCompatActivity {
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
             Log.e("SessionCallback :: ", "onSessionOpenFailed : " + exception.getMessage());
+            String toastMsg = "로그인에 실패하였습니다.";
+            Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
             finish(); // LoginActivity로 돌아가기
         }
 
@@ -150,6 +153,9 @@ public class KakaoLoginActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(ErrorResult errorResult) {
                     Log.e("SessionCallback :: ", "onFailure : " + errorResult.getErrorMessage());
+                    String toastMsg = "로그인에 실패하였습니다.";
+                    Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             });
         }

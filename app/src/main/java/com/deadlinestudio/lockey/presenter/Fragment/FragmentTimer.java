@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Point;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -19,13 +21,20 @@ import android.os.Vibrator;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +43,7 @@ import com.deadlinestudio.lockey.model.Data;
 import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Controller.CaulyAdController;
+import com.deadlinestudio.lockey.presenter.Controller.GrantController;
 import com.deadlinestudio.lockey.presenter.Item.BasicTimer;
 import com.deadlinestudio.lockey.presenter.Item.ItemApplock;
 import com.deadlinestudio.lockey.presenter.Service.TimerService;
@@ -50,6 +60,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 public class FragmentTimer extends Fragment{
     private TextView targetView, totalView;
     private Button startBtn, quaterBtn, halfBtn, tripleBtn, fullBtn;
+    private int maxHeight, heightRemain, maxScroll;
     private long targetTime = 0;
     private double achievement;
     public static BasicTimer bt;
@@ -60,8 +71,17 @@ public class FragmentTimer extends Fragment{
     private boolean seekbarLimit = false;
     private boolean dialogClosed = true;
     CaulyAdController cac;
+    GrantController gc;
     private NotificationManager mNotificationManager;
 
+    private int priColor;
+    private int whiColor;
+    private boolean hitmax = false;
+    private int actionBarHeight = 0;
+
+    private ConstraintLayout timerCon;
+    private FrameLayout timerTopFrame, timerBottomFrame;
+    private ScrollView timerScroll;
     //private TimerService timerService;
     //private Intent tService;
     //Using the Accelometer & Gyroscoper
@@ -81,14 +101,71 @@ public class FragmentTimer extends Fragment{
 
         /* View Set up*/
         final ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_timer, container,false);
+        mainActivity = (MainActivity) this.getActivity();
+
+        priColor = getResources().getColor(R.color.colorPrimary);
+        whiColor = getResources().getColor(R.color.colorWhite);
+
         targetView = (TextView)rootView.findViewById(R.id.TargetTimeText);
         totalView = (TextView)rootView.findViewById(R.id.TotalTimeText);
         startBtn = rootView.findViewById(R.id.timerStartBtn);
-        seekBar = rootView.findViewById(R.id.seekArc);
-        quaterBtn = rootView.findViewById(R.id.quickQuaterBtn);
-        halfBtn = rootView.findViewById(R.id.quickHalfBtn);
-        tripleBtn = rootView.findViewById(R.id.quickTripleBtn);
-        fullBtn = rootView.findViewById(R.id.quickFullBtn);
+
+        timerTopFrame = rootView.findViewById(R.id.timerTopFrame);
+        timerBottomFrame = rootView.findViewById(R.id.timerBottomFrame);
+        timerScroll = rootView.findViewById(R.id.timerScroll);
+
+
+        TypedValue tv = new TypedValue();
+        if (mainActivity.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)){
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
+            //Log.v("akq", String.valueOf(actionBarHeight));
+        }
+
+        int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+        int height = Resources.getSystem().getDisplayMetrics().heightPixels-actionBarHeight;
+
+        timerTopFrame.setLayoutParams(new LinearLayout.LayoutParams(width,height));
+        timerBottomFrame.setLayoutParams(new LinearLayout.LayoutParams(width,height));
+
+        maxHeight = height;
+        heightRemain = 150;
+        maxHeight -= heightRemain;
+
+        int step = maxHeight/48;
+        timerScroll.setScrollY(actionBarHeight);
+
+        timerScroll.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                int scrollY = timerScroll.getScrollY();
+                int progress = (scrollY/step);
+
+                if(scrollY<=actionBarHeight){
+                    timerScroll.setScrollY(actionBarHeight);
+                    targetTime = 0;
+                }else if(scrollY>maxHeight){
+                    targetTime = 48*300000;
+                    if(!hitmax){
+                        timerTopFrame.setBackgroundColor(priColor);
+                        hitmax = true;
+                    }
+                }else if(scrollY<maxHeight){
+                    targetTime = progress*300000;
+                    if(hitmax){
+                        timerTopFrame.setBackgroundColor(whiColor);
+                        hitmax = false;
+                    }
+                }
+                bt.setTargetTime(targetTime);
+                updateTextview();
+            }
+        });
+
+//        seekBar = rootView.findViewById(R.id.seekArc);
+//        quaterBtn = rootView.findViewById(R.id.quickQuaterBtn);
+//        halfBtn = rootView.findViewById(R.id.quickHalfBtn);
+//        tripleBtn = rootView.findViewById(R.id.quickTripleBtn);
+//        fullBtn = rootView.findViewById(R.id.quickFullBtn);
 
         /* timer set up*/
         bt = new BasicTimer(targetTime);
@@ -112,12 +189,14 @@ public class FragmentTimer extends Fragment{
         cac = new CaulyAdController(mainActivity);
         cac.makeInterstitialAd();
 
+        /* GrantController */
+        gc = new GrantController(mainActivity);
+
         /* do not disturb mode NotificationManager */
         mNotificationManager = (NotificationManager) mainActivity.getSystemService(NOTIFICATION_SERVICE);
-        if (!mNotificationManager.isNotificationPolicyAccessGranted()) {
-            Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-            startActivity(intent);
-        }
+        if(!gc.checkAlertGrant(mNotificationManager))
+            gc.settingAccessGrant();
+
 
         /*
         //send timer object to
@@ -142,11 +221,12 @@ public class FragmentTimer extends Fragment{
          **/
         startBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
-            public void onClick(View view){
-                if(timerOn){
+            public void onClick(View view) {
+                if (timerOn) {
                     // timer stop!!
                     mSensorManager.unregisterListener(mGyroLis);
-                    startBtn.setBackgroundResource(R.drawable.lock_icon_grey);
+                    startBtn.setText("시작");
+                    //startBtn.setBackgroundResource(R.drawable.lock_icon_grey);
                     timerOn = false;
                     bt.timerStop();
 
@@ -157,10 +237,10 @@ public class FragmentTimer extends Fragment{
                             //achievement = (bt.getTotalTime()/bt.getTargetTime())*100;
                             tempData.setTarget_time(String.valueOf(bt.makeToTimeFormat(targetTime)));
                             tempData.setAmount(String.valueOf(bt.makeToTimeFormat(bt.getTotalTime())));
-                            Log.v("saved",String.valueOf(bt.makeToTimeFormat(bt.getTotalTime())));
+                            Log.v("saved", String.valueOf(bt.makeToTimeFormat(bt.getTotalTime())));
                             showNoticeDialog(tempData);
                         }
-                    },500);
+                    }, 500);
 
                     // get real time
                     Date currentTime = new Date();
@@ -169,108 +249,115 @@ public class FragmentTimer extends Fragment{
 
                     // reset the timer values
                     setTargetTime(0);
-                    seekBar.setProgress(0);
+                    timerTopFrame.setBackgroundColor(whiColor);
+                    timerScroll.setScrollY(actionBarHeight);
+                    //seekBar.setProgress(0);
                     updateTextview();
-                    seekBar.setEnabled(true);
-                }else{
+                    //seekBar.setEnabled(true);
+                } else {
                     /// timer start!
-                    if(bt.getTargetTime() == 0) {
+                    if (bt.getTargetTime() == 0) {
                         Toast.makeText(getContext(), "목표시간을 설정해 주세요.", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
-                    mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
-                    startBtn.setBackgroundResource(R.drawable.lock_icon_color);
-                    timerOn = true;
-                    seekBar.setEnabled(false);
+                    if (!gc.checkAlertGrant(mNotificationManager))
+                        gc.settingAlertGrant();
+                    else {
+                        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
+                        mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
+                        //startBtn.setBackgroundResource(R.drawable.lock_icon_color);
+                        timerOn = true;
 
-                    Toast.makeText(getContext(), "타이머가 시작됩니다\n휴대폰을 뒤집어주세요",
-                            Toast.LENGTH_SHORT).show();
-                    bt.timerStart();
+                        Toast.makeText(getContext(), "타이머가 시작됩니다\n휴대폰을 뒤집어주세요",
+                                Toast.LENGTH_SHORT).show();
+                        bt.timerStart();
 
-                    //timer text change
-                    final Handler timerViewHandler = new Handler();
-                    timerViewHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            targetView.setText(bt.makeToTimeFormat(bt.getTempTarget()));
-                            totalView.setText(bt.makeToTimeFormat(bt.getTotalTime()+1000));
-                            if(endAlert && bt.getTempTarget() == 0)
-                                vibrator.vibrate(300);
-                            timerViewHandler.postDelayed(this,1000);
-                            if(!bt.getOnoff()){
-                                timerViewHandler.removeMessages(0);
-                                updateTextview();
+                        //timer text change
+                        final Handler timerViewHandler = new Handler();
+                        timerViewHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                targetView.setText(bt.makeToTimeFormat(bt.getTempTarget()));
+                                totalView.setText(bt.makeToTimeFormat(bt.getTotalTime() + 1000));
+                                if (endAlert && bt.getTempTarget() == 0)
+                                    vibrator.vibrate(300);
+
+                                timerViewHandler.postDelayed(this, 1000);
+                                if (!bt.getOnoff()) {
+                                    timerViewHandler.removeMessages(0);
+                                    updateTextview();
+                                }
                             }
-                        }
-                    });
-                }
-            }
-        });
-        seekBar.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener() {
-            @Override
-            public void onProgressChanged(SeekArc seekArc, int i, boolean b) {
-                if(targetTime == 0){
-                    targetTime = 1;
-                }else{
-                    //Log.v("aaa", String.valueOf(b));
-                    //Log.v("angle", String.valueOf(seekBar.getSweepAngle()));
-                    int progress = i;
-                    if(i == 48 && !seekbarLimit){
-                        seekbarLimit = true;
+                        });
                     }
-                    // timer max time is 4hours
-                    targetTime = progress*300000;
-                    bt.setTargetTime(targetTime);
-                    updateTextview();
                 }
             }
-            @Override
-            public void onStartTrackingTouch(SeekArc seekArc) {
-            }
-            @Override
-            public void onStopTrackingTouch(SeekArc seekArc) {
-            }
         });
-
-
-
-        quaterBtn.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                targetTime = 3600000; // one hour
-                seekBar.setProgress(12);
-                bt.setTargetTime(targetTime);
-                updateTextview();
-            }
-        });
-        halfBtn.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                targetTime = 7200000; // two hour
-                seekBar.setProgress(24);
-                bt.setTargetTime(targetTime);
-                updateTextview();
-            }
-        });
-        tripleBtn.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                targetTime = 10800000; // three hour
-                seekBar.setProgress(36);
-                bt.setTargetTime(targetTime);
-                updateTextview();
-            }
-        });
-        fullBtn.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                targetTime = 14400000; // one hour
-                seekBar.setProgress(48);
-                bt.setTargetTime(targetTime);
-                updateTextview();
-            }
-        });
+//
+//        seekBar.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekArc seekArc, int i, boolean b) {
+//                if(targetTime == 0){
+//                    targetTime = 1;
+//                }else{
+//                    //Log.v("aaa", String.valueOf(b));
+//                    //Log.v("angle", String.valueOf(seekBar.getSweepAngle()));
+//                    int progress = i;
+//                    if(i == 48 && !seekbarLimit){
+//                        seekbarLimit = true;
+//                    }
+//                    // timer max time is 4hours
+//                    targetTime = progress*300000;
+//                    bt.setTargetTime(targetTime);
+//                    updateTextview();
+//                }
+//            }
+//            @Override
+//            public void onStartTrackingTouch(SeekArc seekArc) {
+//            }
+//            @Override
+//            public void onStopTrackingTouch(SeekArc seekArc) {
+//            }
+//        });
+//
+//
+//
+//        quaterBtn.setOnClickListener(new Button.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                targetTime = 3600000; // one hour
+//                seekBar.setProgress(12);
+//                bt.setTargetTime(targetTime);
+//                updateTextview();
+//            }
+//        });
+//        halfBtn.setOnClickListener(new Button.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                targetTime = 7200000; // two hour
+//                seekBar.setProgress(24);
+//                bt.setTargetTime(targetTime);
+//                updateTextview();
+//            }
+//        });
+//        tripleBtn.setOnClickListener(new Button.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                targetTime = 10800000; // three hour
+//                seekBar.setProgress(36);
+//                bt.setTargetTime(targetTime);
+//                updateTextview();
+//            }
+//        });
+//        fullBtn.setOnClickListener(new Button.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                targetTime = 14400000; // one hour
+//                seekBar.setProgress(48);
+//                bt.setTargetTime(targetTime);
+//                updateTextview();
+//            }
+//        });
 
         return rootView;
     }
@@ -426,7 +513,8 @@ public class FragmentTimer extends Fragment{
                         isReversed = false;
                         timerOn = false;
 
-                        startBtn.setBackgroundResource(R.drawable.lock_icon_grey);
+                        startBtn.setText("시작");
+                        //startBtn.setBackgroundResource(R.drawable.lock_icon_grey);
                         bt.timerStop();
 
                         // need delay to get broadcast msg
@@ -442,9 +530,11 @@ public class FragmentTimer extends Fragment{
                         },500);
 
                         fragmentTimer.setTargetTime(0);
-                        seekBar.setProgress(0);
+                        timerTopFrame.setBackgroundColor(whiColor);
+                        timerScroll.setScrollY(actionBarHeight);
+                       // seekBar.setProgress(0);
                         fragmentTimer.updateTextview();
-                        seekBar.setEnabled(true);
+                        //seekBar.setEnabled(true);
                     }
                 }
             }
