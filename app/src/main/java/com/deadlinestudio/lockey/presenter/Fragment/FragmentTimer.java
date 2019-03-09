@@ -196,9 +196,6 @@ public class FragmentTimer extends Fragment{
 
         /* do not disturb mode NotificationManager */
         mNotificationManager = (NotificationManager) mainActivity.getSystemService(NOTIFICATION_SERVICE);
-        if(!gc.checkAlertGrant(mNotificationManager))
-            gc.settingAccessGrant();
-
 
         /*
         //send timer object to
@@ -263,43 +260,43 @@ public class FragmentTimer extends Fragment{
                         Toast.makeText(getContext(), "목표시간을 설정해 주세요.", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (!gc.checkAlertGrant(mNotificationManager))
+                    if (!gc.checkAlertGrant(mNotificationManager)) {    // 방해금지모드 권한 검사
                         gc.settingAlertGrant();
-                    else {
-                        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
-                        mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
-                        //startBtn.setBackgroundResource(R.drawable.lock_icon_color);
-                        timerOn = true;
-                        startBtn.setText("정지");
-                        timerScroll.setEnableScrolling(false);
-                        endAlert = true;
-                        Toast.makeText(getContext(), "타이머가 시작됩니다\n휴대폰을 뒤집어주세요",
-                                Toast.LENGTH_SHORT).show();
-                        bt.timerStart();
-
-                        //timer text change
-                        final Handler timerViewHandler = new Handler();
-                        timerViewHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                targetView.setText(bt.makeToTimeFormat(bt.getTempTarget()));
-                                totalView.setText(bt.makeToTimeFormat(bt.getTotalTime() + 1000));
-                                if (endAlert && bt.getTempTarget() <= 1000) {
-                                    Log.e("시간 다됬음","진동울리자");
-                                    endAlert = false;
-                                    mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);        // turn off DO NOT DISTURB MODE
-                                    vibrator.vibrate(300);
-                                }
-                                timerViewHandler.postDelayed(this, 1000);
-                                if (!bt.getOnoff()) {
-                                    Log.e("시간 다됬음","설정시간 : "+bt.getTargetTime()+" 남은시간 : "+bt.getTempTarget());
-                                    timerViewHandler.removeMessages(0);
-                                    updateTextview();
-                                }
-                                Log.e("짠 시간 다됬음","설정시간 : "+bt.getTargetTime()+" 남은시간 : "+bt.getTempTarget());
-                            }
-                        });
+                        return;
                     }
+                    mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
+                    mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
+                    //startBtn.setBackgroundResource(R.drawable.lock_icon_color);
+                    timerOn = true;
+                    startBtn.setText("정지");
+                    timerScroll.setEnableScrolling(false);
+                    endAlert = true;
+                    Toast.makeText(getContext(), "타이머가 시작됩니다\n휴대폰을 뒤집어주세요",
+                            Toast.LENGTH_SHORT).show();
+                    bt.timerStart();
+
+                    //timer text change
+                    final Handler timerViewHandler = new Handler();
+                    timerViewHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            targetView.setText(bt.makeToTimeFormat(bt.getTempTarget()));
+                            totalView.setText(bt.makeToTimeFormat(bt.getTotalTime() + 1000));
+                            if (endAlert && bt.getTempTarget() <= 1000) {
+                                Log.e("시간 다됬음","진동울리자");
+                                endAlert = false;
+                                mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);        // turn off DO NOT DISTURB MODE
+                                vibrator.vibrate(300);
+                            }
+                            timerViewHandler.postDelayed(this, 1000);
+                            if (!bt.getOnoff()) {
+                                Log.e("시간 다됬음","설정시간 : "+bt.getTargetTime()+" 남은시간 : "+bt.getTempTarget());
+                                timerViewHandler.removeMessages(0);
+                                updateTextview();
+                            }
+                            Log.e("짠 시간 다됬음","설정시간 : "+bt.getTargetTime()+" 남은시간 : "+bt.getTempTarget());
+                        }
+                    });
                 }
             }
         });
