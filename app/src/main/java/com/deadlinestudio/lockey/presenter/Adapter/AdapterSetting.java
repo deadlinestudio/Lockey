@@ -37,6 +37,8 @@ public class AdapterSetting extends BaseAdapter{
     ArrayList<ItemSetting> items = new ArrayList<ItemSetting>();
     private MainActivity mainActivity;
     private Context context;
+    AlertDialog.Builder builder;
+    Intent intent;
     private LogfileController lfc;
     final String filename = "userlog.txt";
 
@@ -73,7 +75,6 @@ public class AdapterSetting extends BaseAdapter{
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = null;
                 switch (mode){
                     case 0: // 도움말
                         break;
@@ -83,7 +84,7 @@ public class AdapterSetting extends BaseAdapter{
                             Toast.makeText(mainActivity.getBaseContext(), toastMsg, Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
+                        builder = new AlertDialog.Builder(mainActivity);
                         builder.setTitle("알림");
                         builder.setMessage("초기화 하실 경우 다시 되돌릴 수 없습니다. 그래도 계속하시겠습니까?");
                         builder.setPositiveButton("예",
@@ -113,22 +114,39 @@ public class AdapterSetting extends BaseAdapter{
                         break;
                     case 3:  //로그 아웃
                         Log.e("deb/logout", "in");
-                        lfc.WriteLogFile(context,filename,"nofile",2);
+                        builder = new AlertDialog.Builder(mainActivity);
+                        builder.setTitle("알림");
+                        builder.setMessage("초기화 하실 경우 다시 되돌릴 수 없습니다. 그래도 계속하시겠습니까?");
+                        builder.setPositiveButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        lfc.WriteLogFile(context,filename,"nofile",2);
 
-                        if(mainActivity.getSns().equals("1")) {
-                            intent = new Intent(mainActivity, GoogleLoginActivity.class);
-                            intent.putExtra("InOut", 2);
-                        }else if(mainActivity.getSns().equals("2")){
-                            intent = new Intent(mainActivity, NaverLoginActivity.class);
-                            intent.putExtra("InOut", 2);
-                        }else if(mainActivity.getSns().equals("3")){
-                            intent = new Intent(mainActivity, KakaoLoginActivity.class);
-                            intent.putExtra("InOut", 2);
-                        } else {
-                            intent = new Intent(mainActivity, LoginActivity.class);
-                        }
-                        mainActivity.startActivity(intent);
-                        mainActivity.finish();
+                                        if(mainActivity.getSns().equals("1")) {
+                                            intent = new Intent(mainActivity, GoogleLoginActivity.class);
+                                            intent.putExtra("InOut", 2);
+                                        }else if(mainActivity.getSns().equals("2")){
+                                            intent = new Intent(mainActivity, NaverLoginActivity.class);
+                                            intent.putExtra("InOut", 2);
+                                        }else if(mainActivity.getSns().equals("3")){
+                                            intent = new Intent(mainActivity, KakaoLoginActivity.class);
+                                            intent.putExtra("InOut", 2);
+                                        } else {
+                                            intent = new Intent(mainActivity, LoginActivity.class);
+                                        }
+                                        mainActivity.startActivity(intent);
+                                        mainActivity.finish();
+                                    }
+                                });
+                        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+                        builder.show();
+
                         break;
                 }
             }
