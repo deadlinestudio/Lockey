@@ -122,7 +122,7 @@ public class ItemViewAlysBarChart extends LinearLayout {
         double avg = 0;
         if(analysisData == null) {
             if(xLabels == null) {
-                xLabels = new String[] {"~01.07","~01.14","~01.21","~01.28","~02.04"};
+                xLabels = new String[] {"~01.07", "~01.14","~01.21","~01.28"};
             }
             for(int i = 0; i < xLabels.length; i++) {
                 float randValue = (float) (Math.round(Math.random() * 10)/1.0);
@@ -144,6 +144,7 @@ public class ItemViewAlysBarChart extends LinearLayout {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
                 //Print.e(value);
+                Log.e("xAxis-value", Float.toString(value));
                 return xLabels[(int)value];
             }
         });
