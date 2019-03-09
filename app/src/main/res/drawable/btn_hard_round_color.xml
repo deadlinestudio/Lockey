@@ -12,7 +12,11 @@
                 android:topLeftRadius="20dp"
                 android:topRightRadius="20dp" />
 
-            <solid android:color="@color/colorPrimary" />
+            <gradient
+                android:startColor="@color/colorPrimary"
+                android:endColor="@color/colorSecond"
+                android:angle="0"/>
+
 
         </shape>
     </item>

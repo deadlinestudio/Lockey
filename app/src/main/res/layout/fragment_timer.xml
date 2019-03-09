@@ -134,12 +134,12 @@
 
             <Button
                 android:id="@+id/timerStartBtn"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="135dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
-                android:elevation="1dp"
-                android:background="@drawable/lock_icon_grey"
+                android:background="@drawable/btn_hard_round"
                 android:textColor="@color/darkGrey"
+                android:text="@string/start"
                 android:textSize="16sp" />
         </FrameLayout>
 

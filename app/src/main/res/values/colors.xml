@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#85CC9F</color>
+    <color name="colorPrimary">#4adb9c</color>
+    <!--<color name="colorPrimary">#85CC9F</color>-->
     <color name="colorPrimary_ultra_light">#e2f0e7</color>
     <color name="colorPrimary_lighter">#d7e7dd</color>
     <color name="colorPrimary_light">#8bb79b</color>
     <color name="colorPrimary_soft">#C8E8C7</color>
 
+    <!--<color name="colorSecond">#4adb9c</color>-->
+    <color name="colorSecond">#49D3CC</color>
+    <!--<color name="colorSecond">#9FD5B5</color>-->
     <color name="darkGrey">#aaaaaa</color>
     <color name="lightGrey">#dadada</color>
 

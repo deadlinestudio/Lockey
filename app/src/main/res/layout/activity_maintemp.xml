@@ -1,155 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/timerTopbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:gravity="end"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/timerNotiBtn"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="end"
-            android:background="@drawable/agumon" />
-        <TextView
-            android:id="@+id/timerNotiText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="8dp"
-            android:text="@string/disableNotiSound" />
-    </android.support.v7.widget.Toolbar>
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="76dp"
+        android:layout_height="75dp"
+        app:srcCompat="@drawable/lockey_newicon"
+        tools:layout_editor_absoluteX="167dp"
+        tools:layout_editor_absoluteY="197dp" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timerTopbar">
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="340dp"
+        android:text="당신의 시간은 항상 소중하니까"
+        android:textColor="@color/darkGrey"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:text="효율적인 시간 관리 서비스"
+        android:textColor="@color/colorPrimary"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="305dp" />
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/timer_seekbar_bg" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="324dp"
+        android:layout_height="52dp"
+        android:background="@drawable/btn_hard_round"
+        android:text="로그인"
+        android:textColor="@color/darkGrey"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="454dp" />
 
-            <TextView
-                android:id="@+id/unTimerText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="90:90"
-                android:textColor="@color/colorBlack_light"
-                android:textSize="48sp" />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="324dp"
+        android:layout_height="52dp"
+        android:background="@drawable/btn_hard_round_color"
+        android:text="회원가입"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="390dp" />
 
-            <com.triggertrap.seekarc.SeekArc
-                android:id="@+id/seekArc"
-                android:layout_width="235dp"
-                android:layout_height="235dp"
-                android:layout_gravity="center"
-                android:padding="20dp"
-                app:arcColor="@color/colorPrimary_lighter"
-                app:arcWidth="7dp"
-                app:elevation="0dp"
-                app:progressColor="@color/colorPrimary"
-                app:progressWidth="12dp"
-                app:startAngle="0"
-                app:sweepAngle="360"
-                app:thumb="@drawable/btn_thumb"
-                app:touchInside="true" />
-        </FrameLayout>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비회원으로 시작하기 >"
+        android:textColor="@color/darkGrey"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="142dp"
+        tools:layout_editor_absoluteY="513dp" />
 
-        <LinearLayout
-            android:id="@+id/btncollect"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/hardMinusBtn"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:background="@drawable/btn_oval"
-                android:textColor="@color/colorWhite"
-                android:text="@string/minus" />
-
-            <Button
-                android:id="@+id/softMinusBtn"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/btn_oval"
-                android:textColor="@color/colorWhite"
-                android:text="@string/minus" />
-
-            <Button
-                android:id="@+id/softPlusBtn"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/btn_oval"
-
-                android:textColor="@color/colorWhite"
-                android:text="@string/plus" />
-
-            <Button
-                android:id="@+id/hardPlusBtn"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/btn_oval"
-
-                android:textColor="@color/colorWhite"
-                android:text="@string/plus" />
-        </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp">
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/lock_icon_grey" />
-
-            <Button
-                android:id="@+id/lockStartBtn"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:background="@drawable/btn_oval_stroke"
-                android:textColor="@color/darkGrey"
-                android:textSize="16sp" />
-        </FrameLayout>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lockey"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="177dp"
+        tools:layout_editor_absoluteY="263dp" />
 
 </android.support.constraint.ConstraintLayout>
