@@ -24,5 +24,6 @@
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OpenSourceToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/OpenSourceToolbar"
+        app:fontFamily="@font/my_font_family"/>
 </android.support.constraint.ConstraintLayout>

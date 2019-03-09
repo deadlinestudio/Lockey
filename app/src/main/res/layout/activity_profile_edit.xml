@@ -19,7 +19,8 @@
             android:textColor="@color/colorBlack"
             android:textSize="17sp"
             android:text="@string/profileEdit"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            app:fontFamily="@font/my_font_family"/>
         <TextView
             android:id="@+id/profileEditSaveBtn"
             android:layout_width="wrap_content"
@@ -30,7 +31,8 @@
             android:background="@color/colorWhite"
             android:textColor="@color/colorBlack_light"
             android:textSize="16sp"
-            android:text="@string/save" />
+            android:text="@string/save"
+            app:fontFamily="@font/my_font_family"/>
         <ImageView
             android:id="@+id/profileEditCancel"
             android:layout_width="16dp"
@@ -75,7 +77,8 @@
                 android:background="@color/colorWhite"
                 android:text="@string/id"
                 android:textColor="@color/colorBlack_light"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:fontFamily="@font/my_font_family"/>
 
             <TextView
                 android:id="@+id/proEditIdText"
@@ -85,7 +88,8 @@
                 android:background="@color/colorWhite"
                 android:text="@string/id"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                app:fontFamily="@font/my_font_family"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -101,7 +105,8 @@
             android:background="@color/colorWhite"
             android:text="@string/nickname"
             android:textColor="@color/colorBlack_light"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            app:fontFamily="@font/my_font_family"/>
         <EditText
             android:id="@+id/proEditNickText"
             android:layout_width="match_parent"
@@ -111,7 +116,8 @@
             android:background="@color/colorWhite"
             android:text="@string/id"
             android:textColor="@color/colorBlack"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:fontFamily="@font/my_font_family"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -121,7 +127,8 @@
             android:background="@color/colorWhite"
             android:text="@string/job"
             android:textColor="@color/colorBlack_light"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            app:fontFamily="@font/my_font_family"/>
         <Spinner
             android:id="@+id/editJobSpinner"
             android:layout_width="match_parent"
@@ -144,7 +151,8 @@
             android:background="@color/colorWhite"
             android:text="@string/id"
             android:textColor="@color/colorBlack"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:fontFamily="@font/my_font_family"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="2px"
@@ -161,6 +169,7 @@
             android:background="@color/colorWhite"
             android:text="@string/serviceOut"
             android:textColor="@color/colorBlack_light"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            app:fontFamily="@font/my_font_family"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

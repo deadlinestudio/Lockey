@@ -66,7 +66,8 @@
                         android:padding="8dp"
                         android:text="@string/nickname"
                         android:textColor="#000"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        app:fontFamily="@font/my_font_family"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -74,7 +75,8 @@
                         android:gravity="center"
                         android:text="@string/totalFocusTime"
                         android:textColor="#000"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:fontFamily="@font/my_font_family"/>
 
                     <TextView
                         android:id="@+id/userTotalTimeText"
@@ -84,7 +86,8 @@
                         android:padding="2dp"
                         android:text="0 시간"
                         android:textColor="@color/colorPrimary_light"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        app:fontFamily="@font/my_font_family"/>
 
                     <!--
                     <TextView
@@ -134,17 +137,20 @@
                     <android.support.design.widget.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/weeklyTab" />
+                        android:text="@string/weeklyTab"
+                        app:fontFamily="@font/my_font_family"/>
 
                     <android.support.design.widget.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/monthlyTab" />
+                        android:text="@string/monthlyTab"
+                        app:fontFamily="@font/my_font_family"/>
 
                     <android.support.design.widget.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/totalTab" />
+                        android:text="@string/totalTab"
+                        app:fontFamily="@font/my_font_family"/>
                 </android.support.design.widget.TabLayout>
 
                 <com.deadlinestudio.lockey.presenter.Fragment.NoSwipePager
