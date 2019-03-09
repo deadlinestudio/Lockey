@@ -46,7 +46,7 @@
             android:includeFontPadding="false" />
     </LinearLayout>
 
-    <ScrollView
+    <com.deadlinestudio.lockey.presenter.Item.CustomScrollView
         android:id="@+id/timerScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
 
             </FrameLayout>
         </LinearLayout>
-    </ScrollView>
+    </com.deadlinestudio.lockey.presenter.Item.CustomScrollView>
 
     <Button
         android:id="@+id/timerStartBtn"
