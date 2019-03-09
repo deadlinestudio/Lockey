@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.deadlinestudio.lockey.control.NetworkTask;
 import com.deadlinestudio.lockey.model.User;
@@ -121,8 +122,8 @@ public class NaverLoginActivity extends AppCompatActivity {
             } else {
                 String errorCode = mOAuthLoginInstance.getLastErrorCode(mContext).getCode();
                 String errorDesc = mOAuthLoginInstance.getLastErrorDesc(mContext);
-                Log.d(TAG, "errorCode:" + mOAuthLoginInstance.getLastErrorCode(mContext));
-                Log.d(TAG, "errorDesc:" + mOAuthLoginInstance.getLastErrorDesc(mContext));
+                Log.e(TAG, "errorCode:" + mOAuthLoginInstance.getLastErrorCode(mContext));
+                Log.e(TAG, "errorDesc:" + mOAuthLoginInstance.getLastErrorDesc(mContext));
             }
         }
 
@@ -208,6 +209,9 @@ public class NaverLoginActivity extends AppCompatActivity {
                 }
             } catch(Exception e) {
                 e.printStackTrace();
+                String toastMsg = "인터넷을 연결해주세요.";
+                Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
 
@@ -236,6 +240,9 @@ public class NaverLoginActivity extends AppCompatActivity {
 
             } catch(Exception e) {
                 e.printStackTrace();
+                String toastMsg = "로그인에 실패하였습니다.";
+                Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             return null;
