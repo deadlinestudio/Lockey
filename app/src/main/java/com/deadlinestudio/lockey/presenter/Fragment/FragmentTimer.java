@@ -320,6 +320,7 @@ public class FragmentTimer extends Fragment{
 
         final AlertDialog dialog = builder.create();
         dialog.show();
+        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);        // turn off DO NOT DISTURB MODE
 
         Button cancelSaveBtn = dialog.findViewById(R.id.cancelSaveBtn);
         Button saveBtn = dialog.findViewById(R.id.saveBtn);
@@ -343,7 +344,6 @@ public class FragmentTimer extends Fragment{
                         String toastMsg = "비회원은 저장되지 않습니다";
                         Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG).show();
                     }
-                    mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);        // turn off DO NOT DISTURB MODE
                     cac.runInterstitialAd();
                 } catch(Exception e) {
                     e.printStackTrace();
