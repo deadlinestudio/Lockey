@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <font
-    android:font="@font/noto"
+    android:font="@font/nanumgothic"
     android:fontStyle="normal"
     android:fontWeight="200"
     app:font="@font/noto"

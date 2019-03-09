@@ -169,9 +169,7 @@ public class OpenSourceActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
-                Intent mintent = new Intent(getApplicationContext(), MainActivity.class);
-                mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(mintent);
+                onBackPressed();
                 return true;
             }
         }
@@ -180,8 +178,5 @@ public class OpenSourceActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent mintent = new Intent(getApplicationContext(),MainActivity.class);
-        mintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(mintent);
     }
 }

@@ -1,6 +1,8 @@
 package com.deadlinestudio.lockey.presenter.Controller;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.content.Intent;
 import android.util.Log;
 
 import com.google.android.gms.ads.AdRequest;
@@ -9,12 +11,15 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 public class AdmobAdController implements RewardedVideoAdListener{
     private RewardedVideoAd mRewardedVideoAd;
     private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";      //ca-app-pub-8600536608045213~4285578189
     private static final String APP_ID = "ca-app-pub-3940256099942544~3347511713";          //ca-app-pub-8600536608045213/7270108792
     private Activity act;
     private boolean load;
+    private NotificationManager mNotificationManager;
 
     public AdmobAdController(Activity activity){
         this.act = activity;
@@ -28,8 +33,15 @@ public class AdmobAdController implements RewardedVideoAdListener{
     }
 
     private void loadRewardedVideoAd() {
-        if(!mRewardedVideoAd.isLoaded())
+        if(!mRewardedVideoAd.isLoaded()) {
+            /* do not disturb mode NotificationManager */
+            mNotificationManager = (NotificationManager) act.getSystemService(NOTIFICATION_SERVICE);
+            if (!mNotificationManager.isNotificationPolicyAccessGranted()) {
+                Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                act.startActivity(intent);
+            }
             mRewardedVideoAd.loadAd(AD_UNIT_ID, new AdRequest.Builder().build());
+        }
     }
 
     public void runVideoAd(){
@@ -51,6 +63,7 @@ public class AdmobAdController implements RewardedVideoAdListener{
     @Override
     public void onRewardedVideoAdOpened() {
         Log.e("보상형"," 광고 열렸다");
+        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
     }
 
     @Override
@@ -61,12 +74,14 @@ public class AdmobAdController implements RewardedVideoAdListener{
     @Override
     public void onRewardedVideoAdClosed() {
         Log.e("보상형"," 광고 껐다");
+        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);       // turn off DO NOT DISTURB MODE
     }
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
         // 보상형 광고
         Log.e("보상형"," 광고 다봤다");
+        mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);       // turn off DO NOT DISTURB MODE
     }
 
     @Override
