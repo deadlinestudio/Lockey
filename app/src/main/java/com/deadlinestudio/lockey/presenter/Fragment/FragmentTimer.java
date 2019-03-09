@@ -91,6 +91,7 @@ public class FragmentTimer extends Fragment{
     private SensorEventListener mGyroLis;
     private Sensor mGgyroSensor = null;
     private Vibrator vibrator;
+    private boolean endAlert = true;
     public MainActivity mainActivity;
 
     public FragmentTimer(){}
@@ -212,7 +213,7 @@ public class FragmentTimer extends Fragment{
         mGyroLis = new GyroscopeListener(this);
         vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
 
-        boolean endAlert = true;
+
 
         /**
          * @brief timer btn listener, make the timer stop/start & load pop dialog
@@ -267,7 +268,7 @@ public class FragmentTimer extends Fragment{
                         mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
                         //startBtn.setBackgroundResource(R.drawable.lock_icon_color);
                         timerOn = true;
-
+                        endAlert = true;
                         Toast.makeText(getContext(), "타이머가 시작됩니다\n휴대폰을 뒤집어주세요",
                                 Toast.LENGTH_SHORT).show();
                         bt.timerStart();
@@ -279,9 +280,10 @@ public class FragmentTimer extends Fragment{
                             public void run() {
                                 targetView.setText(bt.makeToTimeFormat(bt.getTempTarget()));
                                 totalView.setText(bt.makeToTimeFormat(bt.getTotalTime() + 1000));
-                                if (endAlert && bt.getTempTarget() == 0)
+                                if (endAlert && bt.getTempTarget() == 0) {
                                     vibrator.vibrate(300);
-
+                                    endAlert = false;
+                                }
                                 timerViewHandler.postDelayed(this, 1000);
                                 if (!bt.getOnoff()) {
                                     timerViewHandler.removeMessages(0);

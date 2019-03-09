@@ -136,7 +136,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                     Toast.makeText(cont, toastMsg, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                AlertDialog.Builder builder = new AlertDialog.Builder(cont);
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setTitle("알림");
                 builder.setMessage("회원탈퇴 하실 경우 다시 되돌릴 수 없습니다. 그래도 계속하시겠습니까?");
                 builder.setPositiveButton("예",
