@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.deadlinestudio.lockey.R;
 
 public class ItemViewSetting extends LinearLayout{
-    TextView menuText;
+    private TextView menuText;
 
     public ItemViewSetting(Context context) {
         super(context);
@@ -31,5 +31,7 @@ public class ItemViewSetting extends LinearLayout{
     public void setMenuText(String s) {
         menuText.setText(s);
     }
-
+    public TextView getMenuText(){
+        return this.menuText;
+    }
 }

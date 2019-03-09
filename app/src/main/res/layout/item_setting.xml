@@ -6,7 +6,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginBottom="5dp"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    app:fontFamily="@font/my_font_family"
+    android:includeFontPadding="false">
     <TextView
         android:id = "@+id/settingText"
         android:layout_width="match_parent"
