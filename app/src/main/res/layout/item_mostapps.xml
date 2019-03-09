@@ -22,13 +22,15 @@
         android:layout_height="wrap_content"
         android:text="hello"
         android:textColor="@color/colorBlack_light"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        app:fontFamily="@font/my_font_family"/>
     <TextView
         android:id="@+id/mostAppTimeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="10시간 10분"
         android:textColor="@color/darkGrey"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        app:fontFamily="@font/my_font_family"/>
 
 </LinearLayout>

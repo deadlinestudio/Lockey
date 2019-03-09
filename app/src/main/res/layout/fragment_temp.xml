@@ -27,7 +27,8 @@ android:layout_height="match_parent">
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textColor="@color/colorPrimary"
-        android:textSize="58sp" />
+        android:textSize="58sp"
+        app:fontFamily="@font/my_font_family"/>
 
     <TextView
         android:id="@+id/TotalTimeText"
@@ -35,7 +36,8 @@ android:layout_height="match_parent">
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textColor="@android:color/darker_gray"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        app:fontFamily="@font/my_font_family"/>
 
 </LinearLayout>
 
@@ -50,7 +52,8 @@ android:layout_height="match_parent">
     app:layout_constraintBottom_toTopOf="@+id/seekArc"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+    app:fontFamily="@font/my_font_family"/>
 
 <Button
     android:id="@+id/minusMinBtn"
@@ -64,7 +67,8 @@ android:layout_height="match_parent">
     android:textColor="@color/colorPrimary"
     app:layout_constraintEnd_toStartOf="@+id/seekArc"
     app:layout_constraintStart_toStartOf="@+id/seekArc"
-    app:layout_constraintTop_toTopOf="@+id/seekArc" />
+    app:layout_constraintTop_toTopOf="@+id/seekArc"
+    app:fontFamily="@font/my_font_family"/>
 
 <Button
     android:id="@+id/plusMinBtn"
@@ -78,7 +82,8 @@ android:layout_height="match_parent">
     android:textColor="@color/colorPrimary"
     app:layout_constraintEnd_toEndOf="@+id/seekArc"
     app:layout_constraintStart_toEndOf="@+id/seekArc"
-    app:layout_constraintTop_toTopOf="@+id/seekArc" />
+    app:layout_constraintTop_toTopOf="@+id/seekArc"
+    app:fontFamily="@font/my_font_family"/>
 <Button
     android:id="@+id/StartBtn"
     android:layout_width="100dp"
@@ -91,7 +96,8 @@ android:layout_height="match_parent">
     app:layout_constraintBottom_toBottomOf="@+id/seekArc"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/seekArc" />
+    app:layout_constraintTop_toTopOf="@+id/seekArc"
+    app:fontFamily="@font/my_font_family"/>
 
 <com.triggertrap.seekarc.SeekArc
     android:id="@+id/seekArc"

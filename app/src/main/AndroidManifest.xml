@@ -32,8 +32,6 @@
         </activity>
         <activity android:name=".presenter.Activity.LockActivity">
         </activity>
-        <activity android:name=".presenter.Activity.AppLockActivity">
-        </activity>
         <activity android:name=".presenter.Activity.GoogleLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
         </activity>
         <activity android:name=".presenter.Activity.KakaoLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">

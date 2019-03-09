@@ -39,7 +39,8 @@
                 android:layout_height="match_parent"
                 android:elevation="1dp"
                 android:gravity="center"
-                android:text="@string/googleSignup" />
+                android:text="@string/googleSignup"
+                app:fontFamily="@font/my_font_family"/>
         </FrameLayout>
 
         <FrameLayout
@@ -62,7 +63,8 @@
                 android:elevation="1dp"
                 android:gravity="center"
                 android:text="@string/naverSignup"
-                android:textColor="#FFF" />
+                android:textColor="#FFF"
+                app:fontFamily="@font/my_font_family"/>
         </FrameLayout>
 
         <FrameLayout
@@ -85,7 +87,8 @@
                 android:layout_height="match_parent"
                 android:elevation="1dp"
                 android:gravity="center"
-                android:text="@string/kakaoSignup" />
+                android:text="@string/kakaoSignup"
+                app:fontFamily="@font/my_font_family"/>
         </FrameLayout>
 
     </LinearLayout>
@@ -103,5 +106,6 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:fontFamily="@font/my_font_family"/>
 </android.support.constraint.ConstraintLayout>

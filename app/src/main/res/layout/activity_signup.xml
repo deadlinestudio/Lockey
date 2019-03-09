@@ -19,7 +19,8 @@
             android:textColor="@color/colorBlack"
             android:textSize="17sp"
             android:text="@string/signup"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            app:fontFamily="@font/my_font_family"/>
     </android.support.v7.widget.Toolbar>
 
 
@@ -42,7 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack_light"
-                android:text="@string/nickname" />
+                android:text="@string/nickname"
+                app:fontFamily="@font/my_font_family"/>
 
             <EditText
                 android:id="@+id/nicknameeditText"
@@ -52,14 +54,16 @@
                 android:textColor="@color/colorBlack"
                 android:ems="8"
                 android:inputType="text"
-                android:hint="@string/nickname_example" />
+                android:hint="@string/nickname_example"
+                app:fontFamily="@font/my_font_family"/>
 
             <TextView
                 android:id="@+id/ageshowText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack_light"
-                android:text="@string/age" />
+                android:text="@string/age"
+                app:fontFamily="@font/my_font_family"/>
 
             <EditText
                 android:id="@+id/ageeditText"
@@ -69,7 +73,8 @@
                 android:textColor="@color/colorBlack"
                 android:ems="8"
                 android:hint="ex) 23"
-                android:inputType="number" />
+                android:inputType="number"
+                app:fontFamily="@font/my_font_family"/>
 
             <TextView
                 android:id="@+id/jobshowText"
@@ -77,7 +82,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:textColor="@color/colorBlack_light"
-                android:text="@string/job" />
+                android:text="@string/job"
+                app:fontFamily="@font/my_font_family"/>
 
             <Spinner
                 android:id="@+id/jobSpinner"
@@ -98,7 +104,8 @@
                 android:ems="8"
                 android:textColor="@color/colorBlack"
                 android:inputType="text"
-                android:hint="@string/job_example" />
+                android:hint="@string/job_example"
+                app:fontFamily="@font/my_font_family"/>
         </LinearLayout>
     </ScrollView>
 
@@ -111,6 +118,7 @@
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:fontFamily="@font/my_font_family"/>
 
 </android.support.constraint.ConstraintLayout>

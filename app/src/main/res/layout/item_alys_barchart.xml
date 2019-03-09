@@ -15,7 +15,8 @@
         android:background="@color/colorWhite"
         android:paddingStart="30dp"
         android:textSize="20sp"
-        android:textColor="#000"/>
+        android:textColor="#000"
+        app:fontFamily="@font/my_font_family"/>
     <com.github.mikephil.charting.charts.BarChart
         android:id = "@+id/barChart"
         android:layout_width="match_parent"
@@ -32,6 +33,7 @@
         android:paddingStart="30dp"
         android:textSize="20sp"
         android:textColor="@color/colorPrimary_light"
+        app:fontFamily="@font/my_font_family"
         />
 
     <TextView
@@ -40,5 +42,6 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary_light"
         android:paddingStart="30dp"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        app:fontFamily="@font/my_font_family"/>
 </LinearLayout>

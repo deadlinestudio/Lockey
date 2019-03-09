@@ -24,7 +24,8 @@
         android:text="00:00:00"
         android:textSize="40sp"
         android:textColor="@color/colorPrimary"
-        android:gravity="center"/>
+        android:gravity="center"
+        app:fontFamily="@font/my_font_family"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +34,8 @@
         android:textColor="@color/colorBlack_light"
         android:text="집중 완료"
 
-        android:gravity="center"/>
+        android:gravity="center"
+        app:fontFamily="@font/my_font_family"/>
 
     <EditText
         android:id="@+id/categoryText"
@@ -48,7 +50,8 @@
         android:gravity="center"
         android:backgroundTint="@color/colorPrimary"
         android:inputType="text"
-        android:hint="무엇에 집중 하셨나요?"/>
+        android:hint="무엇에 집중 하셨나요?"
+        app:fontFamily="@font/my_font_family"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,7 +65,8 @@
             android:background="@color/darkGrey"
             android:text="@string/cancel"
             android:textColor="#fff"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:fontFamily="@font/my_font_family"/>
 
         <Button
             android:id="@+id/saveBtn"
@@ -71,7 +75,8 @@
             android:background="@color/colorPrimary"
             android:text="@string/save"
             android:textColor="#fff"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:fontFamily="@font/my_font_family"/>
 
     </LinearLayout>
 </LinearLayout>
