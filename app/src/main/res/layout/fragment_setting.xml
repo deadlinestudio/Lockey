@@ -22,7 +22,8 @@
             android:textSize="19sp"
             android:text="@string/tab_setting"
             android:layout_gravity="center"
-            app:fontFamily="@font/my_font_family"/>
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"/>
     </android.support.v7.widget.Toolbar>
     <LinearLayout
 
@@ -50,15 +51,17 @@
                     android:layout_height="wrap_content"
                     android:textSize="28sp"
                     android:textColor="@color/colorBlack"
-                    android:text="아이디"
-                    app:fontFamily="@font/my_font_family"/>
+                    android:text="@string/id"
+                    app:fontFamily="@font/my_font_family"
+                    android:includeFontPadding="false"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="@color/colorBlack_light"
                     android:text="@string/profileCheck"
-                    app:fontFamily="@font/my_font_family"/>
+                    app:fontFamily="@font/my_font_family"
+                    android:includeFontPadding="false"/>
             </LinearLayout>
             <ImageView
                 android:layout_width="30dp"
@@ -72,7 +75,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFF"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"/>
 
     </LinearLayout>
 

@@ -139,7 +139,6 @@ public class FragmentTimer extends Fragment{
             @Override
             public void onScrollChanged() {
                 int scrollY = timerScroll.getScrollY();
-                int progress = (scrollY/step);
 
                 if(scrollY<=actionBarHeight){
                     timerScroll.setScrollY(actionBarHeight);
@@ -151,6 +150,7 @@ public class FragmentTimer extends Fragment{
                         hitmax = true;
                     }
                 }else if(scrollY<maxHeight){
+                    int progress = ((scrollY-actionBarHeight)/step);
                     targetTime = progress*300000;
                     if(hitmax){
                         timerTopFrame.setBackgroundColor(whiColor);
@@ -280,15 +280,19 @@ public class FragmentTimer extends Fragment{
                             public void run() {
                                 targetView.setText(bt.makeToTimeFormat(bt.getTempTarget()));
                                 totalView.setText(bt.makeToTimeFormat(bt.getTotalTime() + 1000));
-                                if (endAlert && bt.getTempTarget() == 0) {
-                                    vibrator.vibrate(300);
+                                if (endAlert && bt.getTempTarget() <= 1000) {
+                                    Log.e("시간 다됬음","진동울리자");
                                     endAlert = false;
+                                    mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);        // turn off DO NOT DISTURB MODE
+                                    vibrator.vibrate(300);
                                 }
                                 timerViewHandler.postDelayed(this, 1000);
                                 if (!bt.getOnoff()) {
+                                    Log.e("시간 다됬음","설정시간 : "+bt.getTargetTime()+" 남은시간 : "+bt.getTempTarget());
                                     timerViewHandler.removeMessages(0);
                                     updateTextview();
                                 }
+                                Log.e("짠 시간 다됬음","설정시간 : "+bt.getTargetTime()+" 남은시간 : "+bt.getTempTarget());
                             }
                         });
                     }

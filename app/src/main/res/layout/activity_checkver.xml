@@ -21,6 +21,7 @@
             android:textSize="17sp"
             android:text="@string/lockey"
             app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"
             android:layout_gravity="center"/>
         <ImageView
             android:id="@+id/checkVerBackBtn"
@@ -58,6 +59,7 @@
             android:background="@color/colorWhite"
             android:text="@string/lockey"
             app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"
             android:gravity="center"
             android:textColor="@color/colorBlack"
             android:textSize="20sp" />
@@ -84,7 +86,8 @@
             android:gravity="center"
             android:textColor="@color/colorBlack_light"
             android:textSize="12sp"
-            app:fontFamily="@font/my_font_family"/>
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"/>
 
         <TextView
             android:id="@+id/OpenSourceGo"
@@ -98,6 +101,7 @@
             android:gravity="center"
             android:textColor="@color/colorBlack_light"
             android:textSize="12sp"
-            app:fontFamily="@font/my_font_family"/>
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

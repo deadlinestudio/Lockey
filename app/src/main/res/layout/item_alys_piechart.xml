@@ -16,7 +16,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:textColor="#000"
-        app:fontFamily="@font/my_font_family"/>
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
     <com.github.mikephil.charting.charts.PieChart
         android:id = "@+id/pieChart"
         android:layout_width="match_parent"
@@ -25,5 +26,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
 </LinearLayout>
