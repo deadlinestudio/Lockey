@@ -52,7 +52,10 @@
     <string name="minus">-</string>
     <string name="focusComp">집중완료</string>
     <string name="whatdoyoudo">무엇에 집중하셨나요?</string>
-
+    <string name="quatertime">+1h</string>
+    <string name="halftime">+2h</string>
+    <string name="tripletime">+3h</string>
+    <string name="fulltime">+4h</string>
 
     <!--Applock Fragment-->
     <string name="recentWeek">최근 1주일 동안</string>

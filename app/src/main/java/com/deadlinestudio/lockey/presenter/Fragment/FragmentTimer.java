@@ -115,7 +115,9 @@ public class FragmentTimer extends Fragment{
         timerBottomFrame = rootView.findViewById(R.id.timerBottomFrame);
         timerScroll = rootView.findViewById(R.id.timerScroll);
 
-
+        /**
+         * @brief timer adjust by scrolls
+         * */
         TypedValue tv = new TypedValue();
         if (mainActivity.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)){
             actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
@@ -123,7 +125,7 @@ public class FragmentTimer extends Fragment{
         }
 
         int width = Resources.getSystem().getDisplayMetrics().widthPixels;
-        int height = Resources.getSystem().getDisplayMetrics().heightPixels-actionBarHeight;
+        int height = Resources.getSystem().getDisplayMetrics().heightPixels;
 
         timerTopFrame.setLayoutParams(new LinearLayout.LayoutParams(width,height));
         timerBottomFrame.setLayoutParams(new LinearLayout.LayoutParams(width,height));
@@ -132,7 +134,7 @@ public class FragmentTimer extends Fragment{
         heightRemain = 150;
         maxHeight -= heightRemain;
 
-        int step = maxHeight/48;
+        int step = (maxHeight-actionBarHeight)/48;
         timerScroll.setScrollY(actionBarHeight);
 
         timerScroll.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
@@ -140,6 +142,7 @@ public class FragmentTimer extends Fragment{
             public void onScrollChanged() {
                 int scrollY = timerScroll.getScrollY();
 
+                Log.v("pro",String.valueOf(maxHeight));
                 if(scrollY<=actionBarHeight){
                     timerScroll.setScrollY(actionBarHeight);
                     targetTime = 0;
@@ -151,6 +154,7 @@ public class FragmentTimer extends Fragment{
                     }
                 }else if(scrollY<maxHeight){
                     int progress = ((scrollY-actionBarHeight)/step);
+                    Log.v("proa",String.valueOf(actionBarHeight));
                     targetTime = progress*300000;
                     if(hitmax){
                         timerTopFrame.setBackgroundColor(whiColor);
@@ -161,6 +165,8 @@ public class FragmentTimer extends Fragment{
                 updateTextview();
             }
         });
+
+        /**scrolll done*/
 
 //        seekBar = rootView.findViewById(R.id.seekArc);
 //        quaterBtn = rootView.findViewById(R.id.quickQuaterBtn);
