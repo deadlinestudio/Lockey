@@ -258,9 +258,8 @@ public class FragmentTimer extends Fragment{
                     else{
                         mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
                         mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
-                        startBtn.setBackgroundResource(R.drawable.lock_icon_color);
+                        //startBtn.setBackgroundResource(R.drawable.lock_icon_color);
                         timerOn = true;
-                        seekBar.setEnabled(false);
 
                         Toast.makeText(getContext(), "타이머가 시작됩니다\n휴대폰을 뒤집어주세요",
                                 Toast.LENGTH_SHORT).show();
