@@ -34,8 +34,7 @@ public class LoginActivity extends BaseActivity{
 
     private LogfileController lfc;
     private Context cont;
-    final String filename = "userlog.txt";
-
+    public static final String filename = "userlog.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -174,6 +174,7 @@ public class FragmentTimer extends Fragment{
         timerOn = false;
 
         tempData = new Data();
+        mainActivity = (MainActivity) this.getActivity();
 
         /*for timer service*/
         IntentFilter intentFilter = new IntentFilter();
@@ -211,6 +212,8 @@ public class FragmentTimer extends Fragment{
         mGyroLis = new GyroscopeListener(this);
         vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
 
+        boolean endAlert = true;
+
         /**
          * @brief timer btn listener, make the timer stop/start & load pop dialog
          * timer started by button is just for a performance to make user think timer is working
@@ -218,8 +221,8 @@ public class FragmentTimer extends Fragment{
          **/
         startBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
-            public void onClick(View view){
-                if(timerOn){
+            public void onClick(View view) {
+                if (timerOn) {
                     // timer stop!!
                     mSensorManager.unregisterListener(mGyroLis);
                     startBtn.setText("시작");
@@ -234,10 +237,10 @@ public class FragmentTimer extends Fragment{
                             //achievement = (bt.getTotalTime()/bt.getTargetTime())*100;
                             tempData.setTarget_time(String.valueOf(bt.makeToTimeFormat(targetTime)));
                             tempData.setAmount(String.valueOf(bt.makeToTimeFormat(bt.getTotalTime())));
-                            Log.v("saved",String.valueOf(bt.makeToTimeFormat(bt.getTotalTime())));
+                            Log.v("saved", String.valueOf(bt.makeToTimeFormat(bt.getTotalTime())));
                             showNoticeDialog(tempData);
                         }
-                    },500);
+                    }, 500);
 
                     // get real time
                     Date currentTime = new Date();
@@ -251,11 +254,15 @@ public class FragmentTimer extends Fragment{
                     //seekBar.setProgress(0);
                     updateTextview();
                     //seekBar.setEnabled(true);
-                }else{
+                } else {
                     /// timer start!
-                    if(!gc.checkAlertGrant(mNotificationManager))
+                    if (bt.getTargetTime() == 0) {
+                        Toast.makeText(getContext(), "목표시간을 설정해 주세요.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (!gc.checkAlertGrant(mNotificationManager))
                         gc.settingAlertGrant();
-                    else{
+                    else {
                         mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
                         mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
                         //startBtn.setBackgroundResource(R.drawable.lock_icon_color);
@@ -271,9 +278,12 @@ public class FragmentTimer extends Fragment{
                             @Override
                             public void run() {
                                 targetView.setText(bt.makeToTimeFormat(bt.getTempTarget()));
-                                totalView.setText(bt.makeToTimeFormat(bt.getTotalTime()+1000));
-                                timerViewHandler.postDelayed(this,1000);
-                                if(!bt.getOnoff()){
+                                totalView.setText(bt.makeToTimeFormat(bt.getTotalTime() + 1000));
+                                if (endAlert && bt.getTempTarget() == 0)
+                                    vibrator.vibrate(300);
+
+                                timerViewHandler.postDelayed(this, 1000);
+                                if (!bt.getOnoff()) {
                                     timerViewHandler.removeMessages(0);
                                     updateTextview();
                                 }
