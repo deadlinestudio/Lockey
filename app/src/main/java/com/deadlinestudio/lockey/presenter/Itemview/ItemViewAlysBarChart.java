@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -96,10 +97,27 @@ public class ItemViewAlysBarChart extends LinearLayout {
         xAxis.setTextColor(this.getResources().getColor(R.color.darkGrey));
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
+
         Legend l = barChart.getLegend();
         l.setEnabled(false);
 
         // data insertion part
+        Calendar calendar = Calendar.getInstance();
+        float div = 1.0f;
+        switch(period) {
+            case 1:
+                break;
+            case 7:
+                div = (float) calendar.DAY_OF_WEEK - 2 % 7 + 1.0f;
+                break;
+            case 30:
+                div = 5.0f;
+                break;
+            case 365:
+                div = calendar.MONTH + 1;
+                break;
+        }
+
         this.xLabels = _xLabels;
         double avg = 0;
         if(analysisData == null) {
@@ -107,19 +125,20 @@ public class ItemViewAlysBarChart extends LinearLayout {
                 xLabels = new String[] {"~01.07","~01.14","~01.21","~01.28","~02.04"};
             }
             for(int i = 0; i < xLabels.length; i++) {
-                int randValue = (int) (Math.random() * 1800) + 60;
+                float randValue = (float) (Math.round(Math.random() * 10)/1.0);
                 entries.add(new BarEntry(i, randValue));
-                avg += randValue / period;
+                avg += randValue / xLabels.length;
             }
         } else {
             for (int i = 0; i < xLabels.length; i++) {
                 Log.e("xLabel", xLabels[i]);
-                int value = analysisData.get(xLabels[i]).intValue();
+                float value = Math.round(analysisData.get(xLabels[i]).floatValue() * 1.0) / (float) 60.0;
+                Log.e("xLabel - value", Float.toString(value));
                 entries.add(new BarEntry(i, value));
-                avg += value / period;
+                avg += value / div;
             }
         }
-        setChartAvgVals(avg / 60);
+        setChartAvgVals(avg);
 
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override

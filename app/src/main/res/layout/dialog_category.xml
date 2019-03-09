@@ -48,7 +48,7 @@
         android:gravity="center"
         android:backgroundTint="@color/colorPrimary"
         android:inputType="text"
-        android:text="기본 공부"/>
+        android:hint="무엇에 집중 하셨나요?"/>
 
     <LinearLayout
         android:layout_width="match_parent"

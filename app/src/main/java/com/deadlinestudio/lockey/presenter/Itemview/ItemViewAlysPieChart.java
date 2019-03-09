@@ -111,7 +111,7 @@ public class ItemViewAlysPieChart extends LinearLayout {
                     sum += value;
             }
 
-            if (sum != 0)
+            if (sum > 0 && (total/sum) < 60)
                 yVals.add(new PieEntry((float) sum, "기타"));
         }
 

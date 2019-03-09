@@ -120,7 +120,7 @@ public class ReadJSON {
             } else if (name.equals("amount")) {
                 String amount = reader.nextString();
                 if(amount.equals("None"))   val = 0;
-                else                        val = Long.parseLong(amount)/60;
+                else                        val = Long.parseLong(amount);
             } else {
                 reader.skipValue();
             }
