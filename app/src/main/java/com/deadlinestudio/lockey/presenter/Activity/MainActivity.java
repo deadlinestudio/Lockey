@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
             editor.commit();
 
             // 앱 최초 실행시 하고 싶은 작업
-            Log.v("aaaaa","asd");
             Intent intent = new Intent(getBaseContext(),HelpActivity.class);
             startActivity(intent);
         }

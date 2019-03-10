@@ -22,16 +22,8 @@ public class FragmentHelpFive extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_help, container, false);
         helpImg = rootView.findViewById(R.id.helpImg);
-        confirmBtn = rootView.findViewById(R.id.helpConfirmBtn);
         helpImg.setImageDrawable(getResources().getDrawable(R.drawable.help5));
-        confirmBtn.setVisibility(View.VISIBLE);
 
-        confirmBtn.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().finish();
-            }
-        });
         return rootView;
     }
 }

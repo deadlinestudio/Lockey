@@ -16,6 +16,7 @@ import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.control.NetworkTask;
 import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Activity.GoogleLoginActivity;
+import com.deadlinestudio.lockey.presenter.Activity.HelpActivity;
 import com.deadlinestudio.lockey.presenter.Activity.KakaoLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.LoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
@@ -68,6 +69,9 @@ public class AdapterSetting extends RecyclerView.Adapter<ViewHolderSetting> {
                     public void onClick(View view) {
                         switch (mode){
                             case 0: // 도움말
+                                intent = new Intent(mainActivity, HelpActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                mainActivity.startActivity(intent);
                                 break;
                             case 1: // 데이터 초기화
                                 if(mainActivity.getSns().equals("4") == true) {
