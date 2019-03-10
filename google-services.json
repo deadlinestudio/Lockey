@@ -39,6 +39,14 @@
           }
         },
         {
+          "client_id": "894086141625-iv8euin57510vlpp9r9meqjbupj30q99.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deadlinestudio.lockey",
+            "certificate_hash": "8f6237e344aacde463fc75a9be6a87095c640630"
+          }
+        },
+        {
           "client_id": "894086141625-gpgvfhggkuahvtupkjqnqe7gjjv6iq2e.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -64,7 +72,8 @@
         "ads_service": {
           "status": 2
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-8600536608045213~4285578189"
     }
   ],
   "configuration_version": "1"

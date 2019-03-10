@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'Lockey'
+            keyPassword 'jorku9394!'
+            storeFile file('C:/Program Files/Android/key/keystore.jks')
+            storePassword 'jorku9394!'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.deadlinestudio.lockey"
@@ -14,6 +22,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
