@@ -59,7 +59,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/btn_stroke"
-        android:text="잠금 해제 하러 가기"
+        android:text="잠금 해제하러 가기"
         android:textSize="18sp"
         android:textColor="@color/colorBlack_light"
         android:elevation="0dp"

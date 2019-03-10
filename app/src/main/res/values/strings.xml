@@ -72,7 +72,7 @@
     <string name="totalTab">년</string>
     <string name="total">총</string>
     <string name="average">평균</string>
-    <string name="noMemberFrame">분석 서비스은 회원만 가능합니다</string>
+    <string name="noMemberFrame">분석 서비스는 회원만 가능합니다</string>
 
     <!-- Setting Fragment-->
     <string name="profileCheck">프로필 확인 및 수정</string>
