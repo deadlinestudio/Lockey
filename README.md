@@ -48,11 +48,25 @@
 
 #### [안드로이드 스튜디오에서 해시키 얻는 법]
 1. 스튜디오 오른쪽변에 Gradle 클릭
-1. app -> android -> signingReport 더블클릭
+2. app -> android -> signingReport 더블클릭
 
-#### * 안드로이드 릴리스  해시키 (출시용)
-      keytool -exportcert -alias <release_key_alias> -keystore <release_keystore_path> | openssl sha1 -binary | openssl base64
+----------------------------------------------------------------------------------------------------------------------------------------
 
+### 안드로이드 릴리즈 해시키 생성 및 사이닝 
+#### 안드로이드 스튜디오 작업
+1. Build -> Generate Signed Bundle/APK -> APK 선택 -> Create New
+2. Key store path, Password, Alias는 꼭 외워두기
+3. 완료시 jks 파일이 생성됨
+4. Certificate는 Fisrt and Last Name만 적어도 무관
+5. Build Type은 release로 선택, Signature Version은 V1으로 선택
+6. 완료 시 apk가 생성
+7. File -> Project Structure -> Signing에 +버튼 클릭
+8. Name을 release로 적고 나머지 정보를 입력
+9. Build Types 탭에서 release를 선택후 Signing Config에서 release 선택
+
+#### Cmd창
+1. jks파일 위치로 이동
+2.      keytool -list -v -keystore "jks파일 이름"
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 ### 페이스북 연동 시 "invalid key hash..." 같은 에러가 뜰 경우
