@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -75,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
         pager.setAdapter(adapter);
         pager.setCurrentItem(0);
-        //loadFragment(fragmentTimer);
 
         SharedPreferences pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
         boolean first = pref.getBoolean("isFirst", false);
@@ -84,7 +82,11 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = pref.edit();
             editor.putBoolean("isFirst", true);
             editor.commit();
-            // TODO: 앱 최초 실행시 하고 싶은 작업
+
+            // 앱 최초 실행시 하고 싶은 작업
+            Log.v("aaaaa","asd");
+            Intent intent = new Intent(getBaseContext(),HelpActivity.class);
+            startActivity(intent);
         }
 
         btmNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -94,35 +96,22 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         pager.setCurrentItem(0,false);
-                        break;//return loadFragment(fragmentTimer);
+                        break;
                     case R.id.navigation_applist:
                         pager.setCurrentItem(1,false);
                         break;
-                        //return loadFragment(fragmentApplock);
                     case R.id.navigation_graph:
                         pager.setCurrentItem(2,false);
-                        break;//return loadFragment(fragmentAnalysis);
+                        break;
                     case R.id.navigation_setting:
                         pager.setCurrentItem(3,false);
-                        break;//return loadFragment(fragmentSetting);
+                        break;
                 }
                 return true;
             }
         });
 
     }
-    /*
-    private boolean loadFragment(Fragment fragment) {
-        //switching fragment
-        if (fragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.mainFragContainer, fragment)
-                    .commit();
-            return true;
-        }
-        return false;
-    }*/
     @Override
     public void onBackPressed() {
         Log.e("main back", "start!");

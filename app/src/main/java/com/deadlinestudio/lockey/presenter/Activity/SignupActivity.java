@@ -5,14 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -25,7 +22,6 @@ import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import java.lang.reflect.Field;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 public class SignupActivity extends AppCompatActivity {
     private Button signupBtn;
