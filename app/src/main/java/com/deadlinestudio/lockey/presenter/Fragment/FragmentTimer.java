@@ -157,7 +157,7 @@ public class FragmentTimer extends Fragment{
                 }else if(scrollY<maxHeight){
                     int progress = ((scrollY-actionBarHeight)/step);
                     Log.v("proa",String.valueOf(actionBarHeight));
-                    targetTime = progress*10000;
+                    targetTime = progress*300000;
                     if(hitmax){
                         timerTopFrame.setBackgroundColor(whiColor);
                         hitmax = false;
