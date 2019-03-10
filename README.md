@@ -66,7 +66,9 @@
 
 #### Cmd창
 1. jks파일 위치로 이동
-2.      keytool -list -v -keystore "jks파일 이름"
+2.      keytool -list -v -keystore "jks파일 이름"  // 구글용 해시키
+3.      keytool -exportcert -alias keystore -keystore "jks파일 이름" -storepass android -keypass android | openssl sha1 -binary | openssl base64    // 카카오용 해시키
+
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 ### 페이스북 연동 시 "invalid key hash..." 같은 에러가 뜰 경우
