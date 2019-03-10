@@ -23,7 +23,7 @@
 <br>-> 다운로드 목록 중에 반드시 아래 4개에서 받아야 한다!
 
 #### [안드로이드 키스토어 사용법]
-1. C:\Users\s_negaro\\.android\debug.keystore로 이동
+1. C:\Users\s_negaro\\.android 로 이동
 1.      keytool -list -v -keystore debug.keystore 
 1. 초기 비밀번호는 android
 <br>ex) 3F:23:00:98:D3:13:DD:34:D7:13:38:47:96:C2:B2:7E:F8:7F:48:78
