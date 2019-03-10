@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".presenter.Activity.VerCheckActivity">
         </activity>
+        <activity android:name=".presenter.Activity.HelpActivity">
+        </activity>
         <activity
             android:name=".presenter.Activity.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation" >	<!-- orientation 변경 시 Activity 재시작 방지 -->

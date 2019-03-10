@@ -19,7 +19,6 @@ import com.deadlinestudio.lockey.control.NetworkTask;
 import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterGraph;
-import com.deadlinestudio.lockey.presenter.Item.ItemAnalysis;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;

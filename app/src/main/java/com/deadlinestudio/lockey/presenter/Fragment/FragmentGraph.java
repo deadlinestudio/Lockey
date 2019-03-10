@@ -10,12 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterAnalysis;
-import com.deadlinestudio.lockey.presenter.Item.ItemAnalysis;
 
 public class FragmentGraph extends Fragment {
     private ListView listView;
@@ -47,9 +45,6 @@ public class FragmentGraph extends Fragment {
     }
         public void setAdapter(){
         AdapterAnalysis adapter = new AdapterAnalysis(mainActivity.getApplicationContext());
-//        adapter.addItem(new ItemAnalysis("집중 분포",1));
-//        adapter.addItem(new ItemAnalysis("기록",2));
-//        adapter.addItem(new ItemAnalysis("시간 분포",3));
         listView.setAdapter(adapter);
     }
 

@@ -21,7 +21,7 @@ public class LockActivity extends AppCompatActivity {
         //aac = new AdmobAdController(this);
 
         setContentView(R.layout.activity_lock);
-        ImageView lockBaseImg = findViewById(R.id.lockBaseImg);
+        //ImageView lockBaseImg = findViewById(R.id.lockBaseImg);
         ImageView lockRingImg = findViewById(R.id.lockRingImg);
         Button backBtn = findViewById(R.id.backToBtn);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.translate);
@@ -30,10 +30,6 @@ public class LockActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);*/
                 Intent restart = getApplicationContext().getPackageManager().getLaunchIntentForPackage(getApplicationContext().getPackageName());
                 restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 restart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

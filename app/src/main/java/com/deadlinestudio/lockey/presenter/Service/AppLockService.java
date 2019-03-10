@@ -40,7 +40,7 @@ public class AppLockService extends Service {
 
             // GET_USAGE_STATS 권한 확인
             boolean granted = gc.checkAccessGrant();
-            Log.e("AppLockService  ","grant : "+granted);
+
             while(granted && stopSign) {
                 if(alc.CheckRunningApp(context,AppLock)) {
                     Intent intent = new Intent(context,LockActivity.class);

@@ -63,6 +63,7 @@ public class AppLockController extends BaseActivity {
                     }
                 }
             } else {
+                // To Do : 설정창으로 보내주기
                 Log.d("isRooting stats is NULL", "");
             }
             return false;
