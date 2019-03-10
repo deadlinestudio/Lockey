@@ -61,6 +61,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         jobText.setSelection(jobText.getText().length());
 
         jobSpinner = findViewById(R.id.editJobSpinner);
+        setJobItem();
         idText.setText(User.getInstance().getId());
         jobText.setVisibility(View.GONE);
 
@@ -188,5 +189,17 @@ public class ProfileEditActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    private void setJobItem() {
+        for(int i = 0; i < jobSpinner.getAdapter().getCount(); i++) {
+            if(jobSpinner.getAdapter().getItem(i).toString().equals(User.getInstance().getJob())) {
+                jobSpinner.setSelection(i);
+                return;
+            }
+        }
+        jobSpinner.setSelection(jobSpinner.getAdapter().getCount()-1);
+        jobText.setVisibility(View.VISIBLE);
+        jobText.setText(User.getInstance().getJob());
     }
 }

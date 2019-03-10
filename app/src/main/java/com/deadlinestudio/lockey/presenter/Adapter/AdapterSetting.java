@@ -111,49 +111,49 @@ public class AdapterSetting extends RecyclerView.Adapter<ViewHolderSetting> {
                                 });
                                 builder.show();
                                 break;
-                    case 2: // 버전 확인
-                        intent = new Intent(mainActivity, VerCheckActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        mainActivity.startActivity(intent);
-                        break;
-                    case 3:  //로그 아웃
-                        Log.e("deb/logout", "in");
-                        builder = new AlertDialog.Builder(mainActivity);
-                        builder.setTitle("알림");
-                        builder.setMessage("로그아웃 하시겠습니까?");
-                        builder.setPositiveButton("예",
-                                new DialogInterface.OnClickListener() {
+                            case 2: // 버전 확인
+                                intent = new Intent(mainActivity, VerCheckActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                mainActivity.startActivity(intent);
+                                break;
+                            case 3:  //로그 아웃
+                                Log.e("deb/logout", "in");
+                                builder = new AlertDialog.Builder(mainActivity);
+                                builder.setTitle("알림");
+                                builder.setMessage("로그아웃 하시겠습니까?");
+                                builder.setPositiveButton("예",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                lfc.WriteLogFile(context,filename,"nofile",2);
+
+                                                if(mainActivity.getSns().equals("1")) {
+                                                    intent = new Intent(mainActivity, GoogleLoginActivity.class);
+                                                    intent.putExtra("InOut", 2);
+                                                }else if(mainActivity.getSns().equals("2")){
+                                                    intent = new Intent(mainActivity, NaverLoginActivity.class);
+                                                    intent.putExtra("InOut", 2);
+                                                }else if(mainActivity.getSns().equals("3")){
+                                                    intent = new Intent(mainActivity, KakaoLoginActivity.class);
+                                                    intent.putExtra("InOut", 2);
+                                                } else {
+                                                    intent = new Intent(mainActivity, LoginActivity.class);
+                                                }
+                                                User user = User.getInstance();
+                                                user.resetData();
+                                                mainActivity.startActivity(intent);
+                                                mainActivity.finish();
+                                            }
+                                        });
+                                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        lfc.WriteLogFile(context,filename,"nofile",2);
 
-                                        if(mainActivity.getSns().equals("1")) {
-                                            intent = new Intent(mainActivity, GoogleLoginActivity.class);
-                                            intent.putExtra("InOut", 2);
-                                        }else if(mainActivity.getSns().equals("2")){
-                                            intent = new Intent(mainActivity, NaverLoginActivity.class);
-                                            intent.putExtra("InOut", 2);
-                                        }else if(mainActivity.getSns().equals("3")){
-                                            intent = new Intent(mainActivity, KakaoLoginActivity.class);
-                                            intent.putExtra("InOut", 2);
-                                        } else {
-                                            intent = new Intent(mainActivity, LoginActivity.class);
-                                        }
-                                        User user = User.getInstance();
-                                        user.resetData();
-                                        mainActivity.startActivity(intent);
-                                        mainActivity.finish();
-                                    }
-                                });
-                        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                                            }
+                                        });
+                                        builder.show();
 
-                                    }
-                                });
-                                builder.show();
-
-                                break;
+                                    break;
                         }
                     }
                 });
