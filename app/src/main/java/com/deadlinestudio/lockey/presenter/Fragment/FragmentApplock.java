@@ -44,7 +44,7 @@ import java.util.StringTokenizer;
 public class FragmentApplock extends Fragment  {
     AppLockController alc;
     LogfileController lfc;
-    CaulyAdController cac;
+    //CaulyAdController cac;
     GrantController gc;
     Context cont;
     final static String sfilename = "applock.txt";
@@ -76,8 +76,8 @@ public class FragmentApplock extends Fragment  {
         alc = new AppLockController(mainActivity.getApplicationContext());
         gc = new GrantController(mainActivity.getApplicationContext());
         lfc = new LogfileController();
-        cac = new CaulyAdController(mainActivity);
-        cac.makeInterstitialAd();
+        //cac = new CaulyAdController(mainActivity);
+        //cac.makeInterstitialAd();
         cont = this.getContext();
 
         /* 가장 많이 사용한 앱 리스트 로드하기 위해 권한 설정*/
@@ -148,7 +148,7 @@ public class FragmentApplock extends Fragment  {
                         String toastMsg = "앱 잠금 목록을 업데이트 했습니다.";
                         Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT).show();
                     }
-                    cac.runInterstitialAd();
+                    //cac.runInterstitialAd();
                 }else{
                     gc.settingAccessGrant();
                 }

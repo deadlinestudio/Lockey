@@ -71,7 +71,7 @@ public class FragmentTimer extends Fragment{
     private boolean receiverRegied;
     private boolean seekbarLimit = false;
     private boolean dialogClosed = true;
-    CaulyAdController cac;
+    //CaulyAdController cac;
     GrantController gc;
     private NotificationManager mNotificationManager;
     private int prevNotificationFilter = NotificationManager.INTERRUPTION_FILTER_ALL;
@@ -195,8 +195,8 @@ public class FragmentTimer extends Fragment{
 
 
         /* Cauly AD */
-        cac = new CaulyAdController(mainActivity);
-        cac.makeInterstitialAd();
+        //cac = new CaulyAdController(mainActivity);
+        //cac.makeInterstitialAd();
 
         /* GrantController */
         gc = new GrantController(mainActivity);
@@ -457,7 +457,7 @@ public class FragmentTimer extends Fragment{
                         String toastMsg = "비회원은 저장되지 않습니다";
                         Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG).show();
                     }
-                    cac.runInterstitialAd();
+                    //cac.runInterstitialAd();
                 } catch(Exception e) {
                     e.printStackTrace();
                 }finally {

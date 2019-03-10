@@ -14,11 +14,11 @@ import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.presenter.Controller.AdmobAdController;
 
 public class LockActivity extends AppCompatActivity {
-    AdmobAdController aac;
+    //AdmobAdController aac;
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        aac = new AdmobAdController(this);
+        //aac = new AdmobAdController(this);
 
         setContentView(R.layout.activity_lock);
         ImageView lockBaseImg = findViewById(R.id.lockBaseImg);
@@ -45,7 +45,7 @@ public class LockActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        aac.runVideoAd();
+        //aac.runVideoAd();
     }
 
     @Override
