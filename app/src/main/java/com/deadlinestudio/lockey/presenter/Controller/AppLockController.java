@@ -22,12 +22,18 @@ import java.util.TreeMap;
 public class AppLockController extends BaseActivity {
     PackageManager pkgm;
     List<ResolveInfo> AppInfos;
+    Context cont;
+    GrantController gc;
 
-    public ArrayList<ItemApplock> LoadAppList(Activity act){
+    public AppLockController(Context cont){
+        this.cont = cont;
+        gc = new GrantController(cont);
+    }
 
+    public ArrayList<ItemApplock> LoadAppList(){
         ArrayList<ItemApplock> itemApplocks = new ArrayList<ItemApplock>();
 
-        pkgm = act.getPackageManager();
+        pkgm = cont.getPackageManager();
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         AppInfos = pkgm.queryIntentActivities(intent, 0);
@@ -40,29 +46,32 @@ public class AppLockController extends BaseActivity {
     }
 
     public boolean CheckRunningApp(Context context, ArrayList<String> AppLock) {
-
-        // 기타 프로세스 목록 확인
-        UsageStatsManager usage = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
-        long time = System.currentTimeMillis();
-        List<UsageStats> stats = usage.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, 0, time);
-        if (stats != null)
-        {
-            SortedMap<Long, UsageStats> runningTask = new TreeMap<Long,UsageStats>();
-            for (UsageStats usageStats : stats) {
-                runningTask.put(usageStats.getLastTimeUsed(), usageStats);
-            }
-
-            for(int i=0; i<AppLock.size(); i++){
-                if (AppLock.get(i).equals(runningTask.get(runningTask.lastKey()).getPackageName())){
-                    return true;
+        if (gc.checkAccessGrant()) {
+            // 기타 프로세스 목록 확인
+            UsageStatsManager usage = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+            long time = System.currentTimeMillis();
+            List<UsageStats> stats = usage.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, 0, time);
+            if (stats != null) {
+                SortedMap<Long, UsageStats> runningTask = new TreeMap<Long, UsageStats>();
+                for (UsageStats usageStats : stats) {
+                    runningTask.put(usageStats.getLastTimeUsed(), usageStats);
                 }
+
+                for (int i = 0; i < AppLock.size(); i++) {
+                    if (AppLock.get(i).equals(runningTask.get(runningTask.lastKey()).getPackageName())) {
+                        return true;
+                    }
+                }
+            } else {
+                Log.d("isRooting stats is NULL", "");
             }
+            return false;
+        } else {
+            gc.settingAccessGrant();
+            return false;
         }
-        else
-        {
-            Log.d("isRooting stats is NULL","");
-        }
-        return false;
+
+
 
         /*   API 21 버전 미만
 

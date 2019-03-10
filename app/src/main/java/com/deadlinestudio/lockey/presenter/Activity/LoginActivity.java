@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +22,13 @@ import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.control.NetworkTask;
 import com.deadlinestudio.lockey.model.Data;
 import com.deadlinestudio.lockey.model.User;
+import com.deadlinestudio.lockey.presenter.Controller.GrantController;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class LoginActivity extends BaseActivity{
@@ -33,6 +37,7 @@ public class LoginActivity extends BaseActivity{
     private Button signUpGoBtn, logInGoBtn;
 
     private LogfileController lfc;
+    private GrantController gc;
     private Context cont;
     public static final String filename = "userlog.txt";
 
@@ -43,6 +48,11 @@ public class LoginActivity extends BaseActivity{
 
         lfc = new LogfileController();
         cont = getApplicationContext();
+        gc = new GrantController(cont);
+
+        /* 가장 많이 사용한 앱 리스트 로드하기 위해 권한 설정*/
+        if(!gc.checkAccessGrant())
+            gc.settingAccessGrant();
 
         //check login log
         String line = lfc.ReadLogFile(cont,filename);
@@ -107,6 +117,24 @@ public class LoginActivity extends BaseActivity{
                 finish();
             }
         });
+
+        /**
+         * terms links
+         * */
+        TextView termsText = findViewById(R.id.termsText);
+        Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
+            @Override
+            public String transformUrl(Matcher matcher, String s) {
+                return "";
+            }
+        };
+        Pattern pattern1 = Pattern.compile("서비스이용약관");
+        Pattern pattern2 = Pattern.compile("개인정보처리방침");
+        Pattern pattern3 = Pattern.compile("개인정보수집이용");
+        Linkify.addLinks(termsText, pattern1, "http://thedeadlinestudio.com/lockey/terms/",null,mTransform);
+        Linkify.addLinks(termsText, pattern2, "http://thedeadlinestudio.com/lockey/terms/",null,mTransform);
+        Linkify.addLinks(termsText, pattern3, "http://thedeadlinestudio.com/lockey/terms/",null,mTransform);
+
 
     }
 

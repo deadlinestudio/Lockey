@@ -46,9 +46,10 @@
 
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher_foreground"/>
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/lockey_title"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -74,7 +75,8 @@
             android:gravity="center"
             android:textColor="@color/colorBlack_light"
             android:textSize="16sp"
-            app:fontFamily="@font/my_font_family"/>
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

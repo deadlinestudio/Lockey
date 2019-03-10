@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -49,6 +50,7 @@ public class FragmentApplock extends Fragment  {
     final static String sfilename = "applock.txt";
 
     private Button startBtn;
+    private ImageView refreshBtn;
     private LinearLayout selectAllBtn, selectNoneBtn;
     private Toolbar mToolbar;
     private RecyclerView mostAppListView,listView;
@@ -69,22 +71,21 @@ public class FragmentApplock extends Fragment  {
         startBtn = rootView.findViewById(R.id.lockStartBtn);
         selectAllBtn = rootView.findViewById(R.id.appSelectAllBtn);
         selectNoneBtn = rootView.findViewById(R.id.appSelectNoneBtn);
+        refreshBtn = rootView.findViewById(R.id.applistRefresh);
 
-        alc = new AppLockController();
-        gc = new GrantController(mainActivity);
+        alc = new AppLockController(mainActivity.getApplicationContext());
+        gc = new GrantController(mainActivity.getApplicationContext());
         lfc = new LogfileController();
         cac = new CaulyAdController(mainActivity);
         cac.makeInterstitialAd();
         cont = this.getContext();
 
-        // 사용자 접근 허용 권한 확인 및 설정
-        if(!gc.checkAccessGrant()) {
-
+        /* 가장 많이 사용한 앱 리스트 로드하기 위해 권한 설정*/
+        if(!gc.checkAccessGrant())
             gc.settingAccessGrant();
-        }
 
         // load applist from main activity
-        applocks = alc.LoadAppList(this.getActivity());
+        applocks = alc.LoadAppList();
         mostApps = new ArrayList<ItemMostApps>();
         String line;
         if((line = lfc.ReadLogFile(cont, sfilename)) != "nofile") {         // 앱 잠금 리스트 확인 후 flag 업데이트
@@ -149,18 +150,18 @@ public class FragmentApplock extends Fragment  {
                     }
                     cac.runInterstitialAd();
                 }else{
-                    String toastMsg = "Lockey를 선택 후 사용 추적 허용을 활성화 해주세요.";
-                    final Toast toast = Toast.makeText(getContext(), toastMsg, Toast.LENGTH_LONG);
-                    new CountDownTimer(6000, 1000)
-                    {
-                        public void onTick(long millisUntilFinished) {toast.show();}
-                        public void onFinish() {toast.show();}
-                    }.start();
                     gc.settingAccessGrant();
                 }
             }
         });
-
+        refreshBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Log.v("sksk","skd");
+                ft.detach(getParentFragment()).attach(getParentFragment()).commit();
+            }
+        });
         // select all apps
         selectAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override

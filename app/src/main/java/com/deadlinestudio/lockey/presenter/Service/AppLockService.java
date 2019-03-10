@@ -16,6 +16,7 @@ import android.util.Log;
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.presenter.Activity.LockActivity;
 import com.deadlinestudio.lockey.presenter.Controller.AppLockController;
+import com.deadlinestudio.lockey.presenter.Controller.GrantController;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.StringTokenizer;
 public class AppLockService extends Service {
     LogfileController lfc;
     AppLockController alc;
+    GrantController gc;
     checkThread th;
     private Context context = null;
     final static String sfilename= "applock.txt";
@@ -37,22 +39,17 @@ public class AppLockService extends Service {
             int num = 1;
 
             // GET_USAGE_STATS 권한 확인
-            boolean granted = false;
-            AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-            int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,android.os.Process.myUid(), context.getPackageName());
-
-            if (mode == AppOpsManager.MODE_DEFAULT) {
-                granted = (context.checkCallingOrSelfPermission(android.Manifest.permission.PACKAGE_USAGE_STATS) == PackageManager.PERMISSION_GRANTED);
-            } else {
-                granted = (mode == AppOpsManager.MODE_ALLOWED);
-            }
-
+            boolean granted = gc.checkAccessGrant();
+            Log.e("AppLockService  ","grant : "+granted);
             while(granted && stopSign) {
                 if(alc.CheckRunningApp(context,AppLock)) {
                     Intent intent = new Intent(context,LockActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);       // LockActivity가 중복되지 않도록 Flag설정
                     startActivity(intent);
                     //finish();
+                }else{
+                    //if(!gc.checkAccessGrant())                // 권한설정 리퀘스트 추가 후 수정하기 - 지금은 무한으로 뜸
+                    //    gc.settingAccessGrant();
                 }
                 try {
                     sleep(1000);
@@ -76,8 +73,9 @@ public class AppLockService extends Service {
         super.onCreate();
         // 서비스에서 가장 먼저 호출됨(최초에 한번만)
 
-        alc = new AppLockController();
+        alc = new AppLockController(getApplicationContext());
         lfc = new LogfileController();
+        gc = new GrantController(getApplicationContext());
         grantFlag = false;
         stopSign = true;
         context = getApplicationContext();

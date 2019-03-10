@@ -70,14 +70,18 @@
                 android:layout_centerVertical="true"
                 app:srcCompat="@drawable/more_btn" />
         </RelativeLayout>
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/settingList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFF"
             android:layout_marginTop="16dp"
             app:fontFamily="@font/my_font_family"
-            android:includeFontPadding="false"/>
+            android:includeFontPadding="false"
+
+            android:orientation="vertical"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager">
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
