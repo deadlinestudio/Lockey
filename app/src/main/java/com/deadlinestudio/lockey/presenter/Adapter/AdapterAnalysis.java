@@ -6,23 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.deadlinestudio.lockey.control.NetworkTask;
 import com.deadlinestudio.lockey.model.User;
-import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 import com.deadlinestudio.lockey.presenter.Item.ItemAnalysis;
 import com.deadlinestudio.lockey.presenter.Itemview.ItemViewAlysBarChart;
 import com.deadlinestudio.lockey.presenter.Itemview.ItemViewAlysLineChart;
 import com.deadlinestudio.lockey.presenter.Itemview.ItemViewAlysPieChart;
-import com.deadlinestudio.lockey.presenter.Itemview.ItemViewAnalysis;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.StringTokenizer;
-import java.util.concurrent.TimeUnit;
 
 public class AdapterAnalysis extends BaseAdapter{
     private final int GRAPH_COUNT = 3;

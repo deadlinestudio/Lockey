@@ -2,14 +2,11 @@ package com.deadlinestudio.lockey.presenter.Activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterHelp;
-import com.deadlinestudio.lockey.presenter.Fragment.FragmentHelp;
 import com.deadlinestudio.lockey.presenter.Fragment.FragmentHelpFive;
 import com.deadlinestudio.lockey.presenter.Fragment.FragmentHelpFour;
 import com.deadlinestudio.lockey.presenter.Fragment.FragmentHelpOne;
@@ -18,8 +15,6 @@ import com.deadlinestudio.lockey.presenter.Fragment.FragmentHelpTwo;
 
 public class HelpActivity extends AppCompatActivity {
     int MAX_PAGE=5;
-    Fragment cur_fragment=new Fragment();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

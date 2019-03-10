@@ -60,17 +60,13 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class FragmentTimer extends Fragment{
     private TextView targetView, totalView;
-    private Button startBtn, quaterBtn, halfBtn, tripleBtn, fullBtn;
-    private int maxHeight, heightRemain, maxScroll;
+    private Button startBtn;
+    private int maxHeight, heightRemain;
     private long targetTime = 0;
-    private double achievement;
     public static BasicTimer bt;
     private boolean timerOn;
     private Data tempData;
-    private SeekArc seekBar;
     private boolean receiverRegied;
-    private boolean seekbarLimit = false;
-    private boolean dialogClosed = true;
     CaulyAdController cac;
     GrantController gc;
     private NotificationManager mNotificationManager;
@@ -84,9 +80,6 @@ public class FragmentTimer extends Fragment{
     private ConstraintLayout timerCon;
     private FrameLayout timerTopFrame, timerBottomFrame;
     private CustomScrollView timerScroll;
-    //private TimerService timerService;
-    //private Intent tService;
-    //Using the Accelometer & Gyroscoper
     private SensorManager mSensorManager = null;
 
     //Using the Gyroscope
@@ -170,12 +163,6 @@ public class FragmentTimer extends Fragment{
 
         /**scrolll done*/
 
-//        seekBar = rootView.findViewById(R.id.seekArc);
-//        quaterBtn = rootView.findViewById(R.id.quickQuaterBtn);
-//        halfBtn = rootView.findViewById(R.id.quickHalfBtn);
-//        tripleBtn = rootView.findViewById(R.id.quickTripleBtn);
-//        fullBtn = rootView.findViewById(R.id.quickFullBtn);
-
         /* timer set up*/
         bt = new BasicTimer(targetTime);
         targetView.setText(bt.makeToTimeFormat(this.targetTime));
@@ -204,12 +191,6 @@ public class FragmentTimer extends Fragment{
         /* do not disturb mode NotificationManager */
         mNotificationManager = (NotificationManager) mainActivity.getSystemService(NOTIFICATION_SERVICE);
 
-        /*
-        //send timer object to
-        tService = new Intent(getActivity(), TimerService.class);
-        getActivity().bindService(tService, mConnection, Context.BIND_AUTO_CREATE);
-*/
-
         /*Using the Gyroscope & Accelometer*/
         mSensorManager = (SensorManager) mainActivity.getSystemService(Context.SENSOR_SERVICE);
 
@@ -230,7 +211,6 @@ public class FragmentTimer extends Fragment{
                     // timer stop!!
                     mSensorManager.unregisterListener(mGyroLis);
                     startBtn.setText("시작");
-                    //startBtn.setBackgroundResource(R.drawable.lock_icon_grey);
                     timerOn = false;
                     bt.timerStop();
 
@@ -256,9 +236,7 @@ public class FragmentTimer extends Fragment{
                     timerTopFrame.setBackgroundColor(whiColor);
                     timerScroll.setScrollY(actionBarHeight);
                     timerScroll.setEnableScrolling(true);
-                    //seekBar.setProgress(0);
                     updateTextview();
-                    //seekBar.setEnabled(true);
                 } else {
                     /// timer start!
                     if (bt.getTargetTime() == 0) {
@@ -273,7 +251,6 @@ public class FragmentTimer extends Fragment{
                     prevNotificationFilter = mNotificationManager.getCurrentInterruptionFilter();
                     mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);       // turn on DO NOT DISTURB MODE
                     mSensorManager.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI);
-                    //startBtn.setBackgroundResource(R.drawable.lock_icon_color);
                     timerOn = true;
                     startBtn.setText("정지");
                     timerScroll.setEnableScrolling(false);
@@ -311,71 +288,6 @@ public class FragmentTimer extends Fragment{
                 }
             }
         });
-//
-//        seekBar.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekArc seekArc, int i, boolean b) {
-//                if(targetTime == 0){
-//                    targetTime = 1;
-//                }else{
-//                    //Log.v("aaa", String.valueOf(b));
-//                    //Log.v("angle", String.valueOf(seekBar.getSweepAngle()));
-//                    int progress = i;
-//                    if(i == 48 && !seekbarLimit){
-//                        seekbarLimit = true;
-//                    }
-//                    // timer max time is 4hours
-//                    targetTime = progress*300000;
-//                    bt.setTargetTime(targetTime);
-//                    updateTextview();
-//                }
-//            }
-//            @Override
-//            public void onStartTrackingTouch(SeekArc seekArc) {
-//            }
-//            @Override
-//            public void onStopTrackingTouch(SeekArc seekArc) {
-//            }
-//        });
-//
-//
-//
-//        quaterBtn.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                targetTime = 3600000; // one hour
-//                seekBar.setProgress(12);
-//                bt.setTargetTime(targetTime);
-//                updateTextview();
-//            }
-//        });
-//        halfBtn.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                targetTime = 7200000; // two hour
-//                seekBar.setProgress(24);
-//                bt.setTargetTime(targetTime);
-//                updateTextview();
-//            }
-//        });
-//        tripleBtn.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                targetTime = 10800000; // three hour
-//                seekBar.setProgress(36);
-//                bt.setTargetTime(targetTime);
-//                updateTextview();
-//            }
-//        });
-//        fullBtn.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                targetTime = 14400000; // one hour
-//                seekBar.setProgress(48);
-//                bt.setTargetTime(targetTime);
-//                updateTextview();
-//            }
-//        });
 
         return rootView;
     }
@@ -549,7 +461,6 @@ public class FragmentTimer extends Fragment{
                         timerOn = false;
                         startBtn.setText("시작");
 
-                        //startBtn.setBackgroundResource(R.drawable.lock_icon_grey);
                         bt.timerStop();
 
                         // need delay to get broadcast msg
@@ -568,9 +479,7 @@ public class FragmentTimer extends Fragment{
                         timerTopFrame.setBackgroundColor(whiColor);
                         timerScroll.setScrollY(actionBarHeight);
                         timerScroll.setEnableScrolling(true);
-                       // seekBar.setProgress(0);
                         fragmentTimer.updateTextview();
-                        //seekBar.setEnabled(true);
                     }
                 }
             }

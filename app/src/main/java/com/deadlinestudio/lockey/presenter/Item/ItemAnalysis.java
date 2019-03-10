@@ -4,13 +4,9 @@ import android.content.Context;
 import android.util.Log;
 
 import com.deadlinestudio.lockey.control.NetworkTask;
-import com.deadlinestudio.lockey.model.Data;
-import com.deadlinestudio.lockey.model.User;
-import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ItemAnalysis {
