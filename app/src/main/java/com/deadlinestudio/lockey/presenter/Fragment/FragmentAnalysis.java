@@ -47,6 +47,10 @@ public class FragmentAnalysis extends Fragment{
         totalText = rootView.findViewById(R.id.userTotalTimeText);
         setTotalText();
 
+        if(MainActivity.getSns().equals("4")) {
+            noMemFrame.setVisibility(View.VISIBLE);
+        }
+
         // graph tab fragments
         graphTabLayout = (TabLayout)rootView.findViewById(R.id.analysisTabLayout);
         viewPager =(ViewPager)rootView.findViewById(R.id.graph_pager);
@@ -96,8 +100,6 @@ public class FragmentAnalysis extends Fragment{
             HashMap<String, Long> analysisData = asyncNetwork.getAnalysisData();
             if(analysisData != null) {
                 totalText.setText(Long.toString(analysisData.get("total") / 60) + " 시간");
-            }else{
-                noMemFrame.setVisibility(View.VISIBLE   );
             }
         } catch(Exception e) {
             e.printStackTrace();
