@@ -30,7 +30,7 @@
     <string name="start">시작</string>
     <string name="stop">정지</string>
     <string name="confirm">확인</string>
-
+    <string name="close">닫기</string>
     <!--Login Activity-->
     <string name="loginInfoTitle">효율적인 시간 관리 서비스</string>
     <string name="loginInfosubTitle">당신의 시간은 항상 소중하니까</string>

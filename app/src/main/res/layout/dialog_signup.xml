@@ -110,5 +110,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:fontFamily="@font/my_font_family"/>
+        app:fontFamily="@font/my_font_family"
+        android:includeFontPadding="false"/>
 </android.support.constraint.ConstraintLayout>

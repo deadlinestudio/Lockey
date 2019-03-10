@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="30dp"
         android:textSize="20sp"
-        android:textColor="@color/colorPrimary_light"
+        android:textColor="@color/catTwo"
         app:fontFamily="@font/my_font_family"
         android:includeFontPadding="false"
         />
@@ -46,7 +46,7 @@
         android:id="@+id/chartAvgTimes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary_light"
+        android:textColor="@color/catTwo"
         android:paddingStart="30dp"
         android:textSize="14sp"
         app:fontFamily="@font/my_font_family"
