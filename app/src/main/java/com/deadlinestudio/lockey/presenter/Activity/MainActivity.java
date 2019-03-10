@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = pref.edit();
             editor.putBoolean("isFirst", true);
             editor.commit();
-            //앱 최초 실행시 하고 싶은 작업
+            // TODO: 앱 최초 실행시 하고 싶은 작업
         }
 
         btmNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
