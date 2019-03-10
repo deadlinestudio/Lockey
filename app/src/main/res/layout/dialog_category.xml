@@ -25,7 +25,7 @@
         android:textSize="40sp"
         android:textColor="@color/colorThird"
         android:gravity="center"
-        app:fontFamily="@font/my_font_family"
+        app:fontFamily="@font/nanumgothic"
         android:includeFontPadding="false"/>
     <TextView
         android:layout_width="match_parent"
