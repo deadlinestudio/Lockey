@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -49,6 +50,7 @@ public class FragmentApplock extends Fragment  {
     final static String sfilename = "applock.txt";
 
     private Button startBtn;
+    private ImageView refreshBtn;
     private LinearLayout selectAllBtn, selectNoneBtn;
     private Toolbar mToolbar;
     private RecyclerView mostAppListView,listView;
@@ -69,6 +71,7 @@ public class FragmentApplock extends Fragment  {
         startBtn = rootView.findViewById(R.id.lockStartBtn);
         selectAllBtn = rootView.findViewById(R.id.appSelectAllBtn);
         selectNoneBtn = rootView.findViewById(R.id.appSelectNoneBtn);
+        refreshBtn = rootView.findViewById(R.id.applistRefresh);
 
         alc = new AppLockController(mainActivity.getApplicationContext());
         gc = new GrantController(mainActivity.getApplicationContext());
@@ -151,7 +154,14 @@ public class FragmentApplock extends Fragment  {
                 }
             }
         });
-
+        refreshBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Log.v("sksk","skd");
+                ft.detach(getParentFragment()).attach(getParentFragment()).commit();
+            }
+        });
         // select all apps
         selectAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
