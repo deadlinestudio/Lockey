@@ -25,7 +25,8 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class FragmentAnalysis extends Fragment{
-    private TextView idText, totalText;
+    private static TextView nickText;
+    private TextView totalText;
     private Toolbar mToolbar;
     private ViewPager viewPager;
     private TabLayout graphTabLayout;
@@ -37,9 +38,9 @@ public class FragmentAnalysis extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_analysis, container,false);
         mainActivity = (MainActivity) this.getActivity();
-        idText = rootView.findViewById(R.id.profileName);
+        nickText = rootView.findViewById(R.id.profileName);
         String nick = User.getInstance().getNickname();
-        idText.setText((nick.equals("")) ? "비회원":nick);
+        nickText.setText((nick.equals("")) ? "비회원":nick);
         // set up Toolbars
         mToolbar  = rootView.findViewById(R.id.analysisToolbar);
         noMemFrame = rootView.findViewById(R.id.noMemberFrame);
@@ -101,5 +102,9 @@ public class FragmentAnalysis extends Fragment{
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void setNickText(String nickname) {
+        nickText.setText(nickname);
     }
 }

@@ -1,7 +1,9 @@
 package com.deadlinestudio.lockey.presenter.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -74,6 +76,16 @@ public class MainActivity extends AppCompatActivity {
         pager.setAdapter(adapter);
         pager.setCurrentItem(0);
         //loadFragment(fragmentTimer);
+
+        SharedPreferences pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
+        boolean first = pref.getBoolean("isFirst", false);
+        if(first==false) {
+            Log.d("Is first Time?", "first");
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("isFirst", true);
+            editor.commit();
+            //앱 최초 실행시 하고 싶은 작업
+        }
 
         btmNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

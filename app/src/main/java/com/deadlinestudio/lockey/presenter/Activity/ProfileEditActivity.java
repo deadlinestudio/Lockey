@@ -21,6 +21,8 @@ import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.control.NetworkTask;
 import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
+import com.deadlinestudio.lockey.presenter.Fragment.FragmentAnalysis;
+import com.deadlinestudio.lockey.presenter.Fragment.FragmentSetting;
 
 import java.lang.reflect.Field;
 import java.util.StringTokenizer;
@@ -59,6 +61,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         jobText.setSelection(jobText.getText().length());
 
         jobSpinner = findViewById(R.id.editJobSpinner);
+        setJobItem();
         idText.setText(User.getInstance().getId());
         jobText.setVisibility(View.GONE);
 
@@ -119,9 +122,9 @@ public class ProfileEditActivity extends AppCompatActivity {
                                         "," + job;
                         lfc.WriteLogFile(getBaseContext(), MainActivity.getFilename(), contents, 2);
                         Toast.makeText(getBaseContext(), "프로필이 변경 되었습니다.", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                        startActivity(intent);
-                        finish();
+                        FragmentSetting.setProfileName(nick);
+                        FragmentAnalysis.setNickText(nick);
+                        onBackPressed();
                     }
                 } catch(Exception e ) {
                     e.printStackTrace();
@@ -148,9 +151,6 @@ public class ProfileEditActivity extends AppCompatActivity {
                                     NetworkTask networkTask = new NetworkTask(getBaseContext(), "/leave-user", null);
                                     networkTask.execute().get(1000, TimeUnit.MILLISECONDS);
 
-                                    LogfileController lfc = new LogfileController();
-                                    lfc.WriteLogFile(cont, LoginActivity.filename,"nofile",2);
-
                                     Intent intent = null;
                                     if(MainActivity.getSns().equals("1")) {
                                         intent = new Intent(activity, GoogleLoginActivity.class);
@@ -164,6 +164,10 @@ public class ProfileEditActivity extends AppCompatActivity {
                                     } else {
                                         intent = new Intent(cont, LoginActivity.class);
                                     }
+                                    LogfileController lfc = new LogfileController();
+                                    lfc.WriteLogFile(cont, LoginActivity.filename,"",2);
+                                    lfc.WriteLogFile(cont, LoginActivity.filename,"nofile",2);
+
                                     activity.startActivity(intent);
                                     activity.finish();
                                 } catch(Exception e) {
@@ -185,5 +189,17 @@ public class ProfileEditActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    private void setJobItem() {
+        for(int i = 0; i < jobSpinner.getAdapter().getCount(); i++) {
+            if(jobSpinner.getAdapter().getItem(i).toString().equals(User.getInstance().getJob())) {
+                jobSpinner.setSelection(i);
+                return;
+            }
+        }
+        jobSpinner.setSelection(jobSpinner.getAdapter().getCount()-1);
+        jobText.setVisibility(View.VISIBLE);
+        jobText.setText(User.getInstance().getJob());
     }
 }

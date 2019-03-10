@@ -34,6 +34,14 @@ public class User {
         this.job = job;
     }
 
+    public void resetData() {
+        this.id = "";
+        this.nickname = "";
+        this.age = 0;
+        this.job = "";
+        this.isUser = false;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
