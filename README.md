@@ -69,6 +69,14 @@
 2.      keytool -list -v -keystore "jks파일 이름"  // 구글용 해시키
 3.      keytool -exportcert -alias keystore -keystore "jks파일 이름" -storepass android -keypass android | openssl sha1 -binary | openssl base64    // 카카오용 해시키
 
+#### 실제로 Firebase와 카카오 디벨로퍼에 저장해야할 해시키는 출시해야 생성됨
+1. Google Play Console -> 앱 출시 관리 -> 앱 서명
+2. 앱 서명 인증서에 나온 해시키를 등록해야 함
+3. Firebase는 그대로 등록 가능하지만 카카오는 해시키가 너무 길다고 나옴
+4. 터미널(Cmd는 불가) 열기
+5.      echo "해시키" | xxd -r -p | openssl base64 
+6. 위 해시키를 카카오에 등록
+
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 ### 페이스북 연동 시 "invalid key hash..." 같은 에러가 뜰 경우
