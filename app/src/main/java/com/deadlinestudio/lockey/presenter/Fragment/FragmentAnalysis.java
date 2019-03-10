@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.deadlinestudio.lockey.R;
@@ -29,6 +30,7 @@ public class FragmentAnalysis extends Fragment{
     private ViewPager viewPager;
     private TabLayout graphTabLayout;
     private MainActivity mainActivity;
+    private FrameLayout noMemFrame;
 
     @Nullable
     @Override
@@ -40,7 +42,7 @@ public class FragmentAnalysis extends Fragment{
         idText.setText((nick.equals("")) ? "비회원":nick);
         // set up Toolbars
         mToolbar  = rootView.findViewById(R.id.analysisToolbar);
-
+        noMemFrame = rootView.findViewById(R.id.noMemberFrame);
         totalText = rootView.findViewById(R.id.userTotalTimeText);
         setTotalText();
 
@@ -91,8 +93,11 @@ public class FragmentAnalysis extends Fragment{
             NetworkTask asyncNetwork = new NetworkTask(mainActivity.getBaseContext(), "/get-time", null);
             asyncNetwork.execute().get(1000, TimeUnit.MILLISECONDS);
             HashMap<String, Long> analysisData = asyncNetwork.getAnalysisData();
-            if(analysisData != null)
+            if(analysisData != null) {
                 totalText.setText(Long.toString(analysisData.get("total") / 60) + " 시간");
+            }else{
+                noMemFrame.setVisibility(View.VISIBLE   );
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }

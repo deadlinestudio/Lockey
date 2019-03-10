@@ -12,6 +12,7 @@
 
     <color name="darkGrey">#aaaaaa</color>
     <color name="lightGrey">#dadada</color>
+    <color name="transGrey">#B3aaaaaa</color>
 
     <color name="colorPrimaryDark">#FFF</color>
     <color name="colorWhite">#FFFFFF</color>
