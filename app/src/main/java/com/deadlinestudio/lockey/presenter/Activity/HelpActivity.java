@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterHelp;
@@ -15,10 +18,14 @@ import com.deadlinestudio.lockey.presenter.Fragment.FragmentHelpTwo;
 
 public class HelpActivity extends AppCompatActivity {
     int MAX_PAGE=5;
+    ImageView exitBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
+        exitBtn = findViewById(R.id.helpCancel);
+
+
         ViewPager viewPager=(ViewPager)findViewById(R.id.helpPager);
         viewPager.setOffscreenPageLimit(MAX_PAGE);
         AdapterHelp adapterHelp = new AdapterHelp(getSupportFragmentManager());
@@ -37,5 +44,12 @@ public class HelpActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapterHelp);
         viewPager.setCurrentItem(0);
+        exitBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
+
 }

@@ -5,13 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/helpToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="1dp"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="17sp"
+            android:text="@string/help"
+            app:fontFamily="@font/my_font_family"
+            android:includeFontPadding="false"
+            android:layout_gravity="center"/>
+        <ImageView
+            android:id="@+id/helpCancel"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="start"
+            app:srcCompat="@drawable/close_btn_img_black" />
+    </android.support.v7.widget.Toolbar>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/helpPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
     </android.support.v4.view.ViewPager>
 </android.support.constraint.ConstraintLayout>
