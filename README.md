@@ -19,8 +19,8 @@
 1. 초기 비밀번호는 android
 <br>ex) zSdJoEbFoz6suAQRNzDRPkT97vM=
 <br>* 'openssl'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는 배치 파일이 아닙니다.
--> openssl을 다운후 bin폴더를 환경변수path에 추가한다.  다운로드주소 : https://code.google.com/archive/p/openssl-for-windows/downloads
--> 다운로드 목록 중에 반드시 아래 4개에서 받아야 한다!
+<br>-> openssl을 다운후 bin폴더를 환경변수path에 추가한다.  다운로드주소 : https://code.google.com/archive/p/openssl-for-windows/downloads
+<br>-> 다운로드 목록 중에 반드시 아래 4개에서 받아야 한다!
 
 #### [안드로이드 키스토어 사용법]
 1. C:\Users\s_negaro\.android\debug.keystore로 이동
