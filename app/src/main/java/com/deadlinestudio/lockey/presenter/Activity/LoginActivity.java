@@ -203,6 +203,8 @@ public class LoginActivity extends BaseActivity{
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if(activeNetwork != null){
                     Log.e("인터넷","연결댐");
+                    String toastMsg = "카카오로 로그인 시 반드시 이메일 정보 수집을 동의해주세요.";
+                    Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(cont,KakaoLoginActivity.class);
                     intent.putExtra("InOut",1);
                     startActivity(intent);
@@ -276,6 +278,8 @@ public class LoginActivity extends BaseActivity{
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if(activeNetwork != null){
                     Log.e("인터넷","연결댐");
+                    String toastMsg = "카카오로 로그인 시 반드시 이메일 정보 수집을 동의해주세요.";
+                    Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(cont,KakaoLoginActivity.class);
                     intent.putExtra("InOut",1);
                     startActivity(intent);

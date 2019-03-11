@@ -1,11 +1,14 @@
 package com.deadlinestudio.lockey.presenter.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.control.NetworkTask;
 import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
@@ -14,7 +17,9 @@ import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.MeResponseCallback;
+import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 
@@ -36,22 +41,21 @@ public class KakaoLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        InOutflag = intent.getIntExtra("InOut",0);
+        InOutflag = intent.getIntExtra("InOut", 0);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if(InOutflag==1) {
+        if (InOutflag == 1) {
 
             callback = new SessionCallback();
             Session.getCurrentSession().addCallback(callback);
             Session.getCurrentSession().checkAndImplicitOpen();
-            Session.getCurrentSession().open(AuthType.KAKAO_ACCOUNT,this);
-        }
-        else if(InOutflag==2){
-            //LoginManager.getInstance().logOut();
-            Session.getCurrentSession().close();
+            Session.getCurrentSession().open(AuthType.KAKAO_ACCOUNT, this);
+        } else if (InOutflag == 2) {
+            onClickLogout();
+            //Session.getCurrentSession().close();
 
             Intent restart = getApplicationContext().getPackageManager().getLaunchIntentForPackage(getApplicationContext().getPackageName());
             restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -116,7 +120,7 @@ public class KakaoLoginActivity extends AppCompatActivity {
 
                         // 다음화면으로 이메일을 넘기고 화면을 띄운다
                         String EMAIL = userProfile.getEmail();
-                        Log.e("KAKAO EMAIL : ",EMAIL);
+                        Log.e("KAKAO EMAIL : ", EMAIL);
                         String content =
                                 "3," + EMAIL;
                         lfc.WriteLogFile(getApplicationContext(), filename, content, 2);
@@ -142,8 +146,20 @@ public class KakaoLoginActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         }
-                    } catch(Exception e) {
+                    } catch (NullPointerException e) {
                         e.printStackTrace();
+                        String toastMsg = "이메일 정보 수집을 동의해주세요.";
+                        Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_LONG).show();
+                        //Session.getCurrentSession().close();
+                        onClickLogout();
+                        onClickUnlink();
+                        finish();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        onClickLogout();
+                        onClickUnlink();
+                        //Session.getCurrentSession().close();
+                        finish();
                     }
                 }
 
@@ -159,4 +175,40 @@ public class KakaoLoginActivity extends AppCompatActivity {
         }
     }
 
+    private void onClickLogout() {
+        UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+            @Override
+            public void onCompleteLogout() {
+                Log.e("카카오 : ","로그아웃 하였습니다.");
+            }
+        });
+    }
+
+    private void onClickUnlink() {
+        UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                Log.e("앱 연결 해제 : ",errorResult.toString());
+            }
+
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+                //redirectLoginActivity();
+                Log.e("앱 연결 해제 : ",errorResult.toString());
+            }
+
+            @Override
+            public void onNotSignedUp() {
+                //redirectSignupActivity();
+            }
+
+            @Override
+            public void onSuccess(Long userId) {
+                //redirectLoginActivity();
+                Log.e("앱 연결 해제 : ", "성공");
+                finish();
+            }
+        });
+    }
 }
+
