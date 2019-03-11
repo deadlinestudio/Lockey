@@ -35,4 +35,45 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <ImageView
+            android:id="@+id/help1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/btn_oval_grey" />
+        <ImageView
+            android:id="@+id/help2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/btn_oval_grey" />
+        <ImageView
+            android:id="@+id/help3"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/btn_oval_grey" />
+        <ImageView
+            android:id="@+id/help4"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/btn_oval_grey" />
+        <ImageView
+            android:id="@+id/help5"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/btn_oval_grey" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

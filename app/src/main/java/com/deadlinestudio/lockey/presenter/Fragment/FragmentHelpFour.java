@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import com.deadlinestudio.lockey.R;
 
 public class FragmentHelpFour extends Fragment {
-    private ImageView helpImg;
+    private ImageView helpImg, oval;
     private Button confirmBtn;
 
 
@@ -24,6 +24,8 @@ public class FragmentHelpFour extends Fragment {
         helpImg = rootView.findViewById(R.id.helpImg);
         helpImg.setImageDrawable(getResources().getDrawable(R.drawable.help4));
 
+        oval = rootView.findViewById(R.id.help4);
+        oval.setImageDrawable(getResources().getDrawable(R.drawable.btn_oval));
         return rootView;
     }
 

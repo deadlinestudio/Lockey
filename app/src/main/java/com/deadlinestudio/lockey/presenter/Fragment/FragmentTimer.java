@@ -85,7 +85,7 @@ public class FragmentTimer extends Fragment{
         final ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_timer, container,false);
         mainActivity = (MainActivity) this.getActivity();
 
-        priColor = getResources().getColor(R.color.colorPrimary);
+        priColor = getResources().getColor(R.color.colorPrimary_trans);
         whiColor = getResources().getColor(R.color.colorWhite);
 
         targetView = (TextView)rootView.findViewById(R.id.TargetTimeText);
