@@ -37,8 +37,6 @@ public class KakaoLoginActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         InOutflag = intent.getIntExtra("InOut",0);
-
-
     }
 
     @Override
