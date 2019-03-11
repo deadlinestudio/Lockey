@@ -38,6 +38,7 @@ import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Controller.GrantController;
 import com.deadlinestudio.lockey.presenter.Item.BasicTimer;
 import com.deadlinestudio.lockey.presenter.Item.CustomScrollView;
+import com.deadlinestudio.lockey.presenter.Service.TimerService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -200,6 +201,9 @@ public class FragmentTimer extends Fragment{
                     timerOn = false;
                     bt.timerStop();
 
+                    Intent timerService = new Intent(mainActivity,TimerService.class);
+                    mainActivity.stopService(timerService);
+
                     // need delay to get broadcast msg
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -245,6 +249,11 @@ public class FragmentTimer extends Fragment{
                             Toast.LENGTH_SHORT).show();
                     bt.timerStart();
 
+                    // timer service start
+                    Intent timerService = new Intent(mainActivity, TimerService.class);
+                    timerService.putExtra("timer",bt);
+                    mainActivity.startService(timerService);
+
                     //timer text change
                     final Handler timerViewHandler = new Handler();
                     timerViewHandler.post(new Runnable() {
@@ -254,6 +263,8 @@ public class FragmentTimer extends Fragment{
                             totalView.setText(bt.makeToTimeFormat(bt.getTotalTime() + 1000));
                             if (endAlert && bt.getTempTarget() <= 1000) {
                                 Log.e("시간 다됬음","진동울리자");
+                                Intent timerService = new Intent(mainActivity,TimerService.class);
+                                mainActivity.stopService(timerService);
                                 mNotificationManager.setInterruptionFilter(prevNotificationFilter);        // turn off DO NOT DISTURB MODE
                                 new Handler().postDelayed(new Runnable(){
                                     @Override
@@ -448,7 +459,8 @@ public class FragmentTimer extends Fragment{
                         startBtn.setText("시작");
 
                         bt.timerStop();
-
+                        Intent timerService = new Intent(mainActivity,TimerService.class);
+                        mainActivity.stopService(timerService);
                         // need delay to get broadcast msg
                         new Handler().postDelayed(new Runnable() {
                             @Override

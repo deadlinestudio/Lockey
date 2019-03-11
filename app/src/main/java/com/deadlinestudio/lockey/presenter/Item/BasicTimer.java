@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
-import android.widget.TextView;
 
 public class BasicTimer implements Parcelable{
 
