@@ -263,6 +263,8 @@ public class FragmentTimer extends Fragment{
                             totalView.setText(bt.makeToTimeFormat(bt.getTotalTime() + 1000));
                             if (endAlert && bt.getTempTarget() <= 1000) {
                                 Log.e("시간 다됬음","진동울리자");
+                                Intent timerService = new Intent(mainActivity,TimerService.class);
+                                mainActivity.stopService(timerService);
                                 mNotificationManager.setInterruptionFilter(prevNotificationFilter);        // turn off DO NOT DISTURB MODE
                                 new Handler().postDelayed(new Runnable(){
                                     @Override
@@ -457,7 +459,8 @@ public class FragmentTimer extends Fragment{
                         startBtn.setText("시작");
 
                         bt.timerStop();
-
+                        Intent timerService = new Intent(mainActivity,TimerService.class);
+                        mainActivity.stopService(timerService);
                         // need delay to get broadcast msg
                         new Handler().postDelayed(new Runnable() {
                             @Override
