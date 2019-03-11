@@ -38,6 +38,7 @@ import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Controller.GrantController;
 import com.deadlinestudio.lockey.presenter.Item.BasicTimer;
 import com.deadlinestudio.lockey.presenter.Item.CustomScrollView;
+import com.deadlinestudio.lockey.presenter.Service.TimerService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -200,6 +201,9 @@ public class FragmentTimer extends Fragment{
                     timerOn = false;
                     bt.timerStop();
 
+                    Intent timerService = new Intent(mainActivity,TimerService.class);
+                    mainActivity.stopService(timerService);
+
                     // need delay to get broadcast msg
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -244,6 +248,11 @@ public class FragmentTimer extends Fragment{
                     Toast.makeText(getContext(), "타이머가 시작됩니다\n휴대폰을 뒤집어주세요",
                             Toast.LENGTH_SHORT).show();
                     bt.timerStart();
+
+                    // timer service start
+                    Intent timerService = new Intent(mainActivity, TimerService.class);
+                    timerService.putExtra("timer",bt);
+                    mainActivity.startService(timerService);
 
                     //timer text change
                     final Handler timerViewHandler = new Handler();
