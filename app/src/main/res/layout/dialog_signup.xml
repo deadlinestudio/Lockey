@@ -70,11 +70,11 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/kakaoBtn"
+            android:id="@+id/facebookBtn"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginBottom="8dp"
-            android:background="#ffeb00"
+            android:background="#3B5998"
             android:padding="12dp"
             android:textColor="#3c1e1e">
 
@@ -82,14 +82,15 @@
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:elevation="0dp"
-                app:srcCompat="@drawable/kakao_account_logo" />
+                app:srcCompat="@drawable/com_facebook_button_icon_white"  />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:elevation="1dp"
                 android:gravity="center"
-                android:text="@string/kakaoSignup"
+                android:text="@string/FacebookLogin"
+                android:textColor="#FFF"
                 app:fontFamily="@font/my_font_family"
                 android:includeFontPadding="false"/>
         </FrameLayout>
