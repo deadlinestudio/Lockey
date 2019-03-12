@@ -39,7 +39,7 @@ public class GrantController extends BaseActivity {
         String toastMsg = "Lockey를 선택 후 사용 추적 허용해주세요.";
         Toast.makeText(cont, toastMsg, Toast.LENGTH_LONG);
         Intent sintent = new Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS);
-        sintent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        sintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         cont.startActivity(sintent);
     }
 
@@ -56,7 +56,7 @@ public class GrantController extends BaseActivity {
         String toastMsg = "Lockey를 선택 후 방해 금지 모드를 허용해주세요.";
         Toast.makeText(cont, toastMsg, Toast.LENGTH_LONG);
         Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         cont.startActivity(intent);
     }
 }

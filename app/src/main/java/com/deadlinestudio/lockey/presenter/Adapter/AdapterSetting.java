@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.control.NetworkTask;
 import com.deadlinestudio.lockey.model.User;
+import com.deadlinestudio.lockey.presenter.Activity.FacebookLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.GoogleLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.HelpActivity;
 import com.deadlinestudio.lockey.presenter.Activity.KakaoLoginActivity;
@@ -125,7 +126,7 @@ public class AdapterSetting extends RecyclerView.Adapter<ViewHolderSetting> {
                                                     intent = new Intent(mainActivity, NaverLoginActivity.class);
                                                     intent.putExtra("InOut", 2);
                                                 }else if(mainActivity.getSns().equals("3")){
-                                                    intent = new Intent(mainActivity, KakaoLoginActivity.class);
+                                                    intent = new Intent(mainActivity, FacebookLoginActivity.class);
                                                     intent.putExtra("InOut", 2);
                                                 } else {
                                                     intent = new Intent(mainActivity, LoginActivity.class);

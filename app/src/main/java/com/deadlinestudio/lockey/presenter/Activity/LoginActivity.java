@@ -40,7 +40,7 @@ import static com.kakao.util.helper.Utility.getPackageInfo;
 
 
 public class LoginActivity extends BaseActivity{
-    private FrameLayout kakaoBtn, NaverBtn, googleBtn;
+    private FrameLayout facebookBtn, NaverBtn, googleBtn;
     private TextView noMemberBtn;
     private Button signUpGoBtn, logInGoBtn;
 
@@ -157,9 +157,9 @@ public class LoginActivity extends BaseActivity{
         Pattern pattern1 = Pattern.compile("서비스이용약관");
         Pattern pattern2 = Pattern.compile("개인정보처리방침");
         Pattern pattern3 = Pattern.compile("개인정보수집이용");
-        Linkify.addLinks(termsText, pattern1, "http://thedeadlinestudio.com/lockey/terms/",null,mTransform);
-        Linkify.addLinks(termsText, pattern2, "http://thedeadlinestudio.com/lockey/terms/",null,mTransform);
-        Linkify.addLinks(termsText, pattern3, "http://thedeadlinestudio.com/lockey/terms/",null,mTransform);
+        Linkify.addLinks(termsText, pattern1, "http://125.129.250.156:5000/Lockey_Privacy_Policy/",null,mTransform);
+        Linkify.addLinks(termsText, pattern2, "http://125.129.250.156:5000/Lockey_Privacy_Policy/",null,mTransform);
+        Linkify.addLinks(termsText, pattern3, "http://125.129.250.156:5000/Lockey_Privacy_Policy/",null,mTransform);
 
 
     }
@@ -175,7 +175,7 @@ public class LoginActivity extends BaseActivity{
         dialog.show();
 
         googleBtn = dialog.findViewById(R.id.googleBtn);
-        kakaoBtn = dialog.findViewById(R.id.kakaoBtn);
+        facebookBtn = dialog.findViewById(R.id.facebookBtn);
         NaverBtn = dialog.findViewById(R.id.naverBtn);
         Button cancelBtn = dialog.findViewById(R.id.cancel_signup);
 
@@ -196,16 +196,16 @@ public class LoginActivity extends BaseActivity{
             }
         });
 
-        kakaoBtn.setOnClickListener(new Button.OnClickListener() {
+        facebookBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ConnectivityManager cm = (ConnectivityManager) cont.getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if(activeNetwork != null){
                     Log.e("인터넷","연결댐");
-                    String toastMsg = "카카오로 로그인 시 반드시 이메일 정보 수집을 동의해주세요.";
-                    Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(cont,KakaoLoginActivity.class);
+                    //String toastMsg = "카카오로 로그인 시 반드시 이메일 정보 수집을 동의해주세요.";
+                    //Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(cont,FacebookLoginActivity.class);
                     intent.putExtra("InOut",1);
                     startActivity(intent);
                 }else{
@@ -250,7 +250,7 @@ public class LoginActivity extends BaseActivity{
         dialog.show();
 
         googleBtn = dialog.findViewById(R.id.googleBtn);
-        kakaoBtn = dialog.findViewById(R.id.kakaoBtn);
+        facebookBtn = dialog.findViewById(R.id.facebookBtn);
         NaverBtn = dialog.findViewById(R.id.naverBtn);
         Button cancelBtn = dialog.findViewById(R.id.cancel_signup);
 
@@ -271,16 +271,16 @@ public class LoginActivity extends BaseActivity{
             }
         });
 
-        kakaoBtn.setOnClickListener(new Button.OnClickListener() {
+        facebookBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ConnectivityManager cm = (ConnectivityManager) cont.getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if(activeNetwork != null){
                     Log.e("인터넷","연결댐");
-                    String toastMsg = "카카오로 로그인 시 반드시 이메일 정보 수집을 동의해주세요.";
-                    Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(cont,KakaoLoginActivity.class);
+                    //String toastMsg = "카카오로 로그인 시 반드시 이메일 정보 수집을 동의해주세요.";
+                    //Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(cont,FacebookLoginActivity.class);
                     intent.putExtra("InOut",1);
                     startActivity(intent);
                 }else{

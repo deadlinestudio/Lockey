@@ -159,7 +159,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                                         intent = new Intent(activity, NaverLoginActivity.class);
                                         intent.putExtra("InOut", 2);
                                     }else if(MainActivity.getSns().equals("3")){
-                                        intent = new Intent(activity, KakaoLoginActivity.class);
+                                        intent = new Intent(activity, FacebookLoginActivity.class);
                                         intent.putExtra("InOut", 2);
                                     } else {
                                         intent = new Intent(cont, LoginActivity.class);

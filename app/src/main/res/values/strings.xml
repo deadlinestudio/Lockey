@@ -2,6 +2,7 @@
     <string name="kakao_app_key">e2be04788cd082723365b6868a040b04</string>
     <string name="google_status_fmt">google_status_fmt</string>
     <string name="firebase_status_fmt">firebase_status_fmt</string>
+    <string name="facebook_app_id">321035648755011</string> <string name="fb_login_protocol_scheme">fb321035648755011</string>
     <string name="app_name">Lockey</string>
     <string name="loading">loading</string>
     <string name="signed_out">signed_out</string>
@@ -39,10 +40,12 @@
     <string name="noMemLogin">비회원으로 시작하기 ></string>
     <string name="googleLogin">구글로 로그인</string>
     <string name="naverLogin">네이버로 로그인</string>
+    <string name="FacebookLogin">페이스북으로 로그인</string>
     <string name="kakaoLogin">카카오로 로그인</string>
 
     <string name="googleSignup">구글로 가입하기</string>
     <string name="naverSignup">네이버로 가입하기</string>
+    <string name="FacebookSignup">페이스북으로 가입하기</string>
     <string name="kakaoSignup">카카오로 가입하기</string>
     <string name="terms">회원가입 진행 시 라키의 서비스이용약관, 개인정보처리방침, 개인정보수집이용에 동의하신 것으로 확인합니다.</string>
 
