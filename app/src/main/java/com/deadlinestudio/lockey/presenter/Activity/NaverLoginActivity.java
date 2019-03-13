@@ -83,7 +83,7 @@ public class NaverLoginActivity extends AppCompatActivity {
     // 로그아웃 처리(토큰도 함께 삭제)
     public void signOut() {
         // 스레드로 돌려야 한다. 안 그러면 로그아웃 처리가 안되고 false를 반환한다.
-        mOAuthLoginInstance.logoutAndDeleteToken(mContext);
+        new DeleteTokenTask().execute();
     }
 
     private void initData() {
