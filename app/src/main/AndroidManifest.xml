@@ -36,8 +36,6 @@
         </activity>
         <activity android:name=".presenter.Activity.GoogleLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
         </activity>
-        <activity android:name=".presenter.Activity.KakaoLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
-        </activity>
         <activity android:name=".presenter.Activity.FacebookLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
         </activity>
         <activity android:name=".presenter.Activity.NaverLoginActivity" android:theme="@style/Theme.AppCompat.Translucent">
@@ -60,21 +58,8 @@
             </intent-filter> </activity>
 
         <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key" />
-        <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713"/>        <!-- ca-app-pub-8600536608045213~4285578189 -->
-        <activity
-            android:name="com.kakao.auth.authorization.authcode.KakaoWebViewActivity"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustResize">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
 
         <service android:name=".presenter.Service.AppLockService" />
 

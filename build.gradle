@@ -25,7 +25,6 @@ allprojects {
             url "https://maven.google.com" // Google's Maven repository
         }
         mavenCentral()
-        maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
         maven { url "https://jitpack.io" }
     }
 }

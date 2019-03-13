@@ -1,5 +1,4 @@
 <resources>
-    <string name="kakao_app_key">e2be04788cd082723365b6868a040b04</string>
     <string name="google_status_fmt">google_status_fmt</string>
     <string name="firebase_status_fmt">firebase_status_fmt</string>
     <string name="facebook_app_id">321035648755011</string> <string name="fb_login_protocol_scheme">fb321035648755011</string>

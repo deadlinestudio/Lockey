@@ -144,7 +144,7 @@ public class SignupActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }else if(sns==3){
-            Intent intent = new Intent(getBaseContext(), KakaoLoginActivity.class);
+            Intent intent = new Intent(getBaseContext(), FacebookLoginActivity.class);
             intent.putExtra("InOut", 2);
             startActivity(intent);
             finish();

@@ -18,7 +18,6 @@ import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Activity.FacebookLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.GoogleLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.HelpActivity;
-import com.deadlinestudio.lockey.presenter.Activity.KakaoLoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.LoginActivity;
 import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Activity.NaverLoginActivity;

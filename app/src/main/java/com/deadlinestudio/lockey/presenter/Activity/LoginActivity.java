@@ -1,43 +1,30 @@
 package com.deadlinestudio.lockey.presenter.Activity;
 
 import android.app.AlertDialog;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.util.Linkify;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deadlinestudio.lockey.R;
 import com.deadlinestudio.lockey.control.NetworkTask;
-import com.deadlinestudio.lockey.model.Data;
 import com.deadlinestudio.lockey.model.User;
 import com.deadlinestudio.lockey.presenter.Controller.GrantController;
 import com.deadlinestudio.lockey.presenter.Controller.LogfileController;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.kakao.util.helper.Utility.getPackageInfo;
-
 
 public class LoginActivity extends BaseActivity{
     private FrameLayout facebookBtn, NaverBtn, googleBtn;
@@ -49,29 +36,10 @@ public class LoginActivity extends BaseActivity{
     private Context cont;
     public static final String filename = "userlog.txt";
 
-    public static String getKeyHash(final Context context) {
-        PackageInfo packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES);
-        if (packageInfo == null)
-            return null;
-
-        for (Signature signature : packageInfo.signatures) {
-            try {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                return Base64.encodeToString(md.digest(), Base64.NO_WRAP);
-            } catch (NoSuchAlgorithmException e) {
-                Log.e("Hash key", "Unable to get MessageDigest. signature=" + signature, e);
-            }
-        }
-        return null;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        String a = getKeyHash(this);
-        Log.e("Hash : ",a);
         lfc = new LogfileController();
         cont = getApplicationContext();
         gc = new GrantController(cont);
