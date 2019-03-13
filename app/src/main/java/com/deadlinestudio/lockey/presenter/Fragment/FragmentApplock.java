@@ -59,7 +59,7 @@ public class FragmentApplock extends Fragment  {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // View Set up
         final ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_applock, container,false);
-
+        Log.e("앱락 : ","프래그먼트");
         mainActivity = (MainActivity) this.getActivity();
         mToolbar  = rootView.findViewById(R.id.appListToolbar);
         mostAppListView = rootView.findViewById(R.id.mostAppList);
@@ -83,8 +83,8 @@ public class FragmentApplock extends Fragment  {
         // load applist from main activity
         applocks = alc.LoadAppList();
         mostApps = new ArrayList<ItemMostApps>();
-        String line;
-        if((line = lfc.ReadLogFile(cont, sfilename)) != "nofile") {         // 앱 잠금 리스트 확인 후 flag 업데이트
+        String line = lfc.ReadLogFile(cont, sfilename);
+        if(!line.equals("nofile") && !line.equals("")) {         // 앱 잠금 리스트 확인 후 flag 업데이트
             Log.e("잠금 파일 이름 : ",line);
             StringTokenizer tokens = new StringTokenizer(line);
             while(tokens.hasMoreTokens()) {
@@ -98,8 +98,8 @@ public class FragmentApplock extends Fragment  {
             }
             Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
             getActivity().startService(sintent); // 서비스 시작
-        }else
-            Log.e("잠금 파일 이름 : ","nofile");
+        }
+
         // get App Usage Time
         AppUsageController auc = new AppUsageController(applocks);
         auc.getAppUsageTime(mainActivity);
@@ -135,7 +135,7 @@ public class FragmentApplock extends Fragment  {
                         }
                     }
                     String line = lfc.ReadLogFile(cont, sfilename);
-                    if (line.equals("")) {
+                    if (line.equals("nofile") || line.equals("")) {
                         Log.e("잠금 파일 이름1 : ",line);
                         Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
                         getActivity().stopService(sintent); // 서비스 종료
@@ -189,12 +189,15 @@ public class FragmentApplock extends Fragment  {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:{
-                lfc.WriteLogFile(cont, sfilename, "", 2);
+                Log.e("홈버튼"," 누름");
+                lfc.WriteLogFile(cont, sfilename, "", 2);       // 새로 쓰기
                 for (int i = 0; i < applocks.size(); i++) {
                     if (applocks.get(i).getLockFlag() == true) {
                         lfc.WriteLogFile(cont, sfilename, applocks.get(i).getAppPackage() + ",", 1);
                     }
                 }
+
+                Log.e("여기냐","ㅡㅡ");
                 Intent sintent = new Intent(cont,AppLockService.class); // 이동할 컴포넌트
                 getActivity().startService(sintent); // 서비스 시작
 

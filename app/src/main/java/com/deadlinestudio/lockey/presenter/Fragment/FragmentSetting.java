@@ -22,6 +22,7 @@ import com.deadlinestudio.lockey.presenter.Activity.OpenSourceActivity;
 import com.deadlinestudio.lockey.presenter.Activity.ProfileEditActivity;
 import com.deadlinestudio.lockey.presenter.Adapter.AdapterSetting;
 import com.deadlinestudio.lockey.presenter.Item.ItemSetting;
+import com.deadlinestudio.lockey.presenter.Service.AppLockService;
 
 public class FragmentSetting extends Fragment{
 
