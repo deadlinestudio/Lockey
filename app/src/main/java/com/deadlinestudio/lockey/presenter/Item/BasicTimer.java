@@ -4,17 +4,19 @@ import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
+import android.util.Log;
 
-public class BasicTimer implements Parcelable{
+public class BasicTimer implements Runnable {
+    private static BasicTimer basicTimer = new BasicTimer("0", "0");
 
     private long targetTime, totalTime, startTime =0, tempTarget = 0;
     private Boolean onoff = false;
-    final Handler handler = new Handler();
 
-    public BasicTimer(String hour, String min){
+    private BasicTimer(String hour, String min){
         this.targetTime = Long.valueOf(hour)*(1000 * 60 * 60) + Long.valueOf(min)*(1000*60);
     }
-    public BasicTimer(long targetTime){
+
+    public void setTimer(long targetTime){
         this.targetTime = targetTime;
         this.totalTime = 0;
     }
@@ -27,18 +29,6 @@ public class BasicTimer implements Parcelable{
         byte tmpOnoff = in.readByte();
         onoff = tmpOnoff == 0 ? null : tmpOnoff == 1;
     }
-
-    public static final Creator<BasicTimer> CREATOR = new Creator<BasicTimer>() {
-        @Override
-        public BasicTimer createFromParcel(Parcel in) {
-            return new BasicTimer(in);
-        }
-
-        @Override
-        public BasicTimer[] newArray(int size) {
-            return new BasicTimer[size];
-        }
-    };
 
     /*
      * @brief time formatter
@@ -64,6 +54,11 @@ public class BasicTimer implements Parcelable{
         String time = String.format("%02d:%02d:%02d", hour, minute, second);
         return time;
     }
+
+    public static BasicTimer getInstance() {
+        return basicTimer;
+    }
+
     public long getTargetTime() {
         return targetTime;
     }
@@ -104,44 +99,34 @@ public class BasicTimer implements Parcelable{
     /*
     * @brief timer starts when start button onClicked
     * */
-    public void timerStart(){
-        onoff = true;
+    @Override
+    public void run(){
         startTime = SystemClock.uptimeMillis();
         totalTime = 0;
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if(onoff){
-                    totalTime = SystemClock.uptimeMillis() - startTime;
-                    if(targetTime>totalTime){
-                        tempTarget = targetTime-totalTime;
-                        //targetView.setText(makeToTimeFormat(tempTarget));
-                    }
-                    //totalView.setText(makeToTimeFormat(totalTime+1000));
-                    handler.postDelayed(this,1000);
-                }
+        onoff = true;
+        while(true){
+            if(!onoff)
+                break;
+
+            totalTime = SystemClock.uptimeMillis() - startTime;
+            Log.e("timer-data", Long.toString(totalTime));
+            if(targetTime>totalTime){
+                tempTarget = targetTime-totalTime;
+                //targetView.setText(makeToTimeFormat(tempTarget));
             }
-        });
+            //totalView.setText(makeToTimeFormat(totalTime+1000));
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
     /*
     * @brief timer resets the target time when timer stopped
     * */
     public void timerStop(){
         onoff = false;
-        handler.removeMessages(0);
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeLong(targetTime);
-        parcel.writeLong(totalTime);
-        parcel.writeLong(startTime);
-        parcel.writeLong(tempTarget);
-        parcel.writeByte((byte) (onoff == null ? 0 : onoff ? 1 : 2));
-    }
 }

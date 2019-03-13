@@ -3,9 +3,11 @@ package com.deadlinestudio.lockey.presenter.Fragment;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -13,6 +15,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -38,12 +42,14 @@ import com.deadlinestudio.lockey.presenter.Activity.MainActivity;
 import com.deadlinestudio.lockey.presenter.Controller.GrantController;
 import com.deadlinestudio.lockey.presenter.Item.BasicTimer;
 import com.deadlinestudio.lockey.presenter.Item.CustomScrollView;
+import com.deadlinestudio.lockey.presenter.Service.IMyTimerService;
 import com.deadlinestudio.lockey.presenter.Service.TimerService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import static android.content.Context.BIND_AUTO_CREATE;
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class FragmentTimer extends Fragment{
@@ -56,7 +62,9 @@ public class FragmentTimer extends Fragment{
     private Data tempData;
     private boolean receiverRegied;
     //CaulyAdController cac;
-    GrantController gc;
+    private Intent timerService;
+    private IMyTimerService binder;
+    private GrantController gc;
     private NotificationManager mNotificationManager;
     private int prevNotificationFilter = NotificationManager.INTERRUPTION_FILTER_ALL;
 
@@ -75,6 +83,18 @@ public class FragmentTimer extends Fragment{
     private Vibrator vibrator;
     private boolean endAlert = true;
     public MainActivity mainActivity;
+
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            /** * Service가 가지고있는 binder를 전달받는다. * 즉, Service에서 구체화한 메소드를 받았습니다. */
+            binder = IMyTimerService.Stub.asInterface(service);
+        }
+
+        @Override public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
 
     public FragmentTimer(){}
 
@@ -151,22 +171,14 @@ public class FragmentTimer extends Fragment{
         /**scrolll done*/
 
         /* timer set up*/
-        bt = new BasicTimer(targetTime);
+        bt = BasicTimer.getInstance();
+        bt.setTimer(targetTime);
         targetView.setText(bt.makeToTimeFormat(this.targetTime));
         totalView.setText(bt.makeToTimeFormat(0));
         timerOn = false;
 
         tempData = new Data();
         mainActivity = (MainActivity) this.getActivity();
-
-        /*for timer service*/
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("TIMER_BROAD_CAST_ACK");
-        getActivity().registerReceiver(br,intentFilter);
-        receiverRegied = true;
-        final Intent sendIntent = new Intent("TIMER_BROAD_CAST_REQ");
-        getActivity().sendBroadcast(sendIntent);
-
 
         /* Cauly AD */
         //cac = new CaulyAdController(mainActivity);
@@ -199,10 +211,9 @@ public class FragmentTimer extends Fragment{
                     mSensorManager.unregisterListener(mGyroLis);
                     startBtn.setText("시작");
                     timerOn = false;
-                    bt.timerStop();
+//                    bt.timerStop();
 
-                    Intent timerService = new Intent(mainActivity,TimerService.class);
-                    mainActivity.stopService(timerService);
+                    mainActivity.unbindService(connection);
 
                     // need delay to get broadcast msg
                     new Handler().postDelayed(new Runnable() {
@@ -247,58 +258,21 @@ public class FragmentTimer extends Fragment{
                     endAlert = true;
                     Toast.makeText(getContext(), "타이머가 시작됩니다\n휴대폰을 뒤집어주세요",
                             Toast.LENGTH_SHORT).show();
-                    bt.timerStart();
+//                    bt.timerStart();
 
                     // timer service start
-                    Intent timerService = new Intent(mainActivity, TimerService.class);
-                    timerService.putExtra("timer",bt);
-                    mainActivity.startService(timerService);
+                    timerService = new Intent(mainActivity, TimerService.class);
+                    mainActivity.bindService(timerService, connection, BIND_AUTO_CREATE);
+
+                    new Thread(new GetTimerThread()).start();
 
                     //timer text change
-                    final Handler timerViewHandler = new Handler();
-                    timerViewHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            targetView.setText(bt.makeToTimeFormat(bt.getTempTarget()));
-                            totalView.setText(bt.makeToTimeFormat(bt.getTotalTime() + 1000));
-                            if (endAlert && bt.getTempTarget() <= 1000) {
-                                Log.e("시간 다됬음","진동울리자");
-                                Intent timerService = new Intent(mainActivity,TimerService.class);
-                                mainActivity.stopService(timerService);
-                                mNotificationManager.setInterruptionFilter(prevNotificationFilter);        // turn off DO NOT DISTURB MODE
-                                new Handler().postDelayed(new Runnable(){
-                                    @Override
-                                    public void run(){vibrator.vibrate(500);}
-                                }, 500);
-                                endAlert = false;
-                            }
-
-                            timerViewHandler.postDelayed(this, 1000);
-                            if (!bt.getOnoff()) {
-                                Log.e("시간 다됬음","설정시간 : "+bt.getTargetTime()+" 남은시간 : "+bt.getTempTarget());
-                                timerViewHandler.removeMessages(0);
-                                updateTextview();
-                            }
-                            Log.e("타이머 : ","설정시간 : "+bt.getTargetTime()+" 남은시간 : "+bt.getTempTarget());
-                        }
-                    });
                 }
             }
         });
 
         return rootView;
     }
-
-    /**
-     * @brief boardcast receiver for timer service
-     **/
-    BroadcastReceiver br = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            bt = intent.getParcelableExtra("timer");
-            Log.v("actREC",bt.makeToTimeFormat(bt.getTotalTime()));
-        }
-    };
 
     /**
      * @brief unregister the boardcast receiver while activity on pause
@@ -311,10 +285,7 @@ public class FragmentTimer extends Fragment{
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(receiverRegied){
-            getActivity().unregisterReceiver(br);
-            receiverRegied = false;
-        }
+        mainActivity.stopService(timerService);
     }
 
     public long getTargetTime(){
@@ -383,6 +354,42 @@ public class FragmentTimer extends Fragment{
             }
         });
     }
+
+    private class GetTimerThread implements Runnable {
+        // binder에서 time 가져와서 set 시키려면 handler 필요
+        final Handler timerViewHandler = new Handler();
+        @Override public void run() {
+            while (timerOn) {
+                if(binder == null) { continue; }
+                timerViewHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        targetView.setText(bt.makeToTimeFormat(bt.getTempTarget()));
+                        totalView.setText(bt.makeToTimeFormat(bt.getTotalTime() + 1000));
+                        if (endAlert && bt.getTempTarget() <= 1000) {
+                            Log.e("시간 다됬음","진동울리자");
+
+                            mNotificationManager.setInterruptionFilter(prevNotificationFilter);        // turn off DO NOT DISTURB MODE
+                            new Handler().postDelayed(new Runnable(){
+                                @Override
+                                public void run(){vibrator.vibrate(500);}
+                            }, 500);
+                            endAlert = false;
+                        }
+                        Log.e("타이머 : ","설정시간 : "+bt.getTargetTime()+" 남은시간 : "+bt.getTempTarget());
+                    }
+                });
+
+                try {
+                    Thread.sleep(1000);
+                }catch(InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+
 
     /**
      * @brief GyroSenSensor
@@ -458,8 +465,8 @@ public class FragmentTimer extends Fragment{
                         timerOn = false;
                         startBtn.setText("시작");
 
-                        bt.timerStop();
-                        Intent timerService = new Intent(mainActivity,TimerService.class);
+                        //bt.timerStop();
+                        timerService = new Intent(mainActivity,TimerService.class);
                         mainActivity.stopService(timerService);
                         // need delay to get broadcast msg
                         new Handler().postDelayed(new Runnable() {

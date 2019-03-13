@@ -6,33 +6,48 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.deadlinestudio.lockey.presenter.Item.BasicTimer;
 
 public class TimerService extends Service {
+    private BasicTimer bt = BasicTimer.getInstance();
 
-    private BasicTimer bt;
+    IMyTimerService.Stub binder = new IMyTimerService.Stub() {
+        @Override
+        public long getTempTargetTime() throws RemoteException {
+            return bt.getTempTarget();
+        }
+        @Override
+        public long getTargetTime() throws RemoteException {
+            return bt.getTargetTime();
+        }
+        @Override
+        public long getTotalTime() throws RemoteException {
+            return bt.getTotalTime();
+        }
+    };
+
+    public TimerService() {
+    }
 
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return binder;
     }
     @Override
     public void onCreate() {
         super.onCreate();
+        Thread timer = new Thread(bt);
+        timer.start();
     }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        bt = intent.getParcelableExtra("timer");
-        bt.timerStart();
-
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("TIMER_BROAD_CAST_REQ");
-        registerReceiver(br,intentFilter);
 
         Log.v("sertest", String.valueOf(bt.getTargetTime()));
         return START_STICKY;
@@ -42,18 +57,13 @@ public class TimerService extends Service {
     public void onDestroy() {
         super.onDestroy();
         bt.timerStop();
-        unregisterReceiver(br);
         Log.v("restest", String.valueOf(bt.getTotalTime()));
     }
 
+    @Override
+    public boolean onUnbind(Intent intent) {
+        bt.timerStop();
+        return super.onUnbind(intent);
+    }
 
-    BroadcastReceiver br = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Intent sendIntent = new Intent("TIMER_BROAD_CAST_ACK");
-            sendIntent.putExtra("timer",bt);
-            sendBroadcast(sendIntent);
-            Log.v("serREC","done");
-        }
-    };
 }
