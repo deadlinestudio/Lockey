@@ -83,13 +83,7 @@ public class NaverLoginActivity extends AppCompatActivity {
     // 로그아웃 처리(토큰도 함께 삭제)
     public void signOut() {
         // 스레드로 돌려야 한다. 안 그러면 로그아웃 처리가 안되고 false를 반환한다.
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                mOAuthLoginInstance.logoutAndDeleteToken(mContext);
-            }
-        }).start();
-        new DeleteTokenTask().execute();
+        mOAuthLoginInstance.logoutAndDeleteToken(mContext);
     }
 
     private void initData() {
@@ -139,7 +133,7 @@ public class NaverLoginActivity extends AppCompatActivity {
                 // 실패했어도 클라이언트 상에 token 정보가 없기 때문에 추가적으로 해줄 수 있는 것은 없음
                 Log.d(TAG, "errorCode:" + mOAuthLoginInstance.getLastErrorCode(mContext));
                 Log.d(TAG, "errorDesc:" + mOAuthLoginInstance.getLastErrorDesc(mContext));
-                String toastMsg = "로그인에 실패하였습니다.";
+                String toastMsg = "로그아웃에 실패하였습니다.";
                 Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
             }
 

@@ -1,5 +1,7 @@
 package com.deadlinestudio.lockey.presenter.Fragment;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
@@ -285,7 +287,12 @@ public class FragmentTimer extends Fragment{
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mainActivity.stopService(timerService);
+        ActivityManager manager = (ActivityManager) mainActivity.getSystemService(Activity.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if ("com.deadlinestudio.lockey.presenter.Service.TimerService".equals(service.service.getClassName())) {
+                mainActivity.stopService(timerService);
+            }
+        }
     }
 
     public long getTargetTime(){

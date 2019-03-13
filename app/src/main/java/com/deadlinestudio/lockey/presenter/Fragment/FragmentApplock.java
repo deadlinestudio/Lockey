@@ -85,9 +85,11 @@ public class FragmentApplock extends Fragment  {
         mostApps = new ArrayList<ItemMostApps>();
         String line;
         if((line = lfc.ReadLogFile(cont, sfilename)) != "nofile") {         // 앱 잠금 리스트 확인 후 flag 업데이트
+            Log.e("잠금 파일 이름 : ",line);
             StringTokenizer tokens = new StringTokenizer(line);
             while(tokens.hasMoreTokens()) {
                 String temp = tokens.nextToken(",");
+                Log.e("잠금 목록 : ",temp);
                 for (int i = 0; i < applocks.size(); i++) {
                     if (applocks.get(i).getAppPackage().equals(temp)) {
                         applocks.get(i).setLockFlag(true);
@@ -96,8 +98,8 @@ public class FragmentApplock extends Fragment  {
             }
             Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
             getActivity().startService(sintent); // 서비스 시작
-        }
-
+        }else
+            Log.e("잠금 파일 이름 : ","nofile");
         // get App Usage Time
         AppUsageController auc = new AppUsageController(applocks);
         auc.getAppUsageTime(mainActivity);
@@ -134,11 +136,13 @@ public class FragmentApplock extends Fragment  {
                     }
                     String line = lfc.ReadLogFile(cont, sfilename);
                     if (line.equals("")) {
+                        Log.e("잠금 파일 이름1 : ",line);
                         Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
                         getActivity().stopService(sintent); // 서비스 종료
                         String toastMsg = "앱 잠금 서비스를 종료합니다.";
                         Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT).show();
                     } else {
+                        Log.e("잠금 파일 이름2 : ",line);
                         Intent sintent = new Intent(cont, AppLockService.class); // 이동할 컴포넌트
                         getActivity().startService(sintent); // 서비스 시작
                         String toastMsg = "앱 잠금 목록을 업데이트 했습니다.";

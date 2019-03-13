@@ -72,7 +72,7 @@ public class AppLockService extends Service {
     public void onCreate() {
         super.onCreate();
         // 서비스에서 가장 먼저 호출됨(최초에 한번만)
-
+        Log.e("서비스 실행",getBaseContext().toString());
         alc = new AppLockController(getApplicationContext());
         lfc = new LogfileController();
         gc = new GrantController(getApplicationContext());

@@ -73,11 +73,13 @@ public class FacebookLoginActivity extends AppCompatActivity {
             @Override
             public void onCancel() {
                 Log.d(TAG, "facebook:onCancel");
+                finish();
             }
 
             @Override
             public void onError(FacebookException error) {
                 Log.d(TAG, "facebook:onError", error);
+                finish();
             }
         });
         // [END initialize_fblogin]
