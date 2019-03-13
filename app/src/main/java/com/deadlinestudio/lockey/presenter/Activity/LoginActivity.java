@@ -125,9 +125,9 @@ public class LoginActivity extends BaseActivity{
         Pattern pattern1 = Pattern.compile("서비스이용약관");
         Pattern pattern2 = Pattern.compile("개인정보처리방침");
         Pattern pattern3 = Pattern.compile("개인정보수집이용");
-        Linkify.addLinks(termsText, pattern1, "http://125.129.250.156:5000/Lockey_Privacy_Policy/",null,mTransform);
-        Linkify.addLinks(termsText, pattern2, "http://125.129.250.156:5000/Lockey_Privacy_Policy/",null,mTransform);
-        Linkify.addLinks(termsText, pattern3, "http://125.129.250.156:5000/Lockey_Privacy_Policy/",null,mTransform);
+        Linkify.addLinks(termsText, pattern1, "http://thedeadlinestudio.com/lockey/terms/lockey_privacy_policy/",null,mTransform);
+        Linkify.addLinks(termsText, pattern2, "http://thedeadlinestudio.com/lockey/terms/lockey_privacy_policy/",null,mTransform);
+        Linkify.addLinks(termsText, pattern3, "http://thedeadlinestudio.com/lockey/terms/lockey_privacy_policy/",null,mTransform);
 
 
     }
