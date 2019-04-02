@@ -47,6 +47,7 @@ public class GoogleLoginActivity extends AppCompatActivity{
 
         Intent intent = getIntent();
         InOutflag = intent.getIntExtra("InOut",0);
+
         // [START config_signin]
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -67,7 +68,6 @@ public class GoogleLoginActivity extends AppCompatActivity{
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
         if(InOutflag==1){
             signIn();
         }else if(InOutflag==2){
@@ -96,8 +96,8 @@ public class GoogleLoginActivity extends AppCompatActivity{
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
-                String toastMsg = "로그인에 실패하였습니다.";
-                Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                //String toastMsg = "로그인에 실패하였습니다. : 4 "+e;
+                //Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
                 finish();       // LoginActivity로 돌아가기
                 // [START_EXCLUDE]
                 // [END_EXCLUDE]
@@ -119,9 +119,9 @@ public class GoogleLoginActivity extends AppCompatActivity{
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithCredential:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
+                                //FirebaseUser user = mAuth.getCurrentUser();
                                 // 다음화면으로 이름과 이메일을 넘기고 화면을 띄운다
-                                String EMAIL = user.getEmail();
+                                String EMAIL = acct.getEmail();
                                 Log.e("Google Email : ",EMAIL);
                                 String content =
                                         "1," + EMAIL;
@@ -154,13 +154,18 @@ public class GoogleLoginActivity extends AppCompatActivity{
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithCredential:failure", task.getException());
-                                String toastMsg = "로그인에 실패하였습니다.";
+                                String toastMsg = "로그인에 실패하였습니다. : 3";
                                 Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
                                 finish();
                             }
-                        } catch(Exception e) {
-                            Log.e("google login", "google login error");
-                            String toastMsg = "로그인에 실패하였습니다.";
+                        } catch(NullPointerException e) {
+                            Log.e("google login", "google login error"+e);
+                            String toastMsg = "로그인에 실패하였습니다. : 2"+e;
+                            Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }catch(Exception e) {
+                            Log.e("google login", "google login error"+e);
+                            String toastMsg = "로그인에 실패하였습니다. : 1"+e;
                             Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_SHORT).show();
                             finish();
                         }

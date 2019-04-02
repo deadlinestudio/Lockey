@@ -15,8 +15,8 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class AdmobAdController implements RewardedVideoAdListener{
     private RewardedVideoAd mRewardedVideoAd;
-    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";      //ca-app-pub-8600536608045213~4285578189
-    private static final String APP_ID = "ca-app-pub-3940256099942544~3347511713";          //ca-app-pub-8600536608045213/7270108792
+    private static final String AD_UNIT_ID = "ca-app-pub-8600536608045213/7270108792";       //   test  ca-app-pub-3940256099942544/5224354917
+    private static final String APP_ID = "ca-app-pub-8600536608045213~4285578189";          //   test   ca-app-pub-3940256099942544~3347511713
     private Activity act;
     private boolean load;
     private NotificationManager mNotificationManager;
