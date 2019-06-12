@@ -21,15 +21,6 @@ public class BasicTimer implements Runnable {
         this.totalTime = 0;
     }
 
-    protected BasicTimer(Parcel in) {
-        targetTime = in.readLong();
-        totalTime = in.readLong();
-        startTime = in.readLong();
-        tempTarget = in.readLong();
-        byte tmpOnoff = in.readByte();
-        onoff = tmpOnoff == 0 ? null : tmpOnoff == 1;
-    }
-
     /*
      * @brief time formatter
      * convert the milli sec to the HH:MM:SS format

@@ -24,8 +24,7 @@ import java.util.HashMap;
  * @brief Class to communicate android with server
  */
 public class RequestHttpConnection {
-    private static final String SERVER_ADDR = "http://125.129.250.156:";
-    private static final String SERVER_PORT = "5000";
+    private static final String SERVER_ADDR = "http://thedeadlinestudio.com";
     private InputStream is = null;
 
     /**
@@ -36,7 +35,7 @@ public class RequestHttpConnection {
     private HttpURLConnection connectHTTP(String url) throws Exception {
         HttpURLConnection httpCon;
         try {
-            URL urlCon = new URL(SERVER_ADDR + SERVER_PORT + url);
+            URL urlCon = new URL(SERVER_ADDR + url);
             httpCon = (HttpURLConnection) urlCon.openConnection();
             httpCon.setRequestMethod("POST");
             httpCon.setRequestProperty("Accept", "application/json");
